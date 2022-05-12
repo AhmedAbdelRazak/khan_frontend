@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+/** @format */
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background: white;
+	height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+	--primaryColor: #5fb7ea;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@media (min-width: 950px) {
+	.overAllSidebar {
+		display: none;
+	}
+	.faaa-bars {
+		display: none;
+	}
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media (max-width: 900px) {
+	.loginGoogle {
+		font-size: 13px !important;
+	}
 }
 
-.App-link {
-  color: #61dafb;
+.DarkbackgroundForSidebar {
+	background-color: rgba(0, 0, 0, 0.3);
+	height: 100%;
+	top: 50px;
+	left: 0;
+	position: fixed;
+	z-index: 100;
+	padding: 1000px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.DarkbackgroundForSidebar2 {
+	background-color: rgba(0, 0, 0, 0.3);
+	height: 100%;
+	top: 90px;
+	left: 0;
+	position: fixed;
+	z-index: 100;
+	padding: 1000px;
+}
+
+.detailsAboutAppointment {
+	font-weight: bold;
+	font-size: 0.95rem;
+	/* text-shadow: 1px 1px 4px; */
+	color: #7a0909;
+}
+
+.blogImg {
+	width: 159px;
+	height: 79px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+.imgForBlog {
+	width: 159px;
+	height: 79px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 50px;
+	border-radius: 15px;
 }
