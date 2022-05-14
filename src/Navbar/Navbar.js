@@ -212,16 +212,18 @@ const Navbar = ({ history, language, setLanguage }) => {
 						onClick={() => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}>
-						<span style={{ color: "white", fontWeight: "bold" }}>
+						{/* <span style={{ color: "white", fontWeight: "bold" }}>
 							{language === "Arabic" ? "اللغة" : "Language"}
-						</span>{" "}
-						<span className=' ml-2 btn' style={{ padding: "1px" }}>
+						</span>{" "} */}
+						<span className=' ml-2 btn' style={{ padding: "0px" }}>
 							{language === "English" ? (
 								<span
 									style={{
-										background: "#c40000",
-										color: "white",
+										// background: "#c40000",
+										color: "var(--orangePrimary)",
 										cursor: "pointer",
+										border: "solid 1px white",
+										padding: "0px 6px",
 									}}
 									className='btn '
 									onClick={() => {
@@ -233,9 +235,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 							) : (
 								<span
 									style={{
-										background: "#c40000",
-										color: "white",
+										// background: "#c40000",
 										cursor: "pointer",
+										border: "solid 1px white",
+										padding: "0px 6px",
+										color: "var(--orangePrimary)",
 									}}
 									className='btn '
 									onClick={() => {
@@ -298,7 +302,7 @@ const Navbar1 = styled.nav`
 	}
 
 	.infiniteAppsLogo {
-		width: 160px;
+		width: 250px;
 		height: 80px;
 		margin-top: 0px;
 		margin-bottom: 0px;
@@ -308,7 +312,7 @@ const Navbar1 = styled.nav`
 	}
 
 	.imgLogo {
-		width: 160px;
+		width: 250px;
 		height: 80px;
 		object-fit: cover;
 		margin-top: 0px;

@@ -377,6 +377,8 @@ const BookNow = ({ match }) => {
 		setCurrent(current - 1);
 	};
 
+	console.log(chosenDate, "From Book NOw");
+
 	const dataEnter1 = () => {
 		if (
 			chosenDate &&

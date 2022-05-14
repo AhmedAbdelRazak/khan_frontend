@@ -47,6 +47,8 @@ const FormStep3 = ({
 		);
 	};
 
+	console.log(chosenDate, "From FormStep3");
+
 	return (
 		<FormStep3Wrapper>
 			<div className='row'>

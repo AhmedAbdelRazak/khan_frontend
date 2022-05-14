@@ -5,6 +5,7 @@ import styled from "styled-components";
 import "antd/dist/antd.min.css";
 import { Collapse, DatePicker } from "antd";
 import { getTickets } from "../../apiCore";
+// import Helmet from "react-helmet";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
@@ -89,12 +90,8 @@ const BookNowGeneral_Arabic = ({ language }) => {
 
 	return (
 		<BookNowGeneralWrapper dir='rtl'>
-			<h1 className='titleBookNow my-3'>
-				احجز مقعدك الآن مع خان خديجة
-				<br />
-				أفضل منتجع في مصر!
-			</h1>
-			<div className='horizline col-md-3 mx-auto my-3'></div>
+			<h1 className='titleBookNow my-3'>احجز مقعدك الآن مع خان خديجة</h1>
+			{/* <div className='horizline col-md-3 mx-auto my-3'></div> */}
 			<Collapse
 				style={{ background: "#1E467D" }}
 				className='col-md-4 mx-auto'
@@ -450,11 +447,14 @@ const BookNowGeneral_Arabic = ({ language }) => {
 export default BookNowGeneral_Arabic;
 
 const BookNowGeneralWrapper = styled.div`
+	font-family: "Droid Arabic Kufi";
+
 	.titleBookNow {
 		text-align: center;
 		font-size: 1.3rem;
 		font-weight: bolder;
 		/* letter-spacing: 2px; */
+		color: var(--mainBlue);
 	}
 
 	.horizline {

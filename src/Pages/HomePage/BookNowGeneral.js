@@ -7,6 +7,10 @@ import { Collapse, DatePicker } from "antd";
 import { getTickets } from "../../apiCore";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import TicketIcon from "../../GeneralImgs/ticketIcon.png";
+import DateIcon from "../../GeneralImgs/dateIcon.png";
+import TicketCountIcon from "../../GeneralImgs/ticketCountIcon.png";
+import PhoneIcon from "../../GeneralImgs/phoneIcon.png";
 
 const { Panel } = Collapse;
 
@@ -91,29 +95,56 @@ const BookNowGeneral = () => {
 		<BookNowGeneralWrapper>
 			<h1 className='titleBookNow my-3'>
 				Book Your Seat Now With Khan Khadjia
-				<br />
-				The Best Resort In Egypt!
 			</h1>
-			<div className='horizline col-md-3 mx-auto my-3'></div>
+			{/* <div className='horizline col-md-3 mx-auto my-3'></div> */}
 			<Collapse
-				style={{ background: "#1E467D" }}
+				style={{
+					background: "white",
+					borderRadius: "20px",
+				}}
 				className='col-md-4 mx-auto'
 				accordion>
 				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "20px 20px 0px 0px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
 								fontWeight: "bold",
-								color: "white",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{serviceDetails
-								? serviceDetails.serviceName
-								: "Please Select A Ticket"}
+							{serviceDetails ? (
+								<span>
+									<img
+										src={TicketIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span className='ml-2' style={{ float: "left" }}>
+										{serviceDetails.serviceName}
+									</span>
+								</span>
+							) : (
+								<span>
+									<img
+										src={TicketIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span
+										className='ml-2'
+										style={{ float: "left", fontWeight: "lighter" }}>
+										Please Select A Ticket
+									</span>
+								</span>
+							)}
 						</span>
 					}>
 					<select
@@ -160,16 +191,45 @@ const BookNowGeneral = () => {
 				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "0px 0px 0px 0px",
+						marginTop: "-5px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
 								fontWeight: "bold",
-								color: "white",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{chosenDate ? `Date: ${chosenDate}` : "Please Select A Date"}
+							{chosenDate ? (
+								<span>
+									<img
+										src={DateIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span className='ml-2' style={{ float: "left" }}>
+										Date: {chosenDate}
+									</span>
+								</span>
+							) : (
+								<span>
+									<img
+										src={DateIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span
+										className='ml-2'
+										style={{ float: "left", fontWeight: "lighter" }}>
+										Please Select A Date
+									</span>
+								</span>
+							)}
 						</span>
 					}>
 					<DatePicker
@@ -269,18 +329,33 @@ const BookNowGeneral = () => {
 				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "0px 0px 0px 0px",
+						marginTop: "-5px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
 								fontWeight: "bold",
-								color: "white",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{phoneNumber && countryCallingCode
-								? `Phone: ${countryCallingCode}${phoneNumber}`
-								: "Please Fill In Your Phone Number"}
+							<img
+								src={PhoneIcon}
+								alt='Khan Khadija'
+								className='BookingIcons'
+							/>
+
+							<span
+								className='ml-2'
+								style={{ float: "left", fontWeight: "lighter" }}>
+								{phoneNumber && countryCallingCode
+									? `Phone: ${countryCallingCode}${phoneNumber}`
+									: "Please Fill In Your Phone Number"}
+							</span>
 						</span>
 					}>
 					<div className='col-md-10 mx-auto'>
@@ -333,21 +408,35 @@ const BookNowGeneral = () => {
 					</div>
 				</Panel>
 
-				{/* <Panel
+				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "0px 0px 0px 0px",
+						marginTop: "-5px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
 								fontWeight: "bold",
-								color: "white",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{quantity_Children && quantity_Adults
-								? `Adults Count: ${quantity_Adults}, Children Count: ${quantity_Children}`
-								: "Tickets Count"}
+							<img
+								src={TicketCountIcon}
+								alt='Khan Khadija'
+								className='BookingIcons'
+							/>
+							<span
+								className='ml-2'
+								style={{ float: "left", fontWeight: "lighter" }}>
+								{quantity_Children && quantity_Adults
+									? `Adults Count: ${quantity_Adults}, Children Count: ${quantity_Children}`
+									: "Tickets Count"}
+							</span>
 						</span>
 					}>
 					<div className='col-md-10 mx-auto my-1'>
@@ -389,10 +478,18 @@ const BookNowGeneral = () => {
 							placeholder='(**Required)'
 						/>
 					</div>
-				</Panel> */}
+				</Panel>
 			</Collapse>
 
-			<div className='mx-auto text-center mt-3'>
+			<div
+				className='mx-auto text-center mt-1 col-md-4 bookNowBtn'
+				style={{
+					textAlign: "center",
+					border: "6px var(--orangePrimary) solid",
+					borderRadius: "0px 0px 20px 20px",
+					marginTop: "-5px",
+					background: "var(--mainBlue)",
+				}}>
 				{chosenService_Package ? (
 					<Link
 						to={`/book-now/${chosenService_Package.split(" ").join("-")}`}
@@ -416,7 +513,7 @@ const BookNowGeneral = () => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn btn-primary '>
+						className='btn '>
 						Book Now!
 					</Link>
 				) : (
@@ -438,7 +535,7 @@ const BookNowGeneral = () => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn btn-primary '>
+						className='btn '>
 						Book Now!
 					</Link>
 				)}
@@ -455,21 +552,58 @@ const BookNowGeneralWrapper = styled.div`
 		font-size: 1.3rem;
 		font-weight: bolder;
 		letter-spacing: 2px;
+		color: var(--mainBlue);
 	}
 
 	.horizline {
-		border: 2px grey solid;
+		border: 2px var(--orangePrimary) solid;
 	}
 
 	svg {
-		color: white !important;
+		color: black !important;
+		display: none;
 	}
 
 	.countryCodePhone {
 		margin-left: 50px;
 	}
 
+	i {
+		color: black !important;
+	}
+
+	.BookingIcons {
+		height: 4%;
+		width: 4%;
+		float: left;
+		margin: 0px !important;
+		padding: 0px !important;
+	}
+
+	.bookNowBtn,
+	a {
+		color: white;
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	.bookNowBtn:hover {
+		background: var(--orangePrimary) !important;
+		transition: 0.5s;
+	}
+
+	.bookNowBtn {
+		transition: 0.5s;
+	}
+
 	@media (max-width: 1000px) {
+		margin-left: 30px;
+		margin-right: 30px;
+
+		img {
+			width: 7% !important;
+			height: 7% !important;
+		}
 		.countryCodePhone {
 			margin: 6px 35px;
 		}

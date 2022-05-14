@@ -21,10 +21,33 @@ const FormStep1 = ({
 	setChosenCouponDetails,
 }) => {
 	useEffect(() => {
-		setChosenDate(new Date().toLocaleDateString());
+		if (!localStorage.getItem("reservationData")) {
+			setChosenDate(new Date().toLocaleDateString());
+		} else {
+			setChosenDate(
+				new Date(
+					moment(
+						JSON.parse(
+							localStorage.getItem("reservationData") &&
+								localStorage.getItem("reservationData"),
+						).chosenDate,
+					)._d,
+				).toLocaleDateString(),
+			);
+		}
 
 		// eslint-disable-next-line
 	}, []);
+
+	console.log(
+		moment(
+			JSON.parse(
+				localStorage.getItem("reservationData") &&
+					localStorage.getItem("reservationData"),
+			).chosenDate,
+		),
+		"From Step1",
+	);
 
 	const disabledDate = (current) => {
 		// Can not select days before today and today

@@ -7,6 +7,12 @@ import styled from "styled-components";
 import logo from "./Logo.jpg";
 import { allLoyaltyPointsAndStoreStatus } from "../apiCore";
 
+const mountedStyle = { animation: "inAnimation 600ms ease-in" };
+const unmountedStyle = {
+	animation: "outAnimation 600ms ease-out",
+	animationFillMode: "forwards",
+};
+
 const Sidebar = ({
 	history,
 	click,
@@ -52,6 +58,19 @@ const Sidebar = ({
 		setClick(!click);
 	};
 
+	const storeLogo2 =
+		"https://res.cloudinary.com/infiniteapps/image/upload/v1652480319/khankhadija/LogoSideBar_YusufSidebar_gfw40c.png";
+
+	// eslint-disable-next-line
+	var index2 = storeLogo2.indexOf("upload");
+
+	// var finalLogoUrl2 =
+	// 	storeLogo2.substr(0, index2 + 6) +
+	// 	"/e_bgremoval" +
+	// 	storeLogo2.substr(index2 + 6);
+
+	var finalLogoUrl2 = storeLogo2;
+
 	return (
 		<Nav
 			className=' navbar  navbar-expand-lg nav-center py-1 overAllSidebar'
@@ -74,7 +93,8 @@ const Sidebar = ({
 								: "https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1640714861/KuwaitDemo/1640714860747.jpg"
 						}
 						alt='Infinite-Apps'
-						className='imgLogo'
+						style={click ? unmountedStyle : mountedStyle}
+						className={click ? "imgLogo" : "imgLogo"}
 					/>
 					{/* <div className='logo-type' style={{ color: "black" }}>
 						Grooming Brand <br />
@@ -97,245 +117,284 @@ const Sidebar = ({
 					onClick={handleSidebar}></i>
 			)}
 			<SideWrapper show={clickMenu} dir={language === "Arabic" ? "rtl" : "ltr"}>
-				<ul>
-					<li
-						className='mt-3'
-						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
-						<Link
-							to='/'
-							className='sidebar-link'
-							onClick={() => {
-								setClickMenu(false);
-								setClick(false);
-							}}>
-							{click && clickMenu ? (
-								<React.Fragment>
-									<i
-										className={
-											language === "Arabic"
-												? "fas fa-home fontawesome-iconsArabic"
-												: "fas fa-home fontawesome-icons"
-										}></i>
-									{language === "Arabic" ? "الصفحة الرئيسية" : "Home"}
-								</React.Fragment>
-							) : null}
-						</Link>
-					</li>
-
-					<li
-						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
-						<Link
-							to='/listings'
-							className='sidebar-link'
-							onClick={() => {
-								setClickMenu(false);
-								setClick(false);
-							}}>
-							{click && clickMenu ? (
-								<React.Fragment>
-									<span
-										className={
-											language === "Arabic"
-												? "fontawesome-pricingWrapperArabic"
-												: "fontawesome-pricingWrapper"
-										}>
-										<i
-											className={
-												language === "Arabic"
-													? "far fa-list-alt fontawesome-iconsArabic"
-													: "far fa-list-alt fontawesome-iconsPricing"
-											}></i>{" "}
-									</span>
-									{language === "Arabic" ? "احجز الآن" : "Book Now"}
-								</React.Fragment>
-							) : null}
-						</Link>
-					</li>
-
-					<li
-						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
-						<Link
-							to='/contact'
-							className='sidebar-link'
-							onClick={() => {
-								setClickMenu(false);
-								setClick(false);
-							}}>
-							{click && clickMenu ? (
-								<React.Fragment>
-									<i
-										className={
-											language === "Arabic"
-												? "fas fa-address-card fontawesome-iconsArabic"
-												: "fas fa-address-card fontawesome-icons"
-										}></i>
-									{language === "Arabic" ? "اتصل بنا" : "Contact us"}
-								</React.Fragment>
-							) : null}
-						</Link>
-					</li>
-
-					<li
-						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
-						<Link
-							to='/about'
-							className='sidebar-link'
-							onClick={() => {
-								setClickMenu(false);
-								setClick(false);
-							}}>
-							{click && clickMenu ? (
-								<React.Fragment>
-									<i
-										className={
-											language === "Arabic"
-												? "fas fa-sitemap fontawesome-iconsArabic"
-												: "fas fa-sitemap fontawesome-icons"
-										}></i>
-									{language === "Arabic" ? "من نحن" : "About us"}
-								</React.Fragment>
-							) : null}
-						</Link>
-					</li>
-
-					{isAuthenticated() && isAuthenticated().user.role === 0 && (
+				<span className={language === "Arabic" ? "AlignItemsRight" : ""}>
+					<div className='upperStyling'>
+						<img
+							src={
+								storeLogo
+									? finalLogoUrl2
+									: "https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1652480319/khankhadija/LogoSideBar_YusufSidebar_gfw40c.png"
+							}
+							alt='Infinite-Apps'
+							className={language === "Arabic" ? "imgLogo2Arabic" : "imgLogo2 "}
+						/>
+					</div>
+					<ul>
 						<li
-							className='nav-item ml-5 mt-3'
+							className='mt-3'
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
-								className='nav-link '
-								to='/dashboard'
-								style={{ fontWeight: "bold" }}
+								to='/'
+								className='sidebar-link'
 								onClick={() => {
 									setClickMenu(false);
 									setClick(false);
 								}}>
-								My Account/Dashboard
+								{click && clickMenu ? (
+									<React.Fragment>
+										<i
+											className={
+												language === "Arabic"
+													? "fas fa-home fontawesome-iconsArabic"
+													: "fas fa-home fontawesome-icons"
+											}></i>
+										<span className='linkStyling'>
+											{language === "Arabic" ? "الصفحة الرئيسية" : "Home"}
+										</span>
+									</React.Fragment>
+								) : null}
 							</Link>
 						</li>
-					)}
 
-					{isAuthenticated() && isAuthenticated().user.role === 1 && (
-						<React.Fragment>
+						<li
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
+								to='/listings'
+								className='sidebar-link'
+								onClick={() => {
+									setClickMenu(false);
+									setClick(false);
+								}}>
+								{click && clickMenu ? (
+									<React.Fragment>
+										<span
+											className={
+												language === "Arabic"
+													? "fontawesome-pricingWrapperArabic"
+													: "fontawesome-pricingWrapper"
+											}>
+											<i
+												className={
+													language === "Arabic"
+														? "far fa-list-alt fontawesome-iconsArabic"
+														: "far fa-list-alt fontawesome-iconsPricing"
+												}></i>{" "}
+										</span>
+										<span className='linkStyling'>
+											{" "}
+											{language === "Arabic" ? "احجز الآن" : "Book Now"}{" "}
+										</span>
+									</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
+								to='/contact'
+								className='sidebar-link'
+								onClick={() => {
+									setClickMenu(false);
+									setClick(false);
+								}}>
+								{click && clickMenu ? (
+									<React.Fragment>
+										<i
+											className={
+												language === "Arabic"
+													? "fas fa-address-card fontawesome-iconsArabic"
+													: "fas fa-address-card fontawesome-icons"
+											}></i>
+										<span className='linkStyling'>
+											{" "}
+											{language === "Arabic" ? "اتصل بنا" : "Contact us"}
+										</span>
+									</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
+								to='/about'
+								className='sidebar-link'
+								onClick={() => {
+									setClickMenu(false);
+									setClick(false);
+								}}>
+								{click && clickMenu ? (
+									<React.Fragment>
+										<i
+											className={
+												language === "Arabic"
+													? "fas fa-sitemap fontawesome-iconsArabic"
+													: "fas fa-sitemap fontawesome-icons"
+											}></i>
+										<span className='linkStyling'>
+											{" "}
+											{language === "Arabic" ? "من نحن" : "About us"}
+										</span>
+									</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						{isAuthenticated() && isAuthenticated().user.role === 0 && (
 							<li
 								className='nav-item ml-5 mt-3'
 								onClick={() => {
 									window.scrollTo({ top: 0, behavior: "smooth" });
 								}}>
 								<Link
-									style={{ fontWeight: "bold" }}
 									className='nav-link '
-									to='/admin/dashboard'
+									to='/dashboard'
+									style={{ fontWeight: "bold" }}
 									onClick={() => {
 										setClickMenu(false);
 										setClick(false);
 									}}>
-									Admin Dashboard
+									<span className='linkStyling'>My Account/Dashboard</span>
 								</Link>
 							</li>
-						</React.Fragment>
-					)}
+						)}
 
-					{!isAuthenticated() && (
-						<Fragment>
+						{isAuthenticated() && isAuthenticated().user.role === 1 && (
+							<React.Fragment>
+								<li
+									className='nav-item ml-5 mt-3'
+									onClick={() => {
+										window.scrollTo({ top: 0, behavior: "smooth" });
+									}}>
+									<Link
+										style={{ fontWeight: "bold" }}
+										className='nav-link '
+										to='/admin/dashboard'
+										onClick={() => {
+											setClickMenu(false);
+											setClick(false);
+										}}>
+										<span className='linkStyling'>Admin Dashboard</span>
+									</Link>
+								</li>
+							</React.Fragment>
+						)}
+
+						{!isAuthenticated() && (
+							<Fragment>
+								<li
+									className='nav-item ml-2 mt-3'
+									onClick={() => {
+										window.scrollTo({ top: 0, behavior: "smooth" });
+									}}>
+									<Link
+										className='nav-link '
+										to='/login'
+										style={{ fontWeight: "bold", color: "white" }}
+										onClick={() => {
+											setClickMenu(false);
+											setClick(false);
+										}}>
+										<span className='linkStyling'>
+											{language === "Arabic" ? "تسجيل الدخول" : "Login"}
+										</span>
+									</Link>
+								</li>
+							</Fragment>
+						)}
+
+						{isAuthenticated() && (
 							<li
-								className='nav-item ml-2 mt-3'
+								className='nav-item'
 								onClick={() => {
 									window.scrollTo({ top: 0, behavior: "smooth" });
 								}}>
-								<Link
-									className='nav-link '
-									to='/signin'
-									style={{ fontWeight: "bold", color: "white" }}
-									onClick={() => {
-										setClickMenu(false);
-										setClick(false);
-									}}>
-									{language === "Arabic" ? "تسجيل الدخول" : "Login"}
-								</Link>
+								<span>
+									<span
+										className='signoutbutton nav-link'
+										style={{
+											cursor: "pointer",
+											// margin: 10,
+											fontWeight: "bold",
+											textDecoration: "underline",
+											color: "#ffc8c7",
+											fontStyle: "italic",
+											fontSize: "1.2rem",
+										}}
+										onClick={() =>
+											signout(() => {
+												setClickMenu(false);
+												setClick(false);
+												history.push("/");
+												localStorage.removeItem("userHistoryPurchases");
+												localStorage.removeItem("order");
+											})
+										}>
+										{language === "Arabic" ? "تسجيل خروج" : "Signout"}
+									</span>
+								</span>
 							</li>
-						</Fragment>
-					)}
-
-					{isAuthenticated() && (
+						)}
 						<li
-							className='nav-item'
+							className='nav-item mx-3'
+							style={{ marginTop: "150px" }}
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
-							<span>
-								<span
-									className='signoutbutton nav-link'
-									style={{
-										cursor: "pointer",
-										// margin: 10,
-										fontWeight: "bold",
-										textDecoration: "underline",
-										color: "#ffc8c7",
-										fontStyle: "italic",
-									}}
-									onClick={() =>
-										signout(() => {
+							<span style={{ color: "white", fontWeight: "bold" }}>
+								{language === "Arabic" ? "اللغة" : "Language"}
+							</span>{" "}
+							<span className=' ml-4 btn' style={{ padding: "1px" }}>
+								{language === "English" ? (
+									<span
+										style={{
+											// background: "#c40000",
+											cursor: "pointer",
+											border: "solid 1px white",
+											padding: "0px 6px",
+											color: "var(--orangePrimary)",
+										}}
+										className='btn '
+										onClick={() => {
+											setLanguage("Arabic");
 											setClickMenu(false);
 											setClick(false);
-											history.push("/");
-											localStorage.removeItem("userHistoryPurchases");
-											localStorage.removeItem("order");
-										})
-									}>
-									{language === "Arabic" ? "تسجيل خروج" : "Signout"}
-								</span>
+											// window.location.reload(false);
+										}}>
+										Arabic
+									</span>
+								) : (
+									<span
+										style={{
+											// background: "#c40000",
+											cursor: "pointer",
+											border: "solid 1px white",
+											padding: "0px 6px",
+											color: "var(--orangePrimary)",
+										}}
+										className='btn '
+										onClick={() => {
+											setLanguage("English");
+											setClickMenu(false);
+											setClick(false);
+											// window.location.reload(false);
+										}}>
+										English
+									</span>
+								)}
 							</span>
 						</li>
-					)}
-					<li
-						className='nav-item mx-3'
-						style={{ marginTop: "150px" }}
-						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
-						}}>
-						<span style={{ color: "white", fontWeight: "bold" }}>
-							{language === "Arabic" ? "اللغة" : "Language"}
-						</span>{" "}
-						<span className=' ml-4 btn' style={{ padding: "1px" }}>
-							{language === "English" ? (
-								<span
-									style={{ background: "#c40000", color: "white" }}
-									className='btn '
-									onClick={() => {
-										setLanguage("Arabic");
-										setClickMenu(false);
-										setClick(false);
-										// window.location.reload(false);
-									}}>
-									Arabic
-								</span>
-							) : (
-								<span
-									style={{ background: "#c40000", color: "white" }}
-									className='btn '
-									onClick={() => {
-										setLanguage("English");
-										setClickMenu(false);
-										setClick(false);
-										// window.location.reload(false);
-									}}>
-									English
-								</span>
-							)}
-						</span>
-					</li>
-				</ul>
+					</ul>
+				</span>
 			</SideWrapper>
 		</Nav>
 	);
@@ -348,7 +407,7 @@ const Nav = styled.nav`
 	background-image: linear-gradient(to right, #1e467d, #1e467d) !important;
 
 	.infiniteAppsLogo {
-		width: 159px;
+		width: 250px;
 		height: 79px;
 		margin-top: 0px;
 		margin-bottom: 0px;
@@ -357,13 +416,17 @@ const Nav = styled.nav`
 	}
 
 	.imgLogo {
-		width: 159px;
+		width: 250px;
 		height: 79px;
 		object-fit: cover;
 		margin-top: 0px;
 		margin-bottom: 0px;
-		margin-left: 0px;
+		margin-left: 15px;
 		border-radius: 15px;
+	}
+
+	.logoDisapear {
+		display: none;
 	}
 
 	.nav-icon {
@@ -446,7 +509,7 @@ const Nav = styled.nav`
 const SideWrapper = styled.nav`
 	overflow-y: auto;
 	position: fixed;
-	top: 87px;
+	top: 0px;
 	right: 0;
 	width: 70%;
 	height: 100%;
@@ -457,14 +520,53 @@ const SideWrapper = styled.nav`
 	transform: ${(props) => (props.show ? "translateX(0)" : "translateX(250%)")};
 	background-image: linear-gradient(to right, #1e467d, #1e467d) !important;
 
+	.AlignItemsRight {
+		text-align: right;
+	}
+
 	/*transform: translateX(-100%);*/ /**this will hide the side bar */
+
+	.upperStyling {
+		background: var(--orangePrimary);
+		/* padding: 60px; */
+		position: relative;
+		min-height: 120px;
+		text-align: center;
+	}
+
+	.imgLogo2 {
+		width: 250px;
+		height: 80px;
+		object-fit: cover;
+		margin-top: 20px;
+		margin-bottom: 0px;
+		margin-right: 50px;
+		/* border-radius: 15px; */
+		text-align: center;
+	}
+
+	.imgLogo2Arabic {
+		width: 250px;
+		height: 80px;
+		object-fit: cover;
+		margin-top: 20px;
+		margin-bottom: 0px;
+		margin-right: 20px;
+		/* border-radius: 15px; */
+		text-align: center;
+	}
+
 	ul {
 		list-style-type: none;
 		padding: 0 !important;
 	}
+
+	li {
+		margin-left: 30px;
+	}
 	.sidebar-link {
 		display: block;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		text-transform: capitalize;
 		color: white;
 		padding: 1.1rem 1.1rem;
@@ -484,51 +586,57 @@ const SideWrapper = styled.nav`
 	}
 
 	.fontawesome-icons {
-		color: #ffdbda;
+		color: white;
+		opacity: 0.4;
 		margin-right: 10px;
-		font-size: 1rem;
+		font-size: 1.2rem;
 		/* font-weight: bold; */
 	}
 
 	.fontawesome-pricingWrapper {
-		color: #ffdbda;
+		color: white;
+		opacity: 0.4;
 		margin-right: 8px;
 		/* font-weight: bold; */
 	}
 
 	.fontawesome-iconsPricing {
-		color: #ffdbda;
-		font-size: 1rem;
+		color: white;
+		opacity: 0.4;
+		font-size: 1.2rem;
 		/* font-weight: bold; */
 	}
 
 	.fontawesome-iconsSpecial {
 		margin-right: 10px;
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	.fontawesome-iconsArabic {
-		color: #ffdbda;
+		color: white;
+		opacity: 0.4;
 		margin-left: 10px;
-		font-size: 1rem;
+		font-size: 1.2rem;
 		/* font-weight: bold; */
 	}
 
 	.fontawesome-pricingWrapperArabic {
-		color: #ffdbda;
+		color: white;
+		opacity: 0.4;
 		/* margin-left: 8px; */
 		/* font-weight: bold; */
 	}
 
 	.fontawesome-iconsPricingArabic {
-		color: #ffdbda;
-		font-size: 1rem;
+		color: white;
+		opacity: 0.4;
+		font-size: 1.2rem;
 		/* font-weight: bold; */
 	}
 
 	.fontawesome-iconsSpecialArabic {
 		margin-left: 10px;
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	.dropDownIcon {
@@ -560,6 +668,11 @@ const SideWrapper = styled.nav`
 		opacity: 0;
 		transform: scale(0.9);
 		transition: opacity 200ms, transform 200ms;
+	}
+
+	.linkStyling {
+		font-size: 1.2rem;
+		margin-left: 12px;
 	}
 
 	@media (min-width: 600px) {
