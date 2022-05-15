@@ -93,7 +93,7 @@ const BookNowGeneral = () => {
 
 	return (
 		<BookNowGeneralWrapper>
-			<h1 className='titleBookNow my-3'>
+			<h1 className='titleBookNow mt-3'>
 				Book Your Seat Now With Khan Khadjia
 			</h1>
 			{/* <div className='horizline col-md-3 mx-auto my-3'></div> */}
@@ -102,7 +102,7 @@ const BookNowGeneral = () => {
 					background: "white",
 					borderRadius: "20px",
 				}}
-				className='col-md-4 mx-auto'
+				className='col-md-6 mx-auto'
 				accordion>
 				<Panel
 					showArrow={true}
@@ -127,7 +127,7 @@ const BookNowGeneral = () => {
 										alt='Khan Khadija'
 										className='BookingIcons'
 									/>
-									<span className='ml-2' style={{ float: "left" }}>
+									<span className='ml-2 mainTitles' style={{ float: "left" }}>
 										{serviceDetails.serviceName}
 									</span>
 								</span>
@@ -139,7 +139,7 @@ const BookNowGeneral = () => {
 										className='BookingIcons'
 									/>
 									<span
-										className='ml-2'
+										className='ml-2 mainTitles'
 										style={{ float: "left", fontWeight: "lighter" }}>
 										Please Select A Ticket
 									</span>
@@ -212,7 +212,7 @@ const BookNowGeneral = () => {
 										alt='Khan Khadija'
 										className='BookingIcons'
 									/>
-									<span className='ml-2' style={{ float: "left" }}>
+									<span className='ml-2 mainTitles' style={{ float: "left" }}>
 										Date: {chosenDate}
 									</span>
 								</span>
@@ -224,7 +224,7 @@ const BookNowGeneral = () => {
 										className='BookingIcons'
 									/>
 									<span
-										className='ml-2'
+										className='ml-2 mainTitles'
 										style={{ float: "left", fontWeight: "lighter" }}>
 										Please Select A Date
 									</span>
@@ -350,7 +350,7 @@ const BookNowGeneral = () => {
 							/>
 
 							<span
-								className='ml-2'
+								className='ml-2 mainTitles'
 								style={{ float: "left", fontWeight: "lighter" }}>
 								{phoneNumber && countryCallingCode
 									? `Phone: ${countryCallingCode}${phoneNumber}`
@@ -431,7 +431,7 @@ const BookNowGeneral = () => {
 								className='BookingIcons'
 							/>
 							<span
-								className='ml-2'
+								className='ml-2 mainTitles'
 								style={{ float: "left", fontWeight: "lighter" }}>
 								{quantity_Children && quantity_Adults
 									? `Adults Count: ${quantity_Adults}, Children Count: ${quantity_Children}`
@@ -482,7 +482,7 @@ const BookNowGeneral = () => {
 			</Collapse>
 
 			<div
-				className='mx-auto text-center mt-1 col-md-4 bookNowBtn'
+				className='mx-auto text-center mt-1 col-md-6 bookNowBtn'
 				style={{
 					textAlign: "center",
 					border: "6px var(--orangePrimary) solid",
@@ -540,6 +540,8 @@ const BookNowGeneral = () => {
 					</Link>
 				)}
 			</div>
+
+			{/* <h1 className='titleBookNow my-3'>See More</h1> */}
 		</BookNowGeneralWrapper>
 	);
 };
@@ -547,6 +549,8 @@ const BookNowGeneral = () => {
 export default BookNowGeneral;
 
 const BookNowGeneralWrapper = styled.div`
+	margin-top: 40px;
+
 	.titleBookNow {
 		text-align: center;
 		font-size: 1.3rem;
@@ -606,6 +610,10 @@ const BookNowGeneralWrapper = styled.div`
 		}
 		.countryCodePhone {
 			margin: 6px 35px;
+		}
+
+		.mainTitles {
+			font-size: 0.8rem;
 		}
 	}
 `;

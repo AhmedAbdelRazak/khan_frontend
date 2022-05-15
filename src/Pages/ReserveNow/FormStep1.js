@@ -39,16 +39,6 @@ const FormStep1 = ({
 		// eslint-disable-next-line
 	}, []);
 
-	console.log(
-		moment(
-			JSON.parse(
-				localStorage.getItem("reservationData") &&
-					localStorage.getItem("reservationData"),
-			).chosenDate,
-		),
-		"From Step1",
-	);
-
 	const disabledDate = (current) => {
 		// Can not select days before today and today
 		return current < moment();

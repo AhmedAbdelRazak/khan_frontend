@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import { getTickets } from "../../apiCore";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Slider from "react-slick";
 
 const OurTickets_Arabic = ({ language }) => {
 	const [allTickets, setAllTickets] = useState([]);
+	const [ticketsWithOffers, setTicketsWithOffers] = useState([]);
 
 	const gettingAllTickets = () => {
 		getTickets().then((data) => {
@@ -16,6 +18,14 @@ const OurTickets_Arabic = ({ language }) => {
 				console.log(data.error);
 			} else {
 				setAllTickets(data.filter((i) => i.activeService === true));
+				setTicketsWithOffers(
+					data.filter(
+						(i) =>
+							(i.servicePriceDiscount !== i.servicePrice ||
+								i.servicePriceDiscount_Children !== i.servicePrice_Children) &&
+							i.activeService === true,
+					),
+				);
 			}
 		});
 	};
@@ -32,21 +42,84 @@ const OurTickets_Arabic = ({ language }) => {
 	// 	window.location.replace(`${process.env.REACT_APP_MAIN_URL}/book-now`);
 	// };
 
+	const settings = {
+		dots: true,
+		infinite: true,
+		autoplay: true,
+		arrows: true,
+		speed: 1000,
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		autoplaySpeed: 5000,
+		pauseOnHover: true,
+		adaptiveHeight: true,
+
+		responsive: [
+			{
+				breakpoint: 1200,
+				settings: {
+					dots: true,
+					infinite: true,
+					autoplay: true,
+					arrows: true,
+					speed: 1000,
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					autoplaySpeed: 5000,
+					pauseOnHover: true,
+					adaptiveHeight: true,
+				},
+			},
+		],
+	};
+
+	const settings2 = {
+		dots: true,
+		infinite: true,
+		// autoplay: true,
+		arrows: true,
+		speed: 1000,
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		autoplaySpeed: 5000,
+		pauseOnHover: true,
+		adaptiveHeight: true,
+
+		responsive: [
+			{
+				breakpoint: 1200,
+				settings: {
+					dots: false,
+					infinite: true,
+					// autoplay: true,
+					arrows: true,
+					speed: 1000,
+					slidesToShow:
+						ticketsWithOffers && ticketsWithOffers.length <= 2 ? 1 : 2,
+					slidesToScroll: 1,
+					autoplaySpeed: 5000,
+					pauseOnHover: true,
+					adaptiveHeight: true,
+				},
+			},
+		],
+	};
+
 	return (
 		<OurTicketsWrapper>
 			<div className='secSection' dir='rtl'>
 				<h1 data-aos='fade-up'>خان خديجة | تذاكرنا</h1>
-				<div className='col-md-4 mx-auto'>
+				{/* <div className='col-md-4 mx-auto'>
 					<br />
 					<div className='horizLine'></div>
-				</div>
-				<p data-aos='fade-right'>
+				</div> */}
+				{/* <p data-aos='fade-right'>
 					تشمل جميع الباقات مرافق بدوام كامل ، ودعائم ممتعة للغاية ، وإعداد و
 					انهيار الكابينة ، تجربة مخصصة للجميع ، الرسائل القصيرة / الرسائل
 					النصية والبريد الإلكتروني والوسائط الاجتماعية لمشاركة صورك وصورك
 					المرشحات وصور GIF والرسوم المتحركة المثيرة ومعرض الصور عبر الإنترنت
 					وتجربة لا تنسى!
-				</p>
+				</p> */}
 				<div className='cardsWrapper'>
 					<div className='container-fluid p-5'>
 						<div className='row'>
@@ -55,12 +128,12 @@ const OurTickets_Arabic = ({ language }) => {
 									return (
 										<div
 											key={i}
-											className='col-md-4 mx-auto my-2 '
+											className='col-md-3 mx-auto my-2 '
 											data-aos='fade-down'>
 											<div
 												className='card '
 												style={{
-													borderRadius: "0% 10%",
+													borderRadius: "0% 0%",
 													backgroundColor: "#faf7eb",
 												}}>
 												<div className='card-body  '>
@@ -76,9 +149,9 @@ const OurTickets_Arabic = ({ language }) => {
 																alt={s.serviceName}
 																src={s.thumbnail[0].url}
 																style={{
-																	height: "400px",
-																	width: "400px",
-																	borderRadius: "50px",
+																	height: "300px",
+																	width: "300px",
+																	borderRadius: "30px",
 																	objectFit: "cover",
 																}}
 															/>
@@ -91,6 +164,7 @@ const OurTickets_Arabic = ({ language }) => {
 															fontWeight: "bold",
 															textAlign: "center",
 															textTransform: "capitalize",
+															color: "var(--mainBlue)",
 														}}>
 														التذكرة: {s.serviceName_Arabic}
 													</div>
@@ -289,6 +363,46 @@ const OurTickets_Arabic = ({ language }) => {
 					</div>
 				</div>
 			</div>
+
+			<div className='ticketsPhoneView'>
+				<h1 data-aos='fade-up' className='titleBookNow'>
+					تذاكر الخان
+				</h1>
+				<div className='container-fluid my-3 ProductSlider'>
+					<Slider {...settings} className='mb-5'>
+						{allTickets &&
+							allTickets.map((t, i) => (
+								<div className='img-fluid images' key={i}>
+									<img alt={t.serviceName} src={t.thumbnail[0].url} />
+								</div>
+							))}
+					</Slider>
+				</div>
+			</div>
+
+			{ticketsWithOffers && ticketsWithOffers.length > 0 ? (
+				<div className='ticketsPhoneView'>
+					<h1 data-aos='fade-up' className='titleBookNow'>
+						عروض الخان
+					</h1>
+					<div className='container-fluid my-3 ProductSlider'>
+						<Slider {...settings2} className='mb-5'>
+							{ticketsWithOffers &&
+								ticketsWithOffers.map((t, i) => {
+									return (
+										<div className='img-fluid images' key={i}>
+											<img
+												className='imageOffers'
+												alt={t.serviceName}
+												src={t.thumbnail[1].url}
+											/>
+										</div>
+									);
+								})}
+						</Slider>
+					</div>
+				</div>
+			) : null}
 		</OurTicketsWrapper>
 	);
 };
@@ -296,12 +410,21 @@ const OurTickets_Arabic = ({ language }) => {
 export default OurTickets_Arabic;
 
 const OurTicketsWrapper = styled.div`
+	font-family: "Droid Arabic Kufi";
 	overflow: hidden !important;
+
+	.titleBookNow {
+		text-align: center;
+		font-size: 1.3rem !important;
+		font-weight: bolder;
+		/* letter-spacing: 2px; */
+		color: var(--mainBlue);
+	}
 
 	.secSection h1 {
 		font-size: 2rem;
 		text-align: center;
-		margin-top: 10px;
+		margin-top: 3px;
 		font-weight: bold;
 		/* letter-spacing: 3px; */
 		overflow: hidden !important;
@@ -317,24 +440,23 @@ const OurTicketsWrapper = styled.div`
 	}
 
 	.container-fluid {
-		border: solid red 3px;
+		/* border: solid red 3px; */
 		border-radius: 15% 2%;
 		/* background-color: black; */
-		background-image: linear-gradient(to left, #272100, #000000);
-		box-shadow: 5px 5px 7px 7px rgba(0, 0, 0, 0.3);
+		/* background-image: linear-gradient(to left, #272100, #000000); */
+		/* box-shadow: 5px 5px 7px 7px rgba(0, 0, 0, 0.3); */
 		overflow: hidden !important;
 	}
 
 	.secSection ul {
 		list-style: none;
-		text-align: center;
 	}
 
 	.secSection ul li:before {
 		content: "✓";
 		color: green;
 		font-weight: bold;
-		margin-left: 10px;
+		margin-right: 10px;
 		font-size: 22px;
 	}
 
@@ -348,6 +470,20 @@ const OurTicketsWrapper = styled.div`
 
 	.cardsWrapper {
 		margin: 10px 50px;
+	}
+
+	.ticketsPhoneView {
+		display: none;
+	}
+
+	.ProductSlider {
+		padding: 0px 100px 0px 100px;
+	}
+
+	@media (max-width: 1400px) {
+		.ProductSlider {
+			padding: 0px;
+		}
 	}
 
 	@media (max-width: 1200px) {
@@ -380,6 +516,39 @@ const OurTicketsWrapper = styled.div`
 		.container-fluid {
 			border-radius: 8% 2%;
 			padding: 20px !important;
+		}
+		.ProductSlider {
+			padding: 0px 10px 0px 10px;
+		}
+	}
+
+	@media (max-width: 1000px) {
+		.secSection {
+			display: none;
+		}
+
+		.ticketsPhoneView {
+			display: block;
+		}
+
+		img {
+			border-radius: 10px;
+			width: 180px;
+			height: 180px;
+			object-fit: cover;
+		}
+
+		.imageOffers {
+			border-radius: 10px !important;
+			width: 180px !important;
+			height: 90px !important;
+			object-fit: cover;
+		}
+
+		.slick-slide {
+			/* padding: 0 -8px; */
+			margin-right: 8px;
+			margin-left: 8px;
 		}
 	}
 `;

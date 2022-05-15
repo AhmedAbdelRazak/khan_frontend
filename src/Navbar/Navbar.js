@@ -103,7 +103,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/")} to='/'>
-							{language === "Arabic" ? "الصفحة الرئيسية" : "Home"}
+							{language === "Arabic" ? (
+								<span className='linkTextArabic'>الصفحة الرئيسية</span>
+							) : (
+								"Home"
+							)}
 						</Link>
 					</li>
 
@@ -112,7 +116,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/listings")} to='/listings'>
-							{language === "Arabic" ? "احجز الآن" : "Book Now"}
+							{language === "Arabic" ? (
+								<span className='linkTextArabic'>احجز الآن</span>
+							) : (
+								"Book Now"
+							)}
 						</Link>
 					</li>
 					<li
@@ -120,7 +128,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/contact")} to='/contact'>
-							{language === "Arabic" ? "اتصل بنا" : "Contact us"}
+							{language === "Arabic" ? (
+								<span className='linkTextArabic'>اتصل بنا</span>
+							) : (
+								"Contact us"
+							)}
 						</Link>
 					</li>
 					<li
@@ -128,7 +140,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/about")} to='/about'>
-							{language === "Arabic" ? "من نحن" : "About us"}
+							{language === "Arabic" ? (
+								<span className='linkTextArabic'>من نحن</span>
+							) : (
+								"About us"
+							)}
 						</Link>
 					</li>
 
@@ -172,7 +188,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 									className='LoginStyling'
 									style={isActiveItemsToRight(history, "/login")}
 									to='/login'>
-									{language === "Arabic" ? "تسجيل الدخول" : "Login"}
+									{language === "Arabic" ? (
+										<span className='linkTextArabic'>تسجيل الدخول</span>
+									) : (
+										"Login"
+									)}
 								</Link>
 							</li>
 						</Fragment>
@@ -191,7 +211,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 										fontWeight: "bold",
 										textDecoration: "underline",
 										color: "#ffdbda",
-										fontStyle: "italic",
+										// fontStyle: "italic",
 									}}
 									onClick={() =>
 										signout(() => {
@@ -200,7 +220,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 											localStorage.removeItem("order");
 										})
 									}>
-									{language === "Arabic" ? "تسجيل خروج" : "Signout"}
+									{language === "Arabic" ? (
+										<span className='linkTextArabic'>تسجيل خروج</span>
+									) : (
+										"Signout"
+									)}
 								</span>
 							</span>
 						</li>
@@ -270,6 +294,7 @@ const Navbar1 = styled.nav`
 	z-index: 100;
 	/* box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1); */
 	background-image: linear-gradient(to right, #1e467d, #1e467d);
+	/* font-family: "Droid Arabic Kufi"; */
 
 	a {
 		color: white !important;
@@ -398,6 +423,10 @@ const Navbar1 = styled.nav`
 		opacity: 0;
 		transform: scale(0.9);
 		transition: opacity 200ms, transform 200ms;
+	}
+
+	.linkTextArabic {
+		font-family: "Droid Arabic Kufi" !important;
 	}
 
 	@media (max-width: 1200px) {

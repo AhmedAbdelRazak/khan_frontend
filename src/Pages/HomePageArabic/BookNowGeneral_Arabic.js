@@ -8,6 +8,10 @@ import { getTickets } from "../../apiCore";
 // import Helmet from "react-helmet";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import TicketIcon from "../../GeneralImgs/ticketIcon.png";
+import DateIcon from "../../GeneralImgs/dateIcon.png";
+import TicketCountIcon from "../../GeneralImgs/ticketCountIcon.png";
+import PhoneIcon from "../../GeneralImgs/phoneIcon.png";
 
 const { Panel } = Collapse;
 
@@ -93,24 +97,54 @@ const BookNowGeneral_Arabic = ({ language }) => {
 			<h1 className='titleBookNow my-3'>احجز مقعدك الآن مع خان خديجة</h1>
 			{/* <div className='horizline col-md-3 mx-auto my-3'></div> */}
 			<Collapse
-				style={{ background: "#1E467D" }}
-				className='col-md-4 mx-auto'
+				style={{
+					background: "white",
+					borderRadius: "20px",
+					// border: "1px red solid",
+				}}
+				className='col-md-6 mx-auto'
 				accordion>
 				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "20px 20px 0px 0px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
 								fontWeight: "bold",
-								color: "white",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{serviceDetails
-								? serviceDetails.serviceName_Arabic
-								: "الرجاء اختيار تذكرة"}
+							{serviceDetails ? (
+								<span>
+									<img
+										src={TicketIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span className='mr-2 mainTitles' style={{ float: "right" }}>
+										{serviceDetails.serviceName_Arabic}
+									</span>
+								</span>
+							) : (
+								<span>
+									<img
+										src={TicketIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span
+										className='mr-2 mainTitles'
+										style={{ float: "right", fontWeight: "lighter" }}>
+										الرجاء تحديد تذكرة
+									</span>
+								</span>
+							)}
 						</span>
 					}>
 					<select
@@ -157,16 +191,45 @@ const BookNowGeneral_Arabic = ({ language }) => {
 				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "0px 0px 0px 0px",
+						marginTop: "-5px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
 								fontWeight: "bold",
-								color: "white",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{chosenDate ? `التاريخ: ${chosenDate}` : "يرجى تحديد تاريخ"}
+							{chosenDate ? (
+								<span>
+									<img
+										src={DateIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span className='mr-2 mainTitles' style={{ float: "right" }}>
+										التاريخ: {chosenDate}
+									</span>
+								</span>
+							) : (
+								<span>
+									<img
+										src={DateIcon}
+										alt='Khan Khadija'
+										className='BookingIcons'
+									/>
+									<span
+										className='mr-2  mainTitles'
+										style={{ float: "right", fontWeight: "lighter" }}>
+										يرجى تحديد التاريخ
+									</span>
+								</span>
+							)}
 						</span>
 					}>
 					<DatePicker
@@ -266,18 +329,32 @@ const BookNowGeneral_Arabic = ({ language }) => {
 				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "0px 0px 0px 0px",
+						marginTop: "-5px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
-								fontWeight: "bold",
-								color: "white",
+								// fontWeight: "bold",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{phoneNumber && countryCallingCode
-								? `الهاتف: ${countryCallingCode}${phoneNumber}`
-								: "الرجاء إدخال رقم هاتفك"}
+							<img
+								src={PhoneIcon}
+								alt='Khan Khadija'
+								className='BookingIcons'
+							/>
+							<span
+								className='mr-2 mainTitles'
+								style={{ float: "right", fontWeight: "lighter" }}>
+								{phoneNumber && countryCallingCode
+									? `الهاتف: ${countryCallingCode}${phoneNumber}`
+									: "الرجاء إدخال رقم هاتفك"}
+							</span>
 						</span>
 					}>
 					<div className='col-md-10 mx-auto'>
@@ -330,21 +407,36 @@ const BookNowGeneral_Arabic = ({ language }) => {
 					</div>
 				</Panel>
 
-				{/* <Panel
+				<Panel
 					showArrow={true}
 					collapsible
-					style={{ textAlign: "center" }}
+					style={{
+						textAlign: "center",
+						border: "6px var(--orangePrimary) solid",
+						borderRadius: "0px 0px 0px 0px",
+						marginTop: "-5px",
+					}}
 					header={
 						<span
 							// className='mx-auto'
 							style={{
-								fontWeight: "bold",
-								color: "white",
+								// fontWeight: "bold",
+								color: "black",
 								textTransform: "capitalize",
 							}}>
-							{quantity_Children && quantity_Adults
-								? `Adults Count: ${quantity_Adults}, Children Count: ${quantity_Children}`
-								: "Tickets Count"}
+							<img
+								src={TicketCountIcon}
+								alt='Khan Khadija'
+								className='BookingIcons'
+							/>
+
+							<span
+								className='mr-2 mainTitles'
+								style={{ float: "right", fontWeight: "lighter" }}>
+								{quantity_Children && quantity_Adults
+									? `عدد البالغين: ${quantity_Adults}, عدد الأطفال: ${quantity_Children}`
+									: "عدد التذاكر"}
+							</span>
 						</span>
 					}>
 					<div className='col-md-10 mx-auto my-1'>
@@ -386,10 +478,18 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							placeholder='(**Required)'
 						/>
 					</div>
-				</Panel> */}
+				</Panel>
 			</Collapse>
 
-			<div className='mx-auto text-center mt-3'>
+			<div
+				className='mx-auto text-center mt-1 col-md-6 bookNowBtn'
+				style={{
+					textAlign: "center",
+					border: "6px var(--orangePrimary) solid",
+					borderRadius: "0px 0px 20px 20px",
+					marginTop: "-5px",
+					background: "var(--mainBlue)",
+				}}>
 				{chosenService_Package ? (
 					<Link
 						to={`/book-now/${chosenService_Package.split(" ").join("-")}`}
@@ -413,7 +513,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn btn-primary '>
+						className='btn '>
 						احجز الآن!
 					</Link>
 				) : (
@@ -435,7 +535,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn btn-primary '>
+						className='btn '>
 						احجز الآن!
 					</Link>
 				)}
@@ -448,6 +548,7 @@ export default BookNowGeneral_Arabic;
 
 const BookNowGeneralWrapper = styled.div`
 	font-family: "Droid Arabic Kufi";
+	margin-top: 40px;
 
 	.titleBookNow {
 		text-align: center;
@@ -465,15 +566,52 @@ const BookNowGeneralWrapper = styled.div`
 		color: white !important;
 		margin-left: 10px;
 		float: right;
+		display: none;
 	}
 
 	.countryCodePhone {
 		margin-left: 50px;
 	}
 
+	.BookingIcons {
+		height: 4%;
+		width: 4%;
+		float: right;
+		margin: 0px !important;
+		padding: 0px !important;
+	}
+
+	.bookNowBtn,
+	a {
+		color: white;
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	.bookNowBtn:hover {
+		background: var(--orangePrimary) !important;
+		transition: 0.5s;
+	}
+
+	.bookNowBtn {
+		transition: 0.5s;
+	}
+
 	@media (max-width: 1000px) {
+		margin-left: 30px;
+		margin-right: 30px;
+
+		img {
+			width: 7% !important;
+			height: 7% !important;
+		}
+
 		.countryCodePhone {
 			margin: 6px 35px;
+		}
+
+		.mainTitles {
+			font-size: 0.8rem;
 		}
 	}
 `;

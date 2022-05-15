@@ -12,8 +12,9 @@ body {
 :root {
 	--primaryColor: #5fb7ea;
 	--orangePrimary: #fcb63e;
-	--babyBlue: #429ad2;
+	--babyBlue: #f0f7fb;
 	--mainBlue: #1e467d;
+	--superBabyBlue: #f0f7fb;
 }
 
 @media (min-width: 950px) {

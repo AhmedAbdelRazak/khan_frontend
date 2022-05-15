@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Wave2 from "../GeneralImgs/wave2.png";
+// import Wave2 from "../GeneralImgs/wave2.png";
 // import Logo from "../imgs/Logo.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -13,22 +13,25 @@ const Footer = () => {
 		Aos.init({ duration: 2000 });
 	}, []);
 	const faceBookLink = () => {
-		window.open("");
+		window.open("https://m.facebook.com/khadija.resort/");
 	};
 
 	const instagramLink = () => {
-		window.open("");
+		window.open("https://m.facebook.com/khadija.resort/");
 	};
 
 	return (
 		<FooterWrapper>
-			<img src={Wave2} alt='Khan Khadija' className='footer-img' />
+			{/* <img src={Wave2} alt='Khan Khadija' className='footer-img' /> */}
 			<div className='container'>
 				<div className='row'>
-					<div className='col-md-3 footer-box mx-auto' data-aos='fade-up'>
+					<div className='col-md-3 footer-box mx-auto' data-aos='fade-left'>
 						<p>Social Media</p>
-						<i className='fab fa-facebook-f'></i>{" "}
+						<i
+							style={{ color: "var(--orangePrimary)" }}
+							className='fab fa-facebook-f'></i>{" "}
 						<span
+							className='mt-5 ml-3'
 							onClick={faceBookLink}
 							style={{ cursor: "pointer", fontWeight: "bold" }}>
 							Khan Khadija Resort Facebook
@@ -36,21 +39,30 @@ const Footer = () => {
 						<br />
 						<br />
 						<i
-							style={{ color: "red", fontSize: "15px", fontWeight: "bold" }}
+							style={{
+								color: "var(--orangePrimary)",
+								fontSize: "15px",
+								fontWeight: "bold",
+							}}
 							className='fab fa-instagram'></i>{" "}
 						<span
+							className='mt-3 ml-3'
 							onClick={instagramLink}
 							style={{ cursor: "pointer", fontWeight: "bold" }}>
 							Khan Khadija Resort Instagram
 						</span>
 					</div>
-					<div className='col-md-4 footer-box mx-auto' data-aos='fade-down'>
+					<div className='col-md-4 footer-box mx-auto' data-aos='fade-left'>
 						<p>CONTACT US</p>
 						<p>
-							<i className='fa fa-map-marker'></i> Breaux Bridge, LA 70517
+							<i className='fa fa-map-marker'></i>{" "}
+							<span dir='rtl'>
+								بترو بلاست للصناعات البلاستیكیة، طريق البتروكيماويات طريق
+								الاسكندرية القاهرة الصحراوى
+							</span>
 						</p>
 						<p>
-							<i className='fa fa-phone'></i> (909) 991-4386
+							<i className='fa fa-phone'></i> +201211492941
 						</p>
 					</div>
 					<div className='col-md-5 footer-box mx-auto' data-aos='fade-left'>
@@ -70,7 +82,7 @@ const Footer = () => {
 							}}>
 							<Link
 								to='/book-now/khan-khadija-premium-plan'
-								style={{ color: "white" }}>
+								style={{ color: "var(--mainBlue)" }}>
 								Submit
 							</Link>
 						</button>
@@ -96,7 +108,7 @@ const FooterWrapper = styled.section`
 	 */
 	/* background-image: linear-gradient(to right, #4da6ff, #0000ff); */
 
-	background-image: linear-gradient(to right, #1e467d, #aec8ec);
+	background-image: linear-gradient(to right, var(--mainBlue), var(--mainBlue));
 	margin-top: 100px;
 
 	color: #fff;
@@ -113,13 +125,14 @@ const FooterWrapper = styled.section`
 	}
 	.footer-box .fa {
 		margin-right: 8px;
-		font-size: 25px;
+		font-size: 15px;
 		height: 40px;
 		width: 40px;
 		text-align: center;
 		padding-top: 7px;
 		border-radius: 2px;
-		background-image: linear-gradient(to right, #ff8f8c, #160100);
+		color: var(--orangePrimary);
+		/* background-image: linear-gradient(to right, #ff8f8c, #160100); */
 	}
 	.footer-box .form-control {
 		box-shadow: none !important;
@@ -133,7 +146,8 @@ const FooterWrapper = styled.section`
 		border: none;
 		border-radius: 0;
 		margin-top: 30px;
-		background-image: linear-gradient(to right, #ff8f8c, #160100);
+		/* background-image: linear-gradient(to right, #ff8f8c, #160100); */
+		background: var(--orangePrimary);
 	}
 
 	hr {

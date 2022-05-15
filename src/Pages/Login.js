@@ -192,7 +192,7 @@ const Login = ({ history }) => {
 			</Helmet>
 			<div className='mx-auto text-center'>
 				<img
-					src='https://res.cloudinary.com/infiniteapps/image/upload/v1640714861/KuwaitDemo/1640714860747.jpg'
+					src='https://res.cloudinary.com/infiniteapps/image/upload/v1652480319/khankhadija/LogoSideBar_YusufSidebar_gfw40c.png'
 					alt='Infinite-Apps'
 					className='imgLogo'
 				/>
@@ -261,8 +261,8 @@ const WholeSignin = styled.div`
 	background: #dbe4eb;
 	padding-bottom: 15px;
 	.infiniteAppsLogo {
-		width: 159px;
-		height: 79px;
+		width: 250px;
+		height: 80px;
 		margin-top: 0px;
 		margin-bottom: 0px;
 		margin-left: 0px;
@@ -270,8 +270,8 @@ const WholeSignin = styled.div`
 	}
 
 	.imgLogo {
-		width: 189px;
-		height: 109px;
+		width: 250px;
+		height: 80px;
 		margin-top: 0px;
 		margin-bottom: 0px;
 		margin-left: 0px;

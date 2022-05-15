@@ -42,7 +42,7 @@ const PopUpMessage = ({ modalVisible2, setModalVisible2 }) => {
 					</div>
 					<div>
 						Please Contact Khan Khadija Customer Support For Further Inquiries
-						at 01220459022
+						at +201211492941
 					</div>
 				</div>
 			</Modal>
