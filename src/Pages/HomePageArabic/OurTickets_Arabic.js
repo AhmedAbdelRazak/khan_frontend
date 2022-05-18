@@ -181,7 +181,7 @@ const OurTickets_Arabic = ({ language }) => {
 																textTransform: "capitalize",
 															}}>
 															سعر التذكرة (الكبار): {s.servicePriceDiscount}{" "}
-															L.E.
+															جنيه
 														</div>
 													) : (
 														<div
@@ -195,11 +195,11 @@ const OurTickets_Arabic = ({ language }) => {
 															سعر التذكرة (الكبار):{" "}
 															<s style={{ color: "red" }}>
 																{" "}
-																{s.servicePrice} L.E.
+																{s.servicePrice} جنيه
 															</s>{" "}
 															<span className='ml-1'>
 																{" "}
-																{s.servicePriceDiscount} L.E.
+																{s.servicePriceDiscount} جنيه
 															</span>
 														</div>
 													)}
@@ -215,7 +215,7 @@ const OurTickets_Arabic = ({ language }) => {
 																textTransform: "capitalize",
 															}}>
 															سعر التذكرة (للأطفال):{" "}
-															{s.servicePriceDiscount_Children} L.E.
+															{s.servicePriceDiscount_Children} جنيه
 														</div>
 													) : (
 														<div
@@ -229,11 +229,11 @@ const OurTickets_Arabic = ({ language }) => {
 															سعر التذكرة (للأطفال):{" "}
 															<s style={{ color: "red" }}>
 																{" "}
-																{s.servicePrice_Children} L.E.
+																{s.servicePrice_Children} جنيه
 															</s>{" "}
 															<span className='ml-1'>
 																{" "}
-																{s.servicePriceDiscount_Children} L.E.
+																{s.servicePriceDiscount_Children} جنيه
 															</span>
 														</div>
 													)}
@@ -379,7 +379,13 @@ const OurTickets_Arabic = ({ language }) => {
 						{allTickets &&
 							allTickets.map((t, i) => (
 								<div className='img-fluid images' key={i}>
-									<img alt={t.serviceName} src={t.thumbnail[0].url} />
+									<Link
+										to={`/ticket/${t.serviceName.split(" ").join("-")}`}
+										onClick={() => {
+											window.scrollTo({ top: 0, behavior: "smooth" });
+										}}>
+										<img alt={t.serviceName} src={t.thumbnail[0].url} />
+									</Link>
 								</div>
 							))}
 					</Slider>
@@ -399,11 +405,17 @@ const OurTickets_Arabic = ({ language }) => {
 								ticketsWithOffers.map((t, i) => {
 									return (
 										<div className='img-fluid images' key={i}>
-											<img
-												className='imageOffers'
-												alt={t.serviceName}
-												src={t.thumbnail[1].url}
-											/>
+											<Link
+												to={`/ticket/${t.serviceName.split(" ").join("-")}`}
+												onClick={() => {
+													window.scrollTo({ top: 0, behavior: "smooth" });
+												}}>
+												<img
+													className='imageOffers'
+													alt={t.serviceName}
+													src={t.thumbnail[1].url}
+												/>
+											</Link>
 										</div>
 									);
 								})}

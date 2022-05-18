@@ -38,6 +38,9 @@ import Home_Arabic from "./Pages/HomePageArabic/Home_Arabic";
 import ListingsArabic from "./Pages/ListingsArabic";
 import PopUpMessage from "./Pages/PopUpMessage";
 import ManageGallery from "./admin/ManageGallery";
+import SingleTicketPage from "./Pages/SingleTicketPage/SingleTicketPage";
+import SingleTicketPageArabic from "./Pages/SingleTicketPage/SingleTicketPageArabic";
+import GalleryPage from "./Pages/GalleryPage";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -109,12 +112,29 @@ const App = () => {
 				<Route path='/listings' exact component={Listings} />
 				<Route path='/login' exact component={Login} />
 				<Route path='/signup' exact component={Register} />
+				<Route path='/khan-khadija-gallery' exact component={GalleryPage} />
 				<Route
 					path='/ticket-successfully-reserved'
 					exact
 					component={SuccessfullyPaid}
 				/>
 				<Route path='/book-now/:ticketName' exact component={BookNow} />
+
+				{language === "Arabic" ? (
+					<Route
+						path='/ticket/:ticketslug'
+						exact
+						component={SingleTicketPageArabic}
+						language={language}
+					/>
+				) : (
+					<Route
+						path='/ticket/:ticketslug'
+						exact
+						component={SingleTicketPage}
+					/>
+				)}
+
 				<AdminRoute path='/admin/dashboard' exact component={AdminDashboard} />
 				<AdminRoute path='/admin/create-a-ticket' exact component={AddTicket} />
 				<AdminRoute

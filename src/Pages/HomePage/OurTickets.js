@@ -386,7 +386,7 @@ const OurTickets = () => {
 							allTickets.map((t, i) => (
 								<div className='img-fluid images' key={i}>
 									<Link
-										to={`/book-now/${t.serviceName.split(" ").join("-")}`}
+										to={`/ticket/${t.serviceName.split(" ").join("-")}`}
 										onClick={() => {
 											window.scrollTo({ top: 0, behavior: "smooth" });
 										}}>
@@ -411,7 +411,7 @@ const OurTickets = () => {
 									return (
 										<div className='img-fluid images' key={i}>
 											<Link
-												to={`/book-now/${t.serviceName.split(" ").join("-")}`}
+												to={`/ticket/${t.serviceName.split(" ").join("-")}`}
 												onClick={() => {
 													window.scrollTo({ top: 0, behavior: "smooth" });
 												}}>

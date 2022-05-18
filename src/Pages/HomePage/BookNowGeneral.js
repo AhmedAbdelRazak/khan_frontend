@@ -513,7 +513,7 @@ const BookNowGeneral = () => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn '>
+						className='btn btn-block'>
 						Book Now!
 					</Link>
 				) : (
@@ -535,7 +535,7 @@ const BookNowGeneral = () => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn '>
+						className='btn btn-block'>
 						Book Now!
 					</Link>
 				)}

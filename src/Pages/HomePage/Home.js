@@ -8,6 +8,7 @@ import OurTickets from "./OurTickets";
 import Helmet from "react-helmet";
 import PowerBySnippet from "../PowerBySnippet";
 import KhanGallery from "./KhanGallery";
+import KhanMap from "./KhanMap";
 
 const Home = () => {
 	useEffect(() => {
@@ -43,6 +44,10 @@ const Home = () => {
 			<hr />
 			<span className='khanGalleryStyling'>
 				<KhanGallery />
+			</span>
+
+			<span className=''>
+				<KhanMap />
 			</span>
 			<PowerBySnippet />
 			<span className='phoneBottomHero'>

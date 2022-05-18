@@ -513,7 +513,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn '>
+						className='btn btn-block'>
 						احجز الآن!
 					</Link>
 				) : (
@@ -535,7 +535,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						className='btn '>
+						className='btn btn-block'>
 						احجز الآن!
 					</Link>
 				)}

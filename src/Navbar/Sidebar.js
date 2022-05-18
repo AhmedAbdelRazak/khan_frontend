@@ -207,6 +207,45 @@ const Sidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
+								to='/khan-khadija-gallery'
+								className='sidebar-link'
+								onClick={() => {
+									setClickMenu(false);
+									setClick(false);
+								}}>
+								{click && clickMenu ? (
+									<React.Fragment>
+										<span
+											className={
+												language === "Arabic"
+													? "fontawesome-pricingWrapperArabic"
+													: "fontawesome-pricingWrapper"
+											}>
+											<i
+												className={
+													language === "Arabic"
+														? "fas fa-camera fontawesome-iconsArabic"
+														: "fas fa-camera fontawesome-iconsPricing"
+												}></i>{" "}
+										</span>
+										<span className='linkStyling'>
+											{" "}
+											{language === "Arabic" ? (
+												<span className='linkTextArabic'> صور الخان</span>
+											) : (
+												"Khan Gallery"
+											)}{" "}
+										</span>
+									</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
 								to='/contact'
 								className='sidebar-link'
 								onClick={() => {

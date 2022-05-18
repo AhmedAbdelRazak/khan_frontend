@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import ReactGA from "react-ga";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import "antd/dist/antd.min.css";
@@ -476,6 +477,13 @@ const BookNow = ({ match }) => {
 		}, 1000);
 	};
 
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<BookNowWrapper>
 			<Steps current={current}>
@@ -498,6 +506,11 @@ const BookNow = ({ match }) => {
 						}}
 						onClick={() => {
 							next();
+							ReactGA.event({
+								category: "First Next was clicked in the form",
+								action: "User is adding his/her details ",
+								label: "Client Info Is Being Added",
+							});
 							window.scrollTo({ top: 120, behavior: "smooth" });
 						}}>
 						Next
@@ -531,7 +544,13 @@ const BookNow = ({ match }) => {
 						}}
 						onClick={() => {
 							window.scrollTo({ top: 130, behavior: "smooth" });
+
 							next();
+							ReactGA.event({
+								category: "Second Next was clicked in the form",
+								action: "User Is Reviewing His/Her Data",
+								label: "Data Reviewing",
+							});
 						}}>
 						Next
 					</Button>
@@ -564,7 +583,15 @@ const BookNow = ({ match }) => {
 					!loading &&
 					countryCallingCode && (
 						<Button
-							onClick={clickSubmitSchedule_NoPayment}
+							onClick={() => {
+								clickSubmitSchedule_NoPayment();
+								ReactGA.event({
+									category: "Reserve Now Was Clicked",
+									action: "A Client Has Successfully Reserved A Day Use",
+									label:
+										"Ticket Was Successfully Reserved " + chosenService_Package,
+								});
+							}}
 							disabled={dataEnter2()}
 							className='Buttons'
 							type='success'

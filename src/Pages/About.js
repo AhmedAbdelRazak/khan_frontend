@@ -7,6 +7,7 @@ import styled from "styled-components";
 import ReactGA from "react-ga";
 import Helmet from "react-helmet";
 import { getAbouts } from "../admin/apiAdmin";
+import KhanMap from "./HomePage/KhanMap";
 
 const About = () => {
 	const [aboutus, setAboutUs] = useState({});
@@ -73,6 +74,8 @@ const About = () => {
 					) : null}
 				</div>
 			</div>
+
+			<KhanMap />
 		</AboutPageWrapper>
 	);
 };

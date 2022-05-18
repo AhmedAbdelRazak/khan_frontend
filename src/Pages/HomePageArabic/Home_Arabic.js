@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import KhanMap from "../HomePage/KhanMap";
 import PowerBySnippet from "../PowerBySnippet";
 import BookNowGeneralArabic from "./BookNowGeneral_Arabic";
 import HeroComponentArabic from "./HeroComponent_Arabic";
@@ -37,6 +38,11 @@ const Home_Arabic = ({ language }) => {
 			<span className='khanGalleryStyling'>
 				<KhanGalleryArabic />
 			</span>
+
+			<span className=''>
+				<KhanMap />
+			</span>
+
 			<PowerBySnippet />
 			<span className='phoneBottomHero'>
 				<HeroComponentArabic language={language} />

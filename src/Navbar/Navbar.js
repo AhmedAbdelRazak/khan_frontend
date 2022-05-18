@@ -78,7 +78,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 		<Navbar1
 			className='container-fluid'
 			dir={language === "Arabic" ? "rtl" : "ltr"}>
-			<div className='col-xl-9 py-2  mx-auto'>
+			<div className=' py-2  mx-auto'>
 				<span className='infiniteAppsLogo'>
 					<Link
 						to='/'
@@ -123,6 +123,22 @@ const Navbar = ({ history, language, setLanguage }) => {
 							)}
 						</Link>
 					</li>
+
+					<li
+						onClick={() => {
+							window.scrollTo({ top: 0, behavior: "smooth" });
+						}}>
+						<Link
+							style={isActive(history, "/khan-khadija-gallery")}
+							to='/khan-khadija-gallery'>
+							{language === "Arabic" ? (
+								<span className='linkTextArabic'> صور الخان</span>
+							) : (
+								"Khan Gallery"
+							)}
+						</Link>
+					</li>
+
 					<li
 						onClick={() => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
@@ -331,7 +347,7 @@ const Navbar1 = styled.nav`
 		height: 80px;
 		margin-top: 0px;
 		margin-bottom: 0px;
-		margin-left: 0px;
+		margin-left: 50px;
 
 		/* border-radius: 15px; */
 	}
@@ -349,7 +365,9 @@ const Navbar1 = styled.nav`
 
 	.ItemsToRight {
 		float: right;
-		margin: 13px 0px;
+		margin-top: 13px;
+		margin-bottom: 13px;
+		margin-right: 50px;
 	}
 
 	.LoginStyling {
@@ -379,86 +397,21 @@ const Navbar1 = styled.nav`
 		border: 0.5px solid black;
 		transition: 0.3s;
 	}
-	.icon:hover {
-		cursor: pointer;
-		color: green;
-		transition: 0.3s;
-	}
-
-	.dropDownIcon {
-		cursor: pointer;
-	}
-
-	.subMenuWrapper {
-		position: absolute;
-		background: #00326a;
-		padding: 5px 10px;
-	}
-
-	.subMenuList {
-		display: block;
-		color: white !important;
-	}
-
-	.subMenuList a {
-		display: block;
-		color: white !important;
-		font-size: 0.9rem;
-		font-weight: bold;
-	}
-
-	.subMenuWrapper-enter {
-		opacity: 0;
-		transform: scale(0.4);
-	}
-	.subMenuWrapper-enter-active {
-		opacity: 1;
-		transform: translateX(0);
-		transition: opacity 300ms, transform 300ms;
-	}
-	.subMenuWrapper-exit {
-		opacity: 1;
-	}
-	.subMenuWrapper-exit-active {
-		opacity: 0;
-		transform: scale(0.9);
-		transition: opacity 200ms, transform 200ms;
-	}
 
 	.linkTextArabic {
 		font-family: "Droid Arabic Kufi" !important;
 	}
 
-	@media (max-width: 1580px) {
-		a {
-			font-size: 12px;
-		}
-
-		.imgLogo {
-			width: 200px;
-			height: 70px;
-			object-fit: cover;
-			margin-top: 0px;
-			margin-bottom: 0px;
-			margin-left: 0px;
-			border-radius: 15px;
-		}
-		li {
-			display: inline-block;
-			margin: 3px 8px;
-		}
-	}
-
-	@media (max-width: 1200px) {
+	@media (max-width: 1370px) {
 		li a:hover {
 			padding: 2px;
 		}
 		a {
-			font-size: 12px;
+			font-size: 14px;
 		}
 		li {
 			display: inline-block;
-			margin: 3px 5px;
+			margin: 3px 10px;
 		}
 		.myLogo {
 			margin-right: 50px;
@@ -469,8 +422,43 @@ const Navbar1 = styled.nav`
 		input::placeholder {
 			font-size: 12px !important;
 		}
+
+		.infiniteAppsLogo {
+			margin-left: 20px;
+		}
+
+		.ItemsToRight {
+			margin-right: 10px;
+		}
+	}
+
+	@media (max-width: 1141px) {
+		li a:hover {
+			padding: 2px;
+		}
+		a {
+			font-size: 12px;
+		}
+		li {
+			display: inline-block;
+			margin: 3px 7px;
+		}
 		.myLogo {
-			margin-right: 30px;
+			margin-right: 50px;
+		}
+		input {
+			width: 70%;
+		}
+		input::placeholder {
+			font-size: 12px !important;
+		}
+
+		.infiniteAppsLogo {
+			margin-left: 5px;
+		}
+
+		.ItemsToRight {
+			margin-right: 5px;
 		}
 	}
 

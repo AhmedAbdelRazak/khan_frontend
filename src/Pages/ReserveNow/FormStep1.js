@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { DatePicker } from "antd";
 import moment from "moment";
+import ReactGA from "react-ga";
 
 const FormStep1 = ({
 	chosenDate,
@@ -82,6 +83,12 @@ const FormStep1 = ({
 				: allCoupons[indexOfCoupon];
 
 		setChosenCouponDetails(chosenCouponDetails);
+
+		ReactGA.event({
+			category: "Coupon Was Filled",
+			action: "A Client Filled In Coupon " + event.target.value,
+			label: "Coupon Was Filled",
+		});
 	};
 
 	return (
@@ -159,9 +166,15 @@ const FormStep1 = ({
 
 			<DatePicker
 				className='inputFields'
-				onChange={(date) =>
-					setChosenDate(new Date(date._d).toLocaleDateString() || date._d)
-				}
+				onChange={(date) => {
+					setChosenDate(new Date(date._d).toLocaleDateString() || date._d);
+
+					ReactGA.event({
+						category: "Form Filling",
+						action: "A Client Filled In Date Field",
+						label: "Date Was Added",
+					});
+				}}
 				disabledDate={disabledDate}
 				max
 				size='small'
