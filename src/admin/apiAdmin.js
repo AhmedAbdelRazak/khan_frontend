@@ -550,6 +550,45 @@ export const removeLocation = (locationId, userId, token) => {
 		.catch((err) => console.log(err));
 };
 
+export const getGalleries = async () =>
+	await axios.get(`${process.env.REACT_APP_API_URL}/galleries`);
+
+export const createGallery = (userId, token, title, thumbnail) => {
+	return fetch(`${process.env.REACT_APP_API_URL}/gallery/create/${userId}`, {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(title, thumbnail),
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+export const removeGallery = (galleryId, userId, token) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/gallery/${galleryId}/${userId}`,
+		{
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const AllPossibleHours = [
 	"00:00",
 	"00:15",

@@ -37,6 +37,7 @@ import AddSiteAccount from "./admin/AddSiteAccount";
 import Home_Arabic from "./Pages/HomePageArabic/Home_Arabic";
 import ListingsArabic from "./Pages/ListingsArabic";
 import PopUpMessage from "./Pages/PopUpMessage";
+import ManageGallery from "./admin/ManageGallery";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -174,6 +175,12 @@ const App = () => {
 					exact
 					path='/admin/create-site-account'
 					component={AddSiteAccount}
+				/>
+
+				<AdminRoute
+					exact
+					path='/admin/manage-gallery'
+					component={ManageGallery}
 				/>
 			</Switch>
 			<Footer />

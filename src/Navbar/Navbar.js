@@ -429,6 +429,26 @@ const Navbar1 = styled.nav`
 		font-family: "Droid Arabic Kufi" !important;
 	}
 
+	@media (max-width: 1580px) {
+		a {
+			font-size: 12px;
+		}
+
+		.imgLogo {
+			width: 200px;
+			height: 70px;
+			object-fit: cover;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			margin-left: 0px;
+			border-radius: 15px;
+		}
+		li {
+			display: inline-block;
+			margin: 3px 8px;
+		}
+	}
+
 	@media (max-width: 1200px) {
 		li a:hover {
 			padding: 2px;

@@ -338,7 +338,7 @@ const UpdateTicketManagement = () => {
 export default UpdateTicketManagement;
 
 const UpdateTicketManagementWrapper = styled.div`
-	margin-bottom: 100px;
+	min-height: 480px;
 
 	.firstLinks ul > li {
 		display: inline-block;

@@ -229,6 +229,12 @@ const AddTicket = () => {
 			return toast.error("Please add at least one photo as a thumbnail");
 		}
 
+		if (allTickets.length >= 25) {
+			return toast.error(
+				"You have submitted more than 3 tickets, Please check with infinite-apps.com and ask for increasing your range",
+			);
+		}
+
 		setError("");
 		setSuccess(false);
 		// make request to api to create service
@@ -304,8 +310,6 @@ const AddTicket = () => {
 			}
 		}
 	};
-
-	console.log(addThumbnail, "Add Thumb");
 
 	const FileUploadThumbnail = () => {
 		return (

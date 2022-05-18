@@ -102,7 +102,7 @@ const FormStep1 = ({
 				style={{
 					paddingTop: "12px",
 					paddingBottom: "12px",
-					paddingRight: "140px",
+					// paddingRight: "140px",
 					// textAlign: "center",
 					border: "#cfcfcf solid 1px",
 					borderRadius: "10px",
@@ -118,7 +118,7 @@ const FormStep1 = ({
 						{chosenService_Package}
 					</option>
 				) : (
-					<option className='items text-muted inputFields'>
+					<option className='items ml-2 text-muted inputFields'>
 						Select Package
 					</option>
 				)}
@@ -263,7 +263,7 @@ const FormStep1Wrapper = styled.div`
 		.inputFields {
 			padding-top: 9px;
 			padding-bottom: 9px;
-			text-align: center;
+			/* text-align: center; */
 			border: #cfcfcf solid 1px;
 			border-radius: 4px !important;
 			width: 80% !important;

@@ -7,6 +7,7 @@ import HeroComponent from "./HeroComponent";
 import OurTickets from "./OurTickets";
 import Helmet from "react-helmet";
 import PowerBySnippet from "../PowerBySnippet";
+import KhanGallery from "./KhanGallery";
 
 const Home = () => {
 	useEffect(() => {
@@ -38,6 +39,11 @@ const Home = () => {
 			<div className='mt-2'>
 				<OurTickets />
 			</div>
+			<br />
+			<hr />
+			<span className='khanGalleryStyling'>
+				<KhanGallery />
+			</span>
 			<PowerBySnippet />
 			<span className='phoneBottomHero'>
 				<HeroComponent />
@@ -55,7 +61,11 @@ const HomePageWrapper = styled.div`
 		display: none;
 	}
 
-	@media (max-width: 1000px) {
+	.khanGalleryStyling {
+		display: none;
+	}
+
+	@media (max-width: 900px) {
 		.deskTopHero {
 			display: none;
 		}
@@ -65,6 +75,10 @@ const HomePageWrapper = styled.div`
 		} */
 		.phoneBottomHero {
 			display: none;
+		}
+
+		.khanGalleryStyling {
+			display: block;
 		}
 	}
 `;

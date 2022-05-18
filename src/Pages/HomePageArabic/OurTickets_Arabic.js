@@ -107,8 +107,10 @@ const OurTickets_Arabic = ({ language }) => {
 
 	return (
 		<OurTicketsWrapper>
-			<div className='secSection' dir='rtl'>
-				<h1 data-aos='fade-up'>خان خديجة | تذاكرنا</h1>
+			<div className='secSection'>
+				<h1 dir='rtl' data-aos='fade-up'>
+					خان خديجة | تذاكرنا
+				</h1>
 				{/* <div className='col-md-4 mx-auto'>
 					<br />
 					<div className='horizLine'></div>
@@ -131,10 +133,11 @@ const OurTickets_Arabic = ({ language }) => {
 											className='col-md-3 mx-auto my-2 '
 											data-aos='fade-down'>
 											<div
-												className='card '
+												dir='rtl'
+												className='card'
 												style={{
 													borderRadius: "0% 0%",
-													backgroundColor: "#faf7eb",
+													backgroundColor: "var(--superBabyBlue)",
 												}}>
 												<div className='card-body  '>
 													<div className='card-img-top center img text-center responsiveimage'>
@@ -234,6 +237,7 @@ const OurTickets_Arabic = ({ language }) => {
 															</span>
 														</div>
 													)}
+													<br />
 
 													<ul style={{ textTransform: "capitalize" }}>
 														<li>{s.serviceDescription_Arabic}</li>
@@ -365,7 +369,9 @@ const OurTickets_Arabic = ({ language }) => {
 			</div>
 
 			<div className='ticketsPhoneView'>
-				<h1 data-aos='fade-up' className='titleBookNow'>
+				<h1
+					//  data-aos='fade-up'
+					className='titleBookNow'>
 					تذاكر الخان
 				</h1>
 				<div className='container-fluid my-3 ProductSlider'>
@@ -382,7 +388,9 @@ const OurTickets_Arabic = ({ language }) => {
 
 			{ticketsWithOffers && ticketsWithOffers.length > 0 ? (
 				<div className='ticketsPhoneView'>
-					<h1 data-aos='fade-up' className='titleBookNow'>
+					<h1
+						// data-aos='fade-up'
+						className='titleBookNow2'>
 						عروض الخان
 					</h1>
 					<div className='container-fluid my-3 ProductSlider'>
@@ -419,6 +427,17 @@ const OurTicketsWrapper = styled.div`
 		font-weight: bolder;
 		/* letter-spacing: 2px; */
 		color: var(--mainBlue);
+	}
+
+	.titleBookNow2 {
+		text-align: center;
+		font-size: 1.3rem !important;
+		font-weight: bolder;
+		/* letter-spacing: 2px; */
+		color: var(--orangePrimary);
+		float: right;
+		margin-right: 20px;
+		font-weight: bolder;
 	}
 
 	.secSection h1 {
@@ -480,13 +499,18 @@ const OurTicketsWrapper = styled.div`
 		padding: 0px 100px 0px 100px;
 	}
 
+	ul,
+	li {
+		text-align: right;
+	}
+
 	@media (max-width: 1400px) {
 		.ProductSlider {
 			padding: 0px;
 		}
 	}
 
-	@media (max-width: 1200px) {
+	@media (max-width: 1600px) {
 		.secSection p {
 			margin: 20px 20px !important;
 			/* font-weight: bold; */
@@ -522,7 +546,7 @@ const OurTicketsWrapper = styled.div`
 		}
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-width: 900px) {
 		.secSection {
 			display: none;
 		}

@@ -37,7 +37,7 @@ const PowerBySnippet = () => {
 export default PowerBySnippet;
 
 const PowerBySnippetWrapper = styled.div`
-	margin: 20px 0px;
+	margin: 20px 0px 0px 0px;
 	text-align: center;
 	/* border: 2px solid red; */
 	padding: 40px 0px;

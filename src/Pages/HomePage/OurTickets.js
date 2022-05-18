@@ -50,7 +50,7 @@ const OurTickets = () => {
 		autoplay: true,
 		arrows: true,
 		speed: 1000,
-		slidesToShow: 4,
+		slidesToShow: 3,
 		slidesToScroll: 1,
 		autoplaySpeed: 5000,
 		pauseOnHover: true,
@@ -58,7 +58,7 @@ const OurTickets = () => {
 
 		responsive: [
 			{
-				breakpoint: 1200,
+				breakpoint: 650,
 				settings: {
 					dots: true,
 					infinite: true,
@@ -76,12 +76,12 @@ const OurTickets = () => {
 	};
 
 	const settings2 = {
-		dots: true,
+		dots: false,
 		infinite: true,
 		// autoplay: true,
 		arrows: true,
 		speed: 1000,
-		slidesToShow: 4,
+		slidesToShow: 2,
 		slidesToScroll: 1,
 		autoplaySpeed: 5000,
 		pauseOnHover: true,
@@ -89,7 +89,7 @@ const OurTickets = () => {
 
 		responsive: [
 			{
-				breakpoint: 1200,
+				breakpoint: 650,
 				settings: {
 					dots: false,
 					infinite: true,
@@ -140,7 +140,7 @@ const OurTickets = () => {
 									return (
 										<div
 											key={i}
-											className='col-md-3 mx-auto my-2 '
+											className='col-lg-3 col-sm-4 mx-auto my-2 '
 											data-aos='fade-down'>
 											<div
 												className='card '
@@ -375,7 +375,9 @@ const OurTickets = () => {
 			</div>
 
 			<div className='ticketsPhoneView'>
-				<h1 data-aos='fade-up' className='titleBookNow'>
+				<h1
+					// data-aos='fade-up'
+					className='titleBookNow'>
 					Our Tickets
 				</h1>
 				<div className='container-fluid mt-3 ProductSlider'>
@@ -383,7 +385,13 @@ const OurTickets = () => {
 						{allTickets &&
 							allTickets.map((t, i) => (
 								<div className='img-fluid images' key={i}>
-									<img alt={t.serviceName} src={t.thumbnail[0].url} />
+									<Link
+										to={`/book-now/${t.serviceName.split(" ").join("-")}`}
+										onClick={() => {
+											window.scrollTo({ top: 0, behavior: "smooth" });
+										}}>
+										<img alt={t.serviceName} src={t.thumbnail[0].url} />
+									</Link>
 								</div>
 							))}
 					</Slider>
@@ -391,20 +399,28 @@ const OurTickets = () => {
 			</div>
 			{ticketsWithOffers && ticketsWithOffers.length > 0 ? (
 				<div className='ticketsPhoneView'>
-					<h1 data-aos='fade-up' className='titleBookNow'>
-						Our Offers
+					<h1
+						// data-aos='fade-up'
+						className='titleBookNow2'>
+						OUR OFFERS
 					</h1>
 					<div className='container-fluid my-3 ProductSlider'>
-						<Slider {...settings2} className='mb-5'>
+						<Slider {...settings2} className='mb-2'>
 							{ticketsWithOffers &&
 								ticketsWithOffers.map((t, i) => {
 									return (
 										<div className='img-fluid images' key={i}>
-											<img
-												className='imageOffers'
-												alt={t.serviceName}
-												src={t.thumbnail[1].url}
-											/>
+											<Link
+												to={`/book-now/${t.serviceName.split(" ").join("-")}`}
+												onClick={() => {
+													window.scrollTo({ top: 0, behavior: "smooth" });
+												}}>
+												<img
+													className='imageOffers'
+													alt={t.serviceName}
+													src={t.thumbnail[1].url}
+												/>
+											</Link>
 										</div>
 									);
 								})}
@@ -427,6 +443,18 @@ const OurTicketsWrapper = styled.div`
 		font-weight: bolder;
 		letter-spacing: 2px;
 		color: var(--mainBlue);
+	}
+
+	.titleBookNow2 {
+		text-align: center;
+		font-size: 1.5rem !important;
+		font-weight: bolder;
+		/* letter-spacing: 2px; */
+		color: var(--orangePrimary);
+		float: left;
+		margin-left: 20px;
+		font-weight: bolder;
+		text-transform: capitalize !important;
 	}
 
 	.secSection h1 {
@@ -494,7 +522,7 @@ const OurTicketsWrapper = styled.div`
 		}
 	}
 
-	@media (max-width: 1200px) {
+	@media (max-width: 1600px) {
 		.secSection p {
 			margin: 20px 20px !important;
 			/* font-weight: bold; */
@@ -530,7 +558,7 @@ const OurTicketsWrapper = styled.div`
 		}
 	}
 
-	@media (max-width: 1000px) {
+	@media (max-width: 900px) {
 		.secSection {
 			display: none;
 		}

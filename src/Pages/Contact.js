@@ -6,6 +6,7 @@ import { contactUs } from "../auth/index";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import { getContacts } from "../admin/apiAdmin";
+import styled from "styled-components";
 
 const Contactus = () => {
 	useEffect(() => {
@@ -74,7 +75,7 @@ const Contactus = () => {
 		"Your form was successfully submitted. Our support team will contact you!";
 
 	return (
-		<>
+		<ContactUsWrapper>
 			<Helmet>
 				<meta charSet='utf-8' />
 				<title>Khan Khadija | Contact Us</title>
@@ -119,9 +120,11 @@ const Contactus = () => {
 					<Fragment left>
 						<div
 							className='col-md-7 my-3 mx-auto p-5'
-							style={{
-								boxShadow: "3px 3px 3px 3px rgba(0,0,0,0.5)",
-							}}>
+							style={
+								{
+									// boxShadow: "3px 0px 3px 3px rgba(0,0,0,0.5)",
+								}
+							}>
 							<Fragment duration={5000}>
 								<h2 className='text-center'>Contact Us</h2>
 							</Fragment>
@@ -214,8 +217,12 @@ const Contactus = () => {
 				</div>
 			</div>
 			<hr />
-		</>
+		</ContactUsWrapper>
 	);
 };
 
 export default Contactus;
+
+const ContactUsWrapper = styled.div`
+	overflow: hidden;
+`;

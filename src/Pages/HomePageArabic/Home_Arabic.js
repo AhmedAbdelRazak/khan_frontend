@@ -5,6 +5,7 @@ import styled from "styled-components";
 import PowerBySnippet from "../PowerBySnippet";
 import BookNowGeneralArabic from "./BookNowGeneral_Arabic";
 import HeroComponentArabic from "./HeroComponent_Arabic";
+import KhanGalleryArabic from "./KhanGallery_Arabic";
 import OurTicketsArabic from "./OurTickets_Arabic";
 
 const Home_Arabic = ({ language }) => {
@@ -29,6 +30,13 @@ const Home_Arabic = ({ language }) => {
 			<div className='mt-2'>
 				<OurTicketsArabic language={language} />
 			</div>
+			<div className='col-md-10 mx-auto mt-3'>
+				<hr />
+			</div>
+
+			<span className='khanGalleryStyling'>
+				<KhanGalleryArabic />
+			</span>
 			<PowerBySnippet />
 			<span className='phoneBottomHero'>
 				<HeroComponentArabic language={language} />
@@ -40,13 +48,15 @@ const Home_Arabic = ({ language }) => {
 export default Home_Arabic;
 
 const HomePageWrapper = styled.div`
-	overflow: hidden !important;
-
 	.phoneBottomHero {
 		display: none;
 	}
 
-	@media (max-width: 1000px) {
+	.khanGalleryStyling {
+		display: none;
+	}
+
+	@media (max-width: 900px) {
 		.deskTopHero {
 			display: none;
 		}
@@ -57,6 +67,10 @@ const HomePageWrapper = styled.div`
 
 		.phoneBottomHero {
 			display: none;
+		}
+
+		.khanGalleryStyling {
+			display: block;
 		}
 	}
 `;

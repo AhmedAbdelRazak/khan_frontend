@@ -83,6 +83,7 @@ const AboutPageWrapper = styled.section`
 	background: #f8f9fa;
 	padding-bottom: 200px;
 	padding-top: 50px;
+	overflow: hidden;
 
 	.about-title {
 		font-size: 40px;
@@ -102,8 +103,8 @@ const AboutPageWrapper = styled.section`
 	}
 
 	.imgdiv {
-		transform: rotate(8deg);
-		box-shadow: 3px 10px 3px 10px rgba(0, 0, 0, 0.1);
+		/* transform: rotate(8deg); */
+		/* box-shadow: 3px 10px 3px 10px rgba(0, 0, 0, 0.1); */
 	}
 
 	.horizLine {

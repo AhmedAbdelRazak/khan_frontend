@@ -257,6 +257,24 @@ const Adminsidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
+								to={`/admin/manage-gallery`}
+								className='sidebar-link'
+								style={isActive(history, `/admin/manage-gallery`)}
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment> Manage Gallery</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+						<li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
 								to={`/admin/update-profile/${user._id}`}
 								className='sidebar-link'
 								style={isActive(history, `/admin/update-profile/${user._id}`)}
