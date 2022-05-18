@@ -8,6 +8,7 @@ import BookNowGeneralArabic from "./BookNowGeneral_Arabic";
 import HeroComponentArabic from "./HeroComponent_Arabic";
 import KhanGalleryArabic from "./KhanGallery_Arabic";
 import OurTicketsArabic from "./OurTickets_Arabic";
+import ReactGA from "react-ga";
 
 const Home_Arabic = ({ language }) => {
 	useEffect(() => {
@@ -16,7 +17,13 @@ const Home_Arabic = ({ language }) => {
 		}
 	});
 
-	console.log(language, "from home page arabic");
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<HomePageWrapper>
 			<span className='deskTopHero'>

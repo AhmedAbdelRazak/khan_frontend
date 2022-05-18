@@ -477,7 +477,7 @@ const OurTicketsWrapper = styled.div`
 
 	.container-fluid {
 		/* border: solid red 3px; */
-		border-radius: 15% 2%;
+		/* border-radius: 15% 2%; */
 		/* background-color: black; */
 		/* background-image: linear-gradient(to left, #272100, #000000); */
 		/* box-shadow: 5px 5px 7px 7px rgba(0, 0, 0, 0.3); */

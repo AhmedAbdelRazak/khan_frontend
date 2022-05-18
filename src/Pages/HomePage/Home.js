@@ -9,6 +9,7 @@ import Helmet from "react-helmet";
 import PowerBySnippet from "../PowerBySnippet";
 import KhanGallery from "./KhanGallery";
 import KhanMap from "./KhanMap";
+import ReactGA from "react-ga";
 
 const Home = () => {
 	useEffect(() => {
@@ -16,6 +17,14 @@ const Home = () => {
 			localStorage.removeItem("reservationData");
 		}
 	});
+
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<HomePageWrapper>
 			<Helmet>

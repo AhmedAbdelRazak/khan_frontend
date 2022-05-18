@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import { getContacts } from "../admin/apiAdmin";
 import styled from "styled-components";
+import ReactGA from "react-ga";
 
 const Contactus = () => {
 	useEffect(() => {
@@ -73,6 +74,13 @@ const Contactus = () => {
 
 	const SuccessfullySubmitted =
 		"Your form was successfully submitted. Our support team will contact you!";
+
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<ContactUsWrapper>
