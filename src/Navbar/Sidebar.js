@@ -102,14 +102,18 @@ const Sidebar = ({
 					className='fa fa-window-close nav-icon faaa-bars'
 					onClick={handleSidebar}
 					style={{
-						color: "white",
+						color: "var(--orangePrimary)",
 						fontWeight: "bolder",
 						fontSize: "1.6rem",
 						display: "none",
 					}}></i>
 			) : (
 				<i
-					style={{ color: "white", fontWeight: "bolder", fontSize: "1.6rem" }}
+					style={{
+						color: "var(--orangePrimary)",
+						fontWeight: "bolder",
+						fontSize: "1.6rem",
+					}}
 					className='fa fa-bars nav-icon faaa-bars'
 					onClick={handleSidebar}></i>
 			)}

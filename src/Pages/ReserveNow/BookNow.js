@@ -45,6 +45,8 @@ const BookNow = ({ match }) => {
 	const [appointmentComment, setAppointmentComment] = useState("");
 	const [event_ocassion, setEvent_ocassion] = useState("Day Use");
 	const [chosenCoupon, setChosenCoupon] = useState("");
+	const [totalAmount, setTotalAmount] = useState(0);
+	const [totalAmountBeforeDiscount, setTotalAmountBeforeDiscount] = useState(0);
 	const [HistBookings, setHistBookings] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [
@@ -365,6 +367,10 @@ const BookNow = ({ match }) => {
 					quantity_Children={quantity_Children}
 					chosenBusStationPrice={chosenBusStationDetails}
 					chosenCouponDetails={chosenCouponDetails}
+					totalAmount={totalAmount}
+					totalAmountBeforeDiscount={totalAmountBeforeDiscount}
+					setTotalAmount={setTotalAmount}
+					setTotalAmountBeforeDiscount={setTotalAmountBeforeDiscount}
 				/>
 			),
 		},
@@ -464,6 +470,8 @@ const BookNow = ({ match }) => {
 			chosenBusStation: chosenBusStationDetails,
 			chosenBusStationTime: busStationChosenTime,
 			bookingSource: "Online",
+			totalAmount: totalAmount,
+			totalAmountBeforeDiscount: totalAmountBeforeDiscount,
 		};
 
 		createReservation(createOrderData).then((response) => {

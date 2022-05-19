@@ -18,6 +18,8 @@ const FormStep3 = ({
 	quantity_Children,
 	chosenBusStationPrice,
 	chosenCouponDetails,
+	setTotalAmount,
+	setTotalAmountBeforeDiscount,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -33,6 +35,10 @@ const FormStep3 = ({
 		var TransportationFees =
 			Number(chosenBusStationPrice.price) *
 			(Number(quantity) + Number(quantity_Children));
+
+		setTotalAmountBeforeDiscount(
+			Number(price_adults + price_children + TransportationFees).toFixed(2),
+		);
 
 		return Number(price_adults + price_children + TransportationFees).toFixed(
 			2,
@@ -62,6 +68,12 @@ const FormStep3 = ({
 		var TransportationFees =
 			Number(chosenBusStationPrice.price) *
 			(Number(quantity) + Number(quantity_Children));
+
+		setTotalAmount(
+			Number(
+				price_adults + price_children + TransportationFees + discountedAmount,
+			).toFixed(2),
+		);
 
 		return Number(
 			price_adults + price_children + TransportationFees + discountedAmount,
@@ -124,7 +136,10 @@ const FormStep3 = ({
 					<div>Booking Date: {chosenDate}</div>
 					<div>Event/Occasion: {event_ocassion} </div>
 					{chosenCouponDetails && chosenCouponDetails.name ? (
-						<div>Coupon Name: {chosenCouponDetails.name} </div>
+						<div>
+							Coupon Name: {chosenCouponDetails.name} (
+							{chosenCouponDetails.discount}% Off){" "}
+						</div>
 					) : null}
 
 					<div
