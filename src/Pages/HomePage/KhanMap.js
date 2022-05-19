@@ -6,11 +6,11 @@ import ReactGA from "react-ga";
 
 const KhanMap = () => {
 	// eslint-disable-next-line
-	const [latitude, setLatitude] = useState(30.45381);
+	const [latitude, setLatitude] = useState("30.989970");
 	// eslint-disable-next-line
-	const [longitude, setLongitude] = useState(30.31147);
+	const [longitude, setLongitude] = useState("29.872110");
 
-	var img_url_close = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=10&size=700x300&sensor=false&markers=color:red%7C${latitude},${longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`;
+	var img_url_close = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=12&size=700x300&sensor=false&markers=color:red%7C${latitude},${longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`;
 
 	var img_url_far = `https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=8&size=700x300&sensor=false&markers=color:red%7C${latitude},${longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`;
 

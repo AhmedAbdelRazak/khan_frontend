@@ -40,7 +40,7 @@ const GalleryPage = () => {
 											src={image.thumbnail[0].url}
 											alt={image.title}
 										/>
-										<div className='imageTitle'>{image.title}</div>
+										{/* <div className='imageTitle'>{image.title}</div> */}
 									</div>
 								)}
 							</Fragment>

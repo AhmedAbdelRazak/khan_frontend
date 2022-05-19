@@ -17,6 +17,7 @@ const FormStep3 = ({
 	quantity,
 	quantity_Children,
 	chosenBusStationPrice,
+	chosenCouponDetails,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -28,23 +29,43 @@ const FormStep3 = ({
 		var price_adults = Number(serviceDetails.servicePrice) * Number(quantity);
 		var price_children =
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
-		var TransportationFees = Number(chosenBusStationPrice.price);
+
+		var TransportationFees =
+			Number(chosenBusStationPrice.price) *
+			(Number(quantity) + Number(quantity_Children));
+
 		return Number(price_adults + price_children + TransportationFees).toFixed(
 			2,
 		);
 	};
 
+	// console.log(chosenCouponDetails, "chosenCouponDetails");
+
 	const totalPriceAfterDiscount = () => {
+		var CouponDiscount =
+			chosenCouponDetails && chosenCouponDetails.discount
+				? chosenCouponDetails.discount
+				: 0;
+
 		var price_adults =
 			Number(serviceDetails.servicePriceDiscount) * Number(quantity);
+
 		var price_children =
 			Number(serviceDetails.servicePriceDiscount_Children) *
 			Number(quantity_Children);
-		var TransportationFees = Number(chosenBusStationPrice.price);
 
-		return Number(price_adults + price_children + TransportationFees).toFixed(
-			2,
-		);
+		var discountedAmount =
+			Number(price_adults + price_children) *
+			Number(CouponDiscount / 100).toFixed(2) *
+			-1;
+
+		var TransportationFees =
+			Number(chosenBusStationPrice.price) *
+			(Number(quantity) + Number(quantity_Children));
+
+		return Number(
+			price_adults + price_children + TransportationFees + discountedAmount,
+		).toFixed(2);
 	};
 
 	// console.log(chosenDate, "From FormStep3");
@@ -83,8 +104,8 @@ const FormStep3 = ({
 						serviceDetails.servicePriceDiscount_Children ? (
 							<span>{serviceDetails.servicePriceDiscount_Children} L.E.</span>
 						) : (
-							<span style={{ color: "green", fontWeight: "bold" }}>
-								<s style={{ color: "red", fontWeight: "bold" }}>
+							<span style={{ color: "black", fontWeight: "" }}>
+								<s style={{ color: "black", fontWeight: "" }}>
 									{serviceDetails.servicePrice_Children} L.E.
 								</s>{" "}
 								{serviceDetails.servicePriceDiscount_Children} L.E.
@@ -99,10 +120,24 @@ const FormStep3 = ({
 					<div>
 						Transportation Fees: {Number(chosenBusStationPrice.price)} L.E.{" "}
 					</div>
-					<div>
+
+					<div>Booking Date: {chosenDate}</div>
+					<div>Event/Occasion: {event_ocassion} </div>
+					{chosenCouponDetails && chosenCouponDetails.name ? (
+						<div>Coupon Name: {chosenCouponDetails.name} </div>
+					) : null}
+
+					<div
+						style={{
+							fontSize: "1rem",
+							fontWeight: "bold",
+							color: "var(--mainBlue)",
+						}}>
 						Total Amount:{" "}
 						{totalPriceBeforeDiscount() === totalPriceAfterDiscount() ? (
-							<span>{totalPriceAfterDiscount()} L.E.</span>
+							<span style={{ color: "green", fontWeight: "bold" }}>
+								{totalPriceAfterDiscount()} L.E.
+							</span>
 						) : (
 							<span style={{ color: "green", fontWeight: "bold" }}>
 								<s style={{ color: "red", fontWeight: "bold" }}>
@@ -112,9 +147,6 @@ const FormStep3 = ({
 							</span>
 						)}{" "}
 					</div>
-
-					<div>Booking Date: {chosenDate}</div>
-					<div>Event/Occasion: {event_ocassion} </div>
 				</div>
 				<div className='col-md-5 mx-auto my-auto'>
 					<br />

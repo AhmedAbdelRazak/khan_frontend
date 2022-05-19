@@ -18,6 +18,7 @@ import { getCoupons, getBusStations } from "../../admin/apiAdmin";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
+// eslint-disable-next-line
 import PackagePhotos from "./PackagePhotos";
 const { Step } = Steps;
 
@@ -42,7 +43,7 @@ const BookNow = ({ match }) => {
 	const [serviceDetails, setServiceDetails] = useState("");
 	const [scheduledByUserEmail, setScheduledByUserEmail] = useState("");
 	const [appointmentComment, setAppointmentComment] = useState("");
-	const [event_ocassion, setEvent_ocassion] = useState("");
+	const [event_ocassion, setEvent_ocassion] = useState("Day Use");
 	const [chosenCoupon, setChosenCoupon] = useState("");
 	const [HistBookings, setHistBookings] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -363,6 +364,7 @@ const BookNow = ({ match }) => {
 					quantity={quantity}
 					quantity_Children={quantity_Children}
 					chosenBusStationPrice={chosenBusStationDetails}
+					chosenCouponDetails={chosenCouponDetails}
 				/>
 			),
 		},
@@ -523,7 +525,7 @@ const BookNow = ({ match }) => {
 						style={{
 							width: "20%",
 							marginRight: "10px",
-							backgroundColor: "burlywood",
+							backgroundColor: "var(--orangePrimary)",
 							color: "white",
 							fontWeight: "bold",
 							fontSize: "0.9rem",
@@ -597,7 +599,7 @@ const BookNow = ({ match }) => {
 							type='success'
 							style={{
 								width: "20%",
-								backgroundColor: "darkgreen",
+								backgroundColor: "var(--mainBlue)",
 								color: "white",
 								fontWeight: "bold",
 								fontSize: "0.9rem",
@@ -605,12 +607,6 @@ const BookNow = ({ match }) => {
 							Reserve Now (Pay On Gate)
 						</Button>
 					)}
-			</div>
-			<div className='mx-auto photosWrapperCellPhone'>
-				<PackagePhotos serviceDetails={serviceDetails} />
-			</div>
-			<div className='mx-auto photosWrapper my-5'>
-				<PackagePhotos serviceDetails={serviceDetails} />
 			</div>
 		</BookNowWrapper>
 	);

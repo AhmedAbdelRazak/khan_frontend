@@ -36,6 +36,7 @@ import OnsiteLocations from "./admin/OnsiteLocations";
 import AddSiteAccount from "./admin/AddSiteAccount";
 import Home_Arabic from "./Pages/HomePageArabic/Home_Arabic";
 import ListingsArabic from "./Pages/ListingsArabic";
+// eslint-disable-next-line
 import PopUpMessage from "./Pages/PopUpMessage";
 import ManageGallery from "./admin/ManageGallery";
 import SingleTicketPage from "./Pages/SingleTicketPage/SingleTicketPage";
@@ -46,6 +47,7 @@ const App = () => {
 	const [click, setClick] = useState(false);
 	const [clickMenu, setClickMenu] = useState(false);
 	const [language, setLanguage] = useState("English");
+	// eslint-disable-next-line
 	const [modalVisible2, setModalVisible2] = useState(true);
 
 	useEffect(() => {
@@ -73,10 +75,10 @@ const App = () => {
 
 	return (
 		<BrowserRouter>
-			<PopUpMessage
+			{/* <PopUpMessage
 				modalVisible2={modalVisible2}
 				setModalVisible2={setModalVisible2}
-			/>
+			/> */}
 			<Navbar language={language} setLanguage={setLanguage} />
 			{click && clickMenu ? (
 				<DarkBackground setClick={setClick} setClickMenu={setClickMenu} />

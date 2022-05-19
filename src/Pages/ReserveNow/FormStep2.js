@@ -149,7 +149,7 @@ const FormStep2 = ({
 					<div
 						className='mt-2'
 						style={{ fontWeight: "bold", fontSize: "0.8rem" }}>
-						KW Code: +965, EGY Code: +2, Turkey Code: +90, etc...
+						EGY Code: +2
 					</div>
 				</div>
 				<div className='col-md-6 my-4'>
@@ -207,8 +207,12 @@ const FormStep2 = ({
 							</option>
 						)}
 						<option className='items text-muted inputFields' value='Birthday'>
+							Day Use
+						</option>
+						<option className='items text-muted inputFields' value='Birthday'>
 							Birthday
 						</option>
+
 						<option className='items text-muted inputFields' value='Graduation'>
 							Graduation
 						</option>
@@ -346,57 +350,59 @@ const FormStep2 = ({
 					</select>
 				</div>
 
-				{busStationName && chosenBusStationDetails && (
-					<div className='col-md-6 my-3 mx-auto'>
-						<label
-							className='textResizeMain2'
-							style={{
-								fontWeight: "bold",
-								fontSize: "1rem",
-								color: "#00407f",
-							}}>
-							Here is "{busStationName}" Station Available Times
-						</label>
-						<br />
-						<select
-							onChange={handleBusStationChosenTime}
-							className='inputFields mb-3'
-							style={{
-								paddingTop: "12px",
-								paddingBottom: "12px",
-								paddingRight: "130px",
-								// textAlign: "center",
-								border: "#cfcfcf solid 1px",
-								borderRadius: "10px",
-								width: "75%",
-								fontSize: "0.9rem",
-								// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-							}}>
-							{busStationChosenTime &&
-							busStationChosenTime !== "Please Select (Required)" ? (
-								<option className='items text-muted inputFields'>
-									{busStationChosenTime}
-								</option>
-							) : (
-								<option className='items text-muted inputFields'>
-									Please Select (Required)
-								</option>
-							)}
-							{chosenBusStationDetails &&
-								chosenBusStationDetails.times &&
-								chosenBusStationDetails.times.map((b, i) => {
-									return (
-										<option
-											key={i}
-											className='items text-muted inputFields'
-											value={b}>
-											{b}
-										</option>
-									);
-								})}
-						</select>
-					</div>
-				)}
+				{busStationName &&
+					chosenBusStationDetails &&
+					busStationName !== "no bus needed" && (
+						<div className='col-md-6 my-3 mx-auto'>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									color: "#00407f",
+								}}>
+								Here is "{busStationName}" Station Available Times
+							</label>
+							<br />
+							<select
+								onChange={handleBusStationChosenTime}
+								className='inputFields mb-3'
+								style={{
+									paddingTop: "12px",
+									paddingBottom: "12px",
+									paddingRight: "130px",
+									// textAlign: "center",
+									border: "#cfcfcf solid 1px",
+									borderRadius: "10px",
+									width: "75%",
+									fontSize: "0.9rem",
+									// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+								}}>
+								{busStationChosenTime &&
+								busStationChosenTime !== "Please Select (Required)" ? (
+									<option className='items text-muted inputFields'>
+										{busStationChosenTime}
+									</option>
+								) : (
+									<option className='items text-muted inputFields'>
+										Please Select (Required)
+									</option>
+								)}
+								{chosenBusStationDetails &&
+									chosenBusStationDetails.times &&
+									chosenBusStationDetails.times.map((b, i) => {
+										return (
+											<option
+												key={i}
+												className='items text-muted inputFields'
+												value={b}>
+												{b}
+											</option>
+										);
+									})}
+							</select>
+						</div>
+					)}
 			</div>
 		</FormStep2Wrapper>
 	);

@@ -56,7 +56,7 @@ const KhanGallery_Arabic = () => {
 											src={image.thumbnail[0].url}
 											alt={image.title}
 										/>
-										<div className='imageTitle'>{image.title_Arabic}</div>
+										{/* <div className='imageTitle'>{image.title_Arabic}</div> */}
 									</div>
 								)}
 							</Fragment>
