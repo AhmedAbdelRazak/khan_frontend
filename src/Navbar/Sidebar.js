@@ -59,7 +59,7 @@ const Sidebar = ({
 	};
 
 	const storeLogo2 =
-		"https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1652480319/khankhadija/LogoSideBar_YusufSidebar_gfw40c.png";
+		"https://res.cloudinary.com/infiniteapps/image/upload/v1652480319/khankhadija/LogoSideBar_YusufSidebar_gfw40c.png";
 
 	// eslint-disable-next-line
 	var index2 = storeLogo2.indexOf("upload");
@@ -87,11 +87,7 @@ const Sidebar = ({
 						window.scrollTo({ top: 0, behavior: "smooth" });
 					}}>
 					<img
-						src={
-							storeLogo
-								? finalLogoUrl
-								: "https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1644897692/Infinite-Apps/LogoPNG_ycybyx.png"
-						}
+						src={storeLogo ? finalLogoUrl : ""}
 						alt='Infinite-Apps'
 						style={click ? unmountedStyle : mountedStyle}
 						className={click ? "imgLogo" : "imgLogo"}
@@ -106,18 +102,14 @@ const Sidebar = ({
 					className='fa fa-window-close nav-icon faaa-bars'
 					onClick={handleSidebar}
 					style={{
-						color: "var(--orangePrimary)",
+						color: "white",
 						fontWeight: "bolder",
 						fontSize: "1.6rem",
 						display: "none",
 					}}></i>
 			) : (
 				<i
-					style={{
-						color: "var(--orangePrimary)",
-						fontWeight: "bolder",
-						fontSize: "1.6rem",
-					}}
+					style={{ color: "white", fontWeight: "bolder", fontSize: "1.6rem" }}
 					className='fa fa-bars nav-icon faaa-bars'
 					onClick={handleSidebar}></i>
 			)}

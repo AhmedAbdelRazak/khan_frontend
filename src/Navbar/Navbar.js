@@ -86,11 +86,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}>
 						<img
-							src={
-								storeLogo
-									? finalLogoUrl
-									: "https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1644897692/Infinite-Apps/LogoPNG_ycybyx.png"
-							}
+							src={storeLogo ? finalLogoUrl : ""}
 							alt='Infinite-Apps'
 							className='imgLogo'
 						/>
