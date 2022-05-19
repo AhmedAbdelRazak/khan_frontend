@@ -89,7 +89,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 							src={
 								storeLogo
 									? finalLogoUrl
-									: "https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1640714861/KuwaitDemo/1640714860747.jpg"
+									: "https://res.cloudinary.com/infiniteapps/image/upload/e_bgremoval/v1644897692/Infinite-Apps/LogoPNG_ycybyx.png"
 							}
 							alt='Infinite-Apps'
 							className='imgLogo'
