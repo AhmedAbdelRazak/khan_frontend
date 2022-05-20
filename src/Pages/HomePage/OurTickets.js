@@ -398,7 +398,7 @@ const OurTickets = () => {
 				</div>
 			</div>
 			{ticketsWithOffers && ticketsWithOffers.length > 0 ? (
-				<div className='ticketsPhoneView'>
+				<div className='ticketsPhoneView '>
 					<h1
 						// data-aos='fade-up'
 						className='titleBookNow2'>
@@ -579,10 +579,21 @@ const OurTicketsWrapper = styled.div`
 			width: 180px !important;
 			height: 90px !important;
 			object-fit: cover;
+			border: 2px var(--orangePrimary) solid;
+			box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
 		}
 
 		.slick-slide {
 			margin: 0 8px;
+		}
+	}
+
+	@media (max-width: 380px) {
+		img {
+			border-radius: 10px;
+			width: 160px;
+			height: 160px;
+			object-fit: cover;
 		}
 	}
 `;

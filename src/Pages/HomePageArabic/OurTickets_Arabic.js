@@ -579,6 +579,8 @@ const OurTicketsWrapper = styled.div`
 			width: 180px !important;
 			height: 90px !important;
 			object-fit: cover;
+			border: 2px var(--orangePrimary) solid;
+			box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
 		}
 
 		.slick-slide {

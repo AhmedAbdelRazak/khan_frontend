@@ -304,7 +304,7 @@ const BookNow = ({ match }) => {
 
 	const steps = [
 		{
-			title: <div className='FormTitle'>Booking Date</div>,
+			title: <div className='FormTitle'>تاريخ الحجز</div>,
 			content: (
 				<FormStep1
 					chosenDate={chosenDate}
@@ -329,7 +329,7 @@ const BookNow = ({ match }) => {
 			),
 		},
 		{
-			title: <div className='FormTitle'>Client Info</div>,
+			title: <div className='FormTitle'>بيانات الحجز</div>,
 			content: (
 				<FormStep2
 					fullName={fullName}
@@ -356,7 +356,7 @@ const BookNow = ({ match }) => {
 			),
 		},
 		{
-			title: <div className='FormTitle'>Review Your Data</div>,
+			title: <div className='FormTitle'>مراجعة تفاصيل الحجز</div>,
 			content: (
 				<FormStep3
 					appointmentComment={appointmentComment}
@@ -425,44 +425,44 @@ const BookNow = ({ match }) => {
 	const clickSubmitSchedule_NoPayment = () => {
 		window.scrollTo({ top: 0, behavior: "smooth" });
 		if (!chosenService_Package) {
-			return toast.error(`Please select a package`);
+			return toast.error(`الرجاء تحديد التذكرة`);
 		}
 
 		if (storeClosed_NotClosedCustomized || storeClosed_NotClosed) {
 			return toast.error(
-				`Khan Khadija is closed on the selected date, Please choose another date`,
+				`تم إغلاق خان خديجة في التاريخ المحدد ، يرجى اختيار تاريخ آخر`,
 			);
 		}
 		// console.log("scheduleSubmitted");
 
 		if (!fullName) {
-			return toast.error("Please Fill in Your Full Name");
+			return toast.error("الرجاء كتابه الاسم بالكامل");
 		}
 
 		if (!phone) {
-			return toast.error("Please Fill in Your Phone #...");
+			return toast.error("الرجاء ادخال رقم الهاتف");
 		}
 
 		if (!scheduledByUserEmail) {
-			return toast.error("Please Fill in Email Address");
+			return toast.error("يرجى ملء عنوان البريد الإلكتروني");
 		}
 
 		if (!countryCallingCode) {
-			return toast.error("Please add country calling code");
+			return toast.error("الرجاء إضافة رمز الاتصال بالدولة");
 		}
 
 		if (!quantity) {
-			return toast.error("Please add tickets quantity");
+			return toast.error("الرجاء إضافة كمية التذاكر");
 		}
 
 		if (Number(quantity) + Number(quantity_Children) > availableTickets()) {
 			return toast.error(
-				"No enough tickets are available, please choose another reservation date and try again",
+				"لا تتوفر تذاكر كافية ، يرجى اختيار تاريخ حجز آخر والمحاولة مرة أخرى",
 			);
 		}
 
 		if (!busStationChosenTime) {
-			return toast.error("Please add time for bus station pickup");
+			return toast.error("الرجاء إضافة وقت لمحطة الحافلات للسفر");
 		}
 
 		const createOrderData = {
@@ -510,7 +510,7 @@ const BookNow = ({ match }) => {
 	}, []);
 
 	return (
-		<BookNowWrapper>
+		<BookNowWrapper dir='rtl'>
 			<Steps current={current}>
 				{steps.map((item) => (
 					<Step key={item.title} title={item.title} />
@@ -538,7 +538,7 @@ const BookNow = ({ match }) => {
 							});
 							window.scrollTo({ top: 120, behavior: "smooth" });
 						}}>
-						Next
+						التالي
 					</Button>
 				)}
 
@@ -554,7 +554,7 @@ const BookNow = ({ match }) => {
 							fontSize: "0.9rem",
 						}}
 						onClick={() => prev()}>
-						Previous
+						السابق
 					</Button>
 				)}
 				{current === 1 && !loading && (
@@ -577,7 +577,7 @@ const BookNow = ({ match }) => {
 								label: "Data Reviewing",
 							});
 						}}>
-						Next
+						التالي
 					</Button>
 				)}
 				{current === steps.length - 1 &&
@@ -599,7 +599,7 @@ const BookNow = ({ match }) => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
 								setCurrent(0);
 							}}>
-							Please Fill In Your Phone
+							تاكد من ملئ البيانات
 						</Button>
 					)}
 				{current === steps.length - 1 &&
@@ -627,7 +627,7 @@ const BookNow = ({ match }) => {
 								fontWeight: "bold",
 								fontSize: "0.9rem",
 							}}>
-							Reserve Now
+							احجز الآن
 						</Button>
 					)}
 			</div>
@@ -643,6 +643,7 @@ const BookNowWrapper = styled.div`
 	margin-right: 50px;
 	margin-bottom: 200px;
 	overflow: hidden;
+	font-family: "Droid Arabic Kufi";
 
 	.steps-content {
 		min-height: 450px;

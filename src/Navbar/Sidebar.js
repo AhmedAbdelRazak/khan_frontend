@@ -87,8 +87,12 @@ const Sidebar = ({
 						window.scrollTo({ top: 0, behavior: "smooth" });
 					}}>
 					<img
-						src={storeLogo ? finalLogoUrl : ""}
-						alt='Infinite-Apps'
+						src={
+							storeLogo
+								? finalLogoUrl
+								: "https://res.cloudinary.com/infiniteapps/image/upload/v1652478256/khankhadija/1652478256239.png"
+						}
+						alt='Khan Khadija'
 						style={click ? unmountedStyle : mountedStyle}
 						className={click ? "imgLogo" : "imgLogo"}
 					/>
@@ -108,14 +112,123 @@ const Sidebar = ({
 						display: "none",
 					}}></i>
 			) : (
-				<i
-					style={{
-						color: "var(--orangePrimary)",
-						fontWeight: "bolder",
-						fontSize: "1.6rem",
-					}}
-					className='fa fa-bars nav-icon faaa-bars'
-					onClick={handleSidebar}></i>
+				<span className='nav-icon mt-2'>
+					{language === "Arabic" ? (
+						<span
+							className='nav-item mx-2 navLanguage'
+							style={{ marginTop: "0px" }}
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<span className=' mr-0 btn mb-2' style={{ padding: "0px" }}>
+								{language === "English" ? (
+									<span
+										style={{
+											// background: "#c40000",
+											cursor: "pointer",
+											border: "solid 1px white",
+											padding: "0px 5px",
+											color: "var(--orangePrimary)",
+											// position: "absolute",
+											// top: "30px",
+											// right: "13%",
+
+											fontSize: "0.9rem",
+										}}
+										className='btn '
+										onClick={() => {
+											setLanguage("Arabic");
+											setClickMenu(false);
+											setClick(false);
+											// window.location.reload(false);
+										}}>
+										عربي
+									</span>
+								) : (
+									<span
+										style={{
+											// background: "#c40000",
+											cursor: "pointer",
+											border: "solid 1px white",
+											padding: "0px 2px",
+											color: "var(--orangePrimary)",
+											fontSize: "14px",
+										}}
+										className='btn '
+										onClick={() => {
+											setLanguage("English");
+											setClickMenu(false);
+											setClick(false);
+											// window.location.reload(false);
+										}}>
+										En
+									</span>
+								)}
+							</span>
+						</span>
+					) : (
+						<span
+							className='nav-item mx-2 navLanguage'
+							style={{ marginTop: "0px" }}
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<span className=' mr-0 btn mb-2' style={{ padding: "1px" }}>
+								{language === "English" ? (
+									<span
+										style={{
+											// background: "#c40000",
+											cursor: "pointer",
+											border: "solid 1px white",
+											padding: "0px 5px",
+											color: "var(--orangePrimary)",
+											// position: "absolute",
+											// top: "30px",
+											// right: "13%",
+
+											fontSize: "0.9rem",
+										}}
+										className='btn '
+										onClick={() => {
+											setLanguage("Arabic");
+											setClickMenu(false);
+											setClick(false);
+											// window.location.reload(false);
+										}}>
+										عربي
+									</span>
+								) : (
+									<span
+										style={{
+											// background: "#c40000",
+											cursor: "pointer",
+											border: "solid 1px white",
+											padding: "0px 2px",
+											color: "var(--orangePrimary)",
+											fontSize: "14px",
+										}}
+										className='btn '
+										onClick={() => {
+											setLanguage("English");
+											setClickMenu(false);
+											setClick(false);
+											// window.location.reload(false);
+										}}>
+										En
+									</span>
+								)}
+							</span>
+						</span>
+					)}
+					<i
+						style={{
+							color: "var(--orangePrimary)",
+							fontWeight: "bolder",
+							fontSize: "1.6rem",
+						}}
+						className='fa fa-bars faaa-bars'
+						onClick={handleSidebar}></i>
+				</span>
 			)}
 			<SideWrapper show={clickMenu} dir={language === "Arabic" ? "rtl" : "ltr"}>
 				<span className={language === "Arabic" ? "AlignItemsRight" : ""}>
@@ -455,7 +568,7 @@ const Sidebar = ({
 						{language === "Arabic" ? (
 							<li
 								className='nav-item mx-3'
-								style={{ marginTop: "150px" }}
+								style={{ marginTop: "50px" }}
 								onClick={() => {
 									window.scrollTo({ top: 0, behavior: "smooth" });
 								}}>
@@ -505,7 +618,7 @@ const Sidebar = ({
 						) : (
 							<li
 								className='nav-item mx-5'
-								style={{ marginTop: "150px" }}
+								style={{ marginTop: "50px" }}
 								onClick={() => {
 									window.scrollTo({ top: 0, behavior: "smooth" });
 								}}>
@@ -582,7 +695,7 @@ const Nav = styled.nav`
 		object-fit: cover;
 		margin-top: 0px;
 		margin-bottom: 0px;
-		margin-left: 15px;
+		margin-left: 0px;
 		border-radius: 15px;
 	}
 
@@ -669,6 +782,12 @@ const Nav = styled.nav`
 		}
 	}
 	font-size: 1rem;
+
+	@media (max-width: 380px) {
+		.navLanguage {
+			display: none;
+		}
+	}
 `;
 
 const SideWrapper = styled.nav`
@@ -807,37 +926,6 @@ const SideWrapper = styled.nav`
 		opacity: 0.4;
 	}
 
-	.dropDownIcon {
-		cursor: pointer;
-	}
-
-	.subMenuList {
-		margin-left: 50px;
-		font-weight: bold;
-	}
-
-	.subMenuList a {
-		color: black !important;
-	}
-
-	.subMenuWrapper-enter {
-		opacity: 0;
-		transform: scale(0.4);
-	}
-	.subMenuWrapper-enter-active {
-		opacity: 1;
-		transform: translateX(0);
-		transition: opacity 300ms, transform 300ms;
-	}
-	.subMenuWrapper-exit {
-		opacity: 1;
-	}
-	.subMenuWrapper-exit-active {
-		opacity: 0;
-		transform: scale(0.9);
-		transition: opacity 200ms, transform 200ms;
-	}
-
 	.linkStyling {
 		font-size: 1.2rem;
 		margin-left: 12px;
@@ -854,33 +942,5 @@ const SideWrapper = styled.nav`
 	}
 	@media (min-width: 950px) {
 		display: none;
-	}
-`;
-// eslint-disable-next-line
-const BlogsListWrapper = styled.nav`
-	ul {
-		list-style-type: none;
-		padding: 0 !important;
-		margin-left: 50px;
-		font-weight: bold;
-		color: blue;
-	}
-
-	.sidebar-link {
-		display: block;
-		font-size: 0.9rem;
-		text-transform: capitalize;
-		color: black;
-		padding: 0.5rem 0.5rem;
-		background: transparent;
-		transition: 0.3s;
-		font-weight: bold;
-	}
-	.sidebar-link:hover {
-		background: #727272;
-		color: whitesmoke;
-
-		/* padding: 1rem 2rem 1rem 2rem; */
-		text-decoration: none;
 	}
 `;

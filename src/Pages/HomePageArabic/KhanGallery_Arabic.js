@@ -88,7 +88,9 @@ const KhanGalleryWrapper = styled.div`
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		border-radius: 12px;
+		border-radius: 5px;
+		border: 1px var(--mainBlue) solid;
+		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
 	}
 
 	.mainImagediv0 {

@@ -75,7 +75,7 @@ const KhanGalleryWrapper = styled.div`
 	.row {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		grid-gap: 2em;
+		grid-gap: 1em;
 		margin: auto;
 		/* border: 1px solid red; */
 		grid-auto-rows: minmax(60px, auto);
@@ -86,7 +86,9 @@ const KhanGalleryWrapper = styled.div`
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		border-radius: 12px;
+		border-radius: 5px;
+		border: 1px var(--mainBlue) solid;
+		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
 	}
 
 	.mainImagediv0 {

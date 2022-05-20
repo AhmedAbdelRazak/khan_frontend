@@ -402,7 +402,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 						<div
 							className='mt-2'
 							style={{ fontWeight: "bold", fontSize: "0.8rem" }}>
-							KW Code: +965, EGY Code: +2, Turkey Code: +90, etc...
+							EGY Code: +2
 						</div>
 					</div>
 				</Panel>
@@ -447,7 +447,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								fontSize: "1rem",
 								color: "#00407f",
 							}}>
-							Tickets Count (Adults):
+							عدد التذاكر (كبار):
 						</label>
 
 						<input
@@ -455,7 +455,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							className='form-control w-75 mx-auto'
 							value={quantity_Adults}
 							onChange={handleQuantityAdults}
-							placeholder='(**Required)'
+							placeholder='(**مطلوب)'
 						/>
 					</div>
 
@@ -467,7 +467,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								fontSize: "1rem",
 								color: "#00407f",
 							}}>
-							Tickets Count (Children):
+							عدد التذاكر (اطفال):
 						</label>
 
 						<input
@@ -475,7 +475,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							className='form-control w-75 mx-auto'
 							value={quantity_Children}
 							onChange={handleQuantityChildren}
-							placeholder='(**Required)'
+							placeholder='(**مطلوب)'
 						/>
 					</div>
 				</Panel>

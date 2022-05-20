@@ -85,99 +85,122 @@ const FormStep3 = ({
 	return (
 		<FormStep3Wrapper>
 			<div className='row'>
-				<h3 className='reviewHeader'>Booking Details</h3>
-				<div className='col-md-6 ml-3 mt-2'>
-					<div>Name: {fullName}</div>
-					<div>
-						Phone: ({countryCallingCode}) {phone}
+				<h3 className='reviewHeader'>تفاصيل الحجز</h3>
+				<div className='col-md-6 mt-3'>
+					<div className='toBeAlignedRight'>الاسم: {fullName}</div>
+					<br />
+					<div className='toBeAlignedRight'>
+						الهاتف:{" "}
+						<span dir='ltr'>
+							({countryCallingCode}) {phone}
+						</span>
 					</div>
-					<div>
-						Scheduled By Email:{" "}
+					<br />
+					<div className='toBeAlignedRight'>
+						بريد الالكتروني:{" "}
 						{scheduledByUserEmail ? scheduledByUserEmail : "Not Filled"}
 					</div>
-					<div style={{ textTransform: "capitalize" }}>
-						Booked Package: {chosenService_Package}{" "}
+					<br />
+
+					<div
+						className='toBeAlignedRight'
+						style={{ textTransform: "capitalize" }}>
+						اسم التذكرة: {chosenService_Package}{" "}
 					</div>
-					<div>
-						Package Price (Adults):{" "}
+					<br />
+
+					<div className='toBeAlignedRight'>
+						سعر التذكرة (الكبار):{" "}
 						{serviceDetails.servicePrice ===
 						serviceDetails.servicePriceDiscount ? (
-							<span>{serviceDetails.servicePriceDiscount} L.E.</span>
+							<span>{serviceDetails.servicePriceDiscount} جنيه</span>
 						) : (
 							<span style={{ color: "green", fontWeight: "bold" }}>
 								<s style={{ color: "red", fontWeight: "bold" }}>
-									{serviceDetails.servicePrice} L.E.
+									{serviceDetails.servicePrice} جنيه
 								</s>{" "}
-								{serviceDetails.servicePriceDiscount} L.E.
+								{serviceDetails.servicePriceDiscount} جنيه
 							</span>
 						)}{" "}
 					</div>
+					<br />
 
-					<div>
-						Package Price (Children):{" "}
+					<div className='toBeAlignedRight'>
+						سعر التذكرة (للأطفال):{" "}
 						{serviceDetails.servicePrice_Children ===
 						serviceDetails.servicePriceDiscount_Children ? (
-							<span>{serviceDetails.servicePriceDiscount_Children} L.E.</span>
+							<span>{serviceDetails.servicePriceDiscount_Children} جنيه</span>
 						) : (
 							<span style={{ color: "black", fontWeight: "" }}>
 								<s style={{ color: "black", fontWeight: "" }}>
-									{serviceDetails.servicePrice_Children} L.E.
+									{serviceDetails.servicePrice_Children} جنيه
 								</s>{" "}
-								{serviceDetails.servicePriceDiscount_Children} L.E.
+								{serviceDetails.servicePriceDiscount_Children} جنيه
 							</span>
 						)}{" "}
 					</div>
+					<br />
 
-					<div>
-						Tickets Count: {Number(quantity) + Number(quantity_Children)}{" "}
-						Tickets
+					<div className='toBeAlignedRight'>
+						عدد التذاكر: {Number(quantity) + Number(quantity_Children)} تذاكر
 					</div>
-					<div>
-						Transportation Fees: {Number(chosenBusStationPrice.price)} L.E.{" "}
-					</div>
+					<br />
 
-					<div>Booking Date: {chosenDate}</div>
-					<div>Event/Occasion: {event_ocassion} </div>
+					<div className='toBeAlignedRight'>
+						رسوم المواصلات: {Number(chosenBusStationPrice.price)} جنيه{" "}
+					</div>
+					<br />
+
+					<div className='toBeAlignedRight'>تاريخ الحجز: {chosenDate}</div>
+					<br />
+
+					<div className='toBeAlignedRight'>
+						الحدث / المناسبة: {event_ocassion}{" "}
+					</div>
+					<br />
+
 					{chosenCouponDetails && chosenCouponDetails.name ? (
-						<div>
-							Coupon Name: {chosenCouponDetails.name} (
+						<div className='toBeAlignedRight'>
+							اسم الكوبون: {chosenCouponDetails.name} (
 							{chosenCouponDetails.discount}% Off){" "}
 						</div>
 					) : null}
+					<br />
 
 					<div
+						className='toBeAlignedRight'
 						style={{
 							fontSize: "1rem",
 							fontWeight: "bold",
 							color: "var(--mainBlue)",
 						}}>
-						Total Amount:{" "}
+						المبلغ الإجمالي:{" "}
 						{totalPriceBeforeDiscount() === totalPriceAfterDiscount() ? (
 							<span style={{ color: "green", fontWeight: "bold" }}>
-								{totalPriceAfterDiscount()} L.E.
+								{totalPriceAfterDiscount()} جنيه
 							</span>
 						) : (
 							<span style={{ color: "green", fontWeight: "bold" }}>
 								<s style={{ color: "red", fontWeight: "bold" }}>
-									{totalPriceBeforeDiscount()} L.E.
+									{totalPriceBeforeDiscount()} جنيه
 								</s>{" "}
-								{totalPriceAfterDiscount()} L.E.
+								{totalPriceAfterDiscount()} جنيه
 							</span>
 						)}{" "}
 					</div>
+					<br />
 				</div>
 				<div className='col-md-5 mx-auto my-auto'>
 					<br />
 					<div>
 						<label
-							className='textResizeMain2 ml-3'
+							className='textResizeMain2'
 							style={{
 								fontWeight: "bold",
 								fontSize: "1rem",
 								color: "#00407f",
 							}}>
-							*Optional: If you have any further comments, Please consider
-							addressing them here
+							لاضافه اي تعليقات.الرجاء كتابتها هنا
 						</label>
 
 						<textarea
@@ -200,8 +223,12 @@ export default FormStep3;
 
 const FormStep3Wrapper = styled.div`
 	margin: 30px 0px;
-	text-align: left;
 	margin-left: 100px;
+
+	.toBeAlignedRight {
+		float: right;
+		margin-right: 150px;
+	}
 
 	.reviewHeader {
 		display: none;
@@ -215,6 +242,11 @@ const FormStep3Wrapper = styled.div`
 			font-size: 0.8rem !important;
 			text-shadow: 0px 0px 0px !important;
 			font-weight: bold !important;
+		}
+
+		.toBeAlignedRight {
+			float: right;
+			margin-right: 20px;
 		}
 
 		.reviewHeader {

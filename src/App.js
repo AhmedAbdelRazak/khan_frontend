@@ -16,6 +16,7 @@ import Listings from "./Pages/Listings";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import BookNow from "./Pages/ReserveNow/BookNow";
+import BookNowArabic from "./Pages/ReserveNowArabic/BookNow";
 import SuccessfullyPaid from "./Pages/ReserveNow/SuccessfullyPaid";
 
 //admin routes
@@ -120,7 +121,12 @@ const App = () => {
 					exact
 					component={SuccessfullyPaid}
 				/>
-				<Route path='/book-now/:ticketName' exact component={BookNow} />
+
+				{language === "Arabic" ? (
+					<Route path='/book-now/:ticketName' exact component={BookNowArabic} />
+				) : (
+					<Route path='/book-now/:ticketName' exact component={BookNow} />
+				)}
 
 				{language === "Arabic" ? (
 					<Route

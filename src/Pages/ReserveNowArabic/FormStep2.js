@@ -82,7 +82,6 @@ const FormStep2 = ({
 
 	useEffect(() => {
 		setBusStationName(chosenBusStationDetails.address);
-		setBusStationChosenTime(chosenBusStationDetails.times[0]);
 		// eslint-disable-next-line
 	}, []);
 
@@ -97,15 +96,15 @@ const FormStep2 = ({
 							fontSize: "1rem",
 							color: "#00407f",
 						}}>
-						Full Name
+						الاسم بالكامل
 					</label>
 
 					<input
 						type='text'
-						className='form-control w-75 mx-auto'
+						className='form-control w-75 mx-auto text-center'
 						value={fullName}
 						onChange={handleScheduledByUserFirstName}
-						placeholder='(**Required)'
+						placeholder='(**مطلوب)'
 						required
 					/>
 				</div>
@@ -120,7 +119,7 @@ const FormStep2 = ({
 									fontSize: "1rem",
 									color: "#00407f",
 								}}>
-								Code
+								كود
 							</label>
 							<input
 								type='text'
@@ -139,15 +138,15 @@ const FormStep2 = ({
 									color: "#00407f",
 									textAlign: "center",
 								}}>
-								Phone
+								الهاتف
 							</label>
 
 							<input
 								type='number'
-								className='form-control w-100 mx-auto  '
+								className='form-control w-100 mx-auto  text-center'
 								value={phone}
 								onChange={handlePhone}
-								placeholder='(**Required) Numbers Only'
+								placeholder='(**مطلوب) أرقام فقط'
 								required
 							/>
 						</div>
@@ -166,15 +165,15 @@ const FormStep2 = ({
 							fontSize: "1rem",
 							color: "#00407f",
 						}}>
-						Email
+						بريد الالكتروني
 					</label>
 
 					<input
 						type='text'
-						className='form-control w-75 mx-auto'
+						className='form-control w-75 mx-auto text-center'
 						value={scheduledByUserEmail}
 						onChange={handleScheduleByUserEmail}
-						placeholder='(**Required)'
+						placeholder='(**مطلوب)'
 					/>
 				</div>
 
@@ -186,17 +185,18 @@ const FormStep2 = ({
 							fontSize: "1rem",
 							color: "#00407f",
 						}}>
-						Occasion
+						المناسبة
 					</label>
 					<br />
 					<select
+						dir='ltr'
 						onChange={handleEven_Ocassion}
 						className='inputFields mb-3'
 						style={{
 							paddingTop: "12px",
 							paddingBottom: "12px",
-							paddingRight: "130px",
-							// textAlign: "center",
+							// paddingRight: "130px",
+							textAlign: "center",
 							border: "#cfcfcf solid 1px",
 							borderRadius: "10px",
 							width: "75%",
@@ -209,7 +209,7 @@ const FormStep2 = ({
 							</option>
 						) : (
 							<option className='items text-muted inputFields'>
-								Select An Occasion
+								حدد المناسبة
 							</option>
 						)}
 						<option className='items text-muted inputFields' value='Day Use'>
@@ -267,7 +267,7 @@ const FormStep2 = ({
 							fontSize: "1rem",
 							color: "#00407f",
 						}}>
-						Ticket Quantity (Adults)
+						عدد التذاكر (كبار)
 					</label>
 
 					<input
@@ -283,8 +283,8 @@ const FormStep2 = ({
 						<div
 							className='mt-2'
 							style={{ fontWeight: "bold", color: "red", fontSize: "13px" }}>
-							Not enough tickets are available, please choose another date and
-							try again.
+							لا تتوفر عدد تذاكر كافي . الرجاء تقليل عدد التذاكر او اختيار تاريخ
+							اخر.
 						</div>
 					)}
 				</div>
@@ -297,7 +297,7 @@ const FormStep2 = ({
 							fontSize: "1rem",
 							color: "#00407f",
 						}}>
-						Ticket Quantity (Children)
+						عدد التذاكر (اطفال)
 					</label>
 
 					<input
@@ -313,8 +313,8 @@ const FormStep2 = ({
 						<div
 							className='mt-2'
 							style={{ fontWeight: "bold", color: "red", fontSize: "13px" }}>
-							Not enough tickets are available, please choose another date and
-							try again.
+							لا تتوفر عدد تذاكر كافي . الرجاء تقليل عدد التذاكر او اختيار تاريخ
+							اخر.
 						</div>
 					)}
 				</div>
@@ -326,7 +326,7 @@ const FormStep2 = ({
 							fontSize: "1rem",
 							color: "#00407f",
 						}}>
-						Transportation / Bus Station
+						وسيلة المواصلات
 					</label>
 					<br />
 					<select
@@ -335,21 +335,21 @@ const FormStep2 = ({
 						style={{
 							paddingTop: "12px",
 							paddingBottom: "12px",
-							paddingRight: "130px",
-							// textAlign: "center",
+							// paddingLeft: "130px",
+							textAlign: "center",
 							border: "#cfcfcf solid 1px",
 							borderRadius: "10px",
 							width: "75%",
 							fontSize: "0.9rem",
 							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
 						}}>
-						{busStationName && busStationName !== "Please Select (Required)" ? (
+						{busStationName && busStationName !== "Please Select (مطلوب)" ? (
 							<option className='items text-muted inputFields'>
 								{busStationName}
 							</option>
 						) : (
 							<option className='items text-muted inputFields'>
-								Please Select (Required)
+								يرجى تحديد (مطلوب)
 							</option>
 						)}
 						{busStations &&
@@ -378,7 +378,7 @@ const FormStep2 = ({
 									fontSize: "1rem",
 									color: "#00407f",
 								}}>
-								Here is "{busStationName}" Station Available Times
+								المواعيد المتاحة لرحلة {busStationName}
 							</label>
 							<br />
 							<select
@@ -387,8 +387,8 @@ const FormStep2 = ({
 								style={{
 									paddingTop: "12px",
 									paddingBottom: "12px",
-									paddingRight: "130px",
-									// textAlign: "center",
+									// paddingLeft: "130px",
+									textAlign: "center",
 									border: "#cfcfcf solid 1px",
 									borderRadius: "10px",
 									width: "75%",
@@ -433,6 +433,10 @@ const FormStep2Wrapper = styled.div`
 
 	.countryCodePhone {
 		margin-left: 100px;
+	}
+
+	input {
+		text-align: center;
 	}
 
 	@media (max-width: 1000px) {
