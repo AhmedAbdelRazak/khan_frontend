@@ -584,9 +584,21 @@ const OurTicketsWrapper = styled.div`
 		}
 
 		.slick-slide {
-			/* padding: 0 -8px; */
-			margin-right: 8px;
-			margin-left: 8px;
+			margin: 0px 8px;
+		}
+	}
+
+	@media (max-width: 380px) {
+		img {
+			border-radius: 10px;
+			width: 160px;
+			height: 160px;
+			object-fit: cover;
+		}
+
+		.slick-dots {
+			/* display: none !important; */
+			text-align: center;
 		}
 	}
 `;

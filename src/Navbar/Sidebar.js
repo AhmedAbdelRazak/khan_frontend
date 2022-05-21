@@ -6,6 +6,7 @@ import styled from "styled-components";
 // eslint-disable-next-line
 import logo from "./Logo.jpg";
 import { allLoyaltyPointsAndStoreStatus } from "../apiCore";
+import ReactGA from "react-ga";
 
 const mountedStyle = { animation: "inAnimation 600ms ease-in" };
 const unmountedStyle = {
@@ -71,6 +72,13 @@ const Sidebar = ({
 
 	var finalLogoUrl2 = storeLogo2;
 
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		// ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<Nav
 			className=' navbar  navbar-expand-lg nav-center py-1 overAllSidebar'
@@ -119,6 +127,11 @@ const Sidebar = ({
 							style={{ marginTop: "0px" }}
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
+								ReactGA.event({
+									category: "User Changed Language",
+									action: `User Changed Language to ${language}`,
+									label: "Language Was Changed",
+								});
 							}}>
 							<span className=' mr-0 btn mb-2' style={{ padding: "0px" }}>
 								{language === "English" ? (
@@ -126,7 +139,8 @@ const Sidebar = ({
 										style={{
 											// background: "#c40000",
 											cursor: "pointer",
-											border: "solid 1px white",
+											// borderBottom: "solid 1px white",
+											textDecoration: "underline",
 											padding: "0px 5px",
 											color: "var(--orangePrimary)",
 											// position: "absolute",
@@ -172,6 +186,11 @@ const Sidebar = ({
 							style={{ marginTop: "0px" }}
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
+								ReactGA.event({
+									category: "User Changed Language",
+									action: `User Changed Language to ${language}`,
+									label: "Language Was Changed",
+								});
 							}}>
 							<span className=' mr-0 btn mb-2' style={{ padding: "1px" }}>
 								{language === "English" ? (
@@ -179,9 +198,10 @@ const Sidebar = ({
 										style={{
 											// background: "#c40000",
 											cursor: "pointer",
-											border: "solid 1px white",
+											// borderBottom: "solid 1px white",
 											padding: "0px 5px",
 											color: "var(--orangePrimary)",
+											textDecoration: "underline",
 											// position: "absolute",
 											// top: "30px",
 											// right: "13%",
@@ -590,6 +610,11 @@ const Sidebar = ({
 												setLanguage("Arabic");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to Arabic`,
+													label: "Language Was Changed",
+												});
 												// window.location.reload(false);
 											}}>
 											Arabic
@@ -608,6 +633,11 @@ const Sidebar = ({
 												setLanguage("English");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to English`,
+													label: "Language Was Changed",
+												});
 												// window.location.reload(false);
 											}}>
 											English
@@ -640,6 +670,11 @@ const Sidebar = ({
 												setLanguage("Arabic");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to Arabic`,
+													label: "Language Was Changed",
+												});
 												// window.location.reload(false);
 											}}>
 											Arabic
@@ -658,6 +693,11 @@ const Sidebar = ({
 												setLanguage("English");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to English`,
+													label: "Language Was Changed",
+												});
 												// window.location.reload(false);
 											}}>
 											English

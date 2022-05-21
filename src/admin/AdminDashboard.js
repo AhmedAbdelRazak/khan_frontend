@@ -7,7 +7,11 @@ import Adminsidebar from "./AdminSideBar/Adminsidebar";
 import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
 import { Button } from "antd";
-import { getPreviousBookingsAdmin } from "./apiAdmin";
+import {
+	getPreviousBookingsAdmin,
+	updateOrderStatus,
+	getStatusValues,
+} from "./apiAdmin";
 // import ReactExport from "react-export-excel";
 
 // const ExcelFile = ReactExport.ExcelFile;
@@ -21,7 +25,10 @@ const AdminDashboard = () => {
 	const [HistBookings, setHistBookings] = useState([]);
 	// eslint-disable-next-line
 	const [excelDataSet, setExcelDataSet] = useState([]);
+	const [statusValues, setStatusValues] = useState([]);
 	const [q, setQ] = useState("");
+	const [clickedButton, setClickedButton] = useState("Select All");
+	const [selectedDate, setSelectedDate] = useState(new Date());
 
 	//Admin Auth
 	// eslint-disable-next-line
@@ -30,6 +37,21 @@ const AdminDashboard = () => {
 	useEffect(() => {
 		setClickMenu2(click2);
 	}, [click2, clickMenu2]);
+
+	var today = new Date();
+	var yesterday = new Date(today);
+	var last7Days = new Date(today);
+	var last30Days = new Date(today);
+	var tomorrow = new Date(today);
+	var next7Days = new Date(today);
+	var next30Days = new Date(today);
+
+	yesterday.setDate(yesterday.getDate() - 1);
+	last7Days.setDate(yesterday.getDate() - 7);
+	last30Days.setDate(yesterday.getDate() - 30);
+	tomorrow.setDate(yesterday.getDate() + 2);
+	next7Days.setDate(yesterday.getDate() + 8);
+	next30Days.setDate(yesterday.getDate() + 31);
 
 	const loadHistReservations = () => {
 		function compareTotalAppointments(a, b) {
@@ -48,7 +70,47 @@ const AdminDashboard = () => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
-				setHistBookings(data.sort(compareTotalAppointments));
+				if (clickedButton === "Select All") {
+					setHistBookings(
+						data
+							.filter(
+								(i) =>
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
+										new Date(selectedDate).setHours(0, 0, 0, 0) ||
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) >
+										new Date(selectedDate).setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments),
+					);
+				} else if (clickedButton === "Today" || clickedButton === "Yesterday") {
+					setHistBookings(
+						data
+							.filter(
+								(i) =>
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) ===
+									new Date(selectedDate).setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments),
+					);
+				} else if (
+					clickedButton === "This Week" ||
+					clickedButton === "This Month"
+				) {
+					setHistBookings(
+						data
+							.filter(
+								(i) =>
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
+										new Date(selectedDate).setHours(0, 0, 0, 0) &&
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) >=
+										new Date().setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments),
+					);
+				} else {
+					setHistBookings(data.sort(compareTotalAppointments));
+				}
+
 				setExcelDataSet(
 					data.sort(compareTotalAppointments) &&
 						data.sort(compareTotalAppointments).map((data, i) => {
@@ -76,11 +138,22 @@ const AdminDashboard = () => {
 		});
 	};
 
+	const loadStatusValues = () => {
+		getStatusValues(user._id, token).then((data) => {
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setStatusValues(data);
+			}
+		});
+	};
+
 	useEffect(() => {
+		loadStatusValues();
 		loadHistReservations();
 
 		// eslint-disable-next-line
-	}, []);
+	}, [clickedButton]);
 
 	function search(orders) {
 		return orders.filter((row) => {
@@ -97,9 +170,99 @@ const AdminDashboard = () => {
 		});
 	}
 
+	const handleStatusChange = (e, orderId) => {
+		updateOrderStatus(user._id, token, orderId, e.target.value).then((data) => {
+			if (data.error) {
+				console.log("Status update failed");
+			} else {
+				window.scrollTo({ top: 0, behavior: "smooth" });
+				window.location.reload(false);
+			}
+		});
+	};
+
 	const allReservationsDetails = () => {
 		return (
 			<Summary>
+				<div>
+					<span
+						style={{
+							fontSize: "1.3rem",
+							fontWeight: "bold",
+							marginBottom: "10px",
+							marginLeft: "10px",
+							color: "var(--mainBlue)",
+						}}>
+						Filters:
+					</span>
+					<br />
+					<button
+						onClick={() => {
+							setClickedButton("Select All");
+							setSelectedDate(today);
+						}}
+						style={{
+							color: "white",
+							backgroundColor: "var(--mainBlue)",
+							border: "none",
+						}}
+						className='ml-1 p-2'>
+						Select All
+					</button>
+					<button
+						onClick={() => {
+							setClickedButton("Today");
+							setSelectedDate(today);
+						}}
+						style={{
+							color: "black",
+							backgroundColor: "var(--orangePrimary)",
+							border: "none",
+						}}
+						className='ml-1 p-2'>
+						Today
+					</button>
+					<button
+						onClick={() => {
+							setClickedButton("Yesterday");
+							setSelectedDate(yesterday);
+						}}
+						style={{
+							color: "black",
+							backgroundColor: "var(--babyBlue)",
+							border: "none",
+						}}
+						className='ml-1 p-2'>
+						Yesterday
+					</button>
+					<button
+						onClick={() => {
+							setClickedButton("This Week");
+							setSelectedDate(next7Days);
+						}}
+						style={{
+							color: "black",
+							backgroundColor: "#d9f9fe",
+							border: "none",
+						}}
+						className='ml-1 p-2'>
+						This Week
+					</button>
+					<button
+						onClick={() => {
+							setClickedButton("This Month");
+							setSelectedDate(next30Days);
+						}}
+						style={{
+							color: "white",
+							backgroundColor: "#fc3e84",
+							border: "none",
+						}}
+						className='ml-1 p-2'>
+						This Month
+					</button>
+				</div>
+
 				<div className=' mb-3 form-group mx-3 text-center'>
 					<label
 						className='mt-3 mx-3'
@@ -124,9 +287,11 @@ const AdminDashboard = () => {
 				<table
 					className='table table-bordered table-md-responsive table-hover table-striped'
 					style={{ fontSize: "0.75rem" }}>
-					<thead className='thead-light'>
+					<thead className='thead-light text-center'>
 						<tr>
-							<th scope='col'>#</th>
+							<th scope='col'>
+								<span className=''>#</span>{" "}
+							</th>
 							<th scope='col'>Full Name</th>
 							<th scope='col'>Phone Number</th>
 							<th scope='col'>Client Email</th>
@@ -139,27 +304,80 @@ const AdminDashboard = () => {
 							<th scope='col'>Chosen Package</th>
 							<th scope='col'>Package Price (L.E.)</th>
 							<th scope='col'>Package Price Discount (L.E.)</th>
+							<th scope='col'>Before Discount (L.E.)</th>
+							<th scope='col'>Total Amount (L.E.)</th>
 							<th scope='col'>Status</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						{search(HistBookings).map((s, i) => (
-							<tr key={i}>
+							<tr
+								key={i}
+								style={{
+									background:
+										s.status === "Paid"
+											? "green"
+											: s.status === "Cancelled"
+											? "#871402"
+											: "",
+									color:
+										s.status === "Paid" || s.status === "Cancelled"
+											? "white"
+											: "",
+								}}>
 								<td>{i + 1}</td>
 								<td>{s.fullName}</td>
 								<td>{s.phoneNumber}</td>
 								<td>{s.scheduledByUserEmail}</td>
-								<td>{s.quantity}</td>
-								<td>{s.quantity_Children}</td>
+								<td style={{ width: "10px" }}>{s.quantity}</td>
+								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
 								<td>{new Date(s.createdAt).toLocaleString()}</td>
 								<td>{new Date(s.scheduledDate).toLocaleString()}</td>
 								<td>{s.phoneNumber}</td>
 								<td>{s.event}</td>
 								<td>{s.chosenServiceDetails.serviceName}</td>
-								<td>{s.chosenServiceDetails.servicePrice}</td>
-								<td>{s.chosenServiceDetails.servicePriceDiscount}</td>
-								<td>{s.status}</td>
+								<td style={{ width: "15px" }}>
+									{s.chosenServiceDetails.servicePrice}
+								</td>
+								<td style={{ width: "15px" }}>
+									{s.chosenServiceDetails.servicePriceDiscount}
+								</td>
+								<td style={{ width: "15px" }}>{s.totalAmountBeforeDiscount}</td>
+
+								<td
+									style={{
+										background:
+											s.status === "Paid"
+												? "green"
+												: s.status === "Cancelled"
+												? "#871402"
+												: "var(--mainBlue)",
+										color: "white",
+									}}>
+									{s.totalAmount}
+								</td>
+								<td>
+									<select
+										className='form-control'
+										onChange={(e) => handleStatusChange(e, s._id)}
+										style={{
+											border: "#cfcfcf solid 1px",
+											borderRadius: "5px",
+											width: "100%",
+											fontSize: "0.8rem",
+											padding: "0px",
+											// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+										}}>
+										<option>{s.status}</option>
+										{statusValues &&
+											statusValues.map((status, index) => (
+												<option key={index} value={status}>
+													{status}
+												</option>
+											))}
+									</select>
+								</td>
 							</tr>
 						))}
 					</tbody>
@@ -168,21 +386,13 @@ const AdminDashboard = () => {
 		);
 	};
 
-	var todaysReservations =
-		HistBookings &&
-		HistBookings.filter(
-			(i) =>
-				new Date().setHours(0, 0, 0, 0) ===
-				new Date(i.scheduledDate).setHours(0, 0, 0, 0),
-		);
-
 	const showOrdersLength = () => {
 		if (HistBookings && HistBookings.length > 0) {
 			return (
 				<ShowOrderLength>
 					<h3 className='overall-schedules1'>
 						Overall Reservations: {HistBookings && HistBookings.length}{" "}
-						Reservations ({todaysReservations.length} Reservations Today)
+						Reservations
 					</h3>
 				</ShowOrderLength>
 			);
@@ -231,7 +441,16 @@ const AdminDashboard = () => {
 	// 	);
 	// };
 
-	console.log(HistBookings, "HistBookings");
+	// console.log(
+	// 	HistBookings.filter(
+	// 		(i) =>
+	// 			new Date(i.scheduledDate).setHours(0, 0, 0, 0) >=
+	// 				new Date(last7Days).setHours(0, 0, 0, 0) &&
+	// 			new Date(i.scheduledDate).setHours(0, 0, 0, 0) <
+	// 				new Date(today).setHours(0, 0, 0, 0),
+	// 	),
+	// 	"HistBookings",
+	// );
 
 	return (
 		<AdminDashboardWrapper>
