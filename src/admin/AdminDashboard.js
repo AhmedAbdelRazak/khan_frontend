@@ -1,8 +1,9 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { isAuthenticated } from "../auth";
+import { Link } from "react-router-dom";
 import Adminsidebar from "./AdminSideBar/Adminsidebar";
 import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
@@ -327,13 +328,33 @@ const AdminDashboard = () => {
 											: "",
 								}}>
 								<td>{i + 1}</td>
-								<td>{s.fullName}</td>
+								<td>
+									{" "}
+									<Link
+										style={{
+											background:
+												s.status === "Paid"
+													? "green"
+													: s.status === "Cancelled"
+													? "#871402"
+													: "",
+											color:
+												s.status === "Paid" || s.status === "Cancelled"
+													? "white"
+													: "",
+										}}
+										to={`/admin/update-reservation/${s._id}`}>
+										{s.fullName}
+									</Link>{" "}
+								</td>
 								<td>{s.phoneNumber}</td>
 								<td>{s.scheduledByUserEmail}</td>
 								<td style={{ width: "10px" }}>{s.quantity}</td>
 								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
 								<td>{new Date(s.createdAt).toLocaleString()}</td>
-								<td>{new Date(s.scheduledDate).toLocaleString()}</td>
+								<td>
+									{new Date(s.scheduledDate).toLocaleString()} <br />
+								</td>
 								<td>{s.phoneNumber}</td>
 								<td>{s.event}</td>
 								<td>{s.chosenServiceDetails.serviceName}</td>
@@ -370,12 +391,16 @@ const AdminDashboard = () => {
 											// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
 										}}>
 										<option>{s.status}</option>
-										{statusValues &&
-											statusValues.map((status, index) => (
-												<option key={index} value={status}>
-													{status}
-												</option>
-											))}
+										{s.status === "Paid" ? null : (
+											<Fragment>
+												{statusValues &&
+													statusValues.map((status, index) => (
+														<option key={index} value={status}>
+															{status}
+														</option>
+													))}
+											</Fragment>
+										)}
 									</select>
 								</td>
 							</tr>

@@ -390,7 +390,10 @@ const OurTickets = () => {
 										onClick={() => {
 											window.scrollTo({ top: 0, behavior: "smooth" });
 										}}>
-										<img alt={t.serviceName} src={t.thumbnail[0].url} />
+										<img
+											alt={t.serviceName}
+											src={t.thumbnail[0] && t.thumbnail[0].url}
+										/>
 									</Link>
 								</div>
 							))}
@@ -418,7 +421,7 @@ const OurTickets = () => {
 												<img
 													className='imageOffers'
 													alt={t.serviceName}
-													src={t.thumbnail[1].url}
+													src={t.thumbnail[1] && t.thumbnail[1].url}
 												/>
 											</Link>
 										</div>

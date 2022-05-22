@@ -451,8 +451,12 @@ const BookNow = ({ match }) => {
 			return toast.error("Please add country calling code");
 		}
 
-		if (!quantity) {
+		if (!quantity || quantity <= 0) {
 			return toast.error("Please add tickets quantity");
+		}
+
+		if (quantity_Children < 0) {
+			return toast.error("Quantity Should be 0 Or More Than 0");
 		}
 
 		if (Number(quantity) + Number(quantity_Children) > availableTickets()) {
@@ -609,6 +613,29 @@ const BookNow = ({ match }) => {
 					countryCallingCode && (
 						<Button
 							onClick={() => {
+								const confirmationData = {
+									appointmentComment: appointmentComment,
+									scheduledByUserEmail: scheduledByUserEmail,
+									fullName: fullName,
+									phone: phone,
+									chosenDate: chosenDate,
+									event_ocassion: event_ocassion,
+									chosenService_Package: chosenService_Package,
+									serviceDetails: serviceDetails,
+									countryCallingCode: countryCallingCode,
+									quantity: quantity,
+									quantity_Children: quantity_Children,
+									chosenBusStationPrice: chosenBusStationDetails.price,
+									chosenBusStationDetails: chosenBusStationDetails,
+									chosenCouponDetails: chosenCouponDetails,
+									totalAmountBeforeDiscount: totalAmountBeforeDiscount,
+									totalAmount: totalAmount,
+									chosenBusStationTime: busStationChosenTime,
+								};
+								localStorage.setItem(
+									"confirmationData",
+									JSON.stringify(confirmationData),
+								);
 								clickSubmitSchedule_NoPayment();
 								ReactGA.event({
 									category: "Reserve Now Was Clicked",

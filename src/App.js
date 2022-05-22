@@ -43,6 +43,7 @@ import ManageGallery from "./admin/ManageGallery";
 import SingleTicketPage from "./Pages/SingleTicketPage/SingleTicketPage";
 import SingleTicketPageArabic from "./Pages/SingleTicketPage/SingleTicketPageArabic";
 import GalleryPage from "./Pages/GalleryPage";
+import SingleReservationPage from "./admin/SingleReservationPage";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -209,6 +210,12 @@ const App = () => {
 					exact
 					path='/admin/manage-gallery'
 					component={ManageGallery}
+				/>
+
+				<AdminRoute
+					exact
+					path='/admin/update-reservation/:reservationId'
+					component={SingleReservationPage}
 				/>
 			</Switch>
 			<Footer />
