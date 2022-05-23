@@ -194,6 +194,22 @@ const Navbar = ({ history, language, setLanguage }) => {
 						</React.Fragment>
 					)}
 
+					{isAuthenticated() && isAuthenticated().user.role === 2 && (
+						<React.Fragment>
+							<li
+								onClick={() => {
+									window.scrollTo({ top: 0, behavior: "smooth" });
+								}}>
+								<Link
+									className='DashboardStyling'
+									style={isActiveItemsToRight(history, "/clerk/dashboard")}
+									to='/clerk/dashboard'>
+									Clerk Dashboard
+								</Link>
+							</li>
+						</React.Fragment>
+					)}
+
 					{!isAuthenticated() && (
 						<Fragment>
 							<li

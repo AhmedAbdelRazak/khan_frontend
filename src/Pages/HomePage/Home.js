@@ -29,10 +29,10 @@ const Home = () => {
 		<HomePageWrapper>
 			<Helmet>
 				<meta charSet='utf-8' />
-				<title>Khan Khadija | The Best Resort In Egypt</title>
+				<title>Khan Khadija Resort | The Best Resort In Egypt</title>
 				<meta
 					name='description'
-					content='Welcome to Infinite Apps, your number one source for web design and development. We are committed to offering an innovative platform essential to helping small businesses succeed with quality website designs with a focus on Customer Satisfaction.'
+					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
 				/>
 				<link rel='canonical' href='https://khankhadija.com' />
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />

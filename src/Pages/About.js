@@ -8,6 +8,7 @@ import ReactGA from "react-ga";
 import Helmet from "react-helmet";
 import { getAbouts } from "../admin/apiAdmin";
 import KhanMap from "./HomePage/KhanMap";
+import PowerBySnippet from "./PowerBySnippet";
 
 const About = () => {
 	const [aboutus, setAboutUs] = useState({});
@@ -41,7 +42,7 @@ const About = () => {
 				<title>Khan Khadija | About Us</title>
 				<meta
 					name='description'
-					content="This website still under development by www.infinite-apps.com'. Infinite Apps can help with your SEO (Search Engine Optimization) so you can market for your business and rank higher with Google. If you are interested, Please contact infinite apps 9099914386 (www.infinite-apps.com)"
+					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
 				/>
 				<link rel='canonical' href='http://infinite-apps.com' />
 			</Helmet>
@@ -76,6 +77,7 @@ const About = () => {
 			</div>
 
 			<KhanMap />
+			<PowerBySnippet />
 		</AboutPageWrapper>
 	);
 };

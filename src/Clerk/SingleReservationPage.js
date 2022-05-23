@@ -6,8 +6,8 @@ import styled from "styled-components";
 import { isAuthenticated } from "../auth";
 import {
 	readSingleOrder,
-	getStatusValues,
-	updateOrderStatus,
+	getStatusValuesEmployee,
+	updateOrderStatusEmployee,
 	UpdateScheduledReservation,
 	getTicketsManagement,
 	allLoyaltyPointsAndStoreStatus,
@@ -102,7 +102,7 @@ const SingleReservationPage = (props) => {
 	};
 
 	const loadStatusValues = () => {
-		getStatusValues(user._id, token).then((data) => {
+		getStatusValuesEmployee(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -221,14 +221,16 @@ const SingleReservationPage = (props) => {
 	);
 
 	const handleStatusChange = (e, orderId) => {
-		updateOrderStatus(user._id, token, orderId, e.target.value).then((data) => {
-			if (data.error) {
-				console.log("Status update failed");
-			} else {
-				window.scrollTo({ top: 0, behavior: "smooth" });
-				window.location.reload(false);
-			}
-		});
+		updateOrderStatusEmployee(user._id, token, orderId, e.target.value).then(
+			(data) => {
+				if (data.error) {
+					console.log("Status update failed");
+				} else {
+					window.scrollTo({ top: 0, behavior: "smooth" });
+					window.location.reload(false);
+				}
+			},
+		);
 	};
 
 	// const showInput = (key, value) => (
@@ -497,13 +499,13 @@ const SingleReservationPage = (props) => {
 					<div className='row'>
 						<div className='col-md-10 mt-3 mx-auto'>
 							<Link
-								to='/admin/dashboard'
+								to='/clerk/dashboard'
 								onClick={() => {
 									window.scrollTo({ top: 0, behavior: "smooth" });
 								}}>
 								<div className='backToAdminDashboard'>
 									<i className='fas fa-arrow-alt-circle-left mr-3'></i>
-									Back to Admin Dashboard
+									Back to Clerk Dashboard
 								</div>
 							</Link>
 						</div>

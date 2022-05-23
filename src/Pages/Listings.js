@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import OurTickets from "./HomePage/OurTickets";
 import ReactGA from "react-ga";
+import Helmet from "react-helmet";
+import PowerBySnippet from "./PowerBySnippet";
 
 const Listings = () => {
 	useEffect(() => {
@@ -21,7 +23,18 @@ const Listings = () => {
 
 	return (
 		<LinstingsWrapper className='my-5'>
+			<Helmet>
+				<meta charSet='utf-8' />
+				<title>Khan Khadija Resort | Available Tickets And Offers</title>
+				<meta
+					name='description'
+					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
+				/>
+				<link rel='canonical' href='https://khankhadija.com' />
+				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
+			</Helmet>
 			<OurTickets />
+			<PowerBySnippet />
 		</LinstingsWrapper>
 	);
 };

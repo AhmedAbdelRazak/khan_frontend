@@ -27,6 +27,7 @@ const Adminsidebar = ({
 	match,
 }) => {
 	const [allTickets, setAllTickets] = useState([]);
+	const [ticketSlug, setTicketSlug] = useState([]);
 	const [click, setClick] = useState(true);
 	const [clickMenu, setClickMenu] = useState(true);
 	// eslint-disable-next-line
@@ -43,6 +44,7 @@ const Adminsidebar = ({
 				console.log(data.error);
 			} else {
 				setAllTickets(data.map((serviceId) => serviceId._id));
+				setTicketSlug(data.map((s) => s.serviceName.split(" ").join("-")));
 			}
 		});
 	};
@@ -351,6 +353,28 @@ const Adminsidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
+								to={`/admin/book-for-a-client/${ticketSlug[0]}`}
+								className='sidebar-link'
+								style={isActive(
+									history,
+									`/admin/book-for-a-client/:ticketName`,
+								)}
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment>Reserve For A Client</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						{/* <li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
 								to={`/admin/dev-payments`}
 								className='sidebar-link'
 								style={isActive(history, `/admin/dev-payments`)}
@@ -362,7 +386,7 @@ const Adminsidebar = ({
 									<React.Fragment>Development and Payments</React.Fragment>
 								) : null}
 							</Link>
-						</li>
+						</li> */}
 					</ul>
 				</SideWrapper>
 			</div>

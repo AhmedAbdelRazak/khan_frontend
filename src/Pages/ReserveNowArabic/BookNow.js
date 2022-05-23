@@ -443,16 +443,16 @@ const BookNow = ({ match }) => {
 			return toast.error("الرجاء ادخال رقم الهاتف");
 		}
 
-		if (!scheduledByUserEmail) {
-			return toast.error("يرجى ملء عنوان البريد الإلكتروني");
-		}
-
 		if (!countryCallingCode) {
 			return toast.error("الرجاء إضافة رمز الاتصال بالدولة");
 		}
 
-		if (!quantity) {
+		if (!quantity || quantity <= 0) {
 			return toast.error("الرجاء إضافة كمية التذاكر");
+		}
+
+		if (quantity_Children < 0) {
+			return toast.error("Quantity Should be 0 Or More Than 0");
 		}
 
 		if (Number(quantity) + Number(quantity_Children) > availableTickets()) {
@@ -483,7 +483,10 @@ const BookNow = ({ match }) => {
 			chosenCoupon: chosenCouponDetails,
 			availableCoupon: availableCoupon,
 			chosenBusStation: chosenBusStationDetails,
-			chosenBusStationTime: busStationChosenTime,
+			chosenBusStationTime:
+				chosenBusStationDetails.address === "NO BUS NEEDED"
+					? "00:00"
+					: busStationChosenTime,
 			bookingSource: "Online",
 			totalAmount: totalAmount,
 			totalAmountBeforeDiscount: totalAmountBeforeDiscount,

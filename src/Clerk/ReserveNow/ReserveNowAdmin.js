@@ -14,15 +14,27 @@ import {
 	createReservation,
 	getPreviousBookings,
 } from "../../apiCore";
-import { getCoupons, getBusStations } from "../../admin/apiAdmin";
+import { getCoupons, getBusStations } from "../apiAdmin";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
 // eslint-disable-next-line
 import PackagePhotos from "./PackagePhotos";
+// eslint-disable-next-line
+import Adminsidebar from "../AdminSideBar/Adminsidebar";
+// eslint-disable-next-line
+import DarkBG from "../AdminSideBar/DarkBG";
 const { Step } = Steps;
 
-const BookNow = ({ match }) => {
+const ReserveNowAdmin = ({ match }) => {
+	// eslint-disable-next-line
+	const [click2, setClick2] = useState(false);
+	const [clickMenu2, setClickMenu2] = useState(false);
+
+	useEffect(() => {
+		setClickMenu2(click2);
+	}, [click2, clickMenu2]);
+
 	const [current, setCurrent] = useState(0);
 	// eslint-disable-next-line
 	const [reservationDataLocalStor, setReservationDataLocalStor] = useState({});
@@ -479,7 +491,7 @@ const BookNow = ({ match }) => {
 			chosenPackage_Stock: ticketsManagement ? ticketsManagement : null,
 			scheduledDate: chosenDate,
 			status: "Not Paid",
-			bookedFrom: "Online",
+			bookedFrom: "Booked From Office",
 			chosenCoupon: chosenCouponDetails,
 			availableCoupon: availableCoupon,
 			chosenBusStation: chosenBusStationDetails,
@@ -487,7 +499,7 @@ const BookNow = ({ match }) => {
 				chosenBusStationDetails.address === "NO BUS NEEDED"
 					? "00:00"
 					: busStationChosenTime,
-			bookingSource: "Online",
+			bookingSource: "Booked From Office",
 			totalAmount: totalAmount,
 			totalAmountBeforeDiscount: totalAmountBeforeDiscount,
 		};
@@ -514,6 +526,17 @@ const BookNow = ({ match }) => {
 
 	return (
 		<BookNowWrapper>
+			{click2 && clickMenu2 ? (
+				<DarkBG setClick2={setClick2} setClickMenu2={setClickMenu2} />
+			) : null}
+			<div className='mx-auto'>
+				<Adminsidebar
+					click2={click2}
+					setClick2={setClick2}
+					clickMenu2={clickMenu2}
+					setClickMenu2={setClickMenu2}
+				/>
+			</div>
 			<Steps current={current}>
 				{steps.map((item) => (
 					<Step key={item.title} title={item.title} />
@@ -661,7 +684,7 @@ const BookNow = ({ match }) => {
 	);
 };
 
-export default BookNow;
+export default ReserveNowAdmin;
 
 const BookNowWrapper = styled.div`
 	margin-top: 30px;

@@ -9,6 +9,7 @@ import HeroComponentArabic from "./HeroComponent_Arabic";
 import KhanGalleryArabic from "./KhanGallery_Arabic";
 import OurTicketsArabic from "./OurTickets_Arabic";
 import ReactGA from "react-ga";
+import Helmet from "react-helmet";
 
 const Home_Arabic = ({ language }) => {
 	useEffect(() => {
@@ -26,6 +27,16 @@ const Home_Arabic = ({ language }) => {
 
 	return (
 		<HomePageWrapper>
+			<Helmet>
+				<meta charSet='utf-8' />
+				<title>منتجع خان خديجة | أفضل منتجع في مصر</title>
+				<meta
+					name='description'
+					content='خان خديجة أفضل منتجع في مصر. إذا كنت تبحث عن وقت للشفاء والمرح ، فيجب أن يكون منتجع خان خديجة هو خيارك الأول. تم تشغيل موقع منتجع خان خديجة بواسطة www.infinite-apps.com'
+				/>
+				<link rel='canonical' href='https://khankhadija.com' />
+				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
+			</Helmet>
 			<span className='deskTopHero'>
 				<HeroComponentArabic language={language} />
 			</span>

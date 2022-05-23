@@ -519,6 +519,54 @@ const Sidebar = ({
 							</React.Fragment>
 						)}
 
+						{isAuthenticated() && isAuthenticated().user.role === 2 && (
+							<React.Fragment>
+								{language === "Arabic" ? (
+									<li
+										className='nav-item ml-3 mt-3'
+										onClick={() => {
+											window.scrollTo({ top: 0, behavior: "smooth" });
+										}}>
+										<Link
+											style={{
+												fontWeight: "bold",
+												color: "var(--orangePrimary)",
+											}}
+											className='nav-link '
+											to='/clerk/dashboard'
+											onClick={() => {
+												setClickMenu(false);
+												setClick(false);
+											}}>
+											<span className='linkStyling linkTextArabic'>
+												لوحة التحكم
+											</span>
+										</Link>
+									</li>
+								) : (
+									<li
+										className='nav-item ml-3 mt-3'
+										onClick={() => {
+											window.scrollTo({ top: 0, behavior: "smooth" });
+										}}>
+										<Link
+											style={{
+												fontWeight: "bold",
+												color: "var(--orangePrimary)",
+											}}
+											className='nav-link '
+											to='/clerk/dashboard'
+											onClick={() => {
+												setClickMenu(false);
+												setClick(false);
+											}}>
+											<span className='linkStyling'>Clerk Dashboard</span>
+										</Link>
+									</li>
+								)}
+							</React.Fragment>
+						)}
+
 						{!isAuthenticated() && (
 							<Fragment>
 								<li

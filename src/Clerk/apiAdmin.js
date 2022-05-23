@@ -423,6 +423,25 @@ export const getPreviousBookingsAdmin = (userId, token) => {
 		.catch((err) => console.log(err));
 };
 
+export const getPreviousBookingsEmployee = (userId, token) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/all-reservations-employee/${userId}`,
+		{
+			method: "GET",
+			headers: {
+				// content type?
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const getCoupons = async () =>
 	await axios.get(`${process.env.REACT_APP_API_URL}/coupons`);
 
@@ -606,9 +625,45 @@ export const getStatusValues = (userId, token) => {
 		.catch((err) => console.log(err));
 };
 
+export const getStatusValuesEmployee = (userId, token) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/order/status-values-employee/${userId}`,
+		{
+			method: "GET",
+			headers: {
+				Accept: "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const updateOrderStatus = (userId, token, orderId, status) => {
 	return fetch(
 		`${process.env.REACT_APP_API_URL}/order/${orderId}/status/${userId}`,
+		{
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ status, orderId }),
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
+export const updateOrderStatusEmployee = (userId, token, orderId, status) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/order/${orderId}/status-employee/${userId}`,
 		{
 			method: "PUT",
 			headers: {

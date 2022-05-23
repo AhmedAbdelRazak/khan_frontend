@@ -82,10 +82,10 @@ const Login = ({ history }) => {
 			if (redirectToReferrer) {
 				if (user && user.role === 1) {
 					return <Redirect to='/admin/dashboard' />;
-				} else if (user && user.role === 1000) {
-					return <Redirect to='/business-dashboard' />;
+				} else if (user && user.role === 2) {
+					return <Redirect to='/clerk/dashboard' />;
 				} else {
-					return <Redirect to='/pricing' />;
+					return <Redirect to='/' />;
 				}
 			}
 		}

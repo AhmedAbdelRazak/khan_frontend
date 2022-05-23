@@ -18,10 +18,15 @@ import Register from "./Pages/Register";
 import BookNow from "./Pages/ReserveNow/BookNow";
 import BookNowArabic from "./Pages/ReserveNowArabic/BookNow";
 import SuccessfullyPaid from "./Pages/ReserveNow/SuccessfullyPaid";
+import SuccessfullyPaidArabic from "./Pages/ReserveNowArabic/SuccessfullyPaid";
+import ReserveNowAdmin from "./admin/ReserveNow/ReserveNowAdmin";
+import ReserveNowClerk from "./Clerk/ReserveNow/ReserveNowAdmin";
 
 //admin routes
 import AdminRoute from "./auth/AdminRoute";
+import EmployeeRoute from "./auth/EmployeeRoute";
 import AdminDashboard from "./admin/AdminDashboard";
+import ClerkDashboard from "./Clerk/AdminDashboard";
 import AddTicket from "./admin/AddTicket";
 import UpdateTicket from "./admin/UpdateTicket";
 import AddTicketManagement from "./admin/AddTicketManagement";
@@ -44,6 +49,7 @@ import SingleTicketPage from "./Pages/SingleTicketPage/SingleTicketPage";
 import SingleTicketPageArabic from "./Pages/SingleTicketPage/SingleTicketPageArabic";
 import GalleryPage from "./Pages/GalleryPage";
 import SingleReservationPage from "./admin/SingleReservationPage";
+import SingleReservationPageClerk from "./Clerk/SingleReservationPage";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -117,11 +123,20 @@ const App = () => {
 				<Route path='/login' exact component={Login} />
 				<Route path='/signup' exact component={Register} />
 				<Route path='/khan-khadija-gallery' exact component={GalleryPage} />
-				<Route
-					path='/ticket-successfully-reserved'
-					exact
-					component={SuccessfullyPaid}
-				/>
+
+				{language === "Arabic" ? (
+					<Route
+						path='/ticket-successfully-reserved'
+						exact
+						component={SuccessfullyPaidArabic}
+					/>
+				) : (
+					<Route
+						path='/ticket-successfully-reserved'
+						exact
+						component={SuccessfullyPaid}
+					/>
+				)}
 
 				{language === "Arabic" ? (
 					<Route path='/book-now/:ticketName' exact component={BookNowArabic} />
@@ -145,6 +160,13 @@ const App = () => {
 				)}
 
 				<AdminRoute path='/admin/dashboard' exact component={AdminDashboard} />
+
+				<AdminRoute
+					path='/admin/book-for-a-client/:ticketName'
+					exact
+					component={ReserveNowAdmin}
+				/>
+
 				<AdminRoute path='/admin/create-a-ticket' exact component={AddTicket} />
 				<AdminRoute
 					path='/admin/tickets-count'
@@ -216,6 +238,22 @@ const App = () => {
 					exact
 					path='/admin/update-reservation/:reservationId'
 					component={SingleReservationPage}
+				/>
+
+				<EmployeeRoute
+					exact
+					path='/clerk/update-reservation/:reservationId'
+					component={SingleReservationPageClerk}
+				/>
+				<EmployeeRoute
+					path='/clerk/book-for-a-client/:ticketName'
+					exact
+					component={ReserveNowClerk}
+				/>
+				<EmployeeRoute
+					path='/clerk/dashboard'
+					exact
+					component={ClerkDashboard}
 				/>
 			</Switch>
 			<Footer />
