@@ -13,6 +13,7 @@ import {
 	updateOrderStatus,
 	getStatusValues,
 } from "./apiAdmin";
+import ExecutiveSummary from "./ExecutiveSummary";
 // import ReactExport from "react-export-excel";
 
 // const ExcelFile = ReactExport.ExcelFile;
@@ -185,85 +186,6 @@ const AdminDashboard = () => {
 	const allReservationsDetails = () => {
 		return (
 			<Summary>
-				<div>
-					<span
-						style={{
-							fontSize: "1.3rem",
-							fontWeight: "bold",
-							marginBottom: "10px",
-							marginLeft: "10px",
-							color: "var(--mainBlue)",
-						}}>
-						Filters:
-					</span>
-					<br />
-					<button
-						onClick={() => {
-							setClickedButton("Select All");
-							setSelectedDate(today);
-						}}
-						style={{
-							color: "white",
-							backgroundColor: "var(--mainBlue)",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						Select All
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("Today");
-							setSelectedDate(today);
-						}}
-						style={{
-							color: "black",
-							backgroundColor: "var(--orangePrimary)",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						Today
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("Yesterday");
-							setSelectedDate(yesterday);
-						}}
-						style={{
-							color: "black",
-							backgroundColor: "var(--babyBlue)",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						Yesterday
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("This Week");
-							setSelectedDate(next7Days);
-						}}
-						style={{
-							color: "black",
-							backgroundColor: "#d9f9fe",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						This Week
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("This Month");
-							setSelectedDate(next30Days);
-						}}
-						style={{
-							color: "white",
-							backgroundColor: "#fc3e84",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						This Month
-					</button>
-				</div>
-
 				<div className=' mb-3 form-group mx-3 text-center'>
 					<label
 						className='mt-3 mx-3'
@@ -411,20 +333,20 @@ const AdminDashboard = () => {
 		);
 	};
 
-	const showOrdersLength = () => {
-		if (HistBookings && HistBookings.length > 0) {
-			return (
-				<ShowOrderLength>
-					<h3 className='overall-schedules1'>
-						Overall Reservations: {HistBookings && HistBookings.length}{" "}
-						Reservations
-					</h3>
-				</ShowOrderLength>
-			);
-		} else {
-			return <h1 className='text-danger'>No Schedules</h1>;
-		}
-	};
+	// const showOrdersLength = () => {
+	// 	if (HistBookings && HistBookings.length > 0) {
+	// 		return (
+	// 			<ShowOrderLength>
+	// 				<h3 className='overall-schedules1'>
+	// 					Overall Reservations: {HistBookings && HistBookings.length}{" "}
+	// 					Reservations
+	// 				</h3>
+	// 			</ShowOrderLength>
+	// 		);
+	// 	} else {
+	// 		return <h1 className='text-danger'>No Schedules</h1>;
+	// 	}
+	// };
 
 	// const DownloadExcel = () => {
 	// 	return (
@@ -504,7 +426,88 @@ const AdminDashboard = () => {
 				</div>
 			) : (
 				<React.Fragment>
-					{showOrdersLength()}
+					<div className='mx-auto text-center mt-3 mb-5'>
+						<span
+							style={{
+								fontSize: "1.3rem",
+								fontWeight: "bold",
+								marginBottom: "10px",
+								marginLeft: "10px",
+								color: "var(--mainBlue)",
+							}}>
+							Filters:
+						</span>
+						<br />
+						<button
+							onClick={() => {
+								setClickedButton("Select All");
+								setSelectedDate(today);
+							}}
+							style={{
+								color: "white",
+								backgroundColor: "var(--mainBlue)",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							Select All
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("Today");
+								setSelectedDate(today);
+							}}
+							style={{
+								color: "black",
+								backgroundColor: "var(--orangePrimary)",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							Today
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("Yesterday");
+								setSelectedDate(yesterday);
+							}}
+							style={{
+								color: "black",
+								backgroundColor: "var(--babyBlue)",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							Yesterday
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("This Week");
+								setSelectedDate(next7Days);
+							}}
+							style={{
+								color: "black",
+								backgroundColor: "#d9f9fe",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							This Week
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("This Month");
+								setSelectedDate(next30Days);
+							}}
+							style={{
+								color: "white",
+								backgroundColor: "#fc3e84",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							This Month
+						</button>
+					</div>
+					<ExecutiveSummary historicalBooking={HistBookings} />
+					<hr />
+
+					{/* {showOrdersLength()} */}
 					<br />
 					{allReservationsDetails()}
 				</React.Fragment>
@@ -518,6 +521,10 @@ export default AdminDashboard;
 const AdminDashboardWrapper = styled.div`
 	margin-bottom: 100px;
 	min-height: 600px;
+
+	hr {
+		margin: 0px 200px;
+	}
 `;
 
 const Summary = styled.div`
@@ -531,6 +538,7 @@ const Summary = styled.div`
 	}
 `;
 
+// eslint-disable-next-line
 const ShowOrderLength = styled.div`
 	.overall-schedules1 {
 		/* font-style: italic; */

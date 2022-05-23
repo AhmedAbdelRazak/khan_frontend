@@ -38,13 +38,14 @@ const PackagePhotos2 = ({ serviceDetails }) => {
 export default PackagePhotos2;
 
 const PackagePhotosWrapper = styled.div`
-	margin-bottom: 50px;
+	margin-bottom: 40px;
+	margin-top: 5px;
 	text-align: center;
 	.carousel-root {
 		/* border: 2px solid grey; */
-		border-radius: 15px;
+		border-radius: 10px;
 		object-fit: cover;
-		box-shadow: 3px 2px 3px 2px rgba(0, 0, 0, 0.5);
+		box-shadow: 3px 2px 3px 2px rgba(0, 0, 0, 0.1);
 		text-align: center;
 	}
 	/* .control-dots li {
@@ -57,13 +58,21 @@ const PackagePhotosWrapper = styled.div`
 	} */
 
 	.slider img {
-		width: 920px;
-		height: 350px;
+		width: 70%;
+		height: 70%;
 		object-fit: cover !important;
 	}
 
 	.thumb img {
 		height: 50px !important;
 		object-fit: cover !important;
+	}
+
+	@media (max-width: 1200px) {
+		.slider img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover !important;
+		}
 	}
 `;
