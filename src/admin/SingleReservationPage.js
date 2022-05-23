@@ -308,7 +308,7 @@ const SingleReservationPage = (props) => {
 
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			localStorage.removeItem("barber");
-			window.location.reload(false);
+			// window.location.reload(false);
 		});
 	};
 
