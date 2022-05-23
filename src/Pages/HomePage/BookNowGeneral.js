@@ -358,9 +358,9 @@ const BookNowGeneral = () => {
 							</span>
 						</span>
 					}>
-					<div className='col-md-10 mx-auto'>
+					<div className='col-md-12 mx-auto'>
 						<div className='row countryCodePhone'>
-							<div className='col-md-3'>
+							<div className='col-4'>
 								<label
 									className='textResizeMain2 mx-auto text-center'
 									style={{
@@ -376,9 +376,10 @@ const BookNowGeneral = () => {
 									value={countryCallingCode}
 									onChange={handleCountryCode}
 									required
+									readOnly
 								/>
 							</div>
-							<div className='col-md-9'>
+							<div className='col-8'>
 								<label
 									className='textResizeMain2'
 									style={{
@@ -395,7 +396,7 @@ const BookNowGeneral = () => {
 									className='form-control w-100 mx-auto  '
 									value={phoneNumber}
 									onChange={handlePhone}
-									placeholder='(**Required) Numbers Only'
+									placeholder='Numbers Only'
 									required
 								/>
 							</div>
@@ -403,7 +404,7 @@ const BookNowGeneral = () => {
 						<div
 							className='mt-2'
 							style={{ fontWeight: "bold", fontSize: "0.8rem" }}>
-							KW Code: +965, EGY Code: +2, Turkey Code: +90, etc...
+							EGY Code: +2
 						</div>
 					</div>
 				</Panel>
@@ -568,9 +569,9 @@ const BookNowGeneralWrapper = styled.div`
 		display: none;
 	}
 
-	.countryCodePhone {
+	/* .countryCodePhone {
 		margin-left: 50px;
-	}
+	} */
 
 	i {
 		color: black !important;
@@ -608,9 +609,9 @@ const BookNowGeneralWrapper = styled.div`
 			width: 7% !important;
 			height: 7% !important;
 		}
-		.countryCodePhone {
+		/* .countryCodePhone {
 			margin: 6px 35px;
-		}
+		} */
 
 		.mainTitles {
 			font-size: 0.8rem;

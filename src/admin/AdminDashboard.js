@@ -347,7 +347,7 @@ const AdminDashboard = () => {
 										{s.fullName}
 									</Link>{" "}
 								</td>
-								<td>{s.phoneNumber}</td>
+								<td>+{s.phoneNumber}</td>
 								<td>{s.scheduledByUserEmail}</td>
 								<td style={{ width: "10px" }}>{s.quantity}</td>
 								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
@@ -355,7 +355,7 @@ const AdminDashboard = () => {
 								<td>
 									{new Date(s.scheduledDate).toLocaleString()} <br />
 								</td>
-								<td>{s.phoneNumber}</td>
+								<td>+{s.phoneNumber}</td>
 								<td>{s.event}</td>
 								<td>{s.chosenServiceDetails.serviceName}</td>
 								<td style={{ width: "15px" }}>
@@ -533,19 +533,19 @@ const Summary = styled.div`
 
 const ShowOrderLength = styled.div`
 	.overall-schedules1 {
-		font-style: italic;
+		/* font-style: italic; */
 		font-size: 1.5rem;
 		text-align: center;
 		font-weight: bold;
 		margin-top: 30px;
-		background-color: var(--primaryColor);
+		background-color: var(--orangePrimary);
 		padding: 7px;
-		border-radius: 20px;
+		border-radius: 10px;
 		color: white;
 		margin-right: 400px;
 		margin-left: 400px;
-		border: 2px solid black;
-		box-shadow: 3px 2px 2px 2px rgb(0, 0, 0, 0.3);
+		/* border: 2px solid black; */
+		box-shadow: 3px 2px 2px 2px rgb(0, 0, 0, 0.2);
 	}
 
 	@media (max-width: 1100px) {

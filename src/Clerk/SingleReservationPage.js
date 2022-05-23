@@ -609,7 +609,7 @@ const SingleReservationPage = (props) => {
 									</li>
 
 									<li className='list-group-item'>
-										Customer Phone #: {singleOrder && singleOrder.phoneNumber}
+										Customer Phone #: +{singleOrder && singleOrder.phoneNumber}
 									</li>
 
 									<li className='list-group-item'>

@@ -349,7 +349,7 @@ const AdminDashboard = () => {
 										{s.fullName}
 									</Link>{" "}
 								</td>
-								<td>{s.phoneNumber}</td>
+								<td>+{s.phoneNumber}</td>
 								<td>{s.scheduledByUserEmail}</td>
 								<td style={{ width: "10px" }}>{s.quantity}</td>
 								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
@@ -357,7 +357,7 @@ const AdminDashboard = () => {
 								<td>
 									{new Date(s.scheduledDate).toLocaleString()} <br />
 								</td>
-								<td>{s.phoneNumber}</td>
+								<td>+{s.phoneNumber}</td>
 								<td>{s.event}</td>
 								<td>{s.chosenServiceDetails.serviceName}</td>
 								<td style={{ width: "15px" }}>

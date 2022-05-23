@@ -357,9 +357,9 @@ const BookNowGeneral_Arabic = ({ language }) => {
 							</span>
 						</span>
 					}>
-					<div className='col-md-10 mx-auto'>
+					<div className='col-md-12 mx-auto'>
 						<div className='row countryCodePhone'>
-							<div className='col-md-4'>
+							<div className='col-4'>
 								<label
 									className='textResizeMain2 mx-auto text-center'
 									style={{
@@ -367,7 +367,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 										fontSize: "1rem",
 										color: "#00407f",
 									}}>
-									الرقم الدولي
+									كود
 								</label>
 								<input
 									type='text'
@@ -375,9 +375,10 @@ const BookNowGeneral_Arabic = ({ language }) => {
 									value={countryCallingCode}
 									onChange={handleCountryCode}
 									required
+									readOnly
 								/>
 							</div>
-							<div className='col-md-8'>
+							<div className='col-8'>
 								<label
 									className='textResizeMain2'
 									style={{
@@ -394,7 +395,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 									className='form-control w-100 mx-auto  '
 									value={phoneNumber}
 									onChange={handlePhone}
-									placeholder='(**Required) Numbers Only'
+									placeholder='أرقام فقط'
 									required
 								/>
 							</div>
@@ -569,9 +570,9 @@ const BookNowGeneralWrapper = styled.div`
 		display: none;
 	}
 
-	.countryCodePhone {
+	/* .countryCodePhone {
 		margin-left: 50px;
-	}
+	} */
 
 	.BookingIcons {
 		height: 4%;
@@ -606,9 +607,9 @@ const BookNowGeneralWrapper = styled.div`
 			height: 7% !important;
 		}
 
-		.countryCodePhone {
+		/* .countryCodePhone {
 			margin: 6px 35px;
-		}
+		} */
 
 		.mainTitles {
 			font-size: 0.8rem;
