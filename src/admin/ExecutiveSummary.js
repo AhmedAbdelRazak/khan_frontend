@@ -57,25 +57,39 @@ const ExecutiveSummary = ({ historicalBooking }) => {
 	const TotalOverAllTickets =
 		Number(overallChildrenCount) + Number(overallAdultCount);
 
-	console.log(overallAdultsArray, "OverallAdultCount");
-	console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
-	console.log(overallAdultCount, "Adults Total Count");
-	console.log(overallChildrenCount, "Children Total Count");
-	console.log(totalPaidAmount, "Total Paid Amount");
-	console.log(historicalBooking, "historicalBooking");
-	console.log(scheduledDatesArray, "ScheduledDates");
-	console.log(scheduledDatesArray[0], "MaxDate");
-	console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
+	// console.log(overallAdultsArray, "OverallAdultCount");
+	// console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
+	// console.log(overallAdultCount, "Adults Total Count");
+	// console.log(overallChildrenCount, "Children Total Count");
+	// console.log(totalPaidAmount, "Total Paid Amount");
+	// console.log(historicalBooking, "historicalBooking");
+	// console.log(scheduledDatesArray, "ScheduledDates");
+	// console.log(scheduledDatesArray[0], "MaxDate");
+	// console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
 
 	return (
 		<ExecutiveSummaryWrapper>
 			<div className='container'>
 				<h4>
 					Selected Date: From{" "}
-					{new Date(
-						scheduledDatesArray[scheduledDatesArray.length - 1],
-					).toLocaleDateString()}{" "}
-					To {new Date(scheduledDatesArray[0]).toLocaleDateString()}
+					{dateFormat(
+						new Date(
+							scheduledDatesArray[scheduledDatesArray.length - 1],
+						).toLocaleString(),
+					)}{" "}
+					To {dateFormat(new Date(scheduledDatesArray[0]).toLocaleString())}
 				</h4>
 
 				<div className='row text-center'>

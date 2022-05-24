@@ -183,6 +183,18 @@ const AdminDashboard = () => {
 		});
 	};
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	const allReservationsDetails = () => {
 		return (
 			<Summary>
@@ -234,99 +246,110 @@ const AdminDashboard = () => {
 					</thead>
 
 					<tbody>
-						{search(HistBookings).map((s, i) => (
-							<tr
-								key={i}
-								style={{
-									background:
-										s.status === "Paid"
-											? "green"
-											: s.status === "Cancelled"
-											? "#871402"
-											: "",
-									color:
-										s.status === "Paid" || s.status === "Cancelled"
-											? "white"
-											: "",
-								}}>
-								<td>{i + 1}</td>
-								<td>
-									{" "}
-									<Link
-										style={{
-											background:
-												s.status === "Paid"
-													? "green"
-													: s.status === "Cancelled"
-													? "#871402"
-													: "",
-											color:
-												s.status === "Paid" || s.status === "Cancelled"
-													? "white"
-													: "",
-										}}
-										to={`/admin/update-reservation/${s._id}`}>
-										{s.fullName}
-									</Link>{" "}
-								</td>
-								<td>+{s.phoneNumber}</td>
-								<td>{s.scheduledByUserEmail}</td>
-								<td style={{ width: "10px" }}>{s.quantity}</td>
-								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
-								<td>{new Date(s.createdAt).toLocaleString()}</td>
-								<td>
-									{new Date(s.scheduledDate).toLocaleString()} <br />
-								</td>
-								<td>+{s.phoneNumber}</td>
-								<td>{s.event}</td>
-								<td>{s.chosenServiceDetails.serviceName}</td>
-								<td style={{ width: "15px" }}>
-									{s.chosenServiceDetails.servicePrice}
-								</td>
-								<td style={{ width: "15px" }}>
-									{s.chosenServiceDetails.servicePriceDiscount}
-								</td>
-								<td style={{ width: "15px" }}>{s.totalAmountBeforeDiscount}</td>
-
-								<td
+						{search(HistBookings).map((s, i) => {
+							return (
+								<tr
+									key={i}
 									style={{
 										background:
 											s.status === "Paid"
 												? "green"
 												: s.status === "Cancelled"
 												? "#871402"
-												: "var(--mainBlue)",
-										color: "white",
+												: "",
+										color:
+											s.status === "Paid" || s.status === "Cancelled"
+												? "white"
+												: "",
 									}}>
-									{s.totalAmount}
-								</td>
-								<td>
-									<select
-										className='form-control'
-										onChange={(e) => handleStatusChange(e, s._id)}
-										style={{
-											border: "#cfcfcf solid 1px",
-											borderRadius: "5px",
-											width: "100%",
-											fontSize: "0.8rem",
-											padding: "0px",
-											// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-										}}>
-										<option>{s.status}</option>
-										{s.status === "Paid" ? null : (
-											<Fragment>
-												{statusValues &&
-													statusValues.map((status, index) => (
-														<option key={index} value={status}>
-															{status}
-														</option>
-													))}
-											</Fragment>
+									<td>{i + 1}</td>
+									<td>
+										{" "}
+										<Link
+											style={{
+												background:
+													s.status === "Paid"
+														? "green"
+														: s.status === "Cancelled"
+														? "#871402"
+														: "",
+												color:
+													s.status === "Paid" || s.status === "Cancelled"
+														? "white"
+														: "",
+											}}
+											to={`/admin/update-reservation/${s._id}`}>
+											{s.fullName}
+										</Link>{" "}
+									</td>
+									<td>+{s.phoneNumber}</td>
+									<td>{s.scheduledByUserEmail}</td>
+									<td style={{ width: "10px" }}>{s.quantity}</td>
+									<td style={{ width: "10px" }}>{s.quantity_Children}</td>
+									<td>
+										{dateFormat(
+											new Date(s.createdAt).toLocaleString("en-US", {
+												timeZone: "Africa/Cairo",
+											}),
 										)}
-									</select>
-								</td>
-							</tr>
-						))}
+									</td>
+									<td>
+										{dateFormat(new Date(s.scheduledDate).toLocaleString())}{" "}
+										<br />
+									</td>
+									<td>+{s.phoneNumber}</td>
+									<td>{s.event}</td>
+									<td>{s.chosenServiceDetails.serviceName}</td>
+									<td style={{ width: "15px" }}>
+										{s.chosenServiceDetails.servicePrice}
+									</td>
+									<td style={{ width: "15px" }}>
+										{s.chosenServiceDetails.servicePriceDiscount}
+									</td>
+									<td style={{ width: "15px" }}>
+										{s.totalAmountBeforeDiscount}
+									</td>
+
+									<td
+										style={{
+											background:
+												s.status === "Paid"
+													? "green"
+													: s.status === "Cancelled"
+													? "#871402"
+													: "var(--mainBlue)",
+											color: "white",
+										}}>
+										{s.totalAmount}
+									</td>
+									<td>
+										<select
+											className='form-control'
+											onChange={(e) => handleStatusChange(e, s._id)}
+											style={{
+												border: "#cfcfcf solid 1px",
+												borderRadius: "5px",
+												width: "100%",
+												fontSize: "0.8rem",
+												padding: "0px",
+												// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+											}}>
+											<option>{s.status}</option>
+											{s.status === "Paid" ? null : (
+												<Fragment>
+													{statusValues &&
+														statusValues.map((status, index) => (
+															<option key={index} value={status}>
+																{status}
+															</option>
+														))}
+												</Fragment>
+											)}
+										</select>
+									</td>
+								</tr>
+							);
+						})}
 					</tbody>
 				</table>
 			</Summary>

@@ -477,6 +477,18 @@ const SingleReservationPage = (props) => {
 		).toFixed(2);
 	};
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	return (
 		<SingleReservationPageWrapper>
 			{loading ? (
@@ -575,9 +587,11 @@ const SingleReservationPage = (props) => {
 
 									<li className='list-group-item'>
 										Event Date:{" "}
-										{new Date(
-											singleOrder && singleOrder.scheduledDate,
-										).toDateString()}
+										{dateFormat(
+											new Date(
+												singleOrder && singleOrder.scheduledDate,
+											).toLocaleString(),
+										)}
 									</li>
 
 									<li className='list-group-item'>
@@ -641,7 +655,10 @@ const SingleReservationPage = (props) => {
 									<li className='list-group-item'>
 										Ordered on:{" "}
 										{moment(singleOrder && singleOrder.createdAt).fromNow()} (
-										{new Date(singleOrder.createdAt).toDateString()})
+										{dateFormat(
+											new Date(singleOrder.createdAt).toLocaleString(),
+										)}
+										)
 									</li>
 
 									<li className='list-group-item'>

@@ -127,6 +127,7 @@ const FormStep2 = ({
 								value={countryCallingCode}
 								onChange={handleCountryCode}
 								required
+								readOnly
 							/>
 						</div>
 						<div className='col-9'>

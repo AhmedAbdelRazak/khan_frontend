@@ -82,6 +82,18 @@ const FormStep3 = ({
 
 	// console.log(chosenDate, "From FormStep3");
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	return (
 		<FormStep3Wrapper>
 			<div className='row'>
@@ -151,7 +163,9 @@ const FormStep3 = ({
 					</div>
 					<br />
 
-					<div className='toBeAlignedRight'>تاريخ الحجز: {chosenDate}</div>
+					<div className='toBeAlignedRight'>
+						تاريخ الحجز: {dateFormat(chosenDate)}
+					</div>
 					<br />
 
 					<div className='toBeAlignedRight'>

@@ -82,6 +82,18 @@ const FormStep3 = ({
 
 	// console.log(chosenDate, "From FormStep3");
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	return (
 		<FormStep3Wrapper>
 			<div className='row'>
@@ -136,7 +148,7 @@ const FormStep3 = ({
 						Transportation Fees: {Number(chosenBusStationPrice.price)} L.E.{" "}
 					</div>
 
-					<div>Booking Date: {chosenDate}</div>
+					<div>Booking Date: {dateFormat(chosenDate)}</div>
 					<div>Event/Occasion: {event_ocassion} </div>
 					{chosenCouponDetails && chosenCouponDetails.name ? (
 						<div>
