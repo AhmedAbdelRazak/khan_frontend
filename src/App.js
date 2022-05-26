@@ -81,7 +81,7 @@ const App = () => {
 		// To Report Page View
 		ReactGA.pageview(window.location.pathname + window.location.search);
 		// eslint-disable-next-line
-	}, [window.location.pathname + window.location.search]);
+	}, []);
 
 	return (
 		<BrowserRouter>

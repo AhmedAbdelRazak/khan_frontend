@@ -606,6 +606,22 @@ const SingleReservationPage = (props) => {
 									<li
 										className='list-group-item'
 										style={{
+											backgroundColor: "black",
+											color: "white",
+											fontWeight: "bolder",
+											letterSpacing: "1px",
+											fontSize: "1.1rem",
+											textTransform: "capitalize",
+										}}>
+										Ticket:{" "}
+										{singleOrder &&
+											singleOrder.chosenServiceDetails &&
+											singleOrder.chosenServiceDetails.serviceName}
+									</li>
+
+									<li
+										className='list-group-item'
+										style={{
 											backgroundColor: "var(--mainBlue)",
 											color: "white",
 											fontWeight: "bolder",
