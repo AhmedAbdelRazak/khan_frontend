@@ -167,7 +167,11 @@ const AdminDashboard = () => {
 				row._id.substring(0, 10).toString().toLowerCase().indexOf(q) > -1 ||
 				row.scheduledByUserEmail.toString().toLowerCase().indexOf(q) > -1 ||
 				row.status.toString().toLowerCase().indexOf(q) > -1 ||
-				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1
+				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1 ||
+				row.chosenServiceDetails.serviceName
+					.toString()
+					.toLowerCase()
+					.indexOf(q) > -1
 			);
 		});
 	}

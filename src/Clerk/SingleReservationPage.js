@@ -52,6 +52,10 @@ const SingleReservationPage = (props) => {
 	// eslint-disable-next-line
 	const [sendOrNot, setsendOrNot] = useState(false);
 	const [busStationName, setBusStationName] = useState("");
+	const [option1Count, setOption1Count] = useState(0);
+	const [option2Count, setOption2Count] = useState(0);
+	const [option3Count, setOption3Count] = useState(0);
+	const [option4Count, setOption4Count] = useState(0);
 
 	//End of Update Reservation
 	const { user, token } = isAuthenticated();
@@ -96,6 +100,11 @@ const SingleReservationPage = (props) => {
 				setChosenBusStationsDetails(data.chosenBusStation);
 				setBusStationChosenTime(data.chosenBusStationTime);
 				setBusStationName(data.chosenBusStation.address);
+				setOption1Count(data.option1Count ? data.option1Count : 0);
+				setOption2Count(data.option2Count ? data.option2Count : 0);
+				setOption3Count(data.option3Count ? data.option3Count : 0);
+				setOption4Count(data.option4Count ? data.option4Count : 0);
+
 				setLoading(false);
 			}
 		});
@@ -233,6 +242,19 @@ const SingleReservationPage = (props) => {
 		);
 	};
 
+	const handleOption1Count = (event) => {
+		setOption1Count(event.target.value);
+	};
+	const handleOption2Count = (event) => {
+		setOption2Count(event.target.value);
+	};
+	const handleOption3Count = (event) => {
+		setOption3Count(event.target.value);
+	};
+	const handleOption4Count = (event) => {
+		setOption4Count(event.target.value);
+	};
+
 	// const showInput = (key, value) => (
 	// 	<div className='input-group mb-2 mr-sm-2'>
 	// 		<div className='input-group-prepend'>
@@ -294,6 +316,10 @@ const SingleReservationPage = (props) => {
 				? singleOrder.availableCoupon
 				: false,
 			bookingSource: singleOrder.bookingSource,
+			option1Count: option1Count,
+			option2Count: option2Count,
+			option3Count: option3Count,
+			option4Count: option4Count,
 		};
 		var userId =
 			isAuthenticated() && isAuthenticated().user && isAuthenticated().user._id;
@@ -310,7 +336,9 @@ const SingleReservationPage = (props) => {
 
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			localStorage.removeItem("barber");
-			window.location.reload(false);
+			window.setTimeout(() => {
+				window.location.reload(false);
+			}, 1500);
 		});
 	};
 
@@ -427,24 +455,38 @@ const SingleReservationPage = (props) => {
 	};
 
 	const totalPriceBeforeDiscount = () => {
-		var price_adults = Number(serviceDetails.servicePrice) * Number(quantity);
-		var price_children =
+		var price_adults_fn =
+			Number(serviceDetails.servicePrice) * Number(quantity);
+		var price_children_fn =
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
 
 		var TransportationFees =
 			Number(chosenBusStationDetails.price) *
 			(Number(quantity) + Number(quantity_Children));
 
-		setTotalAmountBeforeDiscount(
-			Number(price_adults + price_children + TransportationFees).toFixed(2),
-		);
+		var totalOtionsPrice =
+			Number(option1Count) *
+				Number(
+					serviceDetails.option1_Price ? serviceDetails.option1_Price : 0,
+				) +
+			Number(option2Count) *
+				Number(
+					serviceDetails.option2_Price ? serviceDetails.option2_Price : 0,
+				) +
+			Number(option3Count) *
+				Number(
+					serviceDetails.option3_Price ? serviceDetails.option3_Price : 0,
+				) +
+			Number(option4Count) *
+				Number(serviceDetails.option4_Price ? serviceDetails.option4_Price : 0);
 
-		return Number(price_adults + price_children + TransportationFees).toFixed(
-			2,
-		);
+		return Number(
+			price_adults_fn +
+				price_children_fn +
+				TransportationFees +
+				totalOtionsPrice,
+		).toFixed(2);
 	};
-
-	// console.log(chosenCouponDetails, "chosenCouponDetails");
 
 	const totalPriceAfterDiscount = () => {
 		var CouponDiscount =
@@ -452,15 +494,15 @@ const SingleReservationPage = (props) => {
 				? chosenCouponDetails.discount
 				: 0;
 
-		var price_adults =
+		var price_adults_fn =
 			Number(serviceDetails.servicePriceDiscount) * Number(quantity);
 
-		var price_children =
+		var price_children_fn =
 			Number(serviceDetails.servicePriceDiscount_Children) *
 			Number(quantity_Children);
 
 		var discountedAmount =
-			Number(price_adults + price_children) *
+			Number(price_adults_fn + price_children_fn) *
 			Number(CouponDiscount / 100).toFixed(2) *
 			-1;
 
@@ -468,15 +510,41 @@ const SingleReservationPage = (props) => {
 			Number(chosenBusStationDetails.price) *
 			(Number(quantity) + Number(quantity_Children));
 
-		setTotalAmount(
-			Number(
-				price_adults + price_children + TransportationFees + discountedAmount,
-			).toFixed(2),
-		);
+		var totalOtionsPrice =
+			Number(option1Count) *
+				Number(
+					serviceDetails.option1_Price ? serviceDetails.option1_Price : 0,
+				) +
+			Number(option2Count) *
+				Number(
+					serviceDetails.option2_Price ? serviceDetails.option2_Price : 0,
+				) +
+			Number(option3Count) *
+				Number(
+					serviceDetails.option3_Price ? serviceDetails.option3_Price : 0,
+				) +
+			Number(option4Count) *
+				Number(serviceDetails.option4_Price ? serviceDetails.option4_Price : 0);
 
 		return Number(
-			price_adults + price_children + TransportationFees + discountedAmount,
+			price_adults_fn +
+				price_children_fn +
+				TransportationFees +
+				discountedAmount +
+				totalOtionsPrice,
 		).toFixed(2);
+	};
+
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
 	return (
@@ -577,9 +645,11 @@ const SingleReservationPage = (props) => {
 
 									<li className='list-group-item'>
 										Event Date:{" "}
-										{new Date(
-											singleOrder && singleOrder.scheduledDate,
-										).toDateString()}
+										{dateFormat(
+											new Date(
+												singleOrder && singleOrder.scheduledDate,
+											).toLocaleString(),
+										)}
 									</li>
 
 									<li className='list-group-item'>
@@ -595,6 +665,46 @@ const SingleReservationPage = (props) => {
 											{singleOrder && singleOrder.quantity_Children} Children
 										</strong>
 									</li>
+
+									{singleOrder && singleOrder.option1Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option1}:{" "}
+											{singleOrder.option1Count} (
+											{singleOrder.option1Count *
+												singleOrder.chosenServiceDetails.option1_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
+									{singleOrder && singleOrder.option2Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option2}:{" "}
+											{singleOrder.option2Count} (
+											{singleOrder.option2Count *
+												singleOrder.chosenServiceDetails.option2_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
+									{singleOrder && singleOrder.option3Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option3}:{" "}
+											{singleOrder.option3Count} (
+											{singleOrder.option3Count *
+												singleOrder.chosenServiceDetails.option3_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
+									{singleOrder && singleOrder.option4Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option4}:{" "}
+											{singleOrder.option4Count} (
+											{singleOrder.option4Count *
+												singleOrder.chosenServiceDetails.option4_Price}{" "}
+											L.E).
+										</li>
+									) : null}
 
 									<li className='list-group-item'>
 										Receipt Number / Invoice Number:{" "}
@@ -643,7 +753,10 @@ const SingleReservationPage = (props) => {
 									<li className='list-group-item'>
 										Ordered on:{" "}
 										{moment(singleOrder && singleOrder.createdAt).fromNow()} (
-										{new Date(singleOrder.createdAt).toDateString()})
+										{dateFormat(
+											new Date(singleOrder.createdAt).toLocaleString(),
+										)}
+										)
 									</li>
 
 									<li className='list-group-item'>
@@ -1090,6 +1203,157 @@ const SingleReservationPage = (props) => {
 								</select>
 							</div>
 						)}
+
+					{(singleOrder && singleOrder.option1Count > 0) ||
+					(singleOrder &&
+						singleOrder.chosenServiceDetails &&
+						singleOrder.chosenServiceDetails.option1_Active) ? (
+						<div className='col-md-8 mx-auto my-1'>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									// color: "#00407f",
+								}}>
+								How Many{" "}
+								{singleOrder && singleOrder.chosenServiceDetails.option1}?
+							</label>
+
+							<input
+								type='number'
+								className='form-control w-75 mx-auto'
+								value={option1Count}
+								onChange={handleOption1Count}
+							/>
+							{Number(option1Count) > 0 ? (
+								<div style={{ color: "grey" }}>
+									{Number(option1Count) *
+										Number(singleOrder.chosenServiceDetails.option1_Price)}{" "}
+									L.E.
+								</div>
+							) : null}
+						</div>
+					) : null}
+
+					{(singleOrder && singleOrder.option2Count > 0) ||
+					(singleOrder &&
+						singleOrder.chosenServiceDetails &&
+						singleOrder.chosenServiceDetails.option2_Active) ? (
+						<div className='col-md-8 mx-auto my-1'>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									// color: "#00407f",
+								}}>
+								How Many{" "}
+								{singleOrder && singleOrder.chosenServiceDetails.option2}?
+							</label>
+
+							<input
+								type='number'
+								className='form-control w-75 mx-auto'
+								value={option2Count}
+								onChange={handleOption2Count}
+							/>
+							{Number(option2Count) > 0 ? (
+								<div style={{ color: "grey" }}>
+									{Number(option2Count) *
+										Number(singleOrder.chosenServiceDetails.option2_Price)}{" "}
+									L.E.
+								</div>
+							) : null}
+						</div>
+					) : null}
+
+					{(singleOrder && singleOrder.option3Count > 0) ||
+					(singleOrder &&
+						singleOrder.chosenServiceDetails &&
+						singleOrder.chosenServiceDetails.option3_Active) ? (
+						<div className='col-md-8 mx-auto my-1'>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									// color: "#00407f",
+								}}>
+								How Many{" "}
+								{singleOrder && singleOrder.chosenServiceDetails.option3}?
+							</label>
+
+							<input
+								type='number'
+								className='form-control w-75 mx-auto'
+								value={option3Count}
+								onChange={handleOption3Count}
+							/>
+							{Number(option3Count) > 0 ? (
+								<div style={{ color: "grey" }}>
+									{Number(option3Count) *
+										Number(singleOrder.chosenServiceDetails.option3_Price)}{" "}
+									L.E.
+								</div>
+							) : null}
+						</div>
+					) : null}
+
+					{(singleOrder && singleOrder.option4Count > 0) ||
+					(singleOrder &&
+						singleOrder.chosenServiceDetails &&
+						singleOrder.chosenServiceDetails.option4_Active) ? (
+						<div className='col-md-8 mx-auto my-1'>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									color: "",
+								}}>
+								How Many{" "}
+								{singleOrder && singleOrder.chosenServiceDetails.option4}?
+							</label>
+
+							<input
+								type='number'
+								className='form-control w-75 mx-auto'
+								value={option4Count}
+								onChange={handleOption4Count}
+							/>
+							{Number(option4Count) > 0 ? (
+								<div style={{ color: "grey" }}>
+									{Number(option4Count) *
+										Number(singleOrder.chosenServiceDetails.option4_Price)}{" "}
+									L.E.
+								</div>
+							) : null}
+						</div>
+					) : null}
+
+					<div
+						className=' col-md-10 mx-auto my-3'
+						style={{
+							fontSize: "1.3rem",
+							fontWeight: "bold",
+							color: "var(--mainBlue)",
+							textAlign: "center",
+						}}>
+						Total Amount:{" "}
+						{totalPriceBeforeDiscount() === totalPriceAfterDiscount() ? (
+							<span style={{ color: "green", fontWeight: "bold" }}>
+								{totalPriceAfterDiscount()} L.E.
+							</span>
+						) : (
+							<span style={{ color: "green", fontWeight: "bold" }}>
+								<s style={{ color: "red", fontWeight: "bold" }}>
+									{totalPriceBeforeDiscount()} L.E.
+								</s>{" "}
+								{totalPriceAfterDiscount()} L.E.
+							</span>
+						)}{" "}
+					</div>
 				</div>
 				<div className='mx-auto col-md-3  mt-3 mb-5'>
 					<button

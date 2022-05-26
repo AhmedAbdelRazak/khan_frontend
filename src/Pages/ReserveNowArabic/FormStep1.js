@@ -12,6 +12,7 @@ const FormStep1 = ({
 	setChosenService_Package,
 	chosenService_Package,
 	setServiceDetails,
+	serviceDetails,
 	allServices,
 	storeClosed_NotClosed,
 	storeClosed_NotClosedCustomized,
@@ -480,6 +481,110 @@ const FormStep1 = ({
 						</div>
 					)}
 			</div>
+
+			{serviceDetails && serviceDetails.option1_Active ? (
+				<div className='col-md-8 mx-auto my-1'>
+					<label
+						className='textResizeMain2'
+						style={{
+							fontWeight: "bold",
+							fontSize: "1rem",
+							// color: "#00407f",
+						}}>
+						كم عدد {serviceDetails && serviceDetails.option1_Arabic}؟
+					</label>
+
+					<input
+						type='number'
+						className='form-control w-75 mx-auto'
+						value={option1Count}
+						onChange={handleOption1Count}
+					/>
+					{Number(option1Count) > 0 ? (
+						<div style={{ color: "grey" }}>
+							{Number(option1Count) * Number(serviceDetails.option1_Price)} جنيه
+						</div>
+					) : null}
+				</div>
+			) : null}
+
+			{serviceDetails && serviceDetails.option2_Active ? (
+				<div className='col-md-8 mx-auto my-1'>
+					<label
+						className='textResizeMain2'
+						style={{
+							fontWeight: "bold",
+							fontSize: "1rem",
+							// color: "#00407f",
+						}}>
+						كم عدد {serviceDetails && serviceDetails.option2_Arabic}؟
+					</label>
+
+					<input
+						type='number'
+						className='form-control w-75 mx-auto'
+						value={option2Count}
+						onChange={handleOption2Count}
+					/>
+					{Number(option2Count) > 0 ? (
+						<div style={{ color: "grey" }}>
+							{Number(option2Count) * Number(serviceDetails.option2_Price)} جنيه
+						</div>
+					) : null}
+				</div>
+			) : null}
+
+			{serviceDetails && serviceDetails.option3_Active ? (
+				<div className='col-md-8 mx-auto my-1'>
+					<label
+						className='textResizeMain2'
+						style={{
+							fontWeight: "bold",
+							fontSize: "1rem",
+							// color: "#00407f",
+						}}>
+						كم عدد {serviceDetails && serviceDetails.option3_Arabic}؟
+					</label>
+
+					<input
+						type='number'
+						className='form-control w-75 mx-auto'
+						value={option3Count}
+						onChange={handleOption3Count}
+					/>
+					{Number(option3Count) > 0 ? (
+						<div style={{ color: "grey" }}>
+							{Number(option3Count) * Number(serviceDetails.option3_Price)} جنيه
+						</div>
+					) : null}
+				</div>
+			) : null}
+
+			{serviceDetails && serviceDetails.option4_Active ? (
+				<div className='col-md-8 mx-auto my-1'>
+					<label
+						className='textResizeMain2'
+						style={{
+							fontWeight: "bold",
+							fontSize: "1rem",
+							color: "",
+						}}>
+						كم عدد {serviceDetails && serviceDetails.option4_Arabic}؟
+					</label>
+
+					<input
+						type='number'
+						className='form-control w-75 mx-auto'
+						value={option4Count}
+						onChange={handleOption4Count}
+					/>
+					{Number(option4Count) > 0 ? (
+						<div style={{ color: "grey" }}>
+							{Number(option4Count) * Number(serviceDetails.option4_Price)} L.E.
+						</div>
+					) : null}
+				</div>
+			) : null}
 		</FormStep1Wrapper>
 	);
 };
