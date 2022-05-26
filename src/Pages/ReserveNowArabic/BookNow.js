@@ -20,6 +20,7 @@ import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
 // eslint-disable-next-line
 import PackagePhotos from "./PackagePhotos";
+import moment from "moment";
 const { Step } = Steps;
 
 const BookNow = ({ match }) => {
@@ -61,6 +62,11 @@ const BookNow = ({ match }) => {
 		setAlreadySetLoyaltyPointsManagement,
 	] = useState("");
 	const [availableCoupon, setAvailableCoupon] = useState(false);
+	const [busStationName, setBusStationName] = useState("");
+	const [option1Count, setOption1Count] = useState(0);
+	const [option2Count, setOption2Count] = useState(0);
+	const [option3Count, setOption3Count] = useState(0);
+	const [option4Count, setOption4Count] = useState(0);
 
 	var days = [
 		"Sunday",
@@ -84,41 +90,46 @@ const BookNow = ({ match }) => {
 		});
 	};
 
+	var today = new Date();
+	var tomorrow = new Date(today);
+	var yesterday = new Date(today);
+
+	tomorrow.setDate(yesterday.getDate() + 1);
+
 	useEffect(() => {
-		if (JSON.parse(localStorage.getItem("reservationData"))) {
-			setReservationDataLocalStor(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				),
-			);
-			setCountryCallingCode(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				).countryCallingCode,
-			);
-
-			setPhone(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				).phoneNumber,
+		if (!localStorage.getItem("reservationData")) {
+			setChosenDate(new Date(tomorrow).toLocaleDateString());
+		} else {
+			setChosenDate(
+				new Date(
+					moment(
+						JSON.parse(
+							localStorage.getItem("reservationData") &&
+								localStorage.getItem("reservationData"),
+						).chosenDate,
+					)._d,
+				).toLocaleDateString(),
 			);
 
-			setServiceDetails(
+			setChosenBusStationsDetails(
 				JSON.parse(
 					localStorage.getItem("reservationData") &&
 						localStorage.getItem("reservationData"),
-				).serviceDetails,
-			);
-			setChosenService_Package(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				).chosenService_Package,
+				).chosenBusStationDetails,
 			);
 
+			setBusStationChosenTime(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).busStationChosenTime,
+			);
+			setBusStationName(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).chosenBusStationDetails.address,
+			);
 			setQuantity(
 				JSON.parse(
 					localStorage.getItem("reservationData") &&
@@ -131,6 +142,72 @@ const BookNow = ({ match }) => {
 					localStorage.getItem("reservationData") &&
 						localStorage.getItem("reservationData"),
 				).quantity_Children,
+			);
+
+			setServiceDetails(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).serviceDetails,
+			);
+
+			setChosenCoupon(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).chosenCoupon,
+			);
+
+			setChosenCouponDetails(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).chosenCouponDetails,
+			);
+
+			setCurrent(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).currentPage,
+			);
+
+			setTotalAmountBeforeDiscount(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).totalPriceBeforeDiscount,
+			);
+			setTotalAmount(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).totalPriceAfterDiscount,
+			);
+
+			setOption1Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option1Count,
+			);
+			setOption2Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option2Count,
+			);
+			setOption3Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option3Count,
+			);
+			setOption4Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option4Count,
 			);
 		}
 
@@ -325,6 +402,25 @@ const BookNow = ({ match }) => {
 					allCoupons={allCoupons}
 					chosenCouponDetails={chosenCouponDetails}
 					setChosenCouponDetails={setChosenCouponDetails}
+					busStations={busStations}
+					chosenBusStationDetails={chosenBusStationDetails}
+					setChosenBusStationsDetails={setChosenBusStationsDetails}
+					busStationChosenTime={busStationChosenTime}
+					setBusStationChosenTime={setBusStationChosenTime}
+					quantity={quantity}
+					setQuantity={setQuantity}
+					quantity_Children={quantity_Children}
+					setQuantity_Children={setQuantity_Children}
+					busStationName={busStationName}
+					setBusStationName={setBusStationName}
+					option1Count={option1Count}
+					option2Count={option2Count}
+					option3Count={option3Count}
+					option4Count={option4Count}
+					setOption1Count={setOption1Count}
+					setOption2Count={setOption2Count}
+					setOption3Count={setOption3Count}
+					setOption4Count={setOption4Count}
 				/>
 			),
 		},
@@ -340,18 +436,8 @@ const BookNow = ({ match }) => {
 					countryCallingCode={countryCallingCode}
 					setCountryCallingCode={setCountryCallingCode}
 					setPhone={setPhone}
-					quantity={quantity}
-					setQuantity={setQuantity}
-					quantity_Children={quantity_Children}
-					setQuantity_Children={setQuantity_Children}
 					event_ocassion={event_ocassion}
 					setEvent_ocassion={setEvent_ocassion}
-					availableTickets={availableTickets}
-					busStations={busStations}
-					chosenBusStationDetails={chosenBusStationDetails}
-					setChosenBusStationsDetails={setChosenBusStationsDetails}
-					busStationChosenTime={busStationChosenTime}
-					setBusStationChosenTime={setBusStationChosenTime}
 				/>
 			),
 		},
@@ -378,6 +464,15 @@ const BookNow = ({ match }) => {
 					totalAmountBeforeDiscount={totalAmountBeforeDiscount}
 					setTotalAmount={setTotalAmount}
 					setTotalAmountBeforeDiscount={setTotalAmountBeforeDiscount}
+					option1Count={option1Count}
+					option2Count={option2Count}
+					option3Count={option3Count}
+					option4Count={option4Count}
+					setOption1Count={setOption1Count}
+					setOption2Count={setOption2Count}
+					setOption3Count={setOption3Count}
+					setOption4Count={setOption4Count}
+					busStationChosenTime={busStationChosenTime}
 				/>
 			),
 		},
@@ -452,7 +547,7 @@ const BookNow = ({ match }) => {
 		}
 
 		if (quantity_Children < 0) {
-			return toast.error("Quantity Should be 0 Or More Than 0");
+			return toast.error("يجب أن تكون الكمية 0 أو أكثر من 0");
 		}
 
 		if (Number(quantity) + Number(quantity_Children) > availableTickets()) {
@@ -490,6 +585,10 @@ const BookNow = ({ match }) => {
 			bookingSource: "Online",
 			totalAmount: totalAmount,
 			totalAmountBeforeDiscount: totalAmountBeforeDiscount,
+			option1Count: option1Count,
+			option2Count: option2Count,
+			option3Count: option3Count,
+			option4Count: option4Count,
 		};
 
 		createReservation(createOrderData).then((response) => {
@@ -497,7 +596,7 @@ const BookNow = ({ match }) => {
 			// console.log("schedule booked");
 
 			window.scrollTo({ top: 0, behavior: "smooth" });
-			toast.success("Your Ticket Was Successfully Booked");
+			toast.success("تم حجز تذكرتك بنجاح");
 			// window.location.reload(false);
 		});
 		return setTimeout(function () {
@@ -612,6 +711,33 @@ const BookNow = ({ match }) => {
 					countryCallingCode && (
 						<Button
 							onClick={() => {
+								const confirmationData = {
+									appointmentComment: appointmentComment,
+									scheduledByUserEmail: scheduledByUserEmail,
+									fullName: fullName,
+									phone: phone,
+									chosenDate: chosenDate,
+									event_ocassion: event_ocassion,
+									chosenService_Package: chosenService_Package,
+									serviceDetails: serviceDetails,
+									countryCallingCode: countryCallingCode,
+									quantity: quantity,
+									quantity_Children: quantity_Children,
+									chosenBusStationPrice: chosenBusStationDetails.price,
+									chosenBusStationDetails: chosenBusStationDetails,
+									chosenCouponDetails: chosenCouponDetails,
+									totalAmountBeforeDiscount: totalAmountBeforeDiscount,
+									totalAmount: totalAmount,
+									chosenBusStationTime: busStationChosenTime,
+									option1Count: option1Count,
+									option2Count: option2Count,
+									option3Count: option3Count,
+									option4Count: option4Count,
+								};
+								localStorage.setItem(
+									"confirmationData",
+									JSON.stringify(confirmationData),
+								);
 								clickSubmitSchedule_NoPayment();
 								ReactGA.event({
 									category: "Reserve Now Was Clicked",

@@ -1,5 +1,5 @@
 /** @format */
-
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 // import { states } from "./Utils";
@@ -11,23 +11,11 @@ const FormStep2 = ({
 	setScheduledByUserEmail,
 	phone,
 	setPhone,
-	quantity,
-	setQuantity,
-	quantity_Children,
-	setQuantity_Children,
 	event_ocassion,
 	setEvent_ocassion,
 	setCountryCallingCode,
 	countryCallingCode,
-	availableTickets,
-	busStations,
-	chosenBusStationDetails,
-	setChosenBusStationsDetails,
-	busStationChosenTime,
-	setBusStationChosenTime,
 }) => {
-	const [busStationName, setBusStationName] = useState("");
-
 	const handleScheduledByUserFirstName = (event) => {
 		setFullName(event.target.value);
 	};
@@ -43,48 +31,9 @@ const FormStep2 = ({
 		setCountryCallingCode(event.target.value);
 	};
 
-	const handleQuantity = (event) => {
-		setQuantity(event.target.value);
-	};
-
 	const handleEven_Ocassion = (event) => {
 		setEvent_ocassion(event.target.value);
 	};
-
-	const handleQuantityChildren = (event) => {
-		setQuantity_Children(event.target.value);
-	};
-
-	const handleChosenBusStation = (event) => {
-		setBusStationName(event.target.value.toLowerCase());
-
-		const indexOfBusStations =
-			event.target.value &&
-			busStations &&
-			busStations
-				.map((busstation) => busstation.address.toLowerCase())
-				.indexOf(event.target.value.toLowerCase());
-
-		const chosenBusStatioDetails =
-			event.target.value &&
-			busStations &&
-			indexOfBusStations &&
-			indexOfBusStations === 0
-				? busStations[indexOfBusStations]
-				: busStations[indexOfBusStations];
-
-		setChosenBusStationsDetails(chosenBusStatioDetails);
-	};
-
-	const handleBusStationChosenTime = (event) => {
-		setBusStationChosenTime(event.target.value);
-	};
-
-	useEffect(() => {
-		setBusStationName(chosenBusStationDetails.address);
-		setBusStationChosenTime(chosenBusStationDetails.times[0]);
-		// eslint-disable-next-line
-	}, []);
 
 	return (
 		<FormStep2Wrapper>
@@ -259,168 +208,6 @@ const FormStep2 = ({
 						</option>
 					</select>
 				</div>
-
-				<div className='col-md-6 my-4'>
-					<label
-						className='textResizeMain2'
-						style={{
-							fontWeight: "bold",
-							fontSize: "1rem",
-							color: "#00407f",
-						}}>
-						Ticket Quantity (Adults)
-					</label>
-
-					<input
-						type='number'
-						className='form-control w-75 mx-auto'
-						value={quantity}
-						onChange={handleQuantity}
-						placeholder='How Many Tickets?'
-						max={availableTickets()}
-					/>
-					{Number(quantity) + Number(quantity_Children) >
-						availableTickets() && (
-						<div
-							className='mt-2'
-							style={{ fontWeight: "bold", color: "red", fontSize: "13px" }}>
-							Not enough tickets are available, please choose another date and
-							try again.
-						</div>
-					)}
-				</div>
-
-				<div className='col-md-6 my-4'>
-					<label
-						className='textResizeMain2'
-						style={{
-							fontWeight: "bold",
-							fontSize: "1rem",
-							color: "#00407f",
-						}}>
-						Ticket Quantity (Children)
-					</label>
-
-					<input
-						type='number'
-						className='form-control w-75 mx-auto'
-						value={quantity_Children}
-						onChange={handleQuantityChildren}
-						placeholder='How Many Tickets?'
-						max={availableTickets()}
-					/>
-					{Number(quantity) + Number(quantity_Children) >
-						availableTickets() && (
-						<div
-							className='mt-2'
-							style={{ fontWeight: "bold", color: "red", fontSize: "13px" }}>
-							Not enough tickets are available, please choose another date and
-							try again.
-						</div>
-					)}
-				</div>
-				<div className='col-md-6 my-3 mx-auto'>
-					<label
-						className='textResizeMain2'
-						style={{
-							fontWeight: "bold",
-							fontSize: "1rem",
-							color: "#00407f",
-						}}>
-						Transportation / Bus Station
-					</label>
-					<br />
-					<select
-						onChange={handleChosenBusStation}
-						className='inputFields mb-3'
-						style={{
-							paddingTop: "12px",
-							paddingBottom: "12px",
-							paddingRight: "130px",
-							// textAlign: "center",
-							border: "#cfcfcf solid 1px",
-							borderRadius: "10px",
-							width: "75%",
-							fontSize: "0.9rem",
-							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-						}}>
-						{busStationName && busStationName !== "Please Select (Required)" ? (
-							<option className='items text-muted inputFields'>
-								{busStationName}
-							</option>
-						) : (
-							<option className='items text-muted inputFields'>
-								Please Select (Required)
-							</option>
-						)}
-						{busStations &&
-							busStations.map((b, i) => {
-								return (
-									<option
-										key={i}
-										className='items text-muted inputFields'
-										value={b.address}>
-										{b.address} ({b.price} L.E.)
-									</option>
-								);
-							})}
-					</select>
-				</div>
-
-				{busStationName &&
-					chosenBusStationDetails &&
-					busStationName !== "no bus needed" &&
-					busStationName !== "NO BUS NEEDED" && (
-						<div className='col-md-6 my-3 mx-auto'>
-							<label
-								className='textResizeMain2'
-								style={{
-									fontWeight: "bold",
-									fontSize: "1rem",
-									color: "#00407f",
-								}}>
-								Here is "{busStationName}" Station Available Times
-							</label>
-							<br />
-							<select
-								onChange={handleBusStationChosenTime}
-								className='inputFields mb-3'
-								style={{
-									paddingTop: "12px",
-									paddingBottom: "12px",
-									paddingRight: "130px",
-									// textAlign: "center",
-									border: "#cfcfcf solid 1px",
-									borderRadius: "10px",
-									width: "75%",
-									fontSize: "0.9rem",
-									// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-								}}>
-								{busStationChosenTime &&
-								busStationChosenTime !== "Please Select (Required)" ? (
-									<option className='items text-muted inputFields'>
-										{busStationChosenTime}
-									</option>
-								) : (
-									<option className='items text-muted inputFields'>
-										Please Select (Required)
-									</option>
-								)}
-								{chosenBusStationDetails &&
-									chosenBusStationDetails.times &&
-									chosenBusStationDetails.times.map((b, i) => {
-										return (
-											<option
-												key={i}
-												className='items text-muted inputFields'
-												value={b}>
-												{b}
-											</option>
-										);
-									})}
-							</select>
-						</div>
-					)}
 			</div>
 		</FormStep2Wrapper>
 	);

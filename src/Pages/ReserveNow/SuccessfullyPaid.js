@@ -97,7 +97,7 @@ const SuccessfullyPaid = () => {
 				localStorage.getItem("confirmationData"),
 		);
 
-		console.log(localStorageData, "inside Fn");
+		// console.log(localStorageData, "inside Fn");
 
 		getPreviousBookings().then((data) => {
 			if (data.error) {
@@ -125,7 +125,7 @@ const SuccessfullyPaid = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	console.log(HistBookings);
+	// console.log(HistBookings);
 
 	const Invoice = (order) => {
 		return (
@@ -184,6 +184,66 @@ const SuccessfullyPaid = () => {
 								</Text>
 								{"\n"}
 								{"\n"}
+								<Text>
+									Ticket Count:{" "}
+									{reservationData &&
+										Number(reservationData.quantity) +
+											Number(reservationData.quantity_Children)}
+								</Text>
+								{"\n"}
+								{"\n"}
+
+								{reservationData.serviceDetails.option1_Active &&
+								reservationData.option1Count > 0 ? (
+									<Text>
+										{reservationData.serviceDetails.option1}:{" "}
+										{reservationData.option1Count} (
+										{reservationData.option1Count *
+											reservationData.serviceDetails.option1_Price}{" "}
+										L.E).
+										{"\n"}
+										{"\n"}
+									</Text>
+								) : null}
+
+								{reservationData.serviceDetails.option2_Active &&
+								reservationData.option2Count > 0 ? (
+									<Text>
+										{reservationData.serviceDetails.option2}:{" "}
+										{reservationData.option2Count} (
+										{reservationData.option2Count *
+											reservationData.serviceDetails.option2_Price}{" "}
+										L.E).
+										{"\n"}
+										{"\n"}
+									</Text>
+								) : null}
+
+								{reservationData.serviceDetails.option3_Active &&
+								reservationData.option3Count > 0 ? (
+									<Text>
+										{reservationData.serviceDetails.option3}:{" "}
+										{reservationData.option3Count} (
+										{reservationData.option3Count *
+											reservationData.serviceDetails.option3_Price}{" "}
+										L.E).
+										{"\n"}
+										{"\n"}
+									</Text>
+								) : null}
+
+								{reservationData.serviceDetails.option4_Active &&
+								reservationData.option4Count > 0 ? (
+									<Text>
+										{reservationData.serviceDetails.option4}:{" "}
+										{reservationData.option4Count} (
+										{reservationData.option4Count *
+											reservationData.serviceDetails.option4_Price}{" "}
+										L.E).
+										{"\n"}
+										{"\n"}
+									</Text>
+								) : null}
 
 								<Text>
 									Client Name: {reservationData && reservationData.fullName}
@@ -377,6 +437,12 @@ const SuccessfullyPaid = () => {
 						<div className='mt-2'>
 							Transportation Fees:{" "}
 							{Number(reservationData.chosenBusStationPrice)} L.E.{" "}
+						</div>
+						<div className='mt-2'>
+							Bus Station: {reservationData.chosenBusStationDetails.address}{" "}
+						</div>
+						<div className='mt-2'>
+							Bus Station Time: {reservationData.chosenBusStationTime}{" "}
 						</div>
 
 						<div className='mt-2'>

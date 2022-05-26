@@ -608,6 +608,50 @@ const SingleReservationPage = (props) => {
 										</strong>
 									</li>
 
+									{singleOrder.chosenServiceDetails.option1_Active &&
+									singleOrder.option1Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option1}:{" "}
+											{singleOrder.option1Count} (
+											{singleOrder.option1Count *
+												singleOrder.chosenServiceDetails.option1_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
+									{singleOrder.chosenServiceDetails.option2_Active &&
+									singleOrder.option2Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option2}:{" "}
+											{singleOrder.option2Count} (
+											{singleOrder.option2Count *
+												singleOrder.chosenServiceDetails.option2_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
+									{singleOrder.chosenServiceDetails.option3_Active &&
+									singleOrder.option3Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option3}:{" "}
+											{singleOrder.option3Count} (
+											{singleOrder.option3Count *
+												singleOrder.chosenServiceDetails.option3_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
+									{singleOrder.chosenServiceDetails.option4_Active &&
+									singleOrder.option4Count > 0 ? (
+										<li className='list-group-item'>
+											{singleOrder.chosenServiceDetails.option4}:{" "}
+											{singleOrder.option4Count} (
+											{singleOrder.option4Count *
+												singleOrder.chosenServiceDetails.option4_Price}{" "}
+											L.E).
+										</li>
+									) : null}
+
 									<li className='list-group-item'>
 										Receipt Number / Invoice Number:{" "}
 										{singleOrder && singleOrder._id}

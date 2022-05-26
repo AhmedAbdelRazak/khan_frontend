@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 
 const FormStep3 = ({
@@ -20,6 +20,11 @@ const FormStep3 = ({
 	chosenCouponDetails,
 	setTotalAmount,
 	setTotalAmountBeforeDiscount,
+	option1Count,
+	option2Count,
+	option3Count,
+	option4Count,
+	busStationChosenTime,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -36,13 +41,31 @@ const FormStep3 = ({
 			Number(chosenBusStationPrice.price) *
 			(Number(quantity) + Number(quantity_Children));
 
+		var totalOtionsPrice =
+			Number(option1Count) *
+				Number(
+					serviceDetails.option1_Price ? serviceDetails.option1_Price : 0,
+				) +
+			Number(option2Count) *
+				Number(
+					serviceDetails.option2_Price ? serviceDetails.option2_Price : 0,
+				) +
+			Number(option3Count) *
+				Number(
+					serviceDetails.option3_Price ? serviceDetails.option3_Price : 0,
+				) +
+			Number(option4Count) *
+				Number(serviceDetails.option4_Price ? serviceDetails.option4_Price : 0);
+
 		setTotalAmountBeforeDiscount(
-			Number(price_adults + price_children + TransportationFees).toFixed(2),
+			Number(
+				price_adults + price_children + TransportationFees + totalOtionsPrice,
+			).toFixed(2),
 		);
 
-		return Number(price_adults + price_children + TransportationFees).toFixed(
-			2,
-		);
+		return Number(
+			price_adults + price_children + TransportationFees + totalOtionsPrice,
+		).toFixed(2);
 	};
 
 	// console.log(chosenCouponDetails, "chosenCouponDetails");
@@ -69,14 +92,38 @@ const FormStep3 = ({
 			Number(chosenBusStationPrice.price) *
 			(Number(quantity) + Number(quantity_Children));
 
+		var totalOtionsPrice =
+			Number(option1Count) *
+				Number(
+					serviceDetails.option1_Price ? serviceDetails.option1_Price : 0,
+				) +
+			Number(option2Count) *
+				Number(
+					serviceDetails.option2_Price ? serviceDetails.option2_Price : 0,
+				) +
+			Number(option3Count) *
+				Number(
+					serviceDetails.option3_Price ? serviceDetails.option3_Price : 0,
+				) +
+			Number(option4Count) *
+				Number(serviceDetails.option4_Price ? serviceDetails.option4_Price : 0);
+
 		setTotalAmount(
 			Number(
-				price_adults + price_children + TransportationFees + discountedAmount,
+				price_adults +
+					price_children +
+					TransportationFees +
+					discountedAmount +
+					totalOtionsPrice,
 			).toFixed(2),
 		);
 
 		return Number(
-			price_adults + price_children + TransportationFees + discountedAmount,
+			price_adults +
+				price_children +
+				TransportationFees +
+				discountedAmount +
+				totalOtionsPrice,
 		).toFixed(2);
 	};
 
@@ -154,7 +201,7 @@ const FormStep3 = ({
 					<br />
 
 					<div className='toBeAlignedRight'>
-						عدد التذاكر: {Number(quantity) + Number(quantity_Children)} تذاكر
+						عدد التذاكر: {Number(quantity) + Number(quantity_Children)} تذكرة
 					</div>
 					<br />
 
@@ -162,6 +209,43 @@ const FormStep3 = ({
 						رسوم المواصلات: {Number(chosenBusStationPrice.price)} جنيه{" "}
 					</div>
 					<br />
+					{serviceDetails.option1_Active && option1Count > 0 ? (
+						<Fragment>
+							<div className='toBeAlignedRight'>
+								{serviceDetails.option1_Arabic}: {option1Count} (
+								{option1Count * serviceDetails.option1_Price} جنيه).
+							</div>
+							<br />
+						</Fragment>
+					) : null}
+
+					{serviceDetails.option2_Active && option2Count > 0 ? (
+						<Fragment>
+							<div className='toBeAlignedRight'>
+								{serviceDetails.option2_Arabic}: {option2Count} (
+								{option2Count * serviceDetails.option2_Price} جنيه).
+							</div>
+							<br />
+						</Fragment>
+					) : null}
+					{serviceDetails.option3_Active && option3Count > 0 ? (
+						<Fragment>
+							<div className='toBeAlignedRight'>
+								{serviceDetails.option3_Arabic}: {option3Count} (
+								{option3Count * serviceDetails.option3_Price} جنيه).
+							</div>
+							<br />
+						</Fragment>
+					) : null}
+					{serviceDetails.option4_Active && option4Count > 0 ? (
+						<Fragment>
+							<div className='toBeAlignedRight'>
+								{serviceDetails.option4_Arabic}: {option4Count} (
+								{option4Count * serviceDetails.option4_Price} جنيه).
+							</div>
+							<br />
+						</Fragment>
+					) : null}
 
 					<div className='toBeAlignedRight'>
 						تاريخ الحجز: {dateFormat(chosenDate)}
@@ -223,7 +307,7 @@ const FormStep3 = ({
 							className='form-control '
 							value={appointmentComment}
 							onChange={handleMeetingComment}
-							placeholder='If you have any further comments, Please add them here...'
+							placeholder='إذا كان لديك أي تعليقات أخرى ، يرجى إضافتها هنا ...'
 							// autoFocus
 						/>
 					</div>

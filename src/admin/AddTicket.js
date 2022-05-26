@@ -10,6 +10,7 @@ import Adminsidebar from "./AdminSideBar/Adminsidebar";
 import DarkBG from "./AdminSideBar/DarkBG";
 import axios from "axios";
 import Resizer from "react-image-file-resizer";
+import styled from "styled-components";
 
 const AddTicket = () => {
 	const [click2, setClick2] = useState(false);
@@ -27,6 +28,25 @@ const AddTicket = () => {
 	const [servicePrice_Children, setServicePrice_Children] = useState("");
 	const [servicePriceDiscount_Children, setServicePriceDiscount_Children] =
 		useState("");
+
+	const [option1, setOption1] = useState("");
+	const [option2, setOption2] = useState("");
+	const [option3, setOption3] = useState("");
+	const [option4, setOption4] = useState("");
+	const [option1_Arabic, setOption1_Arabic] = useState("");
+	const [option2_Arabic, setOption2_Arabic] = useState("");
+	const [option3_Arabic, setOption3_Arabic] = useState("");
+	const [option4_Arabic, setOption4_Arabic] = useState("");
+
+	const [option1_Price, setOption1_Price] = useState("");
+	const [option2_Price, setOption2_Price] = useState("");
+	const [option3_Price, setOption3_Price] = useState("");
+	const [option4_Price, setOption4_Price] = useState("");
+
+	const [option1_Active, setOption1_Active] = useState(false);
+	const [option2_Active, setOption2_Active] = useState(false);
+	const [option3_Active, setOption3_Active] = useState(false);
+	const [option4_Active, setOption4_Active] = useState(false);
 
 	const [allTickets, setAllTickets] = useState([]);
 	const [serviceDescription, setServiceDescription] = useState("");
@@ -198,6 +218,55 @@ const AddTicket = () => {
 		setServicePriceDiscount_Children(e.target.value);
 	};
 
+	const handleChange22 = (e) => {
+		setError("");
+		setOption1(e.target.value);
+	};
+	const handleChange23 = (e) => {
+		setError("");
+		setOption2(e.target.value);
+	};
+	const handleChange24 = (e) => {
+		setError("");
+		setOption3(e.target.value);
+	};
+	const handleChange25 = (e) => {
+		setError("");
+		setOption4(e.target.value);
+	};
+	const handleChange26 = (e) => {
+		setError("");
+		setOption1_Arabic(e.target.value);
+	};
+	const handleChange27 = (e) => {
+		setError("");
+		setOption2_Arabic(e.target.value);
+	};
+	const handleChange28 = (e) => {
+		setError("");
+		setOption3_Arabic(e.target.value);
+	};
+	const handleChange29 = (e) => {
+		setError("");
+		setOption4_Arabic(e.target.value);
+	};
+	const handleChange30 = (e) => {
+		setError("");
+		setOption1_Price(e.target.value);
+	};
+	const handleChange31 = (e) => {
+		setError("");
+		setOption2_Price(e.target.value);
+	};
+	const handleChange32 = (e) => {
+		setError("");
+		setOption3_Price(e.target.value);
+	};
+	const handleChange33 = (e) => {
+		setError("");
+		setOption4_Price(e.target.value);
+	};
+
 	const gettingAllTickets = () => {
 		getTickets(token).then((data) => {
 			if (data.error) {
@@ -245,6 +314,22 @@ const AddTicket = () => {
 			servicePrice_Children,
 			servicePriceDiscount,
 			servicePriceDiscount_Children,
+			option1,
+			option2,
+			option3,
+			option4,
+			option1_Arabic,
+			option2_Arabic,
+			option3_Arabic,
+			option4_Arabic,
+			option1_Price,
+			option2_Price,
+			option3_Price,
+			option4_Price,
+			option1_Active,
+			option2_Active,
+			option3_Active,
+			option4_Active,
 			serviceDescription,
 			serviceDescription_Arabic,
 			serviceDescription2,
@@ -430,6 +515,178 @@ const AddTicket = () => {
 						value={servicePriceDiscount_Children}
 						required
 						placeholder='The price should be only a number'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 1</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange22}
+						value={option1}
+						placeholder='Please add any additional options for this Ticket'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 1 (Arabic)</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange26}
+						value={option1_Arabic}
+						placeholder='Please add any additional options for this Ticket In Arabic'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 1 Price</label>
+					<input
+						type='number'
+						className='form-control'
+						onChange={handleChange30}
+						value={option1_Price}
+						placeholder='The price should be only a number'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-5'>
+					<label className='text-muted'>Activate / Deactivate</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setOption1_Active(!option1_Active)}
+						checked={option1_Active === true ? true : false}
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 2</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange23}
+						value={option2}
+						placeholder='Please add any additional options for this Ticket'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 2 (Arabic)</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange27}
+						value={option2_Arabic}
+						placeholder='Please add any additional options for this Ticket In Arabic'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 2 Price</label>
+					<input
+						type='number'
+						className='form-control'
+						onChange={handleChange31}
+						value={option2_Price}
+						placeholder='The price should be only a number'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-5'>
+					<label className='text-muted'>Activate / Deactivate</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setOption2_Active(!option2_Active)}
+						checked={option2_Active === true ? true : false}
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 3</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange24}
+						value={option3}
+						placeholder='Please add any additional options for this Ticket'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 3 (Arabic)</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange28}
+						value={option3_Arabic}
+						placeholder='Please add any additional options for this Ticket In Arabic'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 3 Price</label>
+					<input
+						type='number'
+						className='form-control'
+						onChange={handleChange32}
+						value={option3_Price}
+						placeholder='The price should be only a number'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-5'>
+					<label className='text-muted'>Activate / Deactivate</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setOption3_Active(!option3_Active)}
+						checked={option3_Active === true ? true : false}
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 4</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange25}
+						value={option4}
+						placeholder='Please add any additional options for this Ticket'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 4 (Arabic)</label>
+					<input
+						type='text'
+						className='form-control'
+						onChange={handleChange29}
+						value={option4_Arabic}
+						placeholder='Please add any additional options for this Ticket In Arabic'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-4'>
+					<label className='text-muted'>Additional Options 4 Price</label>
+					<input
+						type='number'
+						className='form-control'
+						onChange={handleChange33}
+						value={option4_Price}
+						placeholder='The price should be only a number'
+					/>
+				</div>
+
+				<div className='form-group col-md-3 mx-auto mt-5'>
+					<label className='text-muted'>Activate / Deactivate</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setOption4_Active(!option4_Active)}
+						checked={option4_Active === true ? true : false}
 					/>
 				</div>
 
@@ -676,7 +933,7 @@ const AddTicket = () => {
 	console.log(addThumbnail);
 
 	return (
-		<Fragment>
+		<AddTicketWrapper>
 			{click2 && clickMenu2 ? (
 				<DarkBG setClick2={setClick2} setClickMenu2={setClickMenu2} />
 			) : null}
@@ -750,8 +1007,15 @@ const AddTicket = () => {
 				</div>
 				{newTicketForm()}
 			</div>
-		</Fragment>
+		</AddTicketWrapper>
 	);
 };
 
 export default AddTicket;
+
+const AddTicketWrapper = styled.div`
+	input::placeholder {
+		color: #d3d3d3 !important;
+		font-size: 0.75em !important;
+	}
+`;
