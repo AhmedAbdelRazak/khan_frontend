@@ -321,20 +321,23 @@ const SuccessfullyPaid = () => {
 			) : (
 				<Fragment>
 					<div
+						className='mainTitle'
 						style={{
 							fontSize: "2rem",
 							textAlign: "center",
 							marginTop: "15px",
 							fontWeight: "bold",
 							letterSpacing: "2px",
-							color: "#000034",
+							color: "var(--mainBlue)",
 						}}>
-						Thank you for choosing Khan Khadija Resort!
+						Thank you for choosing
+						<br />
+						Khan Khadija Resort!
 					</div>
 					<div
-						className='mt-3'
+						className='mt-3 successMessage'
 						style={{
-							fontSize: "1.5rem",
+							fontSize: "1.2rem",
 							textAlign: "center",
 							fontWeight: "bold",
 							color: "darkgreen",
@@ -342,6 +345,7 @@ const SuccessfullyPaid = () => {
 						Your ticket was successfully reserved.
 					</div>
 					<div
+						className=''
 						style={{
 							fontSize: "1.5rem",
 							textAlign: "center",
@@ -351,7 +355,7 @@ const SuccessfullyPaid = () => {
 							color: "#871402",
 							textTransform: "capitalize",
 						}}>
-						Please take a snapshot or download your receipt
+						Please take a screen shot or download your receipt
 					</div>
 					<div
 						className='col-md-4 mx-auto mt-4 '
@@ -493,11 +497,19 @@ export default SuccessfullyPaid;
 
 const SchedulePage = styled.div`
 	background-color: var(--babyBlue);
+	/* background-color: white; */
 	padding-top: 20px;
 	padding-bottom: 120px;
 	margin: auto 5px;
 	min-height: 700px;
 
 	@media (max-width: 1000px) {
+		.mainTitle {
+			font-size: 1.6rem !important;
+		}
+
+		.successMessage {
+			font-size: 1rem !important;
+		}
 	}
 `;

@@ -696,7 +696,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								style={{ float: "right", fontWeight: "lighter" }}>
 								{quantity_Children && quantity_Adults
 									? `عدد الكبار: ${quantity_Adults}, عدد الأطفال: ${quantity_Children}`
-									: "Tickets Count"}
+									: "عدد التذاكر"}
 							</span>
 						</span>
 					}>

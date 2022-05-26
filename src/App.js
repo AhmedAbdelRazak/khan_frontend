@@ -10,7 +10,9 @@ import Navbar from "./Navbar/Navbar";
 import Sidebar from "./Navbar/Sidebar";
 import DarkBackground from "./Navbar/DarkBackground";
 import About from "./Pages/About";
+import AboutArabic from "./Pages/AboutArabic";
 import Contact from "./Pages/Contact";
+import ContactArabic from "./Pages/ContactArabic";
 import Home from "./Pages/HomePage/Home";
 import Listings from "./Pages/Listings";
 import Login from "./Pages/Login";
@@ -107,8 +109,18 @@ const App = () => {
 					<Route path='/' exact component={Home} />
 				)}
 
-				<Route path='/contact' exact component={Contact} />
-				<Route path='/about' exact component={About} />
+				{language === "Arabic" ? (
+					<Route path='/contact' exact component={ContactArabic} />
+				) : (
+					<Route path='/contact' exact component={Contact} />
+				)}
+
+				{language === "Arabic" ? (
+					<Route path='/about' exact component={AboutArabic} />
+				) : (
+					<Route path='/about' exact component={About} />
+				)}
+
 				{language === "Arabic" ? (
 					<Route
 						path='/listings'

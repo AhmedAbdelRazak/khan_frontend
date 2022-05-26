@@ -9,7 +9,7 @@ import { getContacts } from "../admin/apiAdmin";
 import styled from "styled-components";
 import ReactGA from "react-ga";
 
-const Contactus = () => {
+const ContactusArabic = () => {
 	useEffect(() => {
 		if (window !== "undefined") {
 			localStorage.removeItem("reservationData");
@@ -83,51 +83,50 @@ const Contactus = () => {
 	}, []);
 
 	return (
-		<ContactUsWrapper dir='ltr'>
+		<ContactUsWrapper dir='rtl'>
 			<Helmet>
 				<meta charSet='utf-8' />
-				<title>Khan Khadija | Contact Us</title>
+				<title>منتجع خان خديجة | اتصل بنا</title>
 
 				<meta
 					name='description'
-					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
+					content='خان خديجة أفضل منتجع في مصر. إذا كنت تبحث عن وقت للشفاء والمرح ، فيجب أن يكون منتجع خان خديجة هو خيارك الأول. تم تشغيل موقع منتجع خان خديجة بواسطة www.infinite-apps.com'
 				/>
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
 				<link rel='canonical' href='http://khankhadija.com/contact' />
 			</Helmet>
 			<div>
 				<div className='row mt-5 ml-3'>
-					<div className='col-md-4 my-3'>
+					<div className='col-md-4 my-3 textWrapper'>
 						<h3
 							style={{ color: "var(--orangePrimary)" }}
 							className='text-center'>
-							Do you have any inquiries...?
+							هل لديك اي استفسار ...؟
 						</h3>
 						<p className='Contact-us-paragraph mt-5'>
-							Please allow up to 24 hours for our Resort Support Team to answer
-							your inquiry by filling out the form.
+							يرجى منح فريق الدعم ما يصل إلى 24 ساعة للرد على استفسارك
 						</p>
 
 						<p className='Contact-us-paragraph'>
 							<div className='mt-3'>
 								<strong style={{ color: "var(--orangePrimary)" }}>
-									Business Hour:
+									ساعات العمل:
 								</strong>{" "}
-								{contact && contact.business_hours}.
+								{contact && contact.business_hours_Arabic}.
 							</div>
 							<br />
 							<strong style={{ color: "var(--orangePrimary)" }}>
-								Address:
+								عنوان:
 							</strong>{" "}
-							{contact && contact.address}.
+							{contact && contact.address_Arabic}.
 							<br />
 							<strong style={{ color: "var(--orangePrimary)" }}>
-								Phone #:
+								رقم الهاتف:
 							</strong>{" "}
 							{contact && contact.phone}.
 							<br />
 							<strong style={{ color: "var(--orangePrimary)" }}>
-								Email:
+								بريد الالكتروني:
 							</strong>{" "}
 							{contact && contact.email}.
 							<br />
@@ -137,17 +136,18 @@ const Contactus = () => {
 							<h3
 								style={{ color: "var(--orangePrimary)" }}
 								className='text-center'>
-								{contact && contact.header_1}
+								{contact && contact.header_1_Arabic}
 							</h3>
 
 							<p className='mt-3' style={{ fontSize: "0.85rem" }}>
-								&nbsp;&nbsp;&nbsp;&nbsp; {contact && contact.description_1}
+								&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+								{contact && contact.description_1_Arabic}
 							</p>
 						</div>
 					</div>
 					<Fragment left>
 						<div
-							className='col-md-7 my-3 mx-auto'
+							className='col-md-7 my-3 mx-auto '
 							style={
 								{
 									// boxShadow: "3px 0px 3px 3px rgba(0,0,0,0.5)",
@@ -157,23 +157,18 @@ const Contactus = () => {
 								<h2
 									style={{ color: "var(--mainBlue)" }}
 									className='text-center'>
-									Contact Us
+									اتصل بنا
 								</h2>
 							</Fragment>
 							{loading ? (
 								<h2>Loading...</h2>
 							) : (
-								<form className='mt-5 mr-3 ' onSubmit={clickSubmit}>
+								<form className='mt-5 mr-3 text-right' onSubmit={clickSubmit}>
 									<ToastContainer />
 									{/*first:  adding your name*/}
-									<div className='form-group'>
-										<label
-											className='text-center labelStyle'
-											style={{
-												fontWeight: "bold",
-												fontSize: "1.1rem",
-											}}>
-											Name:
+									<div className='form-group' dir='rtl'>
+										<label style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
+											الاسم:
 										</label>
 										<input
 											type='text'
@@ -188,9 +183,9 @@ const Contactus = () => {
 									{/*email:  adding your emailaddress*/}
 									<div className='form-group'>
 										<label
-											className='text-center labelStyle'
+											className='text-center'
 											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-											Email Address:
+											بريد الالكتروني :
 										</label>
 
 										<input
@@ -206,9 +201,9 @@ const Contactus = () => {
 									{/*Subject:  Adding your subject line*/}
 									<div className='form-group'>
 										<label
-											className='text-center labelStyle'
+											className='text-center'
 											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-											Subject:
+											عنوان الاستعلام الخاص بك:
 										</label>
 
 										<input
@@ -223,9 +218,9 @@ const Contactus = () => {
 									{/*message */}
 									<div className='form'>
 										<label
-											className='text-center labelStyle'
+											className='text-center'
 											style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-											Your Inquiry / Complaint:
+											استفسارك / شكواك:
 										</label>
 
 										<textarea
@@ -256,11 +251,14 @@ const Contactus = () => {
 	);
 };
 
-export default Contactus;
+export default ContactusArabic;
 
 const ContactUsWrapper = styled.div`
 	overflow: hidden;
-	.labelStyle {
-		text-align: center !important;
+	font-family: "Droid Arabic Kufi";
+
+	.textWrapper {
+		text-align: right;
+		margin-right: 30px;
 	}
 `;

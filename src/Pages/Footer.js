@@ -56,13 +56,11 @@ const Footer = () => {
 						<p style={{ fontWeight: "bold" }}>CONTACT US</p>
 						<p>
 							<i className='fa fa-map-marker'></i> <br />
-							<span dir='rtl'>
-								بترو بلاست للصناعات البلاستیكیة، طريق البتروكيماويات طريق
-								الاسكندرية القاهرة الصحراوى
-							</span>
+							<span dir='rtl'>قطاع النهضة، قسم أول العامرية، الإسكندرية</span>
 						</p>
 						<p>
-							<i className='fa fa-phone'></i> <br /> +201211492941
+							<i className='fa fa-phone'></i> <br /> ( 01221755440 - 01279941169
+							- 01208560444 - 034770362)
 						</p>
 					</div>
 					<div className='mx-auto'>

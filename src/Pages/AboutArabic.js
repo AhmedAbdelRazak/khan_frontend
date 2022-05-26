@@ -10,7 +10,7 @@ import { getAbouts } from "../admin/apiAdmin";
 import KhanMap from "./HomePage/KhanMap";
 import PowerBySnippet from "./PowerBySnippet";
 
-const About = () => {
+const AboutArabic = () => {
 	const [aboutus, setAboutUs] = useState({});
 
 	const gettingAllAbouts = () => {
@@ -36,28 +36,30 @@ const About = () => {
 	}, []);
 
 	return (
-		<AboutPageWrapper>
+		<AboutPageWrapper dir='rtl'>
 			<Helmet>
 				<meta charSet='utf-8' />
-				<title>Khan Khadija | About Us</title>
+				<title>منتجع خان خديجة | معلومات عنا</title>
 				<meta
 					name='description'
-					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
+					content='خان خديجة أفضل منتجع في مصر. إذا كنت تبحث عن وقت للشفاء والمرح ، فيجب أن يكون منتجع خان خديجة هو خيارك الأول. تم تشغيل موقع منتجع خان خديجة بواسطة www.infinite-apps.com'
 				/>
+				<link rel='canonical' href='https://khankhadija.com/about' />
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='http://khankhadija.com/about' />
 			</Helmet>
 			<div className='container my-5'>
-				<h1 className='title text-center '>ABOUT US</h1>
+				<h1 className='title text-center '>من نحن؟</h1>
 				<div className='col-md-5 mx-auto mb-5'>
 					<br />
 					<div className='horizLine'></div>
 				</div>
 				<div className='row'>
 					<div className='col-md-6 about-us'>
-						<p className='about-title'>{aboutus && aboutus.header_1}</p>
+						<p className='about-title'>{aboutus && aboutus.header_1_Arabic}</p>
 						<ul>
-							<li>{aboutus && aboutus.description_1}</li>
+							<li className='descriptionlist'>
+								{aboutus && aboutus.description_1_Arabic}
+							</li>
 						</ul>
 					</div>
 					{aboutus ? (
@@ -83,13 +85,14 @@ const About = () => {
 	);
 };
 
-export default About;
+export default AboutArabic;
 
 const AboutPageWrapper = styled.section`
 	background: #f8f9fa;
 	padding-bottom: 200px;
 	padding-top: 50px;
 	overflow: hidden;
+	font-family: "Droid Arabic Kufi";
 
 	.title {
 		font-weight: bolder;
@@ -100,21 +103,21 @@ const AboutPageWrapper = styled.section`
 		font-size: 40px;
 		font-weight: 600;
 		margin-top: 8%;
+		text-align: right;
+		margin-right: 35px;
 		color: var(--orangePrimary);
-		margin-left: 55px;
 	}
-
-	.about-us ul li {
-		margin: 0px 0px;
-		list-style: none;
-		padding: 0px !important;
+	#about-us ul li {
+		margin: 0px 0;
 	}
 
 	ul {
+		text-align: right;
+
 		list-style: none;
 	}
 
-	.about-us ul {
+	#about-us ul {
 		margin-left: 20px;
 	}
 
@@ -128,24 +131,43 @@ const AboutPageWrapper = styled.section`
 	}
 
 	@media (max-width: 1000px) {
-		text-align: center;
 		padding-bottom: 0px;
 		padding-top: 0px;
 
+		.title {
+			text-align: center;
+		}
+
 		.about-title {
-			font-size: 40px;
-			font-weight: 600;
+			text-align: center;
 			margin-top: 0%;
-			color: var(--orangePrimary);
+			margin-right: 0px;
+		}
+		#about-us ul li {
+			text-align: center;
+			margin-right: 30px !important;
+		}
+
+		ul {
+			text-align: center;
+		}
+
+		#about-us ul {
+			text-align: center;
 			margin-left: 0px;
 		}
 
-		ul li {
-			margin: 0px !important;
+		.imgdiv {
+			/* transform: rotate(8deg); */
+			/* box-shadow: 3px 10px 3px 10px rgba(0, 0, 0, 0.1); */
 		}
-		.about-us ul {
-			margin-left: 0px !important;
-			margin-right: 30px;
+
+		.horizLine {
+			text-align: center;
+		}
+
+		.descriptionlist {
+			margin-left: 30px;
 		}
 	}
 `;

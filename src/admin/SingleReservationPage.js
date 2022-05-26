@@ -1166,4 +1166,5 @@ export default SingleReservationPage;
 
 const SingleReservationPageWrapper = styled.div`
 	min-height: 500px;
+	font-family: "Droid Arabic Kufi" !important;
 `;
