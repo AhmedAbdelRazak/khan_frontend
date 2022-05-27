@@ -59,7 +59,9 @@ const BookNowGeneral = () => {
 	// eslint-disable-next-line
 	const [userEmail, setUserEmail] = useState("");
 
-	var today = new Date();
+	var today = new Date().toLocaleDateString("en-US", {
+		timeZone: "Africa/Cairo",
+	});
 	var tomorrow = new Date(today);
 	var yesterday = new Date(today);
 
@@ -579,13 +581,21 @@ const BookNowGeneral = () => {
 					<DatePicker
 						className='inputFields'
 						onChange={(date) =>
-							setChosenDate(new Date(date._d).toLocaleDateString() || date._d)
+							setChosenDate(
+								new Date(date._d).toLocaleDateString("en-US", {
+									timeZone: "Africa/Cairo",
+								}) || date._d,
+							)
 						}
 						disabledDate={disabledDate}
 						max
 						size='small'
-						showToday={true}
-						defaultValue={chosenDate || moment(new Date(tomorrow))}
+						showToday={false}
+						defaultValue={moment(
+							new Date().toLocaleDateString("en-US", {
+								timeZone: "Africa/Cairo",
+							}),
+						)}
 						placeholder='Please pick the desired schedule date'
 						style={{
 							height: "auto",
@@ -1115,7 +1125,9 @@ const BookNowGeneral = () => {
 								chosenService_Package: chosenService_Package,
 								chosenDate: chosenDate
 									? chosenDate
-									: new Date(tomorrow).toLocaleDateString(),
+									: new Date().toLocaleDateString("en-US", {
+											timeZone: "Africa/Cairo",
+									  }),
 								quantity_Children: quantity_Children ? quantity_Children : 0,
 								quantity_Adults: quantity_Adults ? quantity_Adults : 1,
 								chosenCoupon: chosenCoupon,

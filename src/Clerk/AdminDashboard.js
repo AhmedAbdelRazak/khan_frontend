@@ -56,8 +56,8 @@ const AdminDashboard = () => {
 
 	const loadHistReservations = () => {
 		function compareTotalAppointments(a, b) {
-			const TotalAppointmentsA = a.scheduledDate;
-			const TotalAppointmentsB = b.scheduledDate;
+			const TotalAppointmentsA = new Date(a.scheduledDate).setHours(0, 0, 0, 0);
+			const TotalAppointmentsB = new Date(b.scheduledDate).setHours(0, 0, 0, 0);
 			let comparison = 0;
 			if (TotalAppointmentsA < TotalAppointmentsB) {
 				comparison = 1;
@@ -72,17 +72,7 @@ const AdminDashboard = () => {
 				console.log(data.error);
 			} else {
 				if (clickedButton === "Select All") {
-					setHistBookings(
-						data
-							.filter(
-								(i) =>
-									new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
-										new Date(selectedDate).setHours(0, 0, 0, 0) ||
-									new Date(i.scheduledDate).setHours(0, 0, 0, 0) >
-										new Date(selectedDate).setHours(0, 0, 0, 0),
-							)
-							.sort(compareTotalAppointments),
-					);
+					setHistBookings(data.sort(compareTotalAppointments));
 				} else if (clickedButton === "Today" || clickedButton === "Yesterday") {
 					setHistBookings(
 						data
@@ -182,6 +172,18 @@ const AdminDashboard = () => {
 				}
 			},
 		);
+	};
+
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
 	const allReservationsDetails = () => {
@@ -353,9 +355,28 @@ const AdminDashboard = () => {
 								<td>{s.scheduledByUserEmail}</td>
 								<td style={{ width: "10px" }}>{s.quantity}</td>
 								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
-								<td>{new Date(s.createdAt).toLocaleString()}</td>
 								<td>
-									{new Date(s.scheduledDate).toLocaleString()} <br />
+									{dateFormat(
+										new Date(s.createdAt).toLocaleString("en-US", {
+											timeZone: "Africa/Cairo",
+										}),
+									)}
+								</td>
+								{/* <td>
+										{new Date(s.scheduledDate).toLocaleDateString() !==
+										"Invalid Date"
+											? dateFormat(new Date(s.scheduledDate).toLocaleString())
+											: dateFormat(
+													new Date(s.createdAt).toLocaleString("en-US", {
+														timeZone: "Africa/Cairo",
+													}),
+											  )}{" "}
+										<br />
+									</td> */}
+
+								<td>
+									{dateFormat(new Date(s.scheduledDate).toLocaleString())}{" "}
+									<br />
 								</td>
 								<td>+{s.phoneNumber}</td>
 								<td>{s.event}</td>

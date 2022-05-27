@@ -90,7 +90,9 @@ const BookNow = ({ match }) => {
 		});
 	};
 
-	var today = new Date();
+	var today = new Date().toLocaleDateString("en-US", {
+		timeZone: "Africa/Cairo",
+	});
 	var tomorrow = new Date(today);
 	var yesterday = new Date(today);
 
@@ -98,7 +100,11 @@ const BookNow = ({ match }) => {
 
 	useEffect(() => {
 		if (!localStorage.getItem("reservationData")) {
-			setChosenDate(new Date(tomorrow).toLocaleDateString());
+			setChosenDate(
+				new Date(tomorrow).toLocaleDateString("en-US", {
+					timeZone: "Africa/Cairo",
+				}),
+			);
 		} else {
 			setChosenDate(
 				new Date(
@@ -108,7 +114,9 @@ const BookNow = ({ match }) => {
 								localStorage.getItem("reservationData"),
 						).chosenDate,
 					)._d,
-				).toLocaleDateString(),
+				).toLocaleDateString("en-US", {
+					timeZone: "Africa/Cairo",
+				}),
 			);
 
 			setChosenBusStationsDetails(

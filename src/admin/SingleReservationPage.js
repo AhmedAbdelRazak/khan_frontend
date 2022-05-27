@@ -657,11 +657,25 @@ const SingleReservationPage = (props) => {
 
 									<li className='list-group-item'>
 										Event Date:{" "}
-										{dateFormat(
-											new Date(
-												singleOrder && singleOrder.scheduledDate,
-											).toLocaleString(),
-										)}
+										{new Date(
+											singleOrder.scheduledDate,
+										).toLocaleDateString() !== "Invalid Date"
+											? dateFormat(
+													new Date(singleOrder.scheduledDate).toLocaleString(
+														"en-US",
+														{
+															timeZone: "Africa/Cairo",
+														},
+													),
+											  )
+											: dateFormat(
+													new Date(singleOrder.createdAt).toLocaleString(
+														"en-US",
+														{
+															timeZone: "Africa/Cairo",
+														},
+													),
+											  )}{" "}
 									</li>
 
 									<li className='list-group-item'>
@@ -766,7 +780,9 @@ const SingleReservationPage = (props) => {
 										Ordered on:{" "}
 										{moment(singleOrder && singleOrder.createdAt).fromNow()} (
 										{dateFormat(
-											new Date(singleOrder.createdAt).toLocaleString(),
+											new Date(singleOrder.createdAt).toLocaleString("en-US", {
+												timeZone: "Africa/Cairo",
+											}),
 										)}
 										)
 									</li>

@@ -587,13 +587,21 @@ const BookNowGeneral_Arabic = ({ language }) => {
 					<DatePicker
 						className='inputFields'
 						onChange={(date) =>
-							setChosenDate(new Date(date._d).toLocaleDateString() || date._d)
+							setChosenDate(
+								new Date(date._d).toLocaleDateString("en-US", {
+									timeZone: "Africa/Cairo",
+								}) || date._d,
+							)
 						}
 						disabledDate={disabledDate}
 						max
 						size='small'
-						showToday={true}
-						defaultValue={chosenDate || moment(new Date(tomorrow))}
+						showToday={false}
+						defaultValue={moment(
+							new Date().toLocaleDateString("en-US", {
+								timeZone: "Africa/Cairo",
+							}),
+						)}
 						placeholder='Please pick the desired schedule date'
 						style={{
 							height: "auto",
@@ -1121,7 +1129,9 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								chosenService_Package: chosenService_Package,
 								chosenDate: chosenDate
 									? chosenDate
-									: new Date(tomorrow).toLocaleDateString(),
+									: new Date().toLocaleDateString("en-US", {
+											timeZone: "Africa/Cairo",
+									  }),
 								quantity_Children: quantity_Children ? quantity_Children : 0,
 								quantity_Adults: quantity_Adults ? quantity_Adults : 1,
 								chosenCoupon: chosenCoupon,

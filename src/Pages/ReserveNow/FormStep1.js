@@ -231,7 +231,11 @@ const FormStep1 = ({
 			<DatePicker
 				className='inputFields'
 				onChange={(date) => {
-					setChosenDate(new Date(date._d).toLocaleDateString() || date._d);
+					setChosenDate(
+						new Date(date._d).toLocaleDateString("en-US", {
+							timeZone: "Africa/Cairo",
+						}) || date._d,
+					);
 
 					ReactGA.event({
 						category: "Form Filling",
@@ -242,10 +246,14 @@ const FormStep1 = ({
 				disabledDate={disabledDate}
 				max
 				size='small'
-				showToday={true}
+				showToday={false}
 				defaultValue={
 					!localStorage.getItem("reservationData")
-						? moment()
+						? moment(
+								new Date().toLocaleDateString("en-US", {
+									timeZone: "Africa/Cairo",
+								}),
+						  )
 						: moment(
 								JSON.parse(
 									localStorage.getItem("reservationData") &&

@@ -40,7 +40,10 @@ const AdminDashboard = () => {
 		setClickMenu2(click2);
 	}, [click2, clickMenu2]);
 
-	var today = new Date();
+	var today = new Date().toLocaleDateString("en-US", {
+		timeZone: "Africa/Cairo",
+	});
+
 	var yesterday = new Date(today);
 	var last7Days = new Date(today);
 	var last30Days = new Date(today);
@@ -57,8 +60,8 @@ const AdminDashboard = () => {
 
 	const loadHistReservations = () => {
 		function compareTotalAppointments(a, b) {
-			const TotalAppointmentsA = a.scheduledDate;
-			const TotalAppointmentsB = b.scheduledDate;
+			const TotalAppointmentsA = new Date(a.scheduledDate).setHours(0, 0, 0, 0);
+			const TotalAppointmentsB = new Date(b.scheduledDate).setHours(0, 0, 0, 0);
 			let comparison = 0;
 			if (TotalAppointmentsA < TotalAppointmentsB) {
 				comparison = 1;
@@ -67,23 +70,14 @@ const AdminDashboard = () => {
 			}
 			return comparison;
 		}
+
 		setLoading(true);
 		getPreviousBookingsAdmin(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
 				if (clickedButton === "Select All") {
-					setHistBookings(
-						data
-							.filter(
-								(i) =>
-									new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
-										new Date(selectedDate).setHours(0, 0, 0, 0) ||
-									new Date(i.scheduledDate).setHours(0, 0, 0, 0) >
-										new Date(selectedDate).setHours(0, 0, 0, 0),
-							)
-							.sort(compareTotalAppointments),
-					);
+					setHistBookings(data.sort(compareTotalAppointments));
 				} else if (clickedButton === "Today" || clickedButton === "Yesterday") {
 					setHistBookings(
 						data
@@ -297,6 +291,18 @@ const AdminDashboard = () => {
 											}),
 										)}
 									</td>
+									{/* <td>
+										{new Date(s.scheduledDate).toLocaleDateString() !==
+										"Invalid Date"
+											? dateFormat(new Date(s.scheduledDate).toLocaleString())
+											: dateFormat(
+													new Date(s.createdAt).toLocaleString("en-US", {
+														timeZone: "Africa/Cairo",
+													}),
+											  )}{" "}
+										<br />
+									</td> */}
+
 									<td>
 										{dateFormat(new Date(s.scheduledDate).toLocaleString())}{" "}
 										<br />
