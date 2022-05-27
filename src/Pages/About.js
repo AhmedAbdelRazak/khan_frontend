@@ -45,7 +45,7 @@ const About = () => {
 					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
 				/>
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='http://khankhadija.com/about' />
+				<link rel='canonical' href='https://khankhadija.com/about' />
 			</Helmet>
 			<div className='container my-5'>
 				<h1 className='title text-center '>ABOUT US</h1>

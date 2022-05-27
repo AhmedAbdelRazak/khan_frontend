@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { getTickets } from "../../apiCore";
 import PackagePhotos2 from "./PackagePhotos2";
 import ReactGA from "react-ga";
+import Helmet from "react-helmet";
 
 const SingleTicketPage = ({ match }) => {
 	// eslint-disable-next-line
@@ -53,6 +54,19 @@ const SingleTicketPage = ({ match }) => {
 
 	return (
 		<SingleTicketPageWrapper>
+			<Helmet>
+				<meta charSet='utf-8' />
+				<title>{chosenService_Package}</title>
+				<meta
+					name='description'
+					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
+				/>
+				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
+				<link
+					rel='canonical'
+					href={`https://khankhadija.com/ticket/${match.params.ticketslug}`}
+				/>
+			</Helmet>
 			<div className='mx-auto photosWrapperCellPhone'>
 				<PackagePhotos2 serviceDetails={serviceDetails} />
 			</div>

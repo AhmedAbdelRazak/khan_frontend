@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import Adminsidebar from "./AdminSideBar/Adminsidebar";
+import { toast } from "react-toastify";
 import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
 import { Button } from "antd";
@@ -12,6 +13,7 @@ import {
 	getPreviousBookingsAdmin,
 	updateOrderStatus,
 	getStatusValues,
+	removeReservation,
 } from "./apiAdmin";
 import ExecutiveSummary from "./ExecutiveSummary";
 // import ReactExport from "react-export-excel";
@@ -181,6 +183,19 @@ const AdminDashboard = () => {
 		});
 	};
 
+	const handleRemove = (reservationId) => {
+		if (window.confirm("Delete Reservation?")) {
+			setLoading(true);
+			removeReservation(reservationId, user._id, token)
+				.then((res) => {
+					loadHistReservations(); // load all Reservations
+					setLoading(false);
+					toast.error(`Reservation "${res.data.name}" deleted`);
+				})
+				.catch((err) => console.log(err));
+		}
+	};
+
 	const dateFormat = (x) => {
 		var requiredDate = new Date(x);
 		var yyyy = requiredDate.getFullYear();
@@ -240,6 +255,7 @@ const AdminDashboard = () => {
 							<th scope='col'>Before Discount (L.E.)</th>
 							<th scope='col'>Total Amount (L.E.)</th>
 							<th scope='col'>Status</th>
+							<th scope='col'>Delete?</th>
 						</tr>
 					</thead>
 
@@ -356,6 +372,19 @@ const AdminDashboard = () => {
 												</Fragment>
 											)}
 										</select>
+									</td>
+
+									<td>
+										<button
+											className='deleteButton'
+											onClick={() => {
+												handleRemove(s._id);
+												setTimeout(function () {
+													window.location.reload(false);
+												}, 1500);
+											}}>
+											Delete
+										</button>
 									</td>
 								</tr>
 							);
@@ -564,6 +593,16 @@ const Summary = styled.div`
 	margin-right: 20px;
 	margin-left: 20px;
 	overflow-x: auto;
+
+	.deleteButton {
+		padding: 5px;
+		border: none;
+		border-radius: 3px;
+		cursor: pointer;
+		color: black;
+		background: #ffcfcf;
+	}
+
 	@media (max-width: 1100px) {
 		font-size: 0.5rem;
 		margin-right: 5px;

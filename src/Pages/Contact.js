@@ -93,7 +93,7 @@ const Contactus = () => {
 					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
 				/>
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
-				<link rel='canonical' href='http://khankhadija.com/contact' />
+				<link rel='canonical' href='https://khankhadija.com/contact' />
 			</Helmet>
 			<div>
 				<div className='row mt-5 ml-3'>

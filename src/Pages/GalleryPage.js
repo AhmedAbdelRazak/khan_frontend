@@ -4,6 +4,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { getGalleries } from "../admin/apiAdmin";
+import Helmet from "react-helmet";
 
 const GalleryPage = () => {
 	const [galleries, setGalleries] = useState([]);
@@ -17,6 +18,19 @@ const GalleryPage = () => {
 
 	return (
 		<GalleryPageWrapper>
+			<Helmet>
+				<meta charSet='utf-8' />
+				<title>Khan Khadija Resort | Our Gallery</title>
+				<meta
+					name='description'
+					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
+				/>
+				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
+				<link
+					rel='canonical'
+					href='https://khankhadija.com/khan-khadija-gallery'
+				/>
+			</Helmet>
 			<h1
 				// data-aos='fade-up'
 				className='titleBookNow'>

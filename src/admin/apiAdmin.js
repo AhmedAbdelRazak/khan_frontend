@@ -684,6 +684,24 @@ export const UpdateScheduledReservation = (
 		.catch((err) => console.log(err));
 };
 
+export const removeReservation = (reservationId, userId, token) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/reservation/${reservationId}/${userId}`,
+		{
+			method: "DELETE",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const AllPossibleHours = [
 	"00:00",
 	"00:15",
