@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "antd/dist/antd.min.css";
@@ -68,6 +68,7 @@ const App = () => {
 	const languageToggle = () => {
 		console.log(language);
 		localStorage.setItem("lang", JSON.stringify(language));
+
 		// window.location.reload(false);
 	};
 
@@ -76,12 +77,26 @@ const App = () => {
 		// eslint-disable-next-line
 	}, [language]);
 
+	let url = window.location.pathname + window.location.search;
+
+	useEffect(() => {
+		if (url.includes("ar")) {
+			setLanguage("Arabic");
+		} else {
+			setLanguage("English");
+		}
+		// eslint-disable-next-line
+	}, []);
+
 	useEffect(() => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
 		// To Report Page View
 		ReactGA.pageview(window.location.pathname + window.location.search);
 		// eslint-disable-next-line
 	}, []);
+
+	console.log(window.location.pathname + window.location.search);
+	console.log(url.replace("/ar", ""), "url.replace");
 
 	return (
 		<BrowserRouter>
@@ -103,10 +118,12 @@ const App = () => {
 			/>
 			<ToastContainer />
 			<Switch>
-				{language === "Arabic" ? (
+				{url === "/ar" ? (
+					<Redirect to='/' />
+				) : language === "Arabic" ? (
 					<Route path='/' exact component={Home_Arabic} language={language} />
 				) : (
-					<Route path='/' exact component={Home} />
+					<Route path='/' exact component={Home} language={language} />
 				)}
 
 				{language === "Arabic" ? (
@@ -149,6 +166,10 @@ const App = () => {
 						component={SuccessfullyPaid}
 					/>
 				)}
+
+				{url.includes("/ar/book-now") ? (
+					<Redirect to={`${url.replace("/ar", "")}`} />
+				) : null}
 
 				{language === "Arabic" ? (
 					<Route path='/book-now/:ticketName' exact component={BookNowArabic} />

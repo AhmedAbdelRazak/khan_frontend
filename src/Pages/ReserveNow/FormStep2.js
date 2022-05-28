@@ -15,6 +15,7 @@ const FormStep2 = ({
 	setEvent_ocassion,
 	setCountryCallingCode,
 	countryCallingCode,
+	serviceDetails,
 }) => {
 	const handleScheduledByUserFirstName = (event) => {
 		setFullName(event.target.value);
@@ -108,7 +109,7 @@ const FormStep2 = ({
 						EGY Code: +2
 					</div>
 				</div>
-				<div className='col-md-6 my-4'>
+				<div className='col-md-6 my-4 mx-auto'>
 					<label
 						className='textResizeMain2'
 						style={{
@@ -127,87 +128,92 @@ const FormStep2 = ({
 						placeholder='(**Required)'
 					/>
 				</div>
-
-				<div className='col-md-6 my-3 mx-auto'>
-					<label
-						className='textResizeMain2'
-						style={{
-							fontWeight: "bold",
-							fontSize: "1rem",
-							color: "#00407f",
-						}}>
-						Occasion
-					</label>
-					<br />
-					<select
-						onChange={handleEven_Ocassion}
-						className='inputFields mb-3'
-						style={{
-							paddingTop: "12px",
-							paddingBottom: "12px",
-							paddingRight: "130px",
-							// textAlign: "center",
-							border: "#cfcfcf solid 1px",
-							borderRadius: "10px",
-							width: "75%",
-							fontSize: "0.9rem",
-							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-						}}>
-						{event_ocassion && event_ocassion !== "Select An Occasion" ? (
-							<option className='items text-muted inputFields'>
-								{event_ocassion}
+				{serviceDetails && serviceDetails.displayOcassion ? (
+					<div className='col-md-6 my-3 mx-auto'>
+						<label
+							className='textResizeMain2'
+							style={{
+								fontWeight: "bold",
+								fontSize: "1rem",
+								color: "#00407f",
+							}}>
+							Occasion
+						</label>
+						<br />
+						<select
+							onChange={handleEven_Ocassion}
+							className='inputFields mb-3'
+							style={{
+								paddingTop: "12px",
+								paddingBottom: "12px",
+								paddingRight: "130px",
+								// textAlign: "center",
+								border: "#cfcfcf solid 1px",
+								borderRadius: "10px",
+								width: "75%",
+								fontSize: "0.9rem",
+								// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+							}}>
+							{event_ocassion && event_ocassion !== "Select An Occasion" ? (
+								<option className='items text-muted inputFields'>
+									{event_ocassion}
+								</option>
+							) : (
+								<option className='items text-muted inputFields'>
+									Select An Occasion
+								</option>
+							)}
+							<option className='items text-muted inputFields' value='Day Use'>
+								Day Use
 							</option>
-						) : (
-							<option className='items text-muted inputFields'>
-								Select An Occasion
+							<option className='items text-muted inputFields' value='Birthday'>
+								Birthday
 							</option>
-						)}
-						<option className='items text-muted inputFields' value='Day Use'>
-							Day Use
-						</option>
-						<option className='items text-muted inputFields' value='Birthday'>
-							Birthday
-						</option>
 
-						<option className='items text-muted inputFields' value='Graduation'>
-							Graduation
-						</option>
-						<option className='items text-muted inputFields' value='Engagement'>
-							Engagement
-						</option>
-						<option className='items text-muted inputFields' value='Wedding'>
-							Wedding
-						</option>
-						<option
-							className='items text-muted inputFields'
-							value='Anniversary'>
-							Anniversary
-						</option>
-						<option
-							className='items text-muted inputFields'
-							value='Mardi Gras Celebration'>
-							Mardi Gras Celebration
-						</option>
-						<option
-							className='items text-muted inputFields'
-							value='Christmas Party'>
-							Christmas Party
-						</option>
-						<option
-							className='items text-muted inputFields'
-							value='New Years Party'>
-							New Years Party
-						</option>
-						<option
-							className='items text-muted inputFields'
-							value='Company Event'>
-							Company Event
-						</option>
-						<option className='items text-muted inputFields' value='Other'>
-							Other
-						</option>
-					</select>
-				</div>
+							<option
+								className='items text-muted inputFields'
+								value='Graduation'>
+								Graduation
+							</option>
+							<option
+								className='items text-muted inputFields'
+								value='Engagement'>
+								Engagement
+							</option>
+							<option className='items text-muted inputFields' value='Wedding'>
+								Wedding
+							</option>
+							<option
+								className='items text-muted inputFields'
+								value='Anniversary'>
+								Anniversary
+							</option>
+							<option
+								className='items text-muted inputFields'
+								value='Mardi Gras Celebration'>
+								Mardi Gras Celebration
+							</option>
+							<option
+								className='items text-muted inputFields'
+								value='Christmas Party'>
+								Christmas Party
+							</option>
+							<option
+								className='items text-muted inputFields'
+								value='New Years Party'>
+								New Years Party
+							</option>
+							<option
+								className='items text-muted inputFields'
+								value='Company Event'>
+								Company Event
+							</option>
+							<option className='items text-muted inputFields' value='Other'>
+								Other
+							</option>
+						</select>
+					</div>
+				) : null}
 			</div>
 		</FormStep2Wrapper>
 	);

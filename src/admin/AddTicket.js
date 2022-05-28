@@ -47,6 +47,8 @@ const AddTicket = () => {
 	const [option2_Active, setOption2_Active] = useState(false);
 	const [option3_Active, setOption3_Active] = useState(false);
 	const [option4_Active, setOption4_Active] = useState(false);
+	const [displayBusStationOption, setDisplayBusStationOption] = useState(true);
+	const [displayOcassion, setDisplayOcassion] = useState(true);
 
 	const [allTickets, setAllTickets] = useState([]);
 	const [serviceDescription, setServiceDescription] = useState("");
@@ -349,6 +351,8 @@ const AddTicket = () => {
 			serviceDescription9,
 			serviceDescription9_Arabic,
 			serviceDescription10,
+			displayBusStationOption,
+			displayOcassion,
 			serviceDescription10_Arabic,
 			thumbnail: addThumbnail && addThumbnail.images,
 		}).then((data) => {
@@ -687,6 +691,32 @@ const AddTicket = () => {
 						className='ml-2 mt-2'
 						onChange={() => setOption4_Active(!option4_Active)}
 						checked={option4_Active === true ? true : false}
+					/>
+				</div>
+
+				<div className='form-group col-md-5 mx-auto mt-5'>
+					<label className='text-muted'>
+						Display Bus Stations While Reserving?
+					</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() =>
+							setDisplayBusStationOption(!displayBusStationOption)
+						}
+						checked={displayBusStationOption === true ? true : false}
+					/>
+				</div>
+
+				<div className='form-group col-md-5 mx-auto mt-5'>
+					<label className='text-muted'>
+						Display Ocassion While Reserving?
+					</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setDisplayOcassion(!displayOcassion)}
+						checked={displayOcassion === true ? true : false}
 					/>
 				</div>
 

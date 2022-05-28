@@ -6,6 +6,7 @@ import "antd/dist/antd.min.css";
 import { Collapse, DatePicker } from "antd";
 import { getTickets } from "../../apiCore";
 import moment from "moment";
+import ReactGA from "react-ga";
 import { Link } from "react-router-dom";
 import TicketIcon from "../../GeneralImgs/ticketIcon.png";
 import DateIcon from "../../GeneralImgs/dateIcon.png";
@@ -90,6 +91,11 @@ const BookNowGeneral_Arabic = ({ language }) => {
 				: allTickets[indexOfService];
 
 		setServiceDetails(chosenServiceDetails);
+		ReactGA.event({
+			category: "Ticket Was Picked For Reservation",
+			action: `Ticket Was Picked From Home Page (${event.target.value})`,
+			label: "User Selected his desired Ticket",
+		});
 	};
 
 	const loadAllCoupons = () =>
@@ -586,13 +592,22 @@ const BookNowGeneral_Arabic = ({ language }) => {
 					}>
 					<DatePicker
 						className='inputFields'
-						onChange={(date) =>
+						onChange={(date) => {
 							setChosenDate(
 								new Date(date._d).toLocaleDateString("en-US", {
 									timeZone: "Africa/Cairo",
 								}) || date._d,
-							)
-						}
+							);
+							ReactGA.event({
+								category: "Date Was Filled For Reservation",
+								action: `Date Was Filled From Home Page ${new Date(
+									date._d,
+								).toLocaleDateString("en-US", {
+									timeZone: "Africa/Cairo",
+								})}`,
+								label: "User Filled In Scheduling Date",
+							});
+						}}
 						disabledDate={disabledDate}
 						max
 						size='small'
@@ -752,54 +767,57 @@ const BookNowGeneral_Arabic = ({ language }) => {
 									placeholder='(**Required)'
 								/>
 							</div>
-							<div className='col-md-10 mx-auto my-1'>
-								<label
-									className='textResizeMain2'
-									style={{
-										fontWeight: "bold",
-										fontSize: "1rem",
-										color: "#00407f",
-									}}>
-									وسيلة المواصلات
-								</label>
-								<br />
-								<select
-									onChange={handleChosenBusStation}
-									className='inputFields mb-3'
-									style={{
-										paddingTop: "12px",
-										paddingBottom: "12px",
-										// paddingRight: "130px",
-										// textAlign: "center",
-										border: "#cfcfcf solid 1px",
-										borderRadius: "10px",
-										width: "75%",
-										fontSize: "0.9rem",
-										// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-									}}>
-									{busStationName &&
-									busStationName !== "Please Select (Required)" ? (
-										<option className='items text-muted inputFields'>
-											{busStationName}
-										</option>
-									) : (
-										<option className='items text-muted inputFields'>
-											يرجى تحديد (مطلوب)
-										</option>
-									)}
-									{busStations &&
-										busStations.map((b, i) => {
-											return (
-												<option
-													key={i}
-													className='items text-muted inputFields'
-													value={b.address}>
-													{b.address} ({b.price} L.E.)
-												</option>
-											);
-										})}
-								</select>
-							</div>
+
+							{serviceDetails && serviceDetails.displayBusStationOption ? (
+								<div className='col-md-10 mx-auto my-1'>
+									<label
+										className='textResizeMain2'
+										style={{
+											fontWeight: "bold",
+											fontSize: "1rem",
+											color: "#00407f",
+										}}>
+										وسيلة المواصلات
+									</label>
+									<br />
+									<select
+										onChange={handleChosenBusStation}
+										className='inputFields mb-3'
+										style={{
+											paddingTop: "12px",
+											paddingBottom: "12px",
+											// paddingRight: "130px",
+											// textAlign: "center",
+											border: "#cfcfcf solid 1px",
+											borderRadius: "10px",
+											width: "75%",
+											fontSize: "0.9rem",
+											// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+										}}>
+										{busStationName &&
+										busStationName !== "Please Select (Required)" ? (
+											<option className='items text-muted inputFields'>
+												{busStationName}
+											</option>
+										) : (
+											<option className='items text-muted inputFields'>
+												يرجى تحديد (مطلوب)
+											</option>
+										)}
+										{busStations &&
+											busStations.map((b, i) => {
+												return (
+													<option
+														key={i}
+														className='items text-muted inputFields'
+														value={b.address}>
+														{b.address} ({b.price} L.E.)
+													</option>
+												);
+											})}
+									</select>
+								</div>
+							) : null}
 
 							<div className='col-md-10 mx-auto my-1'>
 								{busStationName &&
@@ -1143,6 +1161,11 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								JSON.stringify(reservationData),
 							);
 							window.scrollTo({ top: 0, behavior: "smooth" });
+							ReactGA.event({
+								category: "Booked Now Button Was Clicked From Home Page",
+								action: `Booked Now Button Was Clicked From The Form With Orange in the home page`,
+								label: "Booked Now Was Clicked",
+							});
 						}}
 						className='btn btn-block'>
 						احجز الآن!

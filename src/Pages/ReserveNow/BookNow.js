@@ -444,6 +444,7 @@ const BookNow = ({ match }) => {
 					setPhone={setPhone}
 					event_ocassion={event_ocassion}
 					setEvent_ocassion={setEvent_ocassion}
+					serviceDetails={serviceDetails}
 				/>
 			),
 		},

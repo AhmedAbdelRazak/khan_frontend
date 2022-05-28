@@ -375,59 +375,56 @@ const FormStep1 = ({
 					)}
 				</div>
 
-				<div
-					className={
-						chosenBusStationDetails &&
-						chosenBusStationDetails.address !== "NO BUS NEEDED"
-							? "col-md-5 my-3 mx-auto"
-							: "col-md-6 my-3 mx-auto"
-					}>
-					<label
-						className='textResizeMain2'
-						style={{
-							fontWeight: "bold",
-							fontSize: "1.1rem",
-							// color: "#00407f",
-						}}>
-						Transportation / Bus Station
-					</label>
-					<br />
-					<select
-						onChange={handleChosenBusStation}
-						className='inputFields mb-3'
-						style={{
-							paddingTop: "12px",
-							paddingBottom: "12px",
-							// paddingRight: "130px",
-							// textAlign: "center",
-							border: "#cfcfcf solid 1px",
-							borderRadius: "10px",
-							width: "75%",
-							fontSize: "0.9rem",
-							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-						}}>
-						{busStationName && busStationName !== "Please Select (Required)" ? (
-							<option className='items text-muted inputFields'>
-								{chosenBusStationDetails.address}
-							</option>
-						) : (
-							<option className='items text-muted inputFields'>
-								Please Select (Required)
-							</option>
-						)}
-						{busStations &&
-							busStations.map((b, i) => {
-								return (
-									<option
-										key={i}
-										className='items text-muted inputFields'
-										value={b.address}>
-										{b.address} ({b.price} L.E.)
-									</option>
-								);
-							})}
-					</select>
-				</div>
+				{serviceDetails && serviceDetails.displayBusStationOption ? (
+					<div className='col-md-10 mx-auto my-1'>
+						<label
+							className='textResizeMain2'
+							style={{
+								fontWeight: "bold",
+								fontSize: "1rem",
+								color: "#00407f",
+							}}>
+							وسيلة المواصلات
+						</label>
+						<br />
+						<select
+							onChange={handleChosenBusStation}
+							className='inputFields mb-3'
+							style={{
+								paddingTop: "12px",
+								paddingBottom: "12px",
+								// paddingRight: "130px",
+								// textAlign: "center",
+								border: "#cfcfcf solid 1px",
+								borderRadius: "10px",
+								width: "75%",
+								fontSize: "0.9rem",
+								// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+							}}>
+							{busStationName &&
+							busStationName !== "Please Select (Required)" ? (
+								<option className='items text-muted inputFields'>
+									{busStationName}
+								</option>
+							) : (
+								<option className='items text-muted inputFields'>
+									يرجى تحديد (مطلوب)
+								</option>
+							)}
+							{busStations &&
+								busStations.map((b, i) => {
+									return (
+										<option
+											key={i}
+											className='items text-muted inputFields'
+											value={b.address}>
+											{b.address} ({b.price} L.E.)
+										</option>
+									);
+								})}
+						</select>
+					</div>
+				) : null}
 
 				{chosenBusStationDetails &&
 					chosenBusStationDetails.address !== "no bus needed" &&
@@ -445,8 +442,7 @@ const FormStep1 = ({
 									fontSize: "1rem",
 									// color: "#00407f",
 								}}>
-								Here is "{chosenBusStationDetails.address}" Station Available
-								Times
+								المواعيد المتاحة لرحلة {chosenBusStationDetails.address}
 							</label>
 							<br />
 							<select
