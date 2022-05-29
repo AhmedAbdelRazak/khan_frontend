@@ -118,9 +118,9 @@ const App = () => {
 			/>
 			<ToastContainer />
 			<Switch>
-				{url === "/ar" ? (
-					<Redirect to='/' />
-				) : language === "Arabic" ? (
+				{url === "/ar" ? <Redirect to='/' /> : null}
+
+				{language === "Arabic" ? (
 					<Route path='/' exact component={Home_Arabic} language={language} />
 				) : (
 					<Route path='/' exact component={Home} language={language} />
@@ -146,7 +146,12 @@ const App = () => {
 						language={language}
 					/>
 				) : (
-					<Route path='/listings' exact component={Listings} />
+					<Route
+						path='/listings'
+						exact
+						component={Listings}
+						language={language}
+					/>
 				)}
 				<Route path='/listings' exact component={Listings} />
 				<Route path='/login' exact component={Login} />
