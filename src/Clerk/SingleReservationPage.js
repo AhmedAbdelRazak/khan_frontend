@@ -594,12 +594,21 @@ const SingleReservationPage = (props) => {
 										</strong>{" "}
 									</li>
 
-									<li className='list-group-item mb-2'>
+									<li className='list-group-item mb-2 '>
 										<strong>Booked From:</strong>{" "}
 										<span
-											className='alert alert-info'
+											className='alert alert-info p-1'
 											style={{ fontWeight: "bold" }}>
 											{singleOrder.bookedFrom}
+										</span>
+									</li>
+
+									<li className='list-group-item mb-2'>
+										<strong>Booking Source:</strong>{" "}
+										<span
+											className='alert alert-info p-1'
+											style={{ fontWeight: "bold" }}>
+											{singleOrder.bookingSource}
 										</span>
 									</li>
 

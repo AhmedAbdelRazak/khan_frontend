@@ -20,6 +20,11 @@ const FormStep3 = ({
 	chosenCouponDetails,
 	setTotalAmount,
 	setTotalAmountBeforeDiscount,
+	option1Count,
+	option2Count,
+	option3Count,
+	option4Count,
+	busStationChosenTime,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -36,13 +41,31 @@ const FormStep3 = ({
 			Number(chosenBusStationPrice.price) *
 			(Number(quantity) + Number(quantity_Children));
 
+		var totalOtionsPrice =
+			Number(option1Count) *
+				Number(
+					serviceDetails.option1_Price ? serviceDetails.option1_Price : 0,
+				) +
+			Number(option2Count) *
+				Number(
+					serviceDetails.option2_Price ? serviceDetails.option2_Price : 0,
+				) +
+			Number(option3Count) *
+				Number(
+					serviceDetails.option3_Price ? serviceDetails.option3_Price : 0,
+				) +
+			Number(option4Count) *
+				Number(serviceDetails.option4_Price ? serviceDetails.option4_Price : 0);
+
 		setTotalAmountBeforeDiscount(
-			Number(price_adults + price_children + TransportationFees).toFixed(2),
+			Number(
+				price_adults + price_children + TransportationFees + totalOtionsPrice,
+			).toFixed(2),
 		);
 
-		return Number(price_adults + price_children + TransportationFees).toFixed(
-			2,
-		);
+		return Number(
+			price_adults + price_children + TransportationFees + totalOtionsPrice,
+		).toFixed(2);
 	};
 
 	// console.log(chosenCouponDetails, "chosenCouponDetails");
@@ -69,18 +92,54 @@ const FormStep3 = ({
 			Number(chosenBusStationPrice.price) *
 			(Number(quantity) + Number(quantity_Children));
 
+		var totalOtionsPrice =
+			Number(option1Count) *
+				Number(
+					serviceDetails.option1_Price ? serviceDetails.option1_Price : 0,
+				) +
+			Number(option2Count) *
+				Number(
+					serviceDetails.option2_Price ? serviceDetails.option2_Price : 0,
+				) +
+			Number(option3Count) *
+				Number(
+					serviceDetails.option3_Price ? serviceDetails.option3_Price : 0,
+				) +
+			Number(option4Count) *
+				Number(serviceDetails.option4_Price ? serviceDetails.option4_Price : 0);
+
 		setTotalAmount(
 			Number(
-				price_adults + price_children + TransportationFees + discountedAmount,
+				price_adults +
+					price_children +
+					TransportationFees +
+					discountedAmount +
+					totalOtionsPrice,
 			).toFixed(2),
 		);
 
 		return Number(
-			price_adults + price_children + TransportationFees + discountedAmount,
+			price_adults +
+				price_children +
+				TransportationFees +
+				discountedAmount +
+				totalOtionsPrice,
 		).toFixed(2);
 	};
 
 	// console.log(chosenDate, "From FormStep3");
+
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
 
 	return (
 		<FormStep3Wrapper>
@@ -132,11 +191,37 @@ const FormStep3 = ({
 						Tickets Count: {Number(quantity) + Number(quantity_Children)}{" "}
 						Tickets
 					</div>
+					{serviceDetails.option1_Active && option1Count > 0 ? (
+						<div>
+							{serviceDetails.option1}: {option1Count} (
+							{option1Count * serviceDetails.option1_Price} L.E).
+						</div>
+					) : null}
+					{serviceDetails.option2_Active && option2Count > 0 ? (
+						<div>
+							{serviceDetails.option2}: {option2Count} (
+							{option2Count * serviceDetails.option2_Price} L.E).
+						</div>
+					) : null}
+					{serviceDetails.option3_Active && option3Count > 0 ? (
+						<div>
+							{serviceDetails.option3}: {option3Count} (
+							{option3Count * serviceDetails.option3_Price} L.E).
+						</div>
+					) : null}
+					{serviceDetails.option4_Active && option4Count > 0 ? (
+						<div>
+							{serviceDetails.option4}: {option4Count} (
+							{option4Count * serviceDetails.option4_Price} L.E).
+						</div>
+					) : null}
+
 					<div>
 						Transportation Fees: {Number(chosenBusStationPrice.price)} L.E.{" "}
 					</div>
+					<div>Bus Station Time: {busStationChosenTime}</div>
 
-					<div>Booking Date: {chosenDate}</div>
+					<div>Booking Date: {dateFormat(chosenDate)}</div>
 					<div>Event/Occasion: {event_ocassion} </div>
 					{chosenCouponDetails && chosenCouponDetails.name ? (
 						<div>

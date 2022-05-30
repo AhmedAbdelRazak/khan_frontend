@@ -15,6 +15,7 @@ import {
 	getPreviousBookings,
 } from "../../apiCore";
 import { getCoupons, getBusStations } from "../apiAdmin";
+import moment from "moment";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
@@ -24,6 +25,7 @@ import PackagePhotos from "./PackagePhotos";
 import Adminsidebar from "../AdminSideBar/Adminsidebar";
 // eslint-disable-next-line
 import DarkBG from "../AdminSideBar/DarkBG";
+import { isAuthenticated } from "../../auth";
 const { Step } = Steps;
 
 const ReserveNowAdmin = ({ match }) => {
@@ -73,6 +75,11 @@ const ReserveNowAdmin = ({ match }) => {
 		setAlreadySetLoyaltyPointsManagement,
 	] = useState("");
 	const [availableCoupon, setAvailableCoupon] = useState(false);
+	const [busStationName, setBusStationName] = useState("");
+	const [option1Count, setOption1Count] = useState(0);
+	const [option2Count, setOption2Count] = useState(0);
+	const [option3Count, setOption3Count] = useState(0);
+	const [option4Count, setOption4Count] = useState(0);
 
 	var days = [
 		"Sunday",
@@ -96,41 +103,52 @@ const ReserveNowAdmin = ({ match }) => {
 		});
 	};
 
+	var today = new Date().toLocaleDateString("en-US", {
+		timeZone: "Africa/Cairo",
+	});
+	var tomorrow = new Date(today);
+	var yesterday = new Date(today);
+
+	tomorrow.setDate(yesterday.getDate() + 1);
+
 	useEffect(() => {
-		if (JSON.parse(localStorage.getItem("reservationData"))) {
-			setReservationDataLocalStor(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				),
+		if (!localStorage.getItem("reservationData")) {
+			setChosenDate(
+				new Date(tomorrow).toLocaleDateString("en-US", {
+					timeZone: "Africa/Cairo",
+				}),
 			);
-			setCountryCallingCode(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				).countryCallingCode,
-			);
-
-			setPhone(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				).phoneNumber,
+		} else {
+			setChosenDate(
+				new Date(
+					moment(
+						JSON.parse(
+							localStorage.getItem("reservationData") &&
+								localStorage.getItem("reservationData"),
+						).chosenDate,
+					)._d,
+				).toLocaleDateString(),
 			);
 
-			setServiceDetails(
+			setChosenBusStationsDetails(
 				JSON.parse(
 					localStorage.getItem("reservationData") &&
 						localStorage.getItem("reservationData"),
-				).serviceDetails,
-			);
-			setChosenService_Package(
-				JSON.parse(
-					localStorage.getItem("reservationData") &&
-						localStorage.getItem("reservationData"),
-				).chosenService_Package,
+				).chosenBusStationDetails,
 			);
 
+			setBusStationChosenTime(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).busStationChosenTime,
+			);
+			setBusStationName(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).chosenBusStationDetails.address,
+			);
 			setQuantity(
 				JSON.parse(
 					localStorage.getItem("reservationData") &&
@@ -143,6 +161,72 @@ const ReserveNowAdmin = ({ match }) => {
 					localStorage.getItem("reservationData") &&
 						localStorage.getItem("reservationData"),
 				).quantity_Children,
+			);
+
+			setServiceDetails(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).serviceDetails,
+			);
+
+			setChosenCoupon(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).chosenCoupon,
+			);
+
+			setChosenCouponDetails(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).chosenCouponDetails,
+			);
+
+			setCurrent(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).currentPage,
+			);
+
+			setTotalAmountBeforeDiscount(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).totalPriceBeforeDiscount,
+			);
+			setTotalAmount(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).totalPriceAfterDiscount,
+			);
+
+			setOption1Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option1Count,
+			);
+			setOption2Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option2Count,
+			);
+			setOption3Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option3Count,
+			);
+			setOption4Count(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).option4Count,
 			);
 		}
 
@@ -337,6 +421,25 @@ const ReserveNowAdmin = ({ match }) => {
 					allCoupons={allCoupons}
 					chosenCouponDetails={chosenCouponDetails}
 					setChosenCouponDetails={setChosenCouponDetails}
+					busStations={busStations}
+					chosenBusStationDetails={chosenBusStationDetails}
+					setChosenBusStationsDetails={setChosenBusStationsDetails}
+					busStationChosenTime={busStationChosenTime}
+					setBusStationChosenTime={setBusStationChosenTime}
+					quantity={quantity}
+					setQuantity={setQuantity}
+					quantity_Children={quantity_Children}
+					setQuantity_Children={setQuantity_Children}
+					busStationName={busStationName}
+					setBusStationName={setBusStationName}
+					option1Count={option1Count}
+					option2Count={option2Count}
+					option3Count={option3Count}
+					option4Count={option4Count}
+					setOption1Count={setOption1Count}
+					setOption2Count={setOption2Count}
+					setOption3Count={setOption3Count}
+					setOption4Count={setOption4Count}
 				/>
 			),
 		},
@@ -352,18 +455,9 @@ const ReserveNowAdmin = ({ match }) => {
 					countryCallingCode={countryCallingCode}
 					setCountryCallingCode={setCountryCallingCode}
 					setPhone={setPhone}
-					quantity={quantity}
-					setQuantity={setQuantity}
-					quantity_Children={quantity_Children}
-					setQuantity_Children={setQuantity_Children}
 					event_ocassion={event_ocassion}
 					setEvent_ocassion={setEvent_ocassion}
-					availableTickets={availableTickets}
-					busStations={busStations}
-					chosenBusStationDetails={chosenBusStationDetails}
-					setChosenBusStationsDetails={setChosenBusStationsDetails}
-					busStationChosenTime={busStationChosenTime}
-					setBusStationChosenTime={setBusStationChosenTime}
+					serviceDetails={serviceDetails}
 				/>
 			),
 		},
@@ -390,6 +484,15 @@ const ReserveNowAdmin = ({ match }) => {
 					totalAmountBeforeDiscount={totalAmountBeforeDiscount}
 					setTotalAmount={setTotalAmount}
 					setTotalAmountBeforeDiscount={setTotalAmountBeforeDiscount}
+					option1Count={option1Count}
+					option2Count={option2Count}
+					option3Count={option3Count}
+					option4Count={option4Count}
+					setOption1Count={setOption1Count}
+					setOption2Count={setOption2Count}
+					setOption3Count={setOption3Count}
+					setOption4Count={setOption4Count}
+					busStationChosenTime={busStationChosenTime}
 				/>
 			),
 		},
@@ -477,6 +580,11 @@ const ReserveNowAdmin = ({ match }) => {
 			return toast.error("Please add time for bus station pickup");
 		}
 
+		var role =
+			isAuthenticated() &&
+			isAuthenticated().user &&
+			isAuthenticated().user.role;
+
 		const createOrderData = {
 			fullName: fullName,
 			scheduledByUserEmail: scheduledByUserEmail,
@@ -491,7 +599,8 @@ const ReserveNowAdmin = ({ match }) => {
 			chosenPackage_Stock: ticketsManagement ? ticketsManagement : null,
 			scheduledDate: chosenDate,
 			status: "Not Paid",
-			bookedFrom: "Booked From Office",
+			bookedFrom:
+				role === 1 ? "By Admin" : role === 2 ? "Booked By Clerk" : "Not Online",
 			chosenCoupon: chosenCouponDetails,
 			availableCoupon: availableCoupon,
 			chosenBusStation: chosenBusStationDetails,
@@ -499,9 +608,13 @@ const ReserveNowAdmin = ({ match }) => {
 				chosenBusStationDetails.address === "NO BUS NEEDED"
 					? "00:00"
 					: busStationChosenTime,
-			bookingSource: "Booked From Office",
+			bookingSource: "من الارض",
 			totalAmount: totalAmount,
 			totalAmountBeforeDiscount: totalAmountBeforeDiscount,
+			option1Count: option1Count,
+			option2Count: option2Count,
+			option3Count: option3Count,
+			option4Count: option4Count,
 		};
 
 		createReservation(createOrderData).then((response) => {
@@ -526,17 +639,6 @@ const ReserveNowAdmin = ({ match }) => {
 
 	return (
 		<BookNowWrapper>
-			{click2 && clickMenu2 ? (
-				<DarkBG setClick2={setClick2} setClickMenu2={setClickMenu2} />
-			) : null}
-			<div className='mx-auto'>
-				<Adminsidebar
-					click2={click2}
-					setClick2={setClick2}
-					clickMenu2={clickMenu2}
-					setClickMenu2={setClickMenu2}
-				/>
-			</div>
 			<Steps current={current}>
 				{steps.map((item) => (
 					<Step key={item.title} title={item.title} />
@@ -653,6 +755,10 @@ const ReserveNowAdmin = ({ match }) => {
 									totalAmountBeforeDiscount: totalAmountBeforeDiscount,
 									totalAmount: totalAmount,
 									chosenBusStationTime: busStationChosenTime,
+									option1Count: option1Count,
+									option2Count: option2Count,
+									option3Count: option3Count,
+									option4Count: option4Count,
 								};
 								localStorage.setItem(
 									"confirmationData",

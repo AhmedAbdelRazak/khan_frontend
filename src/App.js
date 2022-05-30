@@ -66,7 +66,7 @@ const App = () => {
 	}, [click, clickMenu]);
 
 	const languageToggle = () => {
-		console.log(language);
+		// console.log(language);
 		localStorage.setItem("lang", JSON.stringify(language));
 
 		// window.location.reload(false);
@@ -80,7 +80,9 @@ const App = () => {
 	let url = window.location.pathname + window.location.search;
 
 	useEffect(() => {
-		if (url.includes("ar")) {
+		let urlFn = window.location.pathname + window.location.search;
+
+		if (urlFn.includes("ar")) {
 			setLanguage("Arabic");
 		} else {
 			setLanguage("English");
@@ -95,8 +97,8 @@ const App = () => {
 		// eslint-disable-next-line
 	}, []);
 
-	console.log(window.location.pathname + window.location.search);
-	console.log(url.replace("/ar", ""), "url.replace");
+	// console.log(window.location.pathname + window.location.search);
+	// console.log(url.replace("/ar", ""), "url.replace");
 
 	return (
 		<BrowserRouter>
