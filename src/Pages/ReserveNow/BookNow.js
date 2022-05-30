@@ -544,6 +544,9 @@ const BookNow = ({ match }) => {
 		if (!phone) {
 			return toast.error("Please Fill in Your Phone #...");
 		}
+		if (phone.length !== 11) {
+			return toast.error("Your Phone Number Should Be 11 Digits");
+		}
 
 		if (!countryCallingCode) {
 			return toast.error("Please add country calling code");

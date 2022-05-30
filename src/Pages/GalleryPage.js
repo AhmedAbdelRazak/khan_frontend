@@ -5,6 +5,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { getGalleries } from "../admin/apiAdmin";
 import Helmet from "react-helmet";
+import PowerBySnippet from "./PowerBySnippet";
 
 const GalleryPage = () => {
 	const [galleries, setGalleries] = useState([]);
@@ -60,6 +61,11 @@ const GalleryPage = () => {
 							</Fragment>
 						);
 					})}
+			</div>
+			<div className='mt-5'>
+				<br />
+				<br />
+				<PowerBySnippet />
 			</div>
 		</GalleryPageWrapper>
 	);

@@ -546,6 +546,9 @@ const BookNow = ({ match }) => {
 		if (!phone) {
 			return toast.error("الرجاء ادخال رقم الهاتف");
 		}
+		if (phone.length !== 11) {
+			return toast.error("يجب أن يتكون رقم هاتفك من 11 رقمًا");
+		}
 
 		if (!countryCallingCode) {
 			return toast.error("الرجاء إضافة رمز الاتصال بالدولة");
