@@ -253,8 +253,8 @@ const SingleTicketPageArabic = ({ match }) => {
 				<Link
 					onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
 					to={`/book-now/${match.params.ticketslug
-						.split("-")
-						.join(" ")
+						.split(" ")
+						.join("-")
 						.toLowerCase()}`}
 					className='btn btn-primary btn-block my-4 text-center '
 					style={{

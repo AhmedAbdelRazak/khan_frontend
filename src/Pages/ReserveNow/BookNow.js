@@ -749,12 +749,25 @@ const BookNow = ({ match }) => {
 									JSON.stringify(confirmationData),
 								);
 								clickSubmitSchedule_NoPayment();
-								ReactGA.event({
-									category: "Reserve Now Was Clicked",
-									action: "A Client Has Successfully Reserved A Day Use",
-									label:
-										"Ticket Was Successfully Reserved " + chosenService_Package,
-								});
+
+								if (phone.length === 11) {
+									ReactGA.event({
+										category: "Reserve Now Was Clicked",
+										action: "A Client Has Successfully Reserved A Day Use",
+										label:
+											"Ticket Was Successfully Reserved " +
+											chosenService_Package,
+									});
+								} else {
+									ReactGA.event({
+										category: "Reserve Now Was Clicked",
+										action:
+											"A Client Has Unsuccessfully Reserved A Day Use Because of his phone number",
+										label:
+											"Ticket Was Unsuccessfully Reserved " +
+											chosenService_Package,
+									});
+								}
 							}}
 							disabled={dataEnter2()}
 							className='Buttons'

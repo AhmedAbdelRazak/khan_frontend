@@ -77,12 +77,10 @@ const App = () => {
 		// eslint-disable-next-line
 	}, [language]);
 
-	let url = window.location.pathname + window.location.search;
+	let url = window.location.pathname;
 
 	useEffect(() => {
-		let urlFn = window.location.pathname + window.location.search;
-
-		if (urlFn.includes("ar")) {
+		if (url === "/ar" || url.includes("/ar/book-now")) {
 			setLanguage("Arabic");
 		} else {
 			setLanguage("English");
