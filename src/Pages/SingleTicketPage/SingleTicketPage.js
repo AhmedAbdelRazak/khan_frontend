@@ -7,6 +7,7 @@ import { getTickets } from "../../apiCore";
 import PackagePhotos2 from "./PackagePhotos2";
 import ReactGA from "react-ga";
 import Helmet from "react-helmet";
+import GoogleAds from "../../GoogleAdsense/GoogleAds";
 
 const SingleTicketPage = ({ match }) => {
 	// eslint-disable-next-line
@@ -67,6 +68,10 @@ const SingleTicketPage = ({ match }) => {
 					href={`https://khankhadija.com/ticket/${match.params.ticketslug}`}
 				/>
 			</Helmet>
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<div className='mx-auto photosWrapperCellPhone'>
 				<PackagePhotos2 serviceDetails={serviceDetails} />
 			</div>

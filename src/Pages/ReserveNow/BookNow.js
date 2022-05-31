@@ -21,6 +21,7 @@ import FormStep3 from "./FormStep3";
 // eslint-disable-next-line
 import PackagePhotos from "./PackagePhotos";
 import moment from "moment";
+import GoogleAds from "../../GoogleAdsense/GoogleAds";
 const { Step } = Steps;
 
 const BookNow = ({ match }) => {
@@ -782,6 +783,10 @@ const BookNow = ({ match }) => {
 							Reserve Now
 						</Button>
 					)}
+			</div>
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
 			</div>
 		</BookNowWrapper>
 	);

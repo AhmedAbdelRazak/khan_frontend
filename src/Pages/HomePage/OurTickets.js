@@ -358,6 +358,12 @@ const OurTickets = () => {
 												</div>
 												<div className='col-md-9 mx-auto w-75'>
 													<Link
+														onClick={() => {
+															window.scrollTo({
+																top: 0,
+																behavior: "smooth",
+															});
+														}}
 														to={`/book-now/${s.serviceName
 															.split(" ")
 															.join("-")}`}
@@ -400,6 +406,7 @@ const OurTickets = () => {
 					</Slider>
 				</div>
 			</div>
+
 			{ticketsWithOffers && ticketsWithOffers.length > 0 ? (
 				<div className='ticketsPhoneView '>
 					<h1

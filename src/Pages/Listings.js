@@ -6,6 +6,7 @@ import OurTickets from "./HomePage/OurTickets";
 import ReactGA from "react-ga";
 import Helmet from "react-helmet";
 import PowerBySnippet from "./PowerBySnippet";
+import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const Listings = () => {
 	useEffect(() => {
@@ -33,8 +34,18 @@ const Listings = () => {
 				<link rel='canonical' href='https://khankhadija.com/listings' />
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
 			</Helmet>
+
 			<OurTickets />
+
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<PowerBySnippet />
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 		</LinstingsWrapper>
 	);
 };

@@ -6,6 +6,7 @@ import ReactGA from "react-ga";
 import OurTicketsArabic from "./HomePageArabic/OurTickets_Arabic";
 import Helmet from "react-helmet";
 import PowerBySnippet from "./PowerBySnippet";
+import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const ListingsArabic = ({ language }) => {
 	useEffect(() => {
@@ -33,8 +34,17 @@ const ListingsArabic = ({ language }) => {
 				<link rel='canonical' href='https://khankhadija.com/listings' />
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
 			</Helmet>
+
 			<OurTicketsArabic language={language} />
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<PowerBySnippet />
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 		</ListingsArabicWrapper>
 	);
 };

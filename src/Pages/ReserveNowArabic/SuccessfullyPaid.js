@@ -13,6 +13,7 @@ import {
 	View,
 } from "@react-pdf/renderer";
 import { getPreviousBookings } from "../../apiCore";
+import GoogleAds from "../../GoogleAdsense/GoogleAds";
 
 const styles = StyleSheet.create({
 	body: {
@@ -484,6 +485,10 @@ const SuccessfullyPaid = () => {
 					</div>
 				</Fragment>
 			)}
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 		</SchedulePage>
 	);
 };

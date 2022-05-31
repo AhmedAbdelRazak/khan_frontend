@@ -10,6 +10,7 @@ import PowerBySnippet from "../PowerBySnippet";
 import KhanGallery from "./KhanGallery";
 import KhanMap from "./KhanMap";
 import ReactGA from "react-ga";
+import GoogleAds from "../../GoogleAdsense/GoogleAds";
 
 const Home = () => {
 	useEffect(() => {
@@ -41,7 +42,10 @@ const Home = () => {
 				<HeroComponent />
 			</span>
 			<BookNowGeneral />
-
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<div className='col-md-10 mx-auto mt-3'>
 				<br />
 				<hr />
@@ -58,7 +62,20 @@ const Home = () => {
 			<span className=''>
 				<KhanMap />
 			</span>
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
+
 			<PowerBySnippet />
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<span className='phoneBottomHero'>
 				<HeroComponent />
 			</span>
