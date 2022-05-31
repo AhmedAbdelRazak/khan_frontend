@@ -127,11 +127,6 @@ const Sidebar = ({
 							style={{ marginTop: "0px" }}
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
-								ReactGA.event({
-									category: "User Changed Language",
-									action: `User Changed Language to ${language}`,
-									label: "Language Was Changed",
-								});
 							}}>
 							<span className=' mr-0 btn mb-2' style={{ padding: "0px" }}>
 								{language === "English" ? (
@@ -186,11 +181,6 @@ const Sidebar = ({
 							style={{ marginTop: "0px" }}
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
-								ReactGA.event({
-									category: "User Changed Language",
-									action: `User Changed Language to ${language}`,
-									label: "Language Was Changed",
-								});
 							}}>
 							<span className=' mr-0 btn mb-2' style={{ padding: "1px" }}>
 								{language === "English" ? (
@@ -658,11 +648,7 @@ const Sidebar = ({
 												setLanguage("Arabic");
 												setClickMenu(false);
 												setClick(false);
-												ReactGA.event({
-													category: "User Changed Language",
-													action: `User Changed Language to Arabic`,
-													label: "Language Was Changed",
-												});
+
 												// window.location.reload(false);
 											}}>
 											Arabic
@@ -681,11 +667,7 @@ const Sidebar = ({
 												setLanguage("English");
 												setClickMenu(false);
 												setClick(false);
-												ReactGA.event({
-													category: "User Changed Language",
-													action: `User Changed Language to English`,
-													label: "Language Was Changed",
-												});
+
 												// window.location.reload(false);
 											}}>
 											English
@@ -718,11 +700,7 @@ const Sidebar = ({
 												setLanguage("Arabic");
 												setClickMenu(false);
 												setClick(false);
-												ReactGA.event({
-													category: "User Changed Language",
-													action: `User Changed Language to Arabic`,
-													label: "Language Was Changed",
-												});
+
 												// window.location.reload(false);
 											}}>
 											Arabic
@@ -741,11 +719,7 @@ const Sidebar = ({
 												setLanguage("English");
 												setClickMenu(false);
 												setClick(false);
-												ReactGA.event({
-													category: "User Changed Language",
-													action: `User Changed Language to English`,
-													label: "Language Was Changed",
-												});
+
 												// window.location.reload(false);
 											}}>
 											English

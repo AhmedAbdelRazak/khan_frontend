@@ -269,7 +269,7 @@ const SingleTicketPage = ({ match }) => {
 					Book Now!
 				</Link>
 			</div>
-			<div className='col-md-6 mx-auto w-75'>
+			<div className='col-md-6 mx-auto w-75 mb-5'>
 				<Link
 					onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
 					to={`/listings`}

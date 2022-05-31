@@ -485,7 +485,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 											textAlign: "center",
 											textTransform: "capitalize",
 										}}>
-										سعر الباقة (الكبار): {serviceDetails.servicePriceDiscount}{" "}
+										سعر التذكرة (الكبار): {serviceDetails.servicePriceDiscount}{" "}
 										جنيه
 									</div>
 								) : (
@@ -497,7 +497,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 											textAlign: "center",
 											textTransform: "capitalize",
 										}}>
-										سعر الباقة (الكبار):{" "}
+										سعر التذكرة (الكبار):{" "}
 										<s style={{ color: "red" }}>
 											{" "}
 											{serviceDetails.servicePrice} جنيه
