@@ -126,7 +126,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 250, behavior: "smooth" });
 						}}>
 						<Link
 							style={isActive(history, "/khan-khadija-gallery")}

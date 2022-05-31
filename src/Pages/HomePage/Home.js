@@ -42,10 +42,7 @@ const Home = () => {
 				<HeroComponent />
 			</span>
 			<BookNowGeneral />
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+
 			<div className='col-md-10 mx-auto mt-3'>
 				<br />
 				<hr />
@@ -55,11 +52,15 @@ const Home = () => {
 			</div>
 			<br />
 			<hr />
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<span className='khanGalleryStyling'>
 				<KhanGallery />
 			</span>
 
-			<span className=''>
+			<span className='mt-3'>
 				<KhanMap />
 			</span>
 			<div className='ad-class'>
