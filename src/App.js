@@ -74,11 +74,7 @@ const App = () => {
 
 	useEffect(() => {
 		languageToggle();
-		ReactGA.event({
-			category: "User Changed Language",
-			action: `User Changed Language to ${language}`,
-			label: "Language Was Changed",
-		});
+
 		// eslint-disable-next-line
 	}, [language]);
 

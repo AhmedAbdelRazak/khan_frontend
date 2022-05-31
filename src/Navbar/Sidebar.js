@@ -149,6 +149,11 @@ const Sidebar = ({
 											setLanguage("Arabic");
 											setClickMenu(false);
 											setClick(false);
+											ReactGA.event({
+												category: "User Changed Language",
+												action: `User Changed Language to Arabic`,
+												label: "Language Was Changed",
+											});
 											// window.location.reload(false);
 										}}>
 										عربي
@@ -168,6 +173,11 @@ const Sidebar = ({
 											setLanguage("English");
 											setClickMenu(false);
 											setClick(false);
+											ReactGA.event({
+												category: "User Changed Language",
+												action: `User Changed Language to English`,
+												label: "Language Was Changed",
+											});
 											// window.location.reload(false);
 										}}>
 										En
@@ -203,6 +213,11 @@ const Sidebar = ({
 											setLanguage("Arabic");
 											setClickMenu(false);
 											setClick(false);
+											ReactGA.event({
+												category: "User Changed Language",
+												action: `User Changed Language to Arabic`,
+												label: "Language Was Changed",
+											});
 											// window.location.reload(false);
 										}}>
 										عربي
@@ -222,6 +237,11 @@ const Sidebar = ({
 											setLanguage("English");
 											setClickMenu(false);
 											setClick(false);
+											ReactGA.event({
+												category: "User Changed Language",
+												action: `User Changed Language to English`,
+												label: "Language Was Changed",
+											});
 											// window.location.reload(false);
 										}}>
 										En
@@ -648,6 +668,11 @@ const Sidebar = ({
 												setLanguage("Arabic");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to Arabic`,
+													label: "Language Was Changed",
+												});
 
 												// window.location.reload(false);
 											}}>
@@ -667,6 +692,11 @@ const Sidebar = ({
 												setLanguage("English");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to English`,
+													label: "Language Was Changed",
+												});
 
 												// window.location.reload(false);
 											}}>
@@ -700,6 +730,11 @@ const Sidebar = ({
 												setLanguage("Arabic");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to Arabic`,
+													label: "Language Was Changed",
+												});
 
 												// window.location.reload(false);
 											}}>
@@ -719,6 +754,11 @@ const Sidebar = ({
 												setLanguage("English");
 												setClickMenu(false);
 												setClick(false);
+												ReactGA.event({
+													category: "User Changed Language",
+													action: `User Changed Language to English`,
+													label: "Language Was Changed",
+												});
 
 												// window.location.reload(false);
 											}}>

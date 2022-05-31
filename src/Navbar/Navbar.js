@@ -10,6 +10,7 @@ import { Link, withRouter } from "react-router-dom";
 import logo from "./Logo.jpg";
 import { signout, isAuthenticated } from "../auth";
 import { allLoyaltyPointsAndStoreStatus } from "../apiCore";
+import ReactGA from "react-ga";
 
 const isActive = (history, path) => {
 	if (history.location.pathname === path) {
@@ -73,6 +74,13 @@ const Navbar = ({ history, language, setLanguage }) => {
 		storeLogo.substr(0, index + 6) +
 		"/e_bgremoval" +
 		storeLogo.substr(index + 6);
+
+	useEffect(() => {
+		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
+		// To Report Page View
+		// ReactGA.pageview(window.location.pathname + window.location.search);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<Navbar1
@@ -284,6 +292,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 									className='btn '
 									onClick={() => {
 										setLanguage("Arabic");
+										ReactGA.event({
+											category: "User Changed Language",
+											action: `User Changed Language to ${language}`,
+											label: "Language Was Changed",
+										});
 										// window.location.reload(false);
 									}}>
 									Arabic
@@ -300,6 +313,11 @@ const Navbar = ({ history, language, setLanguage }) => {
 									className='btn '
 									onClick={() => {
 										setLanguage("English");
+										ReactGA.event({
+											category: "User Changed Language",
+											action: `User Changed Language to ${language}`,
+											label: "Language Was Changed",
+										});
 										// window.location.reload(false);
 									}}>
 									English
