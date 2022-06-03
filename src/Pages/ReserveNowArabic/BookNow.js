@@ -13,6 +13,7 @@ import {
 	allLoyaltyPointsAndStoreStatus,
 	createReservation,
 	getPreviousBookings,
+	createBeforeReview,
 } from "../../apiCore";
 import { getCoupons, getBusStations } from "../../admin/apiAdmin";
 import FormStep1 from "./FormStep1";
@@ -617,6 +618,46 @@ const BookNow = ({ match }) => {
 		}, 1000);
 	};
 
+	const pushToReviewSchema = () => {
+		const createOrderData = {
+			fullName: fullName,
+			scheduledByUserEmail: scheduledByUserEmail,
+			phoneNumber: countryCallingCode + phone,
+			countryCallingCode: countryCallingCode,
+			quantity: quantity,
+			quantity_Children: quantity_Children ? quantity_Children : 0,
+			event: event_ocassion ? event_ocassion : "Not Added",
+			appointmentComment: appointmentComment,
+			chosenService_Package: chosenService_Package,
+			chosenServiceDetails: serviceDetails,
+			chosenPackage_Stock: ticketsManagement ? ticketsManagement : null,
+			scheduledDate: chosenDate,
+			status: "Not Paid",
+			bookedFrom: "Online",
+			chosenCoupon: chosenCouponDetails,
+			availableCoupon: availableCoupon,
+			chosenBusStation: chosenBusStationDetails,
+			chosenBusStationTime:
+				chosenBusStationDetails.address === "NO BUS NEEDED"
+					? "00:00"
+					: busStationChosenTime,
+			bookingSource: "Online",
+			totalAmount: totalAmount,
+			totalAmountBeforeDiscount: totalAmountBeforeDiscount,
+			option1Count: option1Count,
+			option2Count: option2Count,
+			option3Count: option3Count,
+			option4Count: option4Count,
+		};
+
+		createBeforeReview(createOrderData).then((response) => {
+			// console.log(response);
+			console.log("schedule review");
+
+			// window.location.reload(false);
+		});
+	};
+
 	useEffect(() => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
 		// To Report Page View
@@ -691,6 +732,7 @@ const BookNow = ({ match }) => {
 								action: "User Is Reviewing His/Her Data",
 								label: "Data Reviewing",
 							});
+							pushToReviewSchema();
 						}}>
 						التالي
 					</Button>
