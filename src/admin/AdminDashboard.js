@@ -323,7 +323,14 @@ const AdminDashboard = () => {
 									</td> */}
 
 									<td>
-										{dateFormat(new Date(s.scheduledDate).toLocaleString())}{" "}
+										{new Date(s.scheduledDate).toLocaleString() !==
+										"Invalid Date"
+											? dateFormat(
+													new Date(s.scheduledDate).toLocaleString("en-US", {
+														timeZone: "Africa/Cairo",
+													}),
+											  )
+											: s.scheduledDate}{" "}
 										<br />
 									</td>
 									<td>+{s.phoneNumber}</td>

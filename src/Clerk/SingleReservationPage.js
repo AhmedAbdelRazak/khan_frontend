@@ -670,20 +670,17 @@ const SingleReservationPage = (props) => {
 
 									<li className='list-group-item'>
 										Event Date:{" "}
-										{new Date(
-											singleOrder.scheduledDate,
-										).toLocaleDateString() !== "Invalid Date"
+										{new Date(singleOrder.scheduledDate).toLocaleString() !==
+										"Invalid Date"
 											? dateFormat(
-													new Date(singleOrder.scheduledDate).toLocaleString(),
-											  )
-											: dateFormat(
-													new Date(singleOrder.createdAt).toLocaleString(
+													new Date(singleOrder.scheduledDate).toLocaleString(
 														"en-US",
 														{
 															timeZone: "Africa/Cairo",
 														},
 													),
-											  )}{" "}
+											  )
+											: singleOrder.scheduledDate}{" "}
 									</li>
 
 									<li className='list-group-item'>
