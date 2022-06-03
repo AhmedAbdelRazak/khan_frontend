@@ -82,6 +82,24 @@ export const createReservation = (callingOrder) => {
 		});
 };
 
+export const createBeforeReview = (callingOrder) => {
+	return fetch(`${process.env.REACT_APP_API_URL}/before-review`, {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			// Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify(callingOrder),
+	})
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
 export const getPreviousBookings = () => {
 	return fetch(`${process.env.REACT_APP_API_URL}/all-reservations`, {
 		method: "GET",

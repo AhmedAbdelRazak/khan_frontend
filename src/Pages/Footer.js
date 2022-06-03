@@ -64,7 +64,7 @@ const Footer = () => {
 						</p>
 					</div>
 					<div className='mx-auto'>
-						<div className='col-md-5 footer-box mx-auto' data-aos='fade-left'>
+						<div className='col-md-8 footer-box mx-auto' data-aos='fade-left'>
 							<p>
 								<b>Submit your phone and we will respond within minutes</b>
 							</p>
@@ -79,9 +79,7 @@ const Footer = () => {
 								onClick={() => {
 									window.scrollTo({ top: 0, behavior: "smooth" });
 								}}>
-								<Link
-									to='/book-now/khan-khadija-premium-plan'
-									style={{ color: "var(--mainBlue)" }}>
+								<Link to='/contact' style={{ color: "var(--mainBlue)" }}>
 									Submit
 								</Link>
 							</button>

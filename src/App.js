@@ -74,7 +74,6 @@ const App = () => {
 
 	useEffect(() => {
 		languageToggle();
-
 		// eslint-disable-next-line
 	}, [language]);
 
