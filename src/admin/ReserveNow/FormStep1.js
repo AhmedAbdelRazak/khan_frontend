@@ -120,6 +120,7 @@ const FormStep1 = ({
 				: busStations[indexOfBusStations];
 
 		setChosenBusStationsDetails(chosenBusStatioDetails);
+		setBusStationChosenTime(chosenBusStatioDetails.times[0]);
 	};
 
 	const handleBusStationChosenTime = (event) => {
