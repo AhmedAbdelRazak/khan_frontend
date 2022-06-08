@@ -4,7 +4,6 @@ import React from "react";
 import styled from "styled-components";
 import CountUp from "react-countup";
 import "antd/dist/antd.min.css";
-// import { DatePicker } from "antd";
 
 const ExecutiveSummary = ({ historicalBooking }) => {
 	// function numberWithCommas(x) {

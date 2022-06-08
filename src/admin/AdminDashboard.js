@@ -3,6 +3,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { isAuthenticated } from "../auth";
+import "antd/dist/antd.min.css";
 import { Link } from "react-router-dom";
 import Adminsidebar from "./AdminSideBar/Adminsidebar";
 import { toast } from "react-toastify";
@@ -16,11 +17,14 @@ import {
 	removeReservation,
 } from "./apiAdmin";
 import ExecutiveSummary from "./ExecutiveSummary";
-// import ReactExport from "react-export-excel";
+import { DatePicker } from "antd";
+import moment from "moment";
 
-// const ExcelFile = ReactExport.ExcelFile;
-// const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-// const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+import ReactExport from "react-export-excel";
+
+const ExcelFile = ReactExport.ExcelFile;
+const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const AdminDashboard = () => {
 	const [click2, setClick2] = useState(false);
@@ -32,7 +36,11 @@ const AdminDashboard = () => {
 	const [statusValues, setStatusValues] = useState([]);
 	const [q, setQ] = useState("");
 	const [clickedButton, setClickedButton] = useState("Select All");
-	const [selectedDate, setSelectedDate] = useState(new Date());
+	const [selectedDate, setSelectedDate] = useState(
+		new Date().toLocaleString("en-US", {
+			timeZone: "Africa/Cairo",
+		}),
+	);
 
 	//Admin Auth
 	// eslint-disable-next-line
@@ -60,6 +68,18 @@ const AdminDashboard = () => {
 	next7Days.setDate(yesterday.getDate() + 8);
 	next30Days.setDate(yesterday.getDate() + 31);
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	const loadHistReservations = () => {
 		function compareTotalAppointments(a, b) {
 			const TotalAppointmentsA = new Date(a.scheduledDate).setHours(0, 0, 0, 0);
@@ -80,7 +100,12 @@ const AdminDashboard = () => {
 			} else {
 				if (clickedButton === "Select All") {
 					setHistBookings(data.sort(compareTotalAppointments));
-				} else if (clickedButton === "Today" || clickedButton === "Yesterday") {
+				} else if (
+					clickedButton === "Today" ||
+					clickedButton === "Yesterday" ||
+					clickedButton === "Tomorrow" ||
+					clickedButton === "DatePicker"
+				) {
 					setHistBookings(
 						data
 							.filter(
@@ -109,16 +134,104 @@ const AdminDashboard = () => {
 					setHistBookings(data.sort(compareTotalAppointments));
 				}
 
-				setExcelDataSet(
-					data.sort(compareTotalAppointments) &&
+				if (clickedButton === "Select All") {
+					setHistBookings(data.sort(compareTotalAppointments));
+				} else if (
+					clickedButton === "Today" ||
+					clickedButton === "Yesterday" ||
+					clickedButton === "Tomorrow" ||
+					clickedButton === "DatePicker"
+				) {
+					setExcelDataSet(
+						data
+							.filter(
+								(i) =>
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) ===
+									new Date(selectedDate).setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments)
+							.map((data, i) => {
+								return {
+									id: i + 1,
+									fullName: data.fullName,
+									PhoneNumber: data.phoneNumber,
+									ClientEmail: data.scheduledByUserEmail,
+									TicketsCount_Adults: data.quantity,
+									TicketsCount_Children: data.quantity_Children,
+									BookedOn: dateFormat(
+										new Date(data.createdAt).toLocaleString("en-US", {
+											timeZone: "Africa/Cairo",
+										}),
+									),
+
+									ScheduleDate: new Date(data.scheduledDate).toDateString(),
+									Receipt: data.phoneNumber,
+									Event: data.event,
+									ChosenPackage: data.chosenService_Package,
+									PackagePrice: data.chosenServiceDetails.servicePrice,
+									PackagePrice_Discount:
+										data.chosenServiceDetails.servicePriceDiscount,
+									Status: data.status,
+									totalAmount: data.totalAmount,
+								};
+							}),
+					);
+				} else if (
+					clickedButton === "This Week" ||
+					clickedButton === "This Month"
+				) {
+					setExcelDataSet(
+						data
+							.filter(
+								(i) =>
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
+										new Date(selectedDate).setHours(0, 0, 0, 0) &&
+									new Date(i.scheduledDate).setHours(0, 0, 0, 0) >=
+										new Date().setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments)
+							.map((data, i) => {
+								return {
+									id: i + 1,
+									fullName: data.fullName,
+									PhoneNumber: data.phoneNumber,
+									ClientEmail: data.scheduledByUserEmail,
+									TicketsCount_Adults: data.quantity,
+									TicketsCount_Children: data.quantity_Children,
+									BookedOn: dateFormat(
+										new Date(data.createdAt).toLocaleString("en-US", {
+											timeZone: "Africa/Cairo",
+										}),
+									),
+
+									ScheduleDate: new Date(data.scheduledDate).toDateString(),
+									Receipt: data.phoneNumber,
+									Event: data.event,
+									ChosenPackage: data.chosenService_Package,
+									PackagePrice: data.chosenServiceDetails.servicePrice,
+									PackagePrice_Discount:
+										data.chosenServiceDetails.servicePriceDiscount,
+									Status: data.status,
+									totalAmount: data.totalAmount,
+								};
+							}),
+					);
+				} else {
+					setExcelDataSet(
 						data.sort(compareTotalAppointments).map((data, i) => {
 							return {
 								id: i + 1,
 								fullName: data.fullName,
 								PhoneNumber: data.phoneNumber,
 								ClientEmail: data.scheduledByUserEmail,
-								TicketsCount: data.quantity,
-								BookedOn: new Date(data.createdAt).toDateString(),
+								TicketsCount_Adults: data.quantity,
+								TicketsCount_Children: data.quantity_Children,
+								BookedOn: dateFormat(
+									new Date(data.createdAt).toLocaleString("en-US", {
+										timeZone: "Africa/Cairo",
+									}),
+								),
+
 								ScheduleDate: new Date(data.scheduledDate).toDateString(),
 								Receipt: data.phoneNumber,
 								Event: data.event,
@@ -127,9 +240,11 @@ const AdminDashboard = () => {
 								PackagePrice_Discount:
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
+								totalAmount: data.totalAmount,
 							};
 						}),
-				);
+					);
+				}
 
 				setLoading(false);
 			}
@@ -151,7 +266,7 @@ const AdminDashboard = () => {
 		loadHistReservations();
 
 		// eslint-disable-next-line
-	}, [clickedButton]);
+	}, [clickedButton, selectedDate]);
 
 	function search(orders) {
 		return orders.filter((row) => {
@@ -196,18 +311,6 @@ const AdminDashboard = () => {
 		}
 	};
 
-	const dateFormat = (x) => {
-		var requiredDate = new Date(x);
-		var yyyy = requiredDate.getFullYear();
-		let mm = requiredDate.getMonth() + 1; // Months start at 0!
-		let dd = requiredDate.getDate();
-
-		if (dd < 10) dd = "0" + dd;
-		if (mm < 10) mm = "0" + mm;
-
-		return (requiredDate = dd + "/" + mm + "/" + yyyy);
-	};
-
 	const allReservationsDetails = () => {
 		return (
 			<Summary>
@@ -231,7 +334,7 @@ const AdminDashboard = () => {
 						style={{ borderRadius: "20px", width: "50%" }}
 					/>
 				</div>
-				{/* <div className='my-3'>{DownloadExcel()}</div> */}
+				<div className='my-3'>{DownloadExcel()}</div>
 				<table
 					className='table table-bordered table-md-responsive table-hover table-striped'
 					style={{ fontSize: "0.75rem" }}>
@@ -420,45 +523,54 @@ const AdminDashboard = () => {
 	// 	}
 	// };
 
-	// const DownloadExcel = () => {
-	// 	return (
-	// 		<ExcelFile
-	// 			filename={`Appointments ${new Date().toLocaleString()}`}
-	// 			element={
-	// 				<Button
-	// 					bsStyle='info'
-	// 					style={{
-	// 						backgroundColor: "black",
-	// 						color: "white",
-	// 						borderRadius: "10px",
-	// 						marginLeft: "10%",
-	// 					}}>
-	// 					{" "}
-	// 					Download Report{" "}
-	// 				</Button>
-	// 			}>
-	// 			<ExcelSheet data={excelDataSet} name='Appointments'>
-	// 				<ExcelColumn label='Id' value='id' />
-	// 				<ExcelColumn label='First Name' value='FirstName' />
-	// 				<ExcelColumn label='Last Name' value='LastName' />
-	// 				<ExcelColumn label='Phone #' value='PhoneNumber' />
-	// 				<ExcelColumn label='Customer Email' value='ClientEmail' />
-	// 				<ExcelColumn label='Reserved Tickets Count' value='TicketsCount' />
-	// 				<ExcelColumn label='Booked On' value='BookedOn' />
-	// 				<ExcelColumn label='Reservation Date' value='ScheduleDate' />
-	// 				<ExcelColumn label='Receipt' value='Receipt' />
-	// 				<ExcelColumn label='Event/Ocassion' value='Event' />
-	// 				<ExcelColumn label='Chosen Package' value='ChosenPackage' />
-	// 				<ExcelColumn label='Price' value='PackagePrice' />
-	// 				<ExcelColumn
-	// 					label='Price After Discount'
-	// 					value='PackagePrice_Discount'
-	// 				/>
-	// 				<ExcelColumn label='Status' value='Status' />
-	// 			</ExcelSheet>
-	// 		</ExcelFile>
-	// 	);
-	// };
+	const DownloadExcel = () => {
+		return (
+			<ExcelFile
+				filename={`Reservations ${new Date().toLocaleString("en-US", {
+					timeZone: "Africa/Cairo",
+				})}`}
+				element={
+					<Button
+						bsStyle='info'
+						style={{
+							backgroundColor: "black",
+							color: "white",
+							borderRadius: "10px",
+							marginLeft: "10%",
+						}}>
+						{" "}
+						Download Report{" "}
+					</Button>
+				}>
+				<ExcelSheet data={excelDataSet} name='Reservations'>
+					<ExcelColumn label='Id' value='id' />
+					<ExcelColumn label='Full Name' value='fullName' />
+					<ExcelColumn label='Phone #' value='PhoneNumber' />
+					<ExcelColumn label='Customer Email' value='ClientEmail' />
+					<ExcelColumn
+						label='Reserved Tickets Count Adults'
+						value='TicketsCount_Adults'
+					/>
+					<ExcelColumn
+						label='Reserved Tickets Count Children'
+						value='TicketsCount_Children'
+					/>
+					<ExcelColumn label='Booked On' value='BookedOn' />
+					<ExcelColumn label='Event Date' value='ScheduleDate' />
+					<ExcelColumn label='Receipt' value='Receipt' />
+					<ExcelColumn label='Event/Ocassion' value='Event' />
+					<ExcelColumn label='Chosen Package' value='ChosenPackage' />
+					<ExcelColumn label='Price' value='PackagePrice' />
+					<ExcelColumn
+						label='Price After Discount'
+						value='PackagePrice_Discount'
+					/>
+					<ExcelColumn label='Status' value='Status' />
+					<ExcelColumn label='Total Amount' value='totalAmount' />
+				</ExcelSheet>
+			</ExcelFile>
+		);
+	};
 
 	// console.log(
 	// 	HistBookings.filter(
@@ -470,6 +582,11 @@ const AdminDashboard = () => {
 	// 	),
 	// 	"HistBookings",
 	// );
+
+	const disabledDate = (current) => {
+		// Can not select days before today and today
+		return current <= moment();
+	};
 
 	return (
 		<AdminDashboardWrapper>
@@ -520,7 +637,7 @@ const AdminDashboard = () => {
 								backgroundColor: "var(--mainBlue)",
 								border: "none",
 							}}
-							className='ml-1 p-2'>
+							className='ml-1 p-2 mt-3'>
 							Select All
 						</button>
 						<button
@@ -533,8 +650,21 @@ const AdminDashboard = () => {
 								backgroundColor: "var(--orangePrimary)",
 								border: "none",
 							}}
-							className='ml-1 p-2'>
+							className='ml-1 p-2 '>
 							Today
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("Tomorrow");
+								setSelectedDate(tomorrow);
+							}}
+							style={{
+								color: "white",
+								backgroundColor: "black",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							Tomorrow
 						</button>
 						<button
 							onClick={() => {
@@ -575,6 +705,29 @@ const AdminDashboard = () => {
 							className='ml-1 p-2'>
 							This Month
 						</button>
+						<DatePicker
+							className='inputFields'
+							onChange={(date) => {
+								setClickedButton("DatePicker");
+								setSelectedDate(
+									new Date(date._d).toLocaleDateString() || date._d,
+								);
+							}}
+							disabledDate={disabledDate}
+							max
+							size='small'
+							showToday={true}
+							defaultValue={moment(new Date(selectedDate))}
+							placeholder='Please pick the desired schedule date'
+							style={{
+								height: "auto",
+								width: "20%",
+								marginLeft: "5px",
+								padding: "10px",
+								// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+								borderRadius: "10px",
+							}}
+						/>
 					</div>
 					<ExecutiveSummary historicalBooking={HistBookings} />
 					<hr />

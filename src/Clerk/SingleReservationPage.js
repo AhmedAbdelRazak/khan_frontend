@@ -912,7 +912,14 @@ const SingleReservationPage = (props) => {
 						max
 						size='small'
 						showToday={true}
-						defaultValue={moment(singleOrder.scheduledDate)}
+						// defaultValue={moment(singleOrder.scheduledDate)}
+
+						defaultValue={
+							new Date(singleOrder.scheduledDate).toLocaleString() ===
+							"Invalid Date"
+								? moment()
+								: moment(new Date(singleOrder.scheduledDate))
+						}
 						placeholder='Please pick the desired schedule date'
 						style={{
 							height: "auto",

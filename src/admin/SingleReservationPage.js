@@ -95,7 +95,14 @@ const SingleReservationPage = (props) => {
 				setChosenCoupon(data.chosenCoupon);
 				setTotalAmount(data.totalAmount);
 				setTotalAmountBeforeDiscount(data.totalAmountBeforeDiscount);
-				setChosenDate(moment(new Date(data.scheduledDate))._d);
+				// setChosenDate(moment(new Date(data.scheduledDate))._d);
+
+				setChosenDate(
+					new Date(data.scheduledDate).toLocaleString() === "Invalid Date"
+						? new Date().toLocaleString()
+						: moment(new Date(data.scheduledDate))._d,
+				);
+				console.log(new Date(data.scheduledDate).toLocaleString());
 				setChosenCouponDetails(data.chosenCoupon);
 				setChosenBusStationsDetails(data.chosenBusStation);
 				setBusStationChosenTime(data.chosenBusStationTime);
@@ -907,7 +914,13 @@ const SingleReservationPage = (props) => {
 						max
 						size='small'
 						showToday={true}
-						defaultValue={moment(singleOrder.scheduledDate)}
+						// defaultValue={moment(singleOrder.scheduledDate)}
+						defaultValue={
+							new Date(singleOrder.scheduledDate).toLocaleString() ===
+							"Invalid Date"
+								? moment()
+								: moment(new Date(singleOrder.scheduledDate))
+						}
 						placeholder='Please pick the desired schedule date'
 						style={{
 							height: "auto",

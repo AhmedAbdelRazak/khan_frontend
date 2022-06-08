@@ -8,6 +8,10 @@ import Adminsidebar from "./AdminSideBar/Adminsidebar";
 import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
 import { Button } from "antd";
+import { DatePicker } from "antd";
+import moment from "moment";
+import "antd/dist/antd.min.css";
+
 import {
 	getPreviousBookingsEmployee,
 	updateOrderStatusEmployee,
@@ -28,8 +32,12 @@ const AdminDashboard = () => {
 	const [excelDataSet, setExcelDataSet] = useState([]);
 	const [statusValues, setStatusValues] = useState([]);
 	const [q, setQ] = useState("");
-	const [clickedButton, setClickedButton] = useState("Select All");
-	const [selectedDate, setSelectedDate] = useState(new Date());
+	const [clickedButton, setClickedButton] = useState("Today");
+	const [selectedDate, setSelectedDate] = useState(
+		new Date().toLocaleString("en-US", {
+			timeZone: "Africa/Cairo",
+		}),
+	);
 
 	//Admin Auth
 	// eslint-disable-next-line
@@ -73,7 +81,12 @@ const AdminDashboard = () => {
 			} else {
 				if (clickedButton === "Select All") {
 					setHistBookings(data.sort(compareTotalAppointments));
-				} else if (clickedButton === "Today" || clickedButton === "Yesterday") {
+				} else if (
+					clickedButton === "Today" ||
+					clickedButton === "Yesterday" ||
+					clickedButton === "Tomorrow" ||
+					clickedButton === "DatePicker"
+				) {
 					setHistBookings(
 						data
 							.filter(
@@ -144,7 +157,15 @@ const AdminDashboard = () => {
 		loadHistReservations();
 
 		// eslint-disable-next-line
-	}, [clickedButton]);
+	}, [clickedButton, selectedDate]);
+
+	useEffect(() => {
+		if (!q || q === "") {
+			setClickedButton("Today");
+		}
+
+		// eslint-disable-next-line
+	}, [q]);
 
 	function search(orders) {
 		return orders.filter((row) => {
@@ -186,10 +207,15 @@ const AdminDashboard = () => {
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
+	const disabledDate = (current) => {
+		// Can not select days before today and today
+		return current <= moment();
+	};
+
 	const allReservationsDetails = () => {
 		return (
 			<Summary>
-				<div>
+				<div className='mx-auto text-center mt-3 mb-5'>
 					<span
 						style={{
 							fontSize: "1.3rem",
@@ -201,7 +227,7 @@ const AdminDashboard = () => {
 						Filters:
 					</span>
 					<br />
-					<button
+					{/* <button
 						onClick={() => {
 							setClickedButton("Select All");
 							setSelectedDate(today);
@@ -211,10 +237,10 @@ const AdminDashboard = () => {
 							backgroundColor: "var(--mainBlue)",
 							border: "none",
 						}}
-						className='ml-1 p-2'>
+						className='ml-1 p-2 mt-3'>
 						Select All
-					</button>
-					<button
+					</button> */}
+					{/* <button
 						onClick={() => {
 							setClickedButton("Today");
 							setSelectedDate(today);
@@ -224,8 +250,21 @@ const AdminDashboard = () => {
 							backgroundColor: "var(--orangePrimary)",
 							border: "none",
 						}}
-						className='ml-1 p-2'>
+						className='ml-1 p-2 '>
 						Today
+					</button>
+					<button
+						onClick={() => {
+							setClickedButton("Tomorrow");
+							setSelectedDate(tomorrow);
+						}}
+						style={{
+							color: "white",
+							backgroundColor: "black",
+							border: "none",
+						}}
+						className='ml-1 p-2'>
+						Tomorrow
 					</button>
 					<button
 						onClick={() => {
@@ -265,7 +304,30 @@ const AdminDashboard = () => {
 						}}
 						className='ml-1 p-2'>
 						This Month
-					</button>
+					</button> */}
+					<DatePicker
+						className='inputFields'
+						onChange={(date) => {
+							setClickedButton("DatePicker");
+							setSelectedDate(
+								new Date(date._d).toLocaleDateString() || date._d,
+							);
+						}}
+						disabledDate={disabledDate}
+						max
+						size='small'
+						showToday={true}
+						defaultValue={moment(new Date(selectedDate))}
+						placeholder='Please pick the desired schedule date'
+						style={{
+							height: "auto",
+							width: "50%",
+							marginLeft: "5px",
+							padding: "10px",
+							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+							borderRadius: "10px",
+						}}
+					/>
 				</div>
 
 				<div className=' mb-3 form-group mx-3 text-center'>
@@ -283,7 +345,11 @@ const AdminDashboard = () => {
 						className='p-2 my-5 '
 						type='text'
 						value={q}
-						onChange={(e) => setQ(e.target.value.toLowerCase())}
+						autoFocus
+						onChange={(e) => {
+							setClickedButton("Select All");
+							setQ(e.target.value.toLowerCase());
+						}}
 						placeholder='Search By Client Phone, Client Name, Package Name'
 						style={{ borderRadius: "20px", width: "50%" }}
 					/>
@@ -448,7 +514,7 @@ const AdminDashboard = () => {
 				</ShowOrderLength>
 			);
 		} else {
-			return <h1 className='text-danger'>No Schedules</h1>;
+			return <h1 className='text-danger mx-auto'>No Reservations</h1>;
 		}
 	};
 
