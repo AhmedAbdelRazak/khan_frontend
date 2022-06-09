@@ -52,6 +52,7 @@ import SingleTicketPageArabic from "./Pages/SingleTicketPage/SingleTicketPageAra
 import GalleryPage from "./Pages/GalleryPage";
 import SingleReservationPage from "./admin/SingleReservationPage";
 import SingleReservationPageClerk from "./Clerk/SingleReservationPage";
+import UncompleteForm from "./admin/UncompleteForm";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -276,6 +277,11 @@ const App = () => {
 					exact
 					path='/admin/update-reservation/:reservationId'
 					component={SingleReservationPage}
+				/>
+				<AdminRoute
+					exact
+					path='/admin/uncomplete-reservation'
+					component={UncompleteForm}
 				/>
 
 				<EmployeeRoute
