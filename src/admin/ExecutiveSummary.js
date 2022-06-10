@@ -143,7 +143,7 @@ const ExecutiveSummary = ({ historicalBooking }) => {
 					<div className='col-md-5 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--mainBlue)" }}>
 							<div className='card-body totalAmount' style={{ color: "white" }}>
-								<h5> Total Paid Amount (Pounds)</h5>
+								<h5> Total Amount (Pounds)</h5>
 								<CountUp
 									duration='4.5'
 									delay={0.5}

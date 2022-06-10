@@ -68,6 +68,9 @@ const AdminDashboard = () => {
 	next7Days.setDate(yesterday.getDate() + 8);
 	next30Days.setDate(yesterday.getDate() + 31);
 
+	console.log(tomorrow);
+	console.log(selectedDate);
+
 	const dateFormat = (x) => {
 		var requiredDate = new Date(x);
 		var yyyy = requiredDate.getFullYear();
@@ -126,6 +129,38 @@ const AdminDashboard = () => {
 									new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
 										new Date(selectedDate).setHours(0, 0, 0, 0) &&
 									new Date(i.scheduledDate).setHours(0, 0, 0, 0) >=
+										new Date().setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments),
+					);
+				} else if (clickedButton === "Select AllBooking") {
+					setHistBookings(data.sort(compareTotalAppointments));
+				} else if (
+					clickedButton === "TodayBooking" ||
+					clickedButton === "YesterdayBooking" ||
+					clickedButton === "TomorrowBooking" ||
+					clickedButton === "DatePickerBooking"
+				) {
+					setHistBookings(
+						data
+							.filter(
+								(i) =>
+									new Date(i.createdAt).setHours(0, 0, 0, 0) ===
+									new Date(selectedDate).setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments),
+					);
+				} else if (
+					clickedButton === "This WeekBooking" ||
+					clickedButton === "This MonthBooking"
+				) {
+					setHistBookings(
+						data
+							.filter(
+								(i) =>
+									new Date(i.createdAt).setHours(0, 0, 0, 0) <=
+										new Date(selectedDate).setHours(0, 0, 0, 0) &&
+									new Date(i.createdAt).setHours(0, 0, 0, 0) >=
 										new Date().setHours(0, 0, 0, 0),
 							)
 							.sort(compareTotalAppointments),
@@ -624,7 +659,7 @@ const AdminDashboard = () => {
 								marginLeft: "10px",
 								color: "var(--mainBlue)",
 							}}>
-							Filters:
+							Filters (Event Date):
 						</span>
 						<br />
 						<button
@@ -709,6 +744,120 @@ const AdminDashboard = () => {
 							className='inputFields'
 							onChange={(date) => {
 								setClickedButton("DatePicker");
+								setSelectedDate(
+									new Date(date._d).toLocaleDateString() || date._d,
+								);
+							}}
+							disabledDate={disabledDate}
+							max
+							size='small'
+							showToday={true}
+							defaultValue={moment(new Date(selectedDate))}
+							placeholder='Please pick the desired schedule date'
+							style={{
+								height: "auto",
+								width: "20%",
+								marginLeft: "5px",
+								padding: "10px",
+								// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+								borderRadius: "10px",
+							}}
+						/>
+					</div>
+					<div className='mx-auto text-center mb-2'>
+						<span
+							style={{
+								fontSize: "1.3rem",
+								fontWeight: "bold",
+								marginBottom: "10px",
+								marginLeft: "10px",
+								color: "var(--mainBlue)",
+							}}>
+							Filters (Booking Date):
+						</span>
+						<br />
+						<button
+							onClick={() => {
+								setClickedButton("Select AllBooking");
+								setSelectedDate(today);
+							}}
+							style={{
+								color: "white",
+								backgroundColor: "var(--mainBlue)",
+								border: "none",
+							}}
+							className='ml-1 p-2 mt-3'>
+							Select All
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("TodayBooking");
+								setSelectedDate(today);
+							}}
+							style={{
+								color: "black",
+								backgroundColor: "var(--orangePrimary)",
+								border: "none",
+							}}
+							className='ml-1 p-2 '>
+							Today
+						</button>
+						{/* <button
+							onClick={() => {
+								setClickedButton("TomorrowBooking");
+								setSelectedDate(tomorrow);
+							}}
+							style={{
+								color: "white",
+								backgroundColor: "black",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							Tomorrow
+						</button> */}
+						<button
+							onClick={() => {
+								setClickedButton("YesterdayBooking");
+								setSelectedDate(yesterday);
+							}}
+							style={{
+								color: "black",
+								backgroundColor: "var(--babyBlue)",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							Yesterday
+						</button>
+						{/* <button
+							onClick={() => {
+								setClickedButton("This WeekBooking");
+								setSelectedDate(next7Days);
+							}}
+							style={{
+								color: "black",
+								backgroundColor: "#d9f9fe",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							This Week
+						</button>
+						<button
+							onClick={() => {
+								setClickedButton("This MonthBooking");
+								setSelectedDate(next30Days);
+							}}
+							style={{
+								color: "white",
+								backgroundColor: "#fc3e84",
+								border: "none",
+							}}
+							className='ml-1 p-2'>
+							This Month
+						</button> */}
+						<DatePicker
+							className='inputFields'
+							onChange={(date) => {
+								setClickedButton("DatePickerBooking");
 								setSelectedDate(
 									new Date(date._d).toLocaleDateString() || date._d,
 								);
