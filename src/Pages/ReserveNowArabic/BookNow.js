@@ -22,6 +22,7 @@ import FormStep3 from "./FormStep3";
 // eslint-disable-next-line
 import PackagePhotos from "./PackagePhotos";
 import moment from "moment";
+// eslint-disable-next-line
 import GoogleAds from "../../GoogleAdsense/GoogleAds";
 const { Step } = Steps;
 
@@ -828,10 +829,10 @@ const BookNow = ({ match }) => {
 						</Button>
 					)}
 			</div>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 		</BookNowWrapper>
 	);
 };
@@ -899,6 +900,9 @@ const BookNowWrapper = styled.div`
 
 		.dataPointsReview {
 			font-size: 0.8rem !important;
+		}
+		input::placeholder {
+			font-size: 13px;
 		}
 	}
 

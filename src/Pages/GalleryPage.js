@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { getGalleries } from "../admin/apiAdmin";
 import Helmet from "react-helmet";
 import PowerBySnippet from "./PowerBySnippet";
+// eslint-disable-next-line
 import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const GalleryPage = () => {
@@ -39,10 +40,10 @@ const GalleryPage = () => {
 				className='titleBookNow'>
 				Khan Gallery
 			</h1>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 			<div
 				className='row'
 				// style={{ border: "2px red solid" }}
@@ -68,10 +69,10 @@ const GalleryPage = () => {
 						);
 					})}
 			</div>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 			<div className='mt-5'>
 				<br />
 				<br />

@@ -6,6 +6,7 @@ import OurTickets from "./HomePage/OurTickets";
 import ReactGA from "react-ga";
 import Helmet from "react-helmet";
 import PowerBySnippet from "./PowerBySnippet";
+// eslint-disable-next-line
 import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const Listings = () => {
@@ -37,15 +38,15 @@ const Listings = () => {
 
 			<OurTickets />
 
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 			<PowerBySnippet />
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 		</LinstingsWrapper>
 	);
 };

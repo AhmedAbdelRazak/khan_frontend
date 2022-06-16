@@ -347,7 +347,7 @@ const Sidebar = ({
 
 						<li
 							onClick={() => {
-								window.scrollTo({ top: 250, behavior: "smooth" });
+								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
 								to='/khan-khadija-gallery'

@@ -66,6 +66,18 @@ const BookNowGeneral_Arabic = ({ language }) => {
 
 	tomorrow.setDate(yesterday.getDate() + 1);
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	const gettingAllTickets = () => {
 		getTickets().then((data) => {
 			if (data.error) {
@@ -219,6 +231,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 				: busStations[indexOfBusStations];
 
 		setChosenBusStationsDetails(chosenBusStatioDetails);
+		setBusStationChosenTime(chosenBusStatioDetails.times[0]);
 	};
 
 	const handleBusStationChosenTime = (event) => {
@@ -571,7 +584,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 										className='BookingIcons'
 									/>
 									<span className='mr-2 mainTitles' style={{ float: "right" }}>
-										التاريخ: {chosenDate}
+										التاريخ: {dateFormat(chosenDate)}
 									</span>
 								</span>
 							) : (

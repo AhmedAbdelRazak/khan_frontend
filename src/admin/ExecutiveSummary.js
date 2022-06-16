@@ -5,7 +5,7 @@ import styled from "styled-components";
 import CountUp from "react-countup";
 import "antd/dist/antd.min.css";
 
-const ExecutiveSummary = ({ historicalBooking }) => {
+const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 	// function numberWithCommas(x) {
 	//     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	// }
@@ -81,15 +81,17 @@ const ExecutiveSummary = ({ historicalBooking }) => {
 	return (
 		<ExecutiveSummaryWrapper>
 			<div className='container'>
-				<h4>
-					Selected Date: From{" "}
-					{dateFormat(
-						new Date(
-							scheduledDatesArray[scheduledDatesArray.length - 1],
-						).toLocaleString(),
-					)}{" "}
-					To {dateFormat(new Date(scheduledDatesArray[0]).toLocaleString())}
-				</h4>
+				{clickedButton.includes("Booking") ? null : (
+					<h4>
+						Selected Date: From{" "}
+						{dateFormat(
+							new Date(
+								scheduledDatesArray[scheduledDatesArray.length - 1],
+							).toLocaleString(),
+						)}{" "}
+						To {dateFormat(new Date(scheduledDatesArray[0]).toLocaleString())}
+					</h4>
+				)}
 
 				<div className='row text-center'>
 					<div className='col-md-3 text-center mx-auto'>

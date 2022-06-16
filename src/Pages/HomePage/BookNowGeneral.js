@@ -68,6 +68,18 @@ const BookNowGeneral = () => {
 
 	tomorrow.setDate(yesterday.getDate() + 1);
 
+	const dateFormat = (x) => {
+		var requiredDate = new Date(x);
+		var yyyy = requiredDate.getFullYear();
+		let mm = requiredDate.getMonth() + 1; // Months start at 0!
+		let dd = requiredDate.getDate();
+
+		if (dd < 10) dd = "0" + dd;
+		if (mm < 10) mm = "0" + mm;
+
+		return (requiredDate = dd + "/" + mm + "/" + yyyy);
+	};
+
 	const gettingAllTickets = () => {
 		getTickets().then((data) => {
 			if (data.error) {
@@ -221,6 +233,7 @@ const BookNowGeneral = () => {
 				: busStations[indexOfBusStations];
 
 		setChosenBusStationsDetails(chosenBusStatioDetails);
+		setBusStationChosenTime(chosenBusStatioDetails.times[0]);
 	};
 
 	const handleBusStationChosenTime = (event) => {
@@ -565,7 +578,7 @@ const BookNowGeneral = () => {
 										className='BookingIcons'
 									/>
 									<span className='ml-2 mainTitles' style={{ float: "left" }}>
-										Date: {chosenDate}
+										Date: {dateFormat(chosenDate)}
 									</span>
 								</span>
 							) : (

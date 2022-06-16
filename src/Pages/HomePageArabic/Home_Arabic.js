@@ -10,6 +10,7 @@ import KhanGalleryArabic from "./KhanGallery_Arabic";
 import OurTicketsArabic from "./OurTickets_Arabic";
 import ReactGA from "react-ga";
 import Helmet from "react-helmet";
+// eslint-disable-next-line
 import GoogleAds from "../../GoogleAdsense/GoogleAds";
 
 const Home_Arabic = ({ language }) => {
@@ -54,9 +55,10 @@ const Home_Arabic = ({ language }) => {
 			<div className='col-md-10 mx-auto mt-3'>
 				<hr />
 			</div>
+
 			<div className='ad-class mb-3'>
 				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
+				{/* <GoogleAds slot='8388147324' /> */}
 			</div>
 
 			<span className='khanGalleryStyling'>
@@ -66,19 +68,16 @@ const Home_Arabic = ({ language }) => {
 			<span className='mt-3'>
 				<KhanMap />
 			</span>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 			<PowerBySnippet />
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
+
 			<span className='phoneBottomHero'>
 				<HeroComponentArabic language={language} />
 			</span>

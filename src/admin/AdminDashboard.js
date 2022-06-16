@@ -802,19 +802,7 @@ const AdminDashboard = () => {
 							className='ml-1 p-2 '>
 							Today
 						</button>
-						{/* <button
-							onClick={() => {
-								setClickedButton("TomorrowBooking");
-								setSelectedDate(tomorrow);
-							}}
-							style={{
-								color: "white",
-								backgroundColor: "black",
-								border: "none",
-							}}
-							className='ml-1 p-2'>
-							Tomorrow
-						</button> */}
+
 						<button
 							onClick={() => {
 								setClickedButton("YesterdayBooking");
@@ -828,32 +816,7 @@ const AdminDashboard = () => {
 							className='ml-1 p-2'>
 							Yesterday
 						</button>
-						{/* <button
-							onClick={() => {
-								setClickedButton("This WeekBooking");
-								setSelectedDate(next7Days);
-							}}
-							style={{
-								color: "black",
-								backgroundColor: "#d9f9fe",
-								border: "none",
-							}}
-							className='ml-1 p-2'>
-							This Week
-						</button>
-						<button
-							onClick={() => {
-								setClickedButton("This MonthBooking");
-								setSelectedDate(next30Days);
-							}}
-							style={{
-								color: "white",
-								backgroundColor: "#fc3e84",
-								border: "none",
-							}}
-							className='ml-1 p-2'>
-							This Month
-						</button> */}
+
 						<DatePicker
 							className='inputFields'
 							onChange={(date) => {
@@ -862,7 +825,7 @@ const AdminDashboard = () => {
 									new Date(date._d).toLocaleDateString() || date._d,
 								);
 							}}
-							disabledDate={disabledDate}
+							// disabledDate={disabledDate}
 							max
 							size='small'
 							showToday={true}
@@ -878,7 +841,10 @@ const AdminDashboard = () => {
 							}}
 						/>
 					</div>
-					<ExecutiveSummary historicalBooking={HistBookings} />
+					<ExecutiveSummary
+						historicalBooking={HistBookings}
+						clickedButton={clickedButton}
+					/>
 					<hr />
 
 					{/* {showOrdersLength()} */}

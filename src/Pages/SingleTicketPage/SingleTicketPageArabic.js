@@ -7,6 +7,7 @@ import { getTickets } from "../../apiCore";
 import PackagePhotos2 from "./PackagePhotos2";
 import ReactGA from "react-ga";
 import Helmet from "react-helmet";
+// eslint-disable-next-line
 import GoogleAds from "../../GoogleAdsense/GoogleAds";
 
 const SingleTicketPageArabic = ({ match }) => {
@@ -68,10 +69,10 @@ const SingleTicketPageArabic = ({ match }) => {
 					href={`https://khankhadija.com/ticket/${match.params.ticketslug}`}
 				/>
 			</Helmet>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 			<div className='mx-auto photosWrapperCellPhone'>
 				<PackagePhotos2 serviceDetails={serviceDetails} />
 			</div>
@@ -288,7 +289,7 @@ const SingleTicketPageArabic = ({ match }) => {
 export default SingleTicketPageArabic;
 
 const SingleTicketPageWrapper = styled.div`
-	min-height: 1650px;
+	min-height: 1200px;
 	font-family: "Droid Arabic Kufi";
 	overflow: hidden !important;
 

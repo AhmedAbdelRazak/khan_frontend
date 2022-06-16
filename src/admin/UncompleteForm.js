@@ -38,6 +38,8 @@ const UncompleteForm = () => {
 	const [excelDataSet, setExcelDataSet] = useState([]);
 	// eslint-disable-next-line
 	const [statusValues, setStatusValues] = useState([]);
+	// eslint-disable-next-line
+	const [clickedButton, setClickedButton] = useState("Select All");
 	const [q, setQ] = useState("");
 
 	//Admin Auth
@@ -220,6 +222,9 @@ const UncompleteForm = () => {
 							<th scope='col'>
 								<span className=''>#</span>{" "}
 							</th>
+							<th scope='col'>
+								<span className=''>Id</span>{" "}
+							</th>
 							<th scope='col'>Full Name</th>
 							<th scope='col'>Phone Number</th>
 							<th scope='col'>Client Email</th>
@@ -255,6 +260,7 @@ const UncompleteForm = () => {
 												: "",
 									}}>
 									<td>{i + 1}</td>
+									<td>{s._id}</td>
 									<td>
 										{" "}
 										<Link
@@ -273,7 +279,7 @@ const UncompleteForm = () => {
 														? "white"
 														: "",
 											}}
-											to={`/admin/update-reservation/${s._id}`}>
+											to={`#`}>
 											{s.fullName}
 										</Link>{" "}
 									</td>
@@ -436,7 +442,10 @@ const UncompleteForm = () => {
 				</div>
 			) : (
 				<React.Fragment>
-					<ExecutiveSummary historicalBooking={uncompleteClients} />
+					<ExecutiveSummary
+						historicalBooking={uncompleteClients}
+						clickedButton={clickedButton}
+					/>
 					<hr />
 
 					{/* {showOrdersLength()} */}

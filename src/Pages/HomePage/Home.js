@@ -10,6 +10,7 @@ import PowerBySnippet from "../PowerBySnippet";
 import KhanGallery from "./KhanGallery";
 import KhanMap from "./KhanMap";
 import ReactGA from "react-ga";
+// eslint-disable-next-line
 import GoogleAds from "../../GoogleAdsense/GoogleAds";
 
 const Home = () => {
@@ -52,10 +53,7 @@ const Home = () => {
 			</div>
 			<br />
 			<hr />
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+
 			<span className='khanGalleryStyling'>
 				<KhanGallery />
 			</span>
@@ -63,20 +61,9 @@ const Home = () => {
 			<span className='mt-3'>
 				<KhanMap />
 			</span>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
 
 			<PowerBySnippet />
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+
 			<span className='phoneBottomHero'>
 				<HeroComponent />
 			</span>
