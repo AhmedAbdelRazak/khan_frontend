@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { getTickets } from "../apiAdmin";
+import { getAllUsers, getTickets } from "../apiAdmin";
 import { isAuthenticated } from "../../auth/index";
 
 const isActive = (history, path) => {
@@ -28,6 +28,7 @@ const Adminsidebar = ({
 }) => {
 	const [allTickets, setAllTickets] = useState([]);
 	const [ticketSlug, setTicketSlug] = useState([]);
+	const [allUsersAvailable, setAllUsersAvailable] = useState([]);
 	const [click, setClick] = useState(true);
 	const [clickMenu, setClickMenu] = useState(true);
 	// eslint-disable-next-line
@@ -49,8 +50,19 @@ const Adminsidebar = ({
 		});
 	};
 
+	const gettingAllAvailableUsers = () => {
+		getAllUsers(user._id, token).then((data) => {
+			if (data.error) {
+				console.log(data.error, "getting all users error");
+			} else {
+				setAllUsersAvailable(data[0]);
+			}
+		});
+	};
+
 	useEffect(() => {
 		gettingAllTickets();
+		gettingAllAvailableUsers();
 		// eslint-disable-next-line
 	}, []);
 
@@ -304,7 +316,33 @@ const Adminsidebar = ({
 									setClick2(false);
 								}}>
 								{click2 && clickMenu2 ? (
-									<React.Fragment>Create A Site Account</React.Fragment>
+									<React.Fragment>Create An Employee Account</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
+								to={`/admin/update-user-account/${
+									allUsersAvailable && allUsersAvailable._id
+								}`}
+								style={isActive(
+									history,
+									`/admin/update-user-account/${
+										allUsersAvailable && allUsersAvailable._id
+									}`,
+								)}
+								className='sidebar-link'
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment>Update An Employee Account</React.Fragment>
 								) : null}
 							</Link>
 						</li>

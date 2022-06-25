@@ -1,5 +1,5 @@
 /** @format */
-// eslint-disable-next-line
+
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { DatePicker } from "antd";
@@ -126,6 +126,15 @@ const FormStep1 = ({
 	const handleBusStationChosenTime = (event) => {
 		setBusStationChosenTime(event.target.value);
 	};
+
+	useEffect(() => {
+		if (!localStorage.getItem("reservationData")) {
+			setBusStationName(chosenBusStationDetails.address);
+			setBusStationChosenTime(chosenBusStationDetails.times[0]);
+		}
+
+		// eslint-disable-next-line
+	}, []);
 
 	// eslint-disable-next-line
 	const handleOption1Count = (event) => {

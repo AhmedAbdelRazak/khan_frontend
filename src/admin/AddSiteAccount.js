@@ -27,6 +27,7 @@ import { getLocations } from "./apiAdmin";
 const AddSiteAccount = () => {
 	const [click2, setClick2] = useState(false);
 	const [clickMenu2, setClickMenu2] = useState(false);
+	// eslint-disable-next-line
 	const [Locations, setLocations] = useState([]);
 
 	const [values, setValues] = useState({
@@ -48,6 +49,7 @@ const AddSiteAccount = () => {
 		email,
 		password,
 		password2,
+		// eslint-disable-next-line
 		relatedSite,
 		role,
 		success,
@@ -108,8 +110,8 @@ const AddSiteAccount = () => {
 				email,
 				password,
 				password2,
-				role,
-				relatedSite,
+				role: Number(role).toFixed(0),
+				// relatedSite,
 				misMatch,
 			}).then((data) => {
 				console.log(data);
@@ -127,8 +129,9 @@ const AddSiteAccount = () => {
 	const loadAllLocations = () =>
 		getLocations().then((res) => setLocations(res.data));
 
+	// eslint-disable-next-line
 	const handleChosenSite = (event) => {
-		setValues({ ...values, relatedSite: event.target.value });
+		setValues({ ...values, role: event.target.value });
 	};
 
 	const signUpForm = () => (
@@ -144,7 +147,7 @@ const AddSiteAccount = () => {
 							boxShadow: "5px 5px 5px 5px rgba(0, 0, 0, 0.1)",
 						}}>
 						<h1 className='mb-3'>
-							Location <span className='text-primary'>Register</span>
+							Employee <span className='text-primary'>Register</span>
 						</h1>
 						{/* <Google informParent={informParent} /> */}
 						<form onSubmit={clickSubmit}>
@@ -199,57 +202,21 @@ const AddSiteAccount = () => {
 							</div>
 
 							<label htmlFor='password2' style={{ fontWeight: "bold" }}>
-								Choose User Location/Site
+								Add Employee Role
 							</label>
-
 							<select
 								onChange={handleChosenSite}
-								placeholder='Select a Ticket'
-								className=' mb-3 w-75 mx-auto my-1'
-								style={{
-									paddingTop: "12px",
-									paddingBottom: "12px",
-									// paddingRight: "50px",
-									// textAlign: "center",
-									border: "#cfcfcf solid 1px",
-									// borderRadius: "10px",
-									fontSize: "0.9rem",
-									// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-									textTransform: "capitalize",
-								}}>
-								{values.relatedSite && values.relatedSite !== "Select site" ? (
-									<option
-										className='items text-muted inputFields'
-										style={{ textTransform: "capitalize" }}>
-										{values.relatedSite}
-									</option>
-								) : (
-									<option className='items text-muted inputFields'>
-										Select A Location/Site
-									</option>
-								)}
-
-								{Locations &&
-									Locations.map((t, i) => (
-										<option
-											key={i}
-											value={t._id}
-											className='items'
-											style={{
-												textTransform: "capitalize",
-												fontWeight: "bold",
-											}}
-											onChange={() =>
-												setValues({ ...values, relatedSite: t._id })
-											}>
-											{t.address}{" "}
-										</option>
-									))}
+								className='w-75 mx-auto'
+								style={{ fontSize: "0.80rem" }}>
+								<option>Please select / Required*</option>
+								<option value='2'>Clerk Account</option>
+								<option value='1'>Admin Account</option>
 							</select>
+
 							<input
 								type='submit'
 								value='Register'
-								className='btn btn-primary w-75 btn-block mx-auto'
+								className='btn btn-primary w-75 btn-block mx-auto my-4'
 								//onClick={sendEmail}
 							/>
 						</form>

@@ -53,6 +53,7 @@ import GalleryPage from "./Pages/GalleryPage";
 import SingleReservationPage from "./admin/SingleReservationPage";
 import SingleReservationPageClerk from "./Clerk/SingleReservationPage";
 import UncompleteForm from "./admin/UncompleteForm";
+import UpdatingEmployeeAccount from "./admin/UpdatingEmployeeAccount";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -278,6 +279,13 @@ const App = () => {
 					path='/admin/update-reservation/:reservationId'
 					component={SingleReservationPage}
 				/>
+
+				<AdminRoute
+					path='/admin/update-user-account/:userId'
+					exact
+					component={UpdatingEmployeeAccount}
+				/>
+
 				<AdminRoute
 					exact
 					path='/admin/uncomplete-reservation'
