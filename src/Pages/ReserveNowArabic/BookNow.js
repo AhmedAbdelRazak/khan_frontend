@@ -24,6 +24,7 @@ import PackagePhotos from "./PackagePhotos";
 import moment from "moment";
 // eslint-disable-next-line
 import GoogleAds from "../../GoogleAdsense/GoogleAds";
+import { isAuthenticated } from "../../auth";
 const { Step } = Steps;
 
 const BookNow = ({ match }) => {
@@ -575,6 +576,11 @@ const BookNow = ({ match }) => {
 			return toast.error("الرجاء إضافة وقت لمحطة الحافلات للسفر");
 		}
 
+		const bookedByUser =
+			isAuthenticated() &&
+			isAuthenticated().user &&
+			isAuthenticated().user.name;
+
 		const createOrderData = {
 			fullName: fullName,
 			scheduledByUserEmail: scheduledByUserEmail,
@@ -589,7 +595,7 @@ const BookNow = ({ match }) => {
 			chosenPackage_Stock: ticketsManagement ? ticketsManagement : null,
 			scheduledDate: chosenDate,
 			status: "Not Paid",
-			bookedFrom: "Online",
+			bookedFrom: bookedByUser ? `Booked By Clerk ${bookedByUser}` : "Online",
 			chosenCoupon: chosenCouponDetails,
 			availableCoupon: availableCoupon,
 			chosenBusStation: chosenBusStationDetails,
@@ -597,7 +603,9 @@ const BookNow = ({ match }) => {
 				chosenBusStationDetails.address === "NO BUS NEEDED"
 					? "00:00"
 					: busStationChosenTime,
-			bookingSource: "Online",
+			bookingSource: bookedByUser
+				? `Booked By Clerk ${bookedByUser}`
+				: "Online",
 			totalAmount: totalAmount,
 			totalAmountBeforeDiscount: totalAmountBeforeDiscount,
 			option1Count: option1Count,

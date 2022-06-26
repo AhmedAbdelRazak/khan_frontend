@@ -170,7 +170,34 @@ const AdminDashboard = () => {
 				}
 
 				if (clickedButton === "Select All") {
-					setHistBookings(data.sort(compareTotalAppointments));
+					setExcelDataSet(
+						data.sort(compareTotalAppointments).map((data, i) => {
+							return {
+								id: i + 1,
+								fullName: data.fullName,
+								PhoneNumber: data.phoneNumber,
+								ClientEmail: data.scheduledByUserEmail,
+								TicketsCount_Adults: data.quantity,
+								TicketsCount_Children: data.quantity_Children,
+								BookedOn: dateFormat(
+									new Date(data.createdAt).toLocaleString("en-US", {
+										timeZone: "Africa/Cairo",
+									}),
+								),
+
+								ScheduleDate: new Date(data.scheduledDate).toDateString(),
+								Receipt: data.phoneNumber,
+								Event: data.event,
+								ChosenPackage: data.chosenService_Package,
+								BookingSource: data.bookedFrom,
+								PackagePrice: data.chosenServiceDetails.servicePrice,
+								PackagePrice_Discount:
+									data.chosenServiceDetails.servicePriceDiscount,
+								Status: data.status,
+								totalAmount: data.totalAmount,
+							};
+						}),
+					);
 				} else if (
 					clickedButton === "Today" ||
 					clickedButton === "Yesterday" ||
@@ -203,6 +230,7 @@ const AdminDashboard = () => {
 									Receipt: data.phoneNumber,
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
+									BookingSource: data.bookedFrom,
 									PackagePrice: data.chosenServiceDetails.servicePrice,
 									PackagePrice_Discount:
 										data.chosenServiceDetails.servicePriceDiscount,
@@ -243,6 +271,7 @@ const AdminDashboard = () => {
 									Receipt: data.phoneNumber,
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
+									BookingSource: data.bookedFrom,
 									PackagePrice: data.chosenServiceDetails.servicePrice,
 									PackagePrice_Discount:
 										data.chosenServiceDetails.servicePriceDiscount,
@@ -271,6 +300,7 @@ const AdminDashboard = () => {
 								Receipt: data.phoneNumber,
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
+								BookingSource: data.bookedFrom,
 								PackagePrice: data.chosenServiceDetails.servicePrice,
 								PackagePrice_Discount:
 									data.chosenServiceDetails.servicePriceDiscount,
@@ -285,6 +315,8 @@ const AdminDashboard = () => {
 			}
 		});
 	};
+
+	// console.log(excelDataSet, "excelDataSet");
 
 	const loadStatusValues = () => {
 		getStatusValues(user._id, token).then((data) => {
@@ -388,6 +420,7 @@ const AdminDashboard = () => {
 							<th scope='col'>Receipt #</th>
 							<th scope='col'>Event/Ocassion</th>
 							<th scope='col'>Chosen Package</th>
+							<th scope='col'>Booking Source</th>
 							<th scope='col'>Package Price (L.E.)</th>
 							<th scope='col'>Package Price Discount (L.E.)</th>
 							<th scope='col'>Before Discount (L.E.)</th>
@@ -474,6 +507,7 @@ const AdminDashboard = () => {
 									<td>+{s.phoneNumber}</td>
 									<td>{s.event}</td>
 									<td>{s.chosenServiceDetails.serviceName}</td>
+									<td style={{ width: "15px" }}>{s.bookedFrom}</td>
 									<td style={{ width: "15px" }}>
 										{s.chosenServiceDetails.servicePrice}
 									</td>
@@ -595,6 +629,7 @@ const AdminDashboard = () => {
 					<ExcelColumn label='Receipt' value='Receipt' />
 					<ExcelColumn label='Event/Ocassion' value='Event' />
 					<ExcelColumn label='Chosen Package' value='ChosenPackage' />
+					<ExcelColumn label='Booking Source' value='BookingSource' />
 					<ExcelColumn label='Price' value='PackagePrice' />
 					<ExcelColumn
 						label='Price After Discount'

@@ -28,6 +28,7 @@ const Adminsidebar = ({
 }) => {
 	// eslint-disable-next-line
 	const [allTickets, setAllTickets] = useState([]);
+	// eslint-disable-next-line
 	const [ticketSlug, setTicketSlug] = useState([]);
 	const [click, setClick] = useState(true);
 	const [clickMenu, setClickMenu] = useState(true);
@@ -118,7 +119,7 @@ const Adminsidebar = ({
 							</Link>
 						</li>
 
-						<li
+						{/* <li
 							className='mt-3'
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
@@ -138,7 +139,7 @@ const Adminsidebar = ({
 									<React.Fragment>Reserve For A Client</React.Fragment>
 								) : null}
 							</Link>
-						</li>
+						</li> */}
 					</ul>
 				</SideWrapper>
 			</div>
