@@ -92,7 +92,7 @@ const Sidebar = ({
 				<Link
 					to='/'
 					onClick={() => {
-						window.scrollTo({ top: 0, behavior: "smooth" });
+						window.scrollTo({ top: 300, behavior: "smooth" });
 					}}>
 					<img
 						src={
@@ -126,7 +126,7 @@ const Sidebar = ({
 							className='nav-item mx-2 navLanguage'
 							style={{ marginTop: "0px" }}
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<span className=' mr-0 btn mb-2' style={{ padding: "0px" }}>
 								{language === "English" ? (
@@ -190,7 +190,7 @@ const Sidebar = ({
 							className='nav-item mx-2 navLanguage'
 							style={{ marginTop: "0px" }}
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<span className=' mr-0 btn mb-2' style={{ padding: "1px" }}>
 								{language === "English" ? (
@@ -277,7 +277,7 @@ const Sidebar = ({
 						<li
 							className='mt-3'
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<Link
 								to='/'
@@ -308,7 +308,7 @@ const Sidebar = ({
 
 						<li
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<Link
 								to='/listings'
@@ -347,7 +347,7 @@ const Sidebar = ({
 
 						<li
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<Link
 								to='/khan-khadija-gallery'
@@ -386,7 +386,7 @@ const Sidebar = ({
 
 						<li
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<Link
 								to='/contact'
@@ -425,7 +425,7 @@ const Sidebar = ({
 
 						<li
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<Link
 								to='/about'
@@ -466,7 +466,7 @@ const Sidebar = ({
 							<li
 								className='nav-item ml-5 mt-3'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<Link
 									className='nav-link '
@@ -487,7 +487,7 @@ const Sidebar = ({
 									<li
 										className='nav-item ml-3 mt-3'
 										onClick={() => {
-											window.scrollTo({ top: 0, behavior: "smooth" });
+											window.scrollTo({ top: 300, behavior: "smooth" });
 										}}>
 										<Link
 											style={{
@@ -509,7 +509,7 @@ const Sidebar = ({
 									<li
 										className='nav-item ml-3 mt-3'
 										onClick={() => {
-											window.scrollTo({ top: 0, behavior: "smooth" });
+											window.scrollTo({ top: 300, behavior: "smooth" });
 										}}>
 										<Link
 											style={{
@@ -535,7 +535,7 @@ const Sidebar = ({
 									<li
 										className='nav-item ml-3 mt-3'
 										onClick={() => {
-											window.scrollTo({ top: 0, behavior: "smooth" });
+											window.scrollTo({ top: 300, behavior: "smooth" });
 										}}>
 										<Link
 											style={{
@@ -557,7 +557,7 @@ const Sidebar = ({
 									<li
 										className='nav-item ml-3 mt-3'
 										onClick={() => {
-											window.scrollTo({ top: 0, behavior: "smooth" });
+											window.scrollTo({ top: 300, behavior: "smooth" });
 										}}>
 										<Link
 											style={{
@@ -582,7 +582,7 @@ const Sidebar = ({
 								<li
 									className='nav-item ml-3 mt-3'
 									onClick={() => {
-										window.scrollTo({ top: 0, behavior: "smooth" });
+										window.scrollTo({ top: 300, behavior: "smooth" });
 									}}>
 									<Link
 										className='nav-link '
@@ -608,7 +608,7 @@ const Sidebar = ({
 							<li
 								className='nav-item'
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<span>
 									<span
@@ -648,7 +648,7 @@ const Sidebar = ({
 								className='nav-item mx-3'
 								style={{ marginTop: "50px" }}
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<span style={{ color: "white", fontWeight: "bold" }}>
 									{language === "Arabic" ? "اللغة" : "Language"}
@@ -710,7 +710,7 @@ const Sidebar = ({
 								className='nav-item mx-5'
 								style={{ marginTop: "50px" }}
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<span style={{ color: "white", fontWeight: "bold" }}>
 									{language === "Arabic" ? "اللغة" : "Language"}

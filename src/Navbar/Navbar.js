@@ -91,7 +91,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 					<Link
 						to='/'
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						<img
 							src={
@@ -108,7 +108,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 				<span className='ItemsToRight '>
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/")} to='/'>
 							{language === "Arabic" ? (
@@ -121,7 +121,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/listings")} to='/listings'>
 							{language === "Arabic" ? (
@@ -134,7 +134,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						<Link
 							style={isActive(history, "/khan-khadija-gallery")}
@@ -149,7 +149,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/contact")} to='/contact'>
 							{language === "Arabic" ? (
@@ -161,7 +161,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 					</li>
 					<li
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						<Link style={isActive(history, "/about")} to='/about'>
 							{language === "Arabic" ? (
@@ -190,7 +190,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 						<React.Fragment>
 							<li
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<Link
 									className='DashboardStyling'
@@ -206,7 +206,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 						<React.Fragment>
 							<li
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<Link
 									className='DashboardStyling'
@@ -222,7 +222,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 						<Fragment>
 							<li
 								onClick={() => {
-									window.scrollTo({ top: 0, behavior: "smooth" });
+									window.scrollTo({ top: 300, behavior: "smooth" });
 								}}>
 								<Link
 									className='LoginStyling'
@@ -241,7 +241,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 					{isAuthenticated() && (
 						<li
 							onClick={() => {
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 							}}>
 							<span>
 								<span
@@ -274,7 +274,7 @@ const Navbar = ({ history, language, setLanguage }) => {
 						className='nav-item ml-5'
 						// style={{ marginTop: "150px" }}
 						onClick={() => {
-							window.scrollTo({ top: 0, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						{/* <span style={{ color: "white", fontWeight: "bold" }}>
 							{language === "Arabic" ? "اللغة" : "Language"}

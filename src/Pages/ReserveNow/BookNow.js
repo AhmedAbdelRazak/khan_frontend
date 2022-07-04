@@ -616,7 +616,7 @@ const BookNow = ({ match }) => {
 			// console.log(response);
 			// console.log("schedule booked");
 
-			window.scrollTo({ top: 0, behavior: "smooth" });
+			window.scrollTo({ top: 300, behavior: "smooth" });
 			toast.success("Your Ticket Was Successfully Booked");
 			// window.location.reload(false);
 		});
@@ -699,7 +699,7 @@ const BookNow = ({ match }) => {
 								action: "User is adding his/her details ",
 								label: "Client Info Is Being Added",
 							});
-							window.scrollTo({ top: 120, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 						}}>
 						Next
 					</Button>
@@ -731,7 +731,7 @@ const BookNow = ({ match }) => {
 							fontSize: "0.9rem",
 						}}
 						onClick={() => {
-							window.scrollTo({ top: 130, behavior: "smooth" });
+							window.scrollTo({ top: 300, behavior: "smooth" });
 
 							next();
 							ReactGA.event({
@@ -760,7 +760,7 @@ const BookNow = ({ match }) => {
 							onClick={() => {
 								message.success("Processing complete!");
 								console.log("Success");
-								window.scrollTo({ top: 0, behavior: "smooth" });
+								window.scrollTo({ top: 300, behavior: "smooth" });
 								setCurrent(0);
 							}}>
 							Please Fill In Your Phone

@@ -30,6 +30,12 @@ const KhanGallery = () => {
 	useEffect(() => {
 		loadAllGalleries();
 	}, []);
+
+	useEffect(() => {
+		window.scrollTo({ top: 300, behavior: "smooth" });
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<KhanGalleryWrapper>
 			<h1

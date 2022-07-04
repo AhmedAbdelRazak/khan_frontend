@@ -146,7 +146,10 @@ const OurTickets_Arabic = ({ language }) => {
 																.split(" ")
 																.join("-")}`}
 															onClick={() => {
-																window.scrollTo({ top: 0, behavior: "smooth" });
+																window.scrollTo({
+																	top: 300,
+																	behavior: "smooth",
+																});
 															}}>
 															<img
 																alt={s.serviceName}
@@ -382,7 +385,7 @@ const OurTickets_Arabic = ({ language }) => {
 									<Link
 										to={`/ticket/${t.serviceName.split(" ").join("-")}`}
 										onClick={() => {
-											window.scrollTo({ top: 0, behavior: "smooth" });
+											window.scrollTo({ top: 300, behavior: "smooth" });
 										}}>
 										<img alt={t.serviceName} src={t.thumbnail[0].url} />
 									</Link>
@@ -408,7 +411,7 @@ const OurTickets_Arabic = ({ language }) => {
 											<Link
 												to={`/ticket/${t.serviceName.split(" ").join("-")}`}
 												onClick={() => {
-													window.scrollTo({ top: 0, behavior: "smooth" });
+													window.scrollTo({ top: 300, behavior: "smooth" });
 												}}>
 												<img
 													className='imageOffers'

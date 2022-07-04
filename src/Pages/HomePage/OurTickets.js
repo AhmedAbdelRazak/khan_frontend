@@ -156,7 +156,10 @@ const OurTickets = () => {
 																.split(" ")
 																.join("-")}`}
 															onClick={() => {
-																window.scrollTo({ top: 0, behavior: "smooth" });
+																window.scrollTo({
+																	top: 300,
+																	behavior: "smooth",
+																});
 															}}>
 															<img
 																alt={s.serviceName}
@@ -360,7 +363,7 @@ const OurTickets = () => {
 													<Link
 														onClick={() => {
 															window.scrollTo({
-																top: 0,
+																top: 300,
 																behavior: "smooth",
 															});
 														}}
@@ -394,7 +397,7 @@ const OurTickets = () => {
 									<Link
 										to={`/ticket/${t.serviceName.split(" ").join("-")}`}
 										onClick={() => {
-											window.scrollTo({ top: 0, behavior: "smooth" });
+											window.scrollTo({ top: 300, behavior: "smooth" });
 										}}>
 										<img
 											alt={t.serviceName}
@@ -423,7 +426,7 @@ const OurTickets = () => {
 											<Link
 												to={`/ticket/${t.serviceName.split(" ").join("-")}`}
 												onClick={() => {
-													window.scrollTo({ top: 0, behavior: "smooth" });
+													window.scrollTo({ top: 300, behavior: "smooth" });
 												}}>
 												<img
 													className='imageOffers'
