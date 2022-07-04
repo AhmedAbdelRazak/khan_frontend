@@ -250,6 +250,16 @@ const FormStep3 = ({
 							</span>
 						)}{" "}
 					</div>
+					<div
+						style={{
+							color: "red",
+							fontWeight: "bolder",
+							marginTop: "5px",
+							fontSize: "12px",
+							marginLeft: "5px",
+						}}>
+						(Taxes fee is Included)
+					</div>
 				</div>
 				<div className='col-md-5 mx-auto my-auto'>
 					<br />

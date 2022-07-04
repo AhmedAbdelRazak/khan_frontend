@@ -283,10 +283,18 @@ const FormStep3 = ({
 									{totalPriceBeforeDiscount()} جنيه
 								</s>{" "}
 								{totalPriceAfterDiscount()} جنيه
+								<span style={{ color: "black", fontSize: "12px" }}>
+									{" "}
+									(شامل رسوم الضرائب)
+								</span>
 							</span>
 						)}{" "}
 					</div>
 					<br />
+					<br />
+					<div
+						className='toBeAlignedRight'
+						style={{ color: "red", fontWeight: "bolder" }}></div>
 				</div>
 				<div className='col-md-5 mx-auto my-auto'>
 					<br />
