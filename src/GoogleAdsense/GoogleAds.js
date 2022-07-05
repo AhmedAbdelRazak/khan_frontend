@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { Component } from "react";
+import styled from "styled-components";
 
 class GoogleAds extends Component {
 	componentDidMount() {
@@ -9,7 +10,7 @@ class GoogleAds extends Component {
 
 	render() {
 		return (
-			<div style={{ textAlign: "center" }}>
+			<AdsenseWrapper style={{ textAlign: "center" }}>
 				<ins
 					className='adsbygoogle'
 					style={{
@@ -23,9 +24,20 @@ class GoogleAds extends Component {
 					data-ad-slot='8388147324'
 					data-ad-format='auto'
 					data-full-width-responsive='true'></ins>
-			</div>
+			</AdsenseWrapper>
 		);
 	}
 }
 
 export default GoogleAds;
+
+const AdsenseWrapper = styled.div`
+	text-align: center;
+
+	@media (max-width: 1000px) {
+		.adsbygoogle {
+			width: 100%;
+			height: 100%;
+		}
+	}
+`;

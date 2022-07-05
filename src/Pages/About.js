@@ -9,6 +9,7 @@ import Helmet from "react-helmet";
 import { getAbouts } from "../admin/apiAdmin";
 import KhanMap from "./HomePage/KhanMap";
 import PowerBySnippet from "./PowerBySnippet";
+import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const About = () => {
 	const [aboutus, setAboutUs] = useState({});
@@ -76,10 +77,10 @@ const About = () => {
 					) : null}
 				</div>
 			</div>
-			{/* <div className='ad-class'> */}
-			{/* add your slot id  */}
-			{/* <GoogleAds slot='8388147324' /> */}
-			{/* </div> */}
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<KhanMap />
 			<PowerBySnippet />
 		</AboutPageWrapper>

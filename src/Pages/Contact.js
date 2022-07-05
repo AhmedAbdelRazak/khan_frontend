@@ -97,6 +97,10 @@ const Contactus = () => {
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
 				<link rel='canonical' href='https://khankhadija.com/contact' />
 			</Helmet>
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<div>
 				<div className='row mt-5 ml-3'>
 					<div className='col-md-4 my-3'>
@@ -252,6 +256,10 @@ const Contactus = () => {
 
 					<hr />
 				</div>
+			</div>
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
 			</div>
 			<hr />
 		</ContactUsWrapper>

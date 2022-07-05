@@ -66,16 +66,20 @@ const Home = () => {
 			<span className='khanGalleryStyling'>
 				<KhanGallery />
 			</span>
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 
 			<span className='mt-3'>
 				<KhanMap />
 			</span>
-			<div className='ad-class mb-3 text-center mx-auto'>
+			<div className='ad-class my-3 text-center mx-auto'>
 				{/* add your slot id  */}
 				<GoogleAds slot='8388147324' />
 			</div>
 			<PowerBySnippet />
-			<div className='ad-class mb-3 text-center mx-auto'>
+			<div className='ad-class my-3 text-center mx-auto'>
 				{/* add your slot id  */}
 				<GoogleAds slot='8388147324' />
 			</div>

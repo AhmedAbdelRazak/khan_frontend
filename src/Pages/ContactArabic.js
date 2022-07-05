@@ -86,6 +86,10 @@ const ContactusArabic = () => {
 
 	return (
 		<ContactUsWrapper dir='rtl'>
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<Helmet>
 				<meta charSet='utf-8' />
 				<title>منتجع خان خديجة | اتصل بنا</title>
@@ -247,6 +251,10 @@ const ContactusArabic = () => {
 
 					<hr />
 				</div>
+			</div>
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
 			</div>
 			<hr />
 		</ContactUsWrapper>

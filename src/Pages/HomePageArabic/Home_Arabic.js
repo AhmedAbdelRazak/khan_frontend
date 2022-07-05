@@ -68,7 +68,10 @@ const Home_Arabic = ({ language }) => {
 			<span className='khanGalleryStyling'>
 				<KhanGalleryArabic />
 			</span>
-
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<span className='mt-3'>
 				<KhanMap />
 			</span>
