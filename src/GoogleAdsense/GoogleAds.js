@@ -9,10 +9,16 @@ class GoogleAds extends Component {
 
 	render() {
 		return (
-			<div>
+			<div style={{ textAlign: "center" }}>
 				<ins
 					className='adsbygoogle'
-					style={{ display: "inline-block", width: "728px", height: "90px" }}
+					style={{
+						display: "inline-block",
+						width: "728px",
+						height: "90px",
+						// margin: "auto",
+						textAlign: "center",
+					}}
 					data-ad-client='ca-pub-2490851164394283'
 					data-ad-slot='8388147324'
 					data-ad-format='auto'
