@@ -49,6 +49,10 @@ const Home_Arabic = ({ language }) => {
 				<br />
 				<hr />
 			</div>
+			{/* <div className='ad-class mb-3'> */}
+			{/* add your slot id  */}
+			<GoogleAds slot='8388147324' />
+			{/* </div> */}
 			<div className='mt-2'>
 				<OurTicketsArabic language={language} />
 			</div>
@@ -56,10 +60,10 @@ const Home_Arabic = ({ language }) => {
 				<hr />
 			</div>
 
-			<div className='ad-class mb-3'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class mb-3'> */}
+			{/* add your slot id  */}
+			<GoogleAds slot='8388147324' />
+			{/* </div> */}
 
 			<span className='khanGalleryStyling'>
 				<KhanGalleryArabic />
@@ -68,15 +72,15 @@ const Home_Arabic = ({ language }) => {
 			<span className='mt-3'>
 				<KhanMap />
 			</span>
-			{/* <div className='ad-class'> */}
-			{/* add your slot id  */}
-			{/* <GoogleAds slot='8388147324' /> */}
-			{/* </div> */}
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<PowerBySnippet />
-			{/* <div className='ad-class'> */}
-			{/* add your slot id  */}
-			{/* <GoogleAds slot='8388147324' /> */}
-			{/* </div> */}
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 
 			<span className='phoneBottomHero'>
 				<HeroComponentArabic language={language} />

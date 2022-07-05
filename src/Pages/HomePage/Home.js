@@ -36,6 +36,7 @@ const Home = () => {
 					name='description'
 					content='Khan Khadija, The best resort in Egypt. If you are looking for recovery and fun time, Khan Khadija Resort should be your first choice. Khan Khadija Resort Website was powered by www.infinite-apps.com'
 				/>
+
 				<link rel='canonical' href='https://khankhadija.com' />
 				<link rel='icon' href='khan_frontend\src\GeneralImgs\favicon.ico' />
 			</Helmet>
@@ -48,11 +49,19 @@ const Home = () => {
 				<br />
 				<hr />
 			</div>
+			{/* <div className='ad-class mb-3'> */}
+			{/* add your slot id  */}
+			<GoogleAds slot='8388147324' />
+			{/* </div> */}
 			<div className='mt-2'>
 				<OurTickets />
 			</div>
 			<br />
 			<hr />
+			{/* <div className='ad-class mb-3'> */}
+			{/* add your slot id  */}
+			<GoogleAds slot='8388147324' />
+			{/* </div> */}
 
 			<span className='khanGalleryStyling'>
 				<KhanGallery />
@@ -61,9 +70,15 @@ const Home = () => {
 			<span className='mt-3'>
 				<KhanMap />
 			</span>
-
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<PowerBySnippet />
-
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<span className='phoneBottomHero'>
 				<HeroComponent />
 			</span>
