@@ -1173,7 +1173,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								"reservationData",
 								JSON.stringify(reservationData),
 							);
-							window.scrollTo({ top: 300, behavior: "smooth" });
+							// window.scrollTo({ top: 300, behavior: "smooth" });
 							ReactGA.event({
 								category: "Booked Now Button Was Clicked From Home Page",
 								action: `Booked Now Button Was Clicked From The Form With Orange in the home page`,
@@ -1187,7 +1187,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 					<Link
 						to='/listings'
 						onClick={() => {
-							window.scrollTo({ top: 300, behavior: "smooth" });
+							// window.scrollTo({ top: 300, behavior: "smooth" });
 						}}
 						className='btn btn-block'>
 						احجز الآن!

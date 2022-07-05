@@ -67,11 +67,6 @@ const App = () => {
 		// eslint-disable-next-line
 	}, [click, clickMenu]);
 
-	useEffect(() => {
-		window.scrollTo({ top: 300, behavior: "smooth" });
-		// eslint-disable-next-line
-	}, []);
-
 	const languageToggle = () => {
 		// console.log(language);
 		localStorage.setItem("lang", JSON.stringify(language));

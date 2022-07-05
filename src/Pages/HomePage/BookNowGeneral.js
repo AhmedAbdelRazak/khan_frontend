@@ -1168,7 +1168,7 @@ const BookNowGeneral = () => {
 								"reservationData",
 								JSON.stringify(reservationData),
 							);
-							window.scrollTo({ top: 300, behavior: "smooth" });
+							// window.scrollTo({ top: 300, behavior: "smooth" });
 
 							ReactGA.event({
 								category: "Booked Now Button Was Clicked From Home Page",
@@ -1183,7 +1183,7 @@ const BookNowGeneral = () => {
 					<Link
 						to='/listings'
 						onClick={() => {
-							window.scrollTo({ top: 300, behavior: "smooth" });
+							// window.scrollTo({ top: 300, behavior: "smooth" });
 						}}
 						className='btn btn-block'>
 						Book Now!

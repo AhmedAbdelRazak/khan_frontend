@@ -62,6 +62,16 @@ const Home = () => {
 				<KhanMap />
 			</span>
 
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
+			<PowerBySnippet />
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
+
 			<PowerBySnippet />
 
 			<span className='phoneBottomHero'>

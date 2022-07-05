@@ -618,7 +618,7 @@ const BookNow = ({ match }) => {
 			// console.log(response);
 			// console.log("schedule booked");
 
-			window.scrollTo({ top: 300, behavior: "smooth" });
+			window.scrollTo({ top: 0, behavior: "smooth" });
 			toast.success("تم حجز تذكرتك بنجاح");
 			// window.location.reload(false);
 		});
@@ -701,7 +701,7 @@ const BookNow = ({ match }) => {
 								action: "User is adding his/her details ",
 								label: "Client Info Is Being Added",
 							});
-							window.scrollTo({ top: 300, behavior: "smooth" });
+							window.scrollTo({ top: 100, behavior: "smooth" });
 						}}>
 						التالي
 					</Button>
@@ -733,7 +733,7 @@ const BookNow = ({ match }) => {
 							fontSize: "0.9rem",
 						}}
 						onClick={() => {
-							window.scrollTo({ top: 300, behavior: "smooth" });
+							window.scrollTo({ top: 100, behavior: "smooth" });
 
 							next();
 							ReactGA.event({
@@ -762,7 +762,7 @@ const BookNow = ({ match }) => {
 							onClick={() => {
 								message.success("Processing complete!");
 								console.log("Success");
-								window.scrollTo({ top: 300, behavior: "smooth" });
+								window.scrollTo({ top: 100, behavior: "smooth" });
 								setCurrent(0);
 							}}>
 							تاكد من ملئ البيانات
@@ -837,10 +837,10 @@ const BookNow = ({ match }) => {
 						</Button>
 					)}
 			</div>
-			{/* <div className='ad-class'> */}
-			{/* add your slot id  */}
-			{/* <GoogleAds slot='8388147324' /> */}
-			{/* </div> */}
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 		</BookNowWrapper>
 	);
 };

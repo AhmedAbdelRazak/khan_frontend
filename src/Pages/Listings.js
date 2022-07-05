@@ -38,15 +38,15 @@ const Listings = () => {
 
 			<OurTickets />
 
-			{/* <div className='ad-class'> */}
-			{/* add your slot id  */}
-			{/* <GoogleAds slot='8388147324' /> */}
-			{/* </div> */}
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 			<PowerBySnippet />
-			{/* <div className='ad-class'> */}
-			{/* add your slot id  */}
-			{/* <GoogleAds slot='8388147324' /> */}
-			{/* </div> */}
+			<div className='ad-class'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 		</LinstingsWrapper>
 	);
 };
