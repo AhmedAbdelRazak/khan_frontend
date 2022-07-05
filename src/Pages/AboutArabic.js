@@ -9,6 +9,7 @@ import Helmet from "react-helmet";
 import { getAbouts } from "../admin/apiAdmin";
 import KhanMap from "./HomePage/KhanMap";
 import PowerBySnippet from "./PowerBySnippet";
+// eslint-disable-next-line
 import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const AboutArabic = () => {
@@ -79,10 +80,10 @@ const AboutArabic = () => {
 					) : null}
 				</div>
 			</div>
-			<div className='ad-class'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 
 			<KhanMap />
 			<PowerBySnippet />

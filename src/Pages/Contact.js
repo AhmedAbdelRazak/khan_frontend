@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import { getContacts } from "../admin/apiAdmin";
 import styled from "styled-components";
 import ReactGA from "react-ga";
+// eslint-disable-next-line
 import GoogleAds from "../GoogleAdsense/GoogleAds";
 
 const Contactus = () => {
@@ -250,10 +251,6 @@ const Contactus = () => {
 					</Fragment>
 
 					<hr />
-					<div className='ad-class'>
-						{/* add your slot id  */}
-						<GoogleAds slot='8388147324' />
-					</div>
 				</div>
 			</div>
 			<hr />
