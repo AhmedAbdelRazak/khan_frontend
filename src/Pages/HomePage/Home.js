@@ -72,8 +72,6 @@ const Home = () => {
 				<GoogleAds slot='8388147324' />
 			</div>
 
-			<PowerBySnippet />
-
 			<span className='phoneBottomHero'>
 				<HeroComponent />
 			</span>
