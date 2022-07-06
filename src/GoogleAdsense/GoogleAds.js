@@ -36,8 +36,9 @@ const AdsenseWrapper = styled.div`
 
 	@media (max-width: 1000px) {
 		.adsbygoogle {
-			width: 100%;
-			height: 100%;
+			width: 100% !important;
+			height: 100% !important;
+			text-align: center;
 		}
 	}
 `;
