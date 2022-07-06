@@ -354,7 +354,7 @@ const BookNowGeneral = () => {
 	return (
 		<BookNowGeneralWrapper>
 			<h1 className='titleBookNow mt-3'>
-				Book Your Seat Now With Khan Khadjia
+				Book Your Seat Now With Khan Khadija
 			</h1>
 			{/* <div className='horizline col-md-3 mx-auto my-3'></div> */}
 			<Collapse
