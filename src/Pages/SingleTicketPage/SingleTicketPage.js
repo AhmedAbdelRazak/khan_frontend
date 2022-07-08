@@ -282,6 +282,10 @@ const SingleTicketPage = ({ match }) => {
 					Back To Ticket List
 				</Link>
 			</div>
+			<div className='ad-class my-3 text-center mx-auto'>
+				{/* add your slot id  */}
+				<GoogleAds slot='8388147324' />
+			</div>
 		</SingleTicketPageWrapper>
 	);
 };
