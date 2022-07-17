@@ -339,6 +339,27 @@ export const getContacts = (token) => {
 		.catch((err) => console.log(err));
 };
 
+export const createReservationDataEntry = (callingOrder) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/reservation-create-data-entry`,
+		{
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				// Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(callingOrder),
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
 export const createHomePage = (userId, token, home) => {
 	return fetch(`${process.env.REACT_APP_API_URL}/home/create/${userId}`, {
 		method: "POST",

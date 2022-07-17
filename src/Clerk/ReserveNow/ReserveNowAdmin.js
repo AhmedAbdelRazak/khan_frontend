@@ -233,6 +233,11 @@ const ReserveNowAdmin = ({ match }) => {
 		// eslint-disable-next-line
 	}, []);
 
+	var role =
+		isAuthenticated() && isAuthenticated().user && isAuthenticated().user.role;
+
+	// console.log(role, "role");
+
 	// console.log(reservationDataLocalStor, "reservationDataLocalStor");
 
 	const gettingAllTicketsManagement = () => {
@@ -583,11 +588,6 @@ const ReserveNowAdmin = ({ match }) => {
 			return toast.error("Please add time for bus station pickup");
 		}
 
-		var role =
-			isAuthenticated() &&
-			isAuthenticated().user &&
-			isAuthenticated().user.role;
-
 		const createOrderData = {
 			fullName: fullName,
 			scheduledByUserEmail: scheduledByUserEmail,
@@ -771,17 +771,17 @@ const ReserveNowAdmin = ({ match }) => {
 
 								if (phone.length === 11) {
 									ReactGA.event({
-										category: "Reserve Now Was Clicked Clerk",
-										action: "Clerk Has Successfully Reserved A Day Use",
+										category: "Reserve Now Was Clicked Admin",
+										action: "Admin Has Successfully Reserved A Day Use",
 										label:
 											"Ticket Was Successfully Reserved " +
 											chosenService_Package,
 									});
 								} else {
 									ReactGA.event({
-										category: "Reserve Now Was Clicked Clerk",
+										category: "Reserve Now Was Clicked Admin",
 										action:
-											"Clerk Has Unsuccessfully Reserved A Day Use Because of his phone number",
+											"Admin Has Unsuccessfully Reserved A Day Use Because of his phone number",
 										label:
 											"Ticket Was Unsuccessfully Reserved " +
 											chosenService_Package,

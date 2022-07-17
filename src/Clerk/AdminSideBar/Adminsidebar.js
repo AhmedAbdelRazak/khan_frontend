@@ -119,27 +119,27 @@ const Adminsidebar = ({
 							</Link>
 						</li>
 
-						{/* <li
+						<li
 							className='mt-3'
 							onClick={() => {
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
-								to={`/clerk/book-for-a-client/${ticketSlug[0]}`}
+								to={`/clerk/book-for-a-client-data-entry/${ticketSlug[0]}`}
 								className='sidebar-link'
 								style={isActive(
 									history,
-									`/clerk/book-for-a-client/${ticketSlug[0]}`,
+									`/clerk/book-for-a-client-data-entry/${ticketSlug[0]}`,
 								)}
 								onClick={() => {
 									setClickMenu2(false);
 									setClick2(false);
 								}}>
 								{click2 && clickMenu2 ? (
-									<React.Fragment>Reserve For A Client</React.Fragment>
+									<React.Fragment>Data Entry</React.Fragment>
 								) : null}
 							</Link>
-						</li> */}
+						</li>
 					</ul>
 				</SideWrapper>
 			</div>

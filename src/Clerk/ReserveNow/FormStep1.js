@@ -1,10 +1,12 @@
 /** @format */
-// eslint-disable-next-line
-import React, { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { DatePicker } from "antd";
 import moment from "moment";
 import ReactGA from "react-ga";
+import { getStatusValuesEmployee } from "../apiAdmin";
+import { isAuthenticated } from "../../auth";
 
 const FormStep1 = ({
 	chosenDate,
@@ -29,6 +31,8 @@ const FormStep1 = ({
 	setBusStationChosenTime,
 	quantity,
 	setQuantity,
+	reservationStatus,
+	setReservationStatus,
 	quantity_Children,
 	setQuantity_Children,
 	busStationName,
@@ -42,6 +46,8 @@ const FormStep1 = ({
 	setOption3Count,
 	setOption4Count,
 }) => {
+	const [statusValues, setStatusValues] = useState([]);
+
 	const disabledDate = (current) => {
 		// Can not select days before today and today
 		return current < moment();
@@ -68,6 +74,14 @@ const FormStep1 = ({
 
 		setServiceDetails(chosenServiceDetails);
 	};
+
+	const handleChosenStatus = (event) => {
+		setReservationStatus(event.target.value);
+	};
+
+	//Admin Auth
+	// eslint-disable-next-line
+	const { user, token } = isAuthenticated();
 
 	const handleChosenCoupon = (event) => {
 		setChosenCoupon(event.target.value.toUpperCase());
@@ -127,6 +141,15 @@ const FormStep1 = ({
 		setBusStationChosenTime(event.target.value);
 	};
 
+	useEffect(() => {
+		if (!localStorage.getItem("reservationData")) {
+			setBusStationName(chosenBusStationDetails.address);
+			setBusStationChosenTime(chosenBusStationDetails.times[0]);
+		}
+
+		// eslint-disable-next-line
+	}, []);
+
 	// eslint-disable-next-line
 	const handleOption1Count = (event) => {
 		setOption1Count(event.target.value);
@@ -146,6 +169,22 @@ const FormStep1 = ({
 	const handleOption4Count = (event) => {
 		setOption4Count(event.target.value);
 	};
+
+	const loadStatusValues = () => {
+		getStatusValuesEmployee(user._id, token).then((data) => {
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setStatusValues(data);
+			}
+		});
+	};
+
+	useEffect(() => {
+		loadStatusValues();
+
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<FormStep1Wrapper>
@@ -370,7 +409,7 @@ const FormStep1 = ({
 					)}
 				</div>
 
-				{serviceDetails && serviceDetails.displayBusStationOption ? (
+				{serviceDetails && serviceDetails.serviceName ? (
 					<div
 						className={
 							chosenBusStationDetails &&
@@ -590,6 +629,60 @@ const FormStep1 = ({
 					) : null}
 				</div>
 			) : null}
+			<br />
+			<br />
+
+			<label
+				className='dataPointsReview'
+				style={{
+					fontWeight: "bold",
+					fontSize: "1.05rem",
+					color: "#32322b",
+				}}>
+				Select reservation status
+			</label>
+			<br />
+			<select
+				onChange={handleChosenStatus}
+				className='inputFields mb-3'
+				style={{
+					paddingTop: "12px",
+					paddingBottom: "12px",
+					// paddingRight: "140px",
+					// textAlign: "center",
+					border: "#cfcfcf solid 1px",
+					borderRadius: "10px",
+					width: "50%",
+					fontSize: "0.9rem",
+					// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+					textTransform: "capitalize",
+				}}>
+				{reservationStatus && reservationStatus !== "Select Status" ? (
+					<option
+						className='items text-muted inputFields'
+						style={{ textTransform: "capitalize" }}>
+						{reservationStatus}
+					</option>
+				) : (
+					<option className='items ml-2 text-muted inputFields'>
+						Select Status
+					</option>
+				)}
+
+				{statusValues &&
+					statusValues.map((t, i) => (
+						<option
+							key={i}
+							value={t}
+							className='items'
+							style={{ textTransform: "capitalize" }}
+							onChange={() => setReservationStatus(t)}>
+							{t}
+						</option>
+					))}
+			</select>
+			<br />
+			<br />
 		</FormStep1Wrapper>
 	);
 };

@@ -22,6 +22,7 @@ import BookNowArabic from "./Pages/ReserveNowArabic/BookNow";
 import SuccessfullyPaid from "./Pages/ReserveNow/SuccessfullyPaid";
 import SuccessfullyPaidArabic from "./Pages/ReserveNowArabic/SuccessfullyPaid";
 import ReserveNowAdmin from "./admin/ReserveNow/ReserveNowAdmin";
+// eslint-disable-next-line
 import ReserveNowClerk from "./Clerk/ReserveNow/ReserveNowAdmin";
 
 //admin routes
@@ -54,6 +55,9 @@ import SingleReservationPage from "./admin/SingleReservationPage";
 import SingleReservationPageClerk from "./Clerk/SingleReservationPage";
 import UncompleteForm from "./admin/UncompleteForm";
 import UpdatingEmployeeAccount from "./admin/UpdatingEmployeeAccount";
+import DayOverDay from "./admin/Reports/DayOverDay";
+import ReserveForClient from "./admin/ReserveForClient";
+import ReserveForClient2 from "./Clerk/ReserveForClient2";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -200,11 +204,17 @@ const App = () => {
 				)}
 
 				<AdminRoute path='/admin/dashboard' exact component={AdminDashboard} />
+				<AdminRoute path='/admin/reports' exact component={DayOverDay} />
 
 				<AdminRoute
 					path='/admin/book-for-a-client/:ticketName'
 					exact
 					component={ReserveNowAdmin}
+				/>
+				<AdminRoute
+					path='/admin/data-entry/:ticketName'
+					exact
+					component={ReserveForClient}
 				/>
 
 				<AdminRoute path='/admin/create-a-ticket' exact component={AddTicket} />
@@ -297,11 +307,13 @@ const App = () => {
 					path='/clerk/update-reservation/:reservationId'
 					component={SingleReservationPageClerk}
 				/>
+
 				<EmployeeRoute
-					path='/clerk/book-for-a-client/:ticketName'
+					path='/clerk/book-for-a-client-data-entry/:ticketName'
 					exact
-					component={ReserveNowClerk}
+					component={ReserveForClient2}
 				/>
+
 				<EmployeeRoute
 					path='/clerk/dashboard'
 					exact

@@ -21,6 +21,7 @@ import { DatePicker } from "antd";
 import moment from "moment";
 
 import ReactExport from "react-export-excel";
+// import ExcelToJson from "./ExcelToJson";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
@@ -68,8 +69,8 @@ const AdminDashboard = () => {
 	next7Days.setDate(yesterday.getDate() + 8);
 	next30Days.setDate(yesterday.getDate() + 31);
 
-	console.log(tomorrow);
-	console.log(selectedDate);
+	// console.log(tomorrow);
+	// console.log(selectedDate);
 
 	const dateFormat = (x) => {
 		var requiredDate = new Date(x);
@@ -653,10 +654,10 @@ const AdminDashboard = () => {
 	// 	"HistBookings",
 	// );
 
-	const disabledDate = (current) => {
-		// Can not select days before today and today
-		return current <= moment();
-	};
+	// const disabledDate = (current) => {
+	// 	// Can not select days before today and today
+	// 	return current <= moment();
+	// };
 
 	return (
 		<AdminDashboardWrapper>
@@ -783,7 +784,7 @@ const AdminDashboard = () => {
 									new Date(date._d).toLocaleDateString() || date._d,
 								);
 							}}
-							disabledDate={disabledDate}
+							// disabledDate={disabledDate}
 							max
 							size='small'
 							showToday={true}
@@ -881,7 +882,7 @@ const AdminDashboard = () => {
 						clickedButton={clickedButton}
 					/>
 					<hr />
-
+					{/* <ExcelToJson /> */}
 					{/* {showOrdersLength()} */}
 					<br />
 					{allReservationsDetails()}

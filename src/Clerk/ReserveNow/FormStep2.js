@@ -125,7 +125,7 @@ const FormStep2 = ({
 						className='form-control w-75 mx-auto'
 						value={scheduledByUserEmail}
 						onChange={handleScheduleByUserEmail}
-						placeholder='(**Required)'
+						placeholder='(**Optional)'
 					/>
 				</div>
 				{serviceDetails && serviceDetails.displayOcassion ? (

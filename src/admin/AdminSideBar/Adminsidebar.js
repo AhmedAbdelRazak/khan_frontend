@@ -135,6 +135,25 @@ const Adminsidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
+								to='/admin/reports'
+								className='sidebar-link'
+								style={isActive(history, "/admin/reports")}
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment>Khan Reports</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
 								to='/admin/create-a-ticket'
 								className='sidebar-link'
 								style={isActive(history, "/admin/create-a-ticket")}
@@ -410,18 +429,15 @@ const Adminsidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
-								to={`/admin/book-for-a-client/${ticketSlug[0]}`}
+								to={`/admin/data-entry/${ticketSlug[0]}`}
 								className='sidebar-link'
-								style={isActive(
-									history,
-									`/admin/book-for-a-client/:ticketName`,
-								)}
+								style={isActive(history, `/admin/data-entry/:ticketName`)}
 								onClick={() => {
 									setClickMenu2(false);
 									setClick2(false);
 								}}>
 								{click2 && clickMenu2 ? (
-									<React.Fragment>Reserve For A Client</React.Fragment>
+									<React.Fragment>Data Entry</React.Fragment>
 								) : null}
 							</Link>
 						</li>
