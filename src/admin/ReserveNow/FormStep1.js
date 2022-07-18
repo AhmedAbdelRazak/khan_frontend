@@ -48,6 +48,7 @@ const FormStep1 = ({
 }) => {
 	const [statusValues, setStatusValues] = useState([]);
 
+	// eslint-disable-next-line
 	const disabledDate = (current) => {
 		// Can not select days before today and today
 		return current < moment();
@@ -247,7 +248,7 @@ const FormStep1 = ({
 					fontSize: "1.05rem",
 					color: "#32322b",
 				}}>
-				Select Booking Date
+				Select Schedule Date
 			</label>
 			<br />
 			{storeClosed_NotClosed || storeClosed_NotClosedCustomized ? (
@@ -274,7 +275,7 @@ const FormStep1 = ({
 						label: "Date Was Added",
 					});
 				}}
-				disabledDate={disabledDate}
+				// disabledDate={disabledDate}
 				max
 				size='small'
 				showToday={false}
