@@ -18,6 +18,7 @@ const DayOverDay = () => {
 	const [clickMenu2, setClickMenu2] = useState(false);
 	// eslint-disable-next-line
 	const [HistBookings, setHistBookings] = useState([]);
+	// eslint-disable-next-line
 	const [allHistBookings, setAllHistBookings] = useState([]);
 	// eslint-disable-next-line
 	const [loading, setLoading] = useState(true);
@@ -51,24 +52,25 @@ const DayOverDay = () => {
 				console.log(data.error);
 			} else {
 				setAllHistBookings(data.sort(compareTotalAppointments));
-				if (!startDate && !endDate) {
-					var nonCancelledReservation = data
-						.filter((i) => i.status !== "Cancelled")
-						.sort(compareTotalAppointments);
+				// eslint-disable-next-line
+				var nonCancelledReservation = data
+					.filter((i) => i.status !== "Cancelled")
+					.sort(compareTotalAppointments);
 
-					setStartDate(
-						moment(
-							new Date(
-								nonCancelledReservation[
-									nonCancelledReservation.length - 1
-								].scheduledDate,
-							),
-						),
-					);
+				if (!startDate || !endDate) {
+					// setStartDate(
+					// 	moment(
+					// 		new Date(
+					// 			nonCancelledReservation[
+					// 				nonCancelledReservation.length - 1
+					// 			].scheduledDate,
+					// 		),
+					// 	),
+					// );
 
-					setEndDate(
-						moment(new Date(nonCancelledReservation[1].scheduledDate)),
-					);
+					// setEndDate(
+					// 	moment(new Date(nonCancelledReservation[0].scheduledDate)),
+					// );
 					setHistBookings(
 						data
 							.filter((i) => i.status !== "Cancelled")
@@ -223,10 +225,11 @@ const DayOverDay = () => {
 				};
 				OverAllTicket_TotalAmount.push(res[value.chosenService_Package]);
 			}
-			res[value.chosenService_Package].totalAmount +=
-				Number(value.totalAmount) + Number(value.totalAmount);
+			res[value.chosenService_Package].totalAmount += Number(value.totalAmount);
 			return res;
 		}, {});
+
+	console.log(OverAllTicket_TotalAmount, "Ticket TotalAmount");
 
 	var chartDataTicketsSummary = {
 		options: {
@@ -281,12 +284,9 @@ const DayOverDay = () => {
 				};
 				overAllStatusSummary.push(res[value.status]);
 			}
-			res[value.status].totalAmount +=
-				Number(value.totalAmount) + Number(value.totalAmount);
+			res[value.status].totalAmount += Number(value.totalAmount);
 			return res;
 		}, {});
-
-	console.log(allHistBookings, "AllHistBookings");
 
 	var chartDataStatusSummary = {
 		options: {
@@ -331,18 +331,9 @@ const DayOverDay = () => {
 
 	// Score Card
 
-	const overallReservations = allHistBookings && allHistBookings.length;
+	const overallReservations = HistBookings && HistBookings.length;
 
-	const nonCancelledReservation =
-		allHistBookings &&
-		allHistBookings.filter(
-			(i) =>
-				i.status !== "Cancelled" &&
-				new Date(i.scheduledDate).setHours(0, 0, 0, 0) >=
-					new Date(startDate).setHours(0, 0, 0, 0) &&
-				new Date(i.scheduledDate).setHours(0, 0, 0, 0) <=
-					new Date(endDate).setHours(0, 0, 0, 0),
-		);
+	const nonCancelledReservation = HistBookings;
 
 	const overallAdultsArray =
 		nonCancelledReservation && nonCancelledReservation.map((i) => i.quantity);
@@ -400,7 +391,7 @@ const DayOverDay = () => {
 								max
 								size='small'
 								showToday={true}
-								defaultValue={moment(new Date(startDate))}
+								defaultValue={startDate ? moment(new Date(startDate)) : null}
 								placeholder='Please pick the desired start schedule date'
 								style={{
 									height: "auto",
@@ -424,7 +415,7 @@ const DayOverDay = () => {
 								max
 								size='small'
 								showToday={true}
-								defaultValue={moment(new Date(endDate))}
+								defaultValue={endDate ? moment(new Date(endDate)) : null}
 								placeholder='Please pick the desired end schedule date'
 								style={{
 									height: "auto",
@@ -445,7 +436,9 @@ const DayOverDay = () => {
 										className='card'
 										style={{ background: "var(--babyBlue)" }}>
 										<div className='card-body'>
-											<h5>Overall Reservations</h5>
+											<h5 style={{ fontSize: "0.9rem" }}>
+												Reservations (Not Cancelled)
+											</h5>
 											<CountUp
 												duration='2'
 												delay={0.5}
