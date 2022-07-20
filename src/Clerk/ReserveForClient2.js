@@ -330,6 +330,10 @@ const ReserveForClient2 = ({ match }) => {
 			return toast.error("Please add time for bus station pickup");
 		}
 
+		if (!chosenDate) {
+			return toast.error("Please add Scheduled On Date");
+		}
+
 		const bookedByUser =
 			isAuthenticated() &&
 			isAuthenticated().user &&

@@ -346,10 +346,10 @@ const SingleReservationPage = (props) => {
 		});
 	};
 
-	const disabledDate = (current) => {
-		// Can not select days before today and today
-		return current < moment();
-	};
+	// const disabledDate = (current) => {
+	// 	// Can not select days before today and today
+	// 	return current < moment();
+	// };
 
 	const handleChosenService_Package = (event) => {
 		setChosenService_Package(event.target.value);
@@ -904,34 +904,32 @@ const SingleReservationPage = (props) => {
 					</span>
 				) : null}
 
-				{chosenDate && singleOrder && singleOrder.scheduledDate ? (
-					<DatePicker
-						className='inputFields'
-						onChange={(date) => {
-							setChosenDate(new Date(date._d).toLocaleDateString() || date._d);
-						}}
-						disabledDate={disabledDate}
-						max
-						size='small'
-						showToday={true}
-						// defaultValue={moment(singleOrder.scheduledDate)}
-						defaultValue={
-							new Date(singleOrder.scheduledDate).toLocaleString() ===
-							"Invalid Date"
-								? moment()
-								: moment(new Date(singleOrder.scheduledDate))
-						}
-						placeholder='Please pick the desired schedule date'
-						style={{
-							height: "auto",
-							width: "50%",
-							marginBottom: "30px",
-							padding: "10px",
-							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-							borderRadius: "10px",
-						}}
-					/>
-				) : null}
+				<DatePicker
+					className='inputFields'
+					onChange={(date) => {
+						setChosenDate(new Date(date._d).toLocaleDateString() || date._d);
+					}}
+					// disabledDate={disabledDate}
+					max
+					size='small'
+					showToday={true}
+					// defaultValue={moment(singleOrder.scheduledDate)}
+					defaultValue={
+						new Date(singleOrder.scheduledDate).toLocaleString() ===
+						"Invalid Date"
+							? moment()
+							: moment(new Date(singleOrder.scheduledDate))
+					}
+					placeholder='Please pick the desired schedule date'
+					style={{
+						height: "auto",
+						width: "50%",
+						marginBottom: "30px",
+						padding: "10px",
+						// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+						borderRadius: "10px",
+					}}
+				/>
 
 				<br />
 				<div className='row'>
