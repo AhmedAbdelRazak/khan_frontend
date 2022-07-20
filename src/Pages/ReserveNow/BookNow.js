@@ -55,6 +55,7 @@ const BookNow = ({ match }) => {
 	const [serviceDetails, setServiceDetails] = useState("");
 	const [scheduledByUserEmail, setScheduledByUserEmail] = useState("");
 	const [appointmentComment, setAppointmentComment] = useState("");
+	const [status, setStatus] = useState("Not Paid");
 	const [event_ocassion, setEvent_ocassion] = useState("Day Use");
 	const [chosenCoupon, setChosenCoupon] = useState("");
 	const [totalAmount, setTotalAmount] = useState(0);
@@ -484,6 +485,8 @@ const BookNow = ({ match }) => {
 					setOption3Count={setOption3Count}
 					setOption4Count={setOption4Count}
 					busStationChosenTime={busStationChosenTime}
+					status={status}
+					setStatus={setStatus}
 				/>
 			),
 		},
@@ -592,7 +595,7 @@ const BookNow = ({ match }) => {
 			chosenServiceDetails: serviceDetails,
 			chosenPackage_Stock: ticketsManagement ? ticketsManagement : null,
 			scheduledDate: chosenDate,
-			status: "Not Paid",
+			status: status ? status : "Not Paid",
 			bookedFrom: bookedByUser ? `Booked By Clerk ${bookedByUser}` : "Online",
 			chosenCoupon: chosenCouponDetails,
 			availableCoupon: availableCoupon,
@@ -639,7 +642,7 @@ const BookNow = ({ match }) => {
 			chosenServiceDetails: serviceDetails,
 			chosenPackage_Stock: ticketsManagement ? ticketsManagement : null,
 			scheduledDate: chosenDate,
-			status: "Not Paid",
+			status: status ? status : "Not Paid",
 			bookedFrom: "Online",
 			chosenCoupon: chosenCouponDetails,
 			availableCoupon: availableCoupon,

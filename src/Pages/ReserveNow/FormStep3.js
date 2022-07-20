@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import { isAuthenticated } from "../../auth";
 
 const FormStep3 = ({
 	appointmentComment,
@@ -25,9 +26,15 @@ const FormStep3 = ({
 	option3Count,
 	option4Count,
 	busStationChosenTime,
+	status,
+	setStatus,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
+	};
+
+	const handleReservationStatus = (event) => {
+		setStatus(event.target.value);
 	};
 
 	// console.log(chosenBusStationPrice.price, "from Step 3");
@@ -261,7 +268,69 @@ const FormStep3 = ({
 						(Taxes fee is Included)
 					</div>
 				</div>
-				<div className='col-md-5 mx-auto my-auto'>
+				<div className='mx-auto my-3'>
+					{isAuthenticated() &&
+					isAuthenticated().user &&
+					(isAuthenticated().user.role === 1 ||
+						isAuthenticated().user.role === 2) ? (
+						<div className='my-3 mx-auto'>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									color: "#00407f",
+								}}>
+								What is the status?
+							</label>
+							<br />
+							<select
+								onChange={handleReservationStatus}
+								className=' mb-3'
+								style={{
+									paddingTop: "12px",
+									paddingBottom: "12px",
+									paddingRight: "10px",
+									paddingLeft: "10px",
+									// textAlign: "center",
+									border: "#cfcfcf solid 1px",
+									borderRadius: "10px",
+									width: "100%",
+									fontSize: "0.9rem",
+									// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+								}}>
+								{status && status !== "Select A Status" ? (
+									<option className='items text-muted inputFields'>
+										{status}
+									</option>
+								) : (
+									<option className='items text-muted inputFields'>
+										Select A Status
+									</option>
+								)}
+								<option className='items text-muted inputFields' value='Paid'>
+									Paid
+								</option>
+								<option
+									className='items text-muted inputFields'
+									value='Partially Paid'>
+									Partially Paid
+								</option>
+
+								<option
+									className='items text-muted inputFields'
+									value='Cancelled'>
+									Cancelled
+								</option>
+								<option
+									className='items text-muted inputFields'
+									value='Not Paid'>
+									Not Paid
+								</option>
+							</select>
+						</div>
+					) : null}
+
 					<br />
 					<div>
 						<label
