@@ -547,6 +547,10 @@ const SingleReservationPage = (props) => {
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
+	const handleMeetingComment = (event) => {
+		setAppointmentComment(event.target.value);
+	};
+
 	return (
 		<SingleReservationPageWrapper>
 			{loading ? (
@@ -1369,6 +1373,32 @@ const SingleReservationPage = (props) => {
 							) : null}
 						</div>
 					) : null}
+
+					<div className='col-md-5 mx-auto my-auto'>
+						<br />
+						<div>
+							<label
+								className='textResizeMain2 ml-3'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									color: "#00407f",
+								}}>
+								*Optional: If you have any further comments, Please consider
+								addressing them here
+							</label>
+
+							<textarea
+								type='text'
+								rows='5'
+								className='form-control '
+								value={appointmentComment}
+								onChange={handleMeetingComment}
+								placeholder='If you have any further comments, Please add them here...'
+								// autoFocus
+							/>
+						</div>
+					</div>
 
 					<div
 						className=' col-md-10 mx-auto my-3'
