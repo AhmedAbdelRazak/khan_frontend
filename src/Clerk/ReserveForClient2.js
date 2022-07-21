@@ -54,6 +54,8 @@ const ReserveForClient2 = ({ match }) => {
 	const [appointmentComment, setAppointmentComment] = useState("");
 	const [event_ocassion, setEvent_ocassion] = useState("Day Use");
 	const [chosenCoupon, setChosenCoupon] = useState("");
+	const [customPriceAdults, setCustomPriceAdults] = useState(0);
+	const [customPriceChildren, setCustomPriceChildren] = useState(0);
 	const [totalAmount, setTotalAmount] = useState(0);
 	const [totalAmountBeforeDiscount, setTotalAmountBeforeDiscount] = useState(0);
 	const [HistBookings, setHistBookings] = useState([]);
@@ -447,6 +449,10 @@ const ReserveForClient2 = ({ match }) => {
 					setOption2Count={setOption2Count}
 					setOption3Count={setOption3Count}
 					setOption4Count={setOption4Count}
+					customPriceAdults={customPriceAdults}
+					setCustomPriceAdults={setCustomPriceAdults}
+					customPriceChildren={customPriceChildren}
+					setCustomPriceChildren={setCustomPriceChildren}
 				/>
 			</div>
 

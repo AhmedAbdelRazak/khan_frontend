@@ -45,6 +45,10 @@ const FormStep1 = ({
 	setOption2Count,
 	setOption3Count,
 	setOption4Count,
+	customPriceAdults,
+	setCustomPriceAdults,
+	customPriceChildren,
+	setCustomPriceChildren,
 }) => {
 	const [statusValues, setStatusValues] = useState([]);
 
@@ -58,22 +62,27 @@ const FormStep1 = ({
 
 	const handleChosenService_Package = (event) => {
 		setChosenService_Package(event.target.value);
-		const indexOfService =
-			event.target.value &&
-			allServices &&
-			allServices
-				.map((service) => service.serviceName.toLowerCase())
-				.indexOf(event.target.value.toLowerCase());
 
-		const chosenServiceDetails =
-			event.target.value &&
-			allServices &&
-			indexOfService &&
-			indexOfService === 0
-				? allServices[indexOfService]
-				: allServices[indexOfService];
+		if (event.target.value !== "Custom") {
+			const indexOfService =
+				event.target.value &&
+				allServices &&
+				allServices
+					.map((service) => service.serviceName.toLowerCase())
+					.indexOf(event.target.value.toLowerCase());
 
-		setServiceDetails(chosenServiceDetails);
+			const chosenServiceDetails =
+				event.target.value &&
+				allServices &&
+				indexOfService &&
+				indexOfService === 0
+					? allServices[indexOfService]
+					: allServices[indexOfService];
+
+			setServiceDetails(chosenServiceDetails);
+		} else {
+			return null;
+		}
 	};
 
 	const handleChosenStatus = (event) => {
@@ -114,6 +123,26 @@ const FormStep1 = ({
 
 	const handleQuantityChildren = (event) => {
 		setQuantity_Children(event.target.value);
+	};
+
+	const handleCustomPriceAdults = (event) => {
+		setCustomPriceAdults(event.target.value);
+		setServiceDetails({
+			...serviceDetails,
+			serviceName: "Custom",
+			servicePrice: event.target.value,
+			servicePriceDiscount: event.target.value,
+		});
+	};
+
+	const handleCustomPriceChildren = (event) => {
+		setCustomPriceChildren(event.target.value);
+		setServiceDetails({
+			...serviceDetails,
+			serviceName: "Custom",
+			servicePrice_Children: event.target.value,
+			servicePriceDiscount_Children: event.target.value,
+		});
 	};
 
 	const handleChosenBusStation = (event) => {
@@ -237,6 +266,22 @@ const FormStep1 = ({
 							{t.serviceName}
 						</option>
 					))}
+				<option
+					value='Custom'
+					className='items'
+					style={{ textTransform: "capitalize" }}
+					onChange={() =>
+						setServiceDetails({
+							...serviceDetails,
+							serviceName: "Custom",
+							servicePrice: 0,
+							servicePriceDiscount: 0,
+							servicePrice_Children: 0,
+							servicePriceDiscount_Children: 0,
+						})
+					}>
+					Custom
+				</option>
 			</select>
 			<br />
 			<br />
@@ -348,6 +393,49 @@ const FormStep1 = ({
 				)}
 			</div>
 			<br />
+			{chosenService_Package === "Custom" ? (
+				<div className='row'>
+					<div className='col-md-5 mx-auto my-4'>
+						<label
+							className='dataPointsReview'
+							style={{
+								fontWeight: "bold",
+								fontSize: "1.1rem",
+								// color: "#00407f",
+							}}>
+							Custom Ticket Price (Adults)
+						</label>
+
+						<input
+							type='number'
+							className='form-control w-75 mx-auto'
+							value={customPriceAdults}
+							onChange={handleCustomPriceAdults}
+							placeholder='What is the ticket price for adults?'
+						/>
+					</div>
+
+					<div className='col-md-5 mx-auto my-4'>
+						<label
+							className='dataPointsReview'
+							style={{
+								fontWeight: "bold",
+								fontSize: "1.1rem",
+								// color: "#00407f",
+							}}>
+							Custom Ticket Price (Children)
+						</label>
+
+						<input
+							type='number'
+							className='form-control w-75 mx-auto'
+							value={customPriceChildren}
+							onChange={handleCustomPriceChildren}
+							placeholder='What is the ticket price for children?'
+						/>
+					</div>
+				</div>
+			) : null}
 
 			<div className='row'>
 				<div className='col-md-5 mx-auto my-4'>

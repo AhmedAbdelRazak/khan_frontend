@@ -229,12 +229,6 @@ const KitchenDashboard = () => {
 				true,
 	);
 
-	console.log(allLunchArrayAdults, "allLunchArrayAdults");
-	console.log(allLunchArrayChildren, "allLunchArrayChildren");
-
-	console.log(allBreakfastArrayAdults, "allBreakfastArrayAdults");
-	console.log(allBreakfastArrayChildren, "allBreakfastArrayChildren");
-
 	const overallBreakfastAdultsArray =
 		allBreakfastArrayAdults && allBreakfastArrayAdults.map((i) => i.quantity);
 
@@ -266,11 +260,25 @@ const KitchenDashboard = () => {
 		0,
 	);
 
+	// Group Reservation Breakfasts
+	const overAllGroupReservationBreakfasts =
+		HistBookings && HistBookings.map((i) => i.option1Count);
+	const overAllGroupReservationBreakfastsSum =
+		overAllGroupReservationBreakfasts.reduce((a, b) => a + b, 0);
+
+	// Group Reservation Lunches
+	const overAllGroupReservationLunches =
+		HistBookings && HistBookings.map((i) => i.option2Count);
+	const overAllGroupReservationBreakLunchesSum =
+		overAllGroupReservationLunches.reduce((a, b) => a + b, 0);
+
 	const OverAllTotalMeals =
 		Number(overallLunchAdultsArraySum) +
 		Number(overallLunchChildrenArraySum) +
 		Number(overallBreakfastAdultsArraySum) +
-		Number(overallBreakfastChildrenArraySum);
+		Number(overallBreakfastChildrenArraySum) +
+		Number(overAllGroupReservationBreakfastsSum) +
+		Number(overAllGroupReservationBreakLunchesSum);
 
 	return (
 		<KitchenDashboardWrapper>
@@ -428,6 +436,38 @@ const KitchenDashboard = () => {
 									</div>
 								</div>
 
+								<div className='col-md-5 text-center mx-auto my-2'>
+									<div
+										className='card'
+										style={{ background: "var(--babyBlue)" }}>
+										<div className='card-body'>
+											<h5> Group Reservation Breakfast</h5>
+											<CountUp
+												duration='3.5'
+												delay={0.5}
+												end={overAllGroupReservationBreakfastsSum}
+												separator=','
+											/>
+										</div>
+									</div>
+								</div>
+
+								<div className='col-md-5 text-center mx-auto  my-2'>
+									<div
+										className='card'
+										style={{ background: "var(--babyBlue)" }}>
+										<div className='card-body'>
+											<h5> Group Reservation Lunches</h5>
+											<CountUp
+												duration='3.5'
+												delay={0.5}
+												end={overAllGroupReservationBreakLunchesSum}
+												separator=','
+											/>
+										</div>
+									</div>
+								</div>
+
 								<div className='col-md-5 text-center mx-auto mt-3'>
 									<div
 										className='card'
@@ -458,10 +498,10 @@ const KitchenDashboard = () => {
 export default KitchenDashboard;
 
 const KitchenDashboardWrapper = styled.div`
-	min-height: 550px;
+	min-height: 650px;
 
 	.MainTitle {
-		margin-top: 20px;
+		margin-top: 5px;
 		text-align: center;
 		font-weight: bolder;
 		font-size: 1.5rem;
