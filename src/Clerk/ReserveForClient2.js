@@ -69,6 +69,9 @@ const ReserveForClient2 = ({ match }) => {
 	const [option2Count, setOption2Count] = useState(0);
 	const [option3Count, setOption3Count] = useState(0);
 	const [option4Count, setOption4Count] = useState(0);
+	const [reservationBelongsTo, setReservationBelongsTo] = useState(
+		"Semi Colon and Infinite-Apps",
+	);
 
 	var days = [
 		"Sunday",
@@ -372,6 +375,9 @@ const ReserveForClient2 = ({ match }) => {
 			option2Count: option2Count,
 			option3Count: option3Count,
 			option4Count: option4Count,
+			reservationBelongsTo: reservationBelongsTo
+				? reservationBelongsTo
+				: "Semi Colon and Infinite-Apps",
 		};
 
 		createReservationDataEntry(createOrderData).then((response) => {
@@ -490,6 +496,8 @@ const ReserveForClient2 = ({ match }) => {
 					setOption3Count={setOption3Count}
 					setOption4Count={setOption4Count}
 					busStationChosenTime={busStationChosenTime}
+					reservationBelongsTo={reservationBelongsTo}
+					setReservationBelongsTo={setReservationBelongsTo}
 				/>
 			</div>
 			<button

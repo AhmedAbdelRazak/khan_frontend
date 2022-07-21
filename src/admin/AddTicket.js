@@ -47,6 +47,13 @@ const AddTicket = () => {
 	const [option2_Active, setOption2_Active] = useState(false);
 	const [option3_Active, setOption3_Active] = useState(false);
 	const [option4_Active, setOption4_Active] = useState(false);
+
+	const [breakfast, setBreakFast] = useState(false);
+	const [lunch, setLunch] = useState(false);
+	const [horses, setHorses] = useState(false);
+	const [pool, setPool] = useState(false);
+	const [boat, setBoat] = useState(false);
+
 	const [displayBusStationOption, setDisplayBusStationOption] = useState(true);
 	const [displayOcassion, setDisplayOcassion] = useState(true);
 
@@ -332,6 +339,13 @@ const AddTicket = () => {
 			option2_Active,
 			option3_Active,
 			option4_Active,
+
+			breakfast,
+			lunch,
+			horses,
+			pool,
+			boat,
+
 			serviceDescription,
 			serviceDescription_Arabic,
 			serviceDescription2,
@@ -720,6 +734,52 @@ const AddTicket = () => {
 					/>
 				</div>
 
+				<div className='form-group col-md-4 mx-auto mt-5 text-center'>
+					<label className='text-muted'>Breakfast (Constant)</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setBreakFast(!breakfast)}
+						checked={breakfast === true ? true : false}
+					/>
+				</div>
+				<div className='form-group col-md-4 mx-auto mt-5 text-center'>
+					<label className='text-muted'>Lunch (Constant)</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setLunch(!lunch)}
+						checked={lunch === true ? true : false}
+					/>
+				</div>
+				<div className='form-group col-md-4 mx-auto mt-5 text-center'>
+					<label className='text-muted'>Horses (Constant)</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setHorses(!horses)}
+						checked={horses === true ? true : false}
+					/>
+				</div>
+				<div className='form-group col-md-4 mx-auto mt-5 text-center'>
+					<label className='text-muted'>Pool (Constant)</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setPool(!pool)}
+						checked={pool === true ? true : false}
+					/>
+				</div>
+				<div className='form-group col-md-4 mx-auto mt-5 text-center'>
+					<label className='text-muted'>Boat (Constant)</label>
+					<input
+						type='checkbox'
+						className='ml-2 mt-2'
+						onChange={() => setBoat(!boat)}
+						checked={boat === true ? true : false}
+					/>
+				</div>
+
 				<div className='form-group col-md-6 mx-auto mt-4'>
 					<label className='text-muted'>Package Description 1</label>
 					<input
@@ -755,7 +815,6 @@ const AddTicket = () => {
 						placeholder='Please add 2nd package Description'
 					/>
 				</div>
-
 				<div className='form-group col-md-6 mx-auto mt-4'>
 					<label className='text-muted'>Package Description 2 (Arabic)</label>
 					<input

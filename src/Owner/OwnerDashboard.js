@@ -1,21 +1,18 @@
 /** @format */
 
+// eslint-disable-next-line
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { isAuthenticated } from "../auth";
 import "antd/dist/antd.min.css";
 import { Link } from "react-router-dom";
 import Adminsidebar from "./AdminSideBar/Adminsidebar";
+// eslint-disable-next-line
 import { toast } from "react-toastify";
 import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
 import { Button } from "antd";
-import {
-	getPreviousBookingsAdmin,
-	updateOrderStatus,
-	getStatusValues,
-	removeReservation,
-} from "./apiAdmin";
+import { getPreviousBookingsOwner } from "./OwnerAPI";
 import ExecutiveSummary from "./ExecutiveSummary";
 import { DatePicker } from "antd";
 import moment from "moment";
@@ -34,7 +31,6 @@ const AdminDashboard = () => {
 	const [HistBookings, setHistBookings] = useState([]);
 	// eslint-disable-next-line
 	const [excelDataSet, setExcelDataSet] = useState([]);
-	const [statusValues, setStatusValues] = useState([]);
 	const [q, setQ] = useState("");
 	const [clickedButton, setClickedButton] = useState("Select All");
 	const [selectedDate, setSelectedDate] = useState(
@@ -98,7 +94,7 @@ const AdminDashboard = () => {
 		}
 
 		setLoading(true);
-		getPreviousBookingsAdmin(user._id, token).then((data) => {
+		getPreviousBookingsOwner(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -187,6 +183,7 @@ const AdminDashboard = () => {
 								),
 
 								ScheduleDate: new Date(data.scheduledDate).toDateString(),
+								Receipt: data.phoneNumber,
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
 								BookingSource: data.bookedFrom,
@@ -195,8 +192,6 @@ const AdminDashboard = () => {
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
 								totalAmount: data.totalAmount,
-								reservationBelongsTo: data.reservationBelongsTo,
-								appointmentComment: data.appointmentComment,
 							};
 						}),
 					);
@@ -229,6 +224,7 @@ const AdminDashboard = () => {
 									),
 
 									ScheduleDate: new Date(data.scheduledDate).toDateString(),
+									Receipt: data.phoneNumber,
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
 									BookingSource: data.bookedFrom,
@@ -237,8 +233,6 @@ const AdminDashboard = () => {
 										data.chosenServiceDetails.servicePriceDiscount,
 									Status: data.status,
 									totalAmount: data.totalAmount,
-									reservationBelongsTo: data.reservationBelongsTo,
-									appointmentComment: data.appointmentComment,
 								};
 							}),
 					);
@@ -271,6 +265,7 @@ const AdminDashboard = () => {
 									),
 
 									ScheduleDate: new Date(data.scheduledDate).toDateString(),
+									Receipt: data.phoneNumber,
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
 									BookingSource: data.bookedFrom,
@@ -279,8 +274,6 @@ const AdminDashboard = () => {
 										data.chosenServiceDetails.servicePriceDiscount,
 									Status: data.status,
 									totalAmount: data.totalAmount,
-									reservationBelongsTo: data.reservationBelongsTo,
-									appointmentComment: data.appointmentComment,
 								};
 							}),
 					);
@@ -301,6 +294,7 @@ const AdminDashboard = () => {
 								),
 
 								ScheduleDate: new Date(data.scheduledDate).toDateString(),
+								Receipt: data.phoneNumber,
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
 								BookingSource: data.bookedFrom,
@@ -309,8 +303,6 @@ const AdminDashboard = () => {
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
 								totalAmount: data.totalAmount,
-								reservationBelongsTo: data.reservationBelongsTo,
-								appointmentComment: data.appointmentComment,
 							};
 						}),
 					);
@@ -323,18 +315,7 @@ const AdminDashboard = () => {
 
 	// console.log(excelDataSet, "excelDataSet");
 
-	const loadStatusValues = () => {
-		getStatusValues(user._id, token).then((data) => {
-			if (data.error) {
-				console.log(data.error);
-			} else {
-				setStatusValues(data);
-			}
-		});
-	};
-
 	useEffect(() => {
-		loadStatusValues();
 		loadHistReservations();
 
 		// eslint-disable-next-line
@@ -349,8 +330,6 @@ const AdminDashboard = () => {
 				datesYaba.toString().toLowerCase().indexOf(q) > -1 ||
 				row._id.substring(0, 10).toString().toLowerCase().indexOf(q) > -1 ||
 				row.scheduledByUserEmail.toString().toLowerCase().indexOf(q) > -1 ||
-				row.reservationBelongsTo.toString().toLowerCase().indexOf(q) > -1 ||
-				row.bookedFrom.toString().toLowerCase().indexOf(q) > -1 ||
 				row.status.toString().toLowerCase().indexOf(q) > -1 ||
 				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1 ||
 				row.chosenServiceDetails.serviceName
@@ -360,30 +339,6 @@ const AdminDashboard = () => {
 			);
 		});
 	}
-
-	const handleStatusChange = (e, orderId) => {
-		updateOrderStatus(user._id, token, orderId, e.target.value).then((data) => {
-			if (data.error) {
-				console.log("Status update failed");
-			} else {
-				window.scrollTo({ top: 0, behavior: "smooth" });
-				window.location.reload(false);
-			}
-		});
-	};
-
-	const handleRemove = (reservationId) => {
-		if (window.confirm("Delete Reservation?")) {
-			setLoading(true);
-			removeReservation(reservationId, user._id, token)
-				.then((res) => {
-					loadHistReservations(); // load all Reservations
-					setLoading(false);
-					toast.error(`Reservation "${res.data.name}" deleted`);
-				})
-				.catch((err) => console.log(err));
-		}
-	};
 
 	const allReservationsDetails = () => {
 		return (
@@ -424,6 +379,7 @@ const AdminDashboard = () => {
 							<th scope='col'>Tickets Count (Children)</th>
 							<th scope='col'>Booked On</th>
 							<th scope='col'>Schedule Date</th>
+							<th scope='col'>Receipt #</th>
 							<th scope='col'>Event/Ocassion</th>
 							<th scope='col'>Chosen Package</th>
 							<th scope='col'>Booking Source</th>
@@ -431,9 +387,6 @@ const AdminDashboard = () => {
 							<th scope='col'>Package Price Discount (L.E.)</th>
 							<th scope='col'>Before Discount (L.E.)</th>
 							<th scope='col'>Total Amount (L.E.)</th>
-							<th scope='col'>Status</th>
-							<th scope='col'>Reservation Belongs To</th>
-							<th scope='col'>Delete?</th>
 						</tr>
 					</thead>
 
@@ -512,6 +465,7 @@ const AdminDashboard = () => {
 											: s.scheduledDate}{" "}
 										<br />
 									</td>
+									<td>+{s.phoneNumber}</td>
 									<td>{s.event}</td>
 									<td>{s.chosenServiceDetails.serviceName}</td>
 									<td style={{ width: "15px" }}>{s.bookedFrom}</td>
@@ -536,44 +490,6 @@ const AdminDashboard = () => {
 											color: "white",
 										}}>
 										{s.totalAmount}
-									</td>
-									<td>
-										<select
-											className='form-control'
-											onChange={(e) => handleStatusChange(e, s._id)}
-											style={{
-												border: "#cfcfcf solid 1px",
-												borderRadius: "5px",
-												width: "100%",
-												fontSize: "0.8rem",
-												padding: "0px",
-												// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-											}}>
-											<option>{s.status}</option>
-											{s.status === "Paid" ? null : (
-												<Fragment>
-													{statusValues &&
-														statusValues.map((status, index) => (
-															<option key={index} value={status}>
-																{status}
-															</option>
-														))}
-												</Fragment>
-											)}
-										</select>
-									</td>
-									<td style={{ width: "15px" }}>{s.reservationBelongsTo}</td>
-									<td>
-										<button
-											className='deleteButton'
-											onClick={() => {
-												handleRemove(s._id);
-												setTimeout(function () {
-													window.location.reload(false);
-												}, 1500);
-											}}>
-											Delete
-										</button>
 									</td>
 								</tr>
 							);
@@ -633,6 +549,7 @@ const AdminDashboard = () => {
 					/>
 					<ExcelColumn label='Booked On' value='BookedOn' />
 					<ExcelColumn label='Event Date' value='ScheduleDate' />
+					<ExcelColumn label='Receipt' value='Receipt' />
 					<ExcelColumn label='Event/Ocassion' value='Event' />
 					<ExcelColumn label='Chosen Package' value='ChosenPackage' />
 					<ExcelColumn label='Booking Source' value='BookingSource' />
@@ -643,11 +560,6 @@ const AdminDashboard = () => {
 					/>
 					<ExcelColumn label='Status' value='Status' />
 					<ExcelColumn label='Total Amount' value='totalAmount' />
-					<ExcelColumn
-						label='Reservation Belongs To'
-						value='reservationBelongsTo'
-					/>
-					<ExcelColumn label='Reservation Comment' value='appointmentComment' />
 				</ExcelSheet>
 			</ExcelFile>
 		);
@@ -810,83 +722,7 @@ const AdminDashboard = () => {
 							}}
 						/>
 					</div>
-					<div className='mx-auto text-center mb-2'>
-						<span
-							style={{
-								fontSize: "1.3rem",
-								fontWeight: "bold",
-								marginBottom: "10px",
-								marginLeft: "10px",
-								color: "var(--mainBlue)",
-							}}>
-							Filters (Booking Date):
-						</span>
-						<br />
-						<button
-							onClick={() => {
-								setClickedButton("Select AllBooking");
-								setSelectedDate(today);
-							}}
-							style={{
-								color: "white",
-								backgroundColor: "var(--mainBlue)",
-								border: "none",
-							}}
-							className='ml-1 p-2 mt-3'>
-							Select All
-						</button>
-						<button
-							onClick={() => {
-								setClickedButton("TodayBooking");
-								setSelectedDate(today);
-							}}
-							style={{
-								color: "black",
-								backgroundColor: "var(--orangePrimary)",
-								border: "none",
-							}}
-							className='ml-1 p-2 '>
-							Today
-						</button>
 
-						<button
-							onClick={() => {
-								setClickedButton("YesterdayBooking");
-								setSelectedDate(yesterday);
-							}}
-							style={{
-								color: "black",
-								backgroundColor: "var(--babyBlue)",
-								border: "none",
-							}}
-							className='ml-1 p-2'>
-							Yesterday
-						</button>
-
-						<DatePicker
-							className='inputFields'
-							onChange={(date) => {
-								setClickedButton("DatePickerBooking");
-								setSelectedDate(
-									new Date(date._d).toLocaleDateString() || date._d,
-								);
-							}}
-							// disabledDate={disabledDate}
-							max
-							size='small'
-							showToday={true}
-							defaultValue={moment(new Date(selectedDate))}
-							placeholder='Please pick the desired schedule date'
-							style={{
-								height: "auto",
-								width: "20%",
-								marginLeft: "5px",
-								padding: "10px",
-								// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
-								borderRadius: "10px",
-							}}
-						/>
-					</div>
 					<ExecutiveSummary
 						historicalBooking={HistBookings}
 						clickedButton={clickedButton}

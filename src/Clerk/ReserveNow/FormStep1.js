@@ -278,7 +278,7 @@ const FormStep1 = ({
 				// disabledDate={disabledDate}
 				max
 				size='small'
-				showToday={false}
+				showToday={true}
 				defaultValue={
 					!localStorage.getItem("reservationData")
 						? moment(

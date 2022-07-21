@@ -56,6 +56,9 @@ const BookNow = ({ match }) => {
 	const [scheduledByUserEmail, setScheduledByUserEmail] = useState("");
 	const [appointmentComment, setAppointmentComment] = useState("");
 	const [status, setStatus] = useState("Not Paid");
+	const [reservationBelongsTo, setReservationBelongsTo] = useState(
+		"Semi Colon and Infinite-Apps",
+	);
 	const [event_ocassion, setEvent_ocassion] = useState("Day Use");
 	const [chosenCoupon, setChosenCoupon] = useState("");
 	const [totalAmount, setTotalAmount] = useState(0);
@@ -487,6 +490,8 @@ const BookNow = ({ match }) => {
 					busStationChosenTime={busStationChosenTime}
 					status={status}
 					setStatus={setStatus}
+					reservationBelongsTo={reservationBelongsTo}
+					setReservationBelongsTo={setReservationBelongsTo}
 				/>
 			),
 		},
@@ -613,6 +618,7 @@ const BookNow = ({ match }) => {
 			option2Count: option2Count,
 			option3Count: option3Count,
 			option4Count: option4Count,
+			reservationBelongsTo: reservationBelongsTo,
 		};
 
 		createReservation(createOrderData).then((response) => {

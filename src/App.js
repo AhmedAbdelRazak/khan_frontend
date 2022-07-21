@@ -58,6 +58,10 @@ import UpdatingEmployeeAccount from "./admin/UpdatingEmployeeAccount";
 import DayOverDay from "./admin/Reports/DayOverDay";
 import ReserveForClient from "./admin/ReserveForClient";
 import ReserveForClient2 from "./Clerk/ReserveForClient2";
+import OwnerRoute from "./auth/OwnerRoute";
+import OwnerDashboard from "./Owner/OwnerDashboard";
+import DayOverDayOwner from "./Owner/Reports/DayOverDayOwner";
+import KitchenDashboard from "./admin/KitchenDashboard";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -297,6 +301,12 @@ const App = () => {
 				/>
 
 				<AdminRoute
+					path='/admin/kitchen-dashboard'
+					exact
+					component={KitchenDashboard}
+				/>
+
+				<AdminRoute
 					exact
 					path='/admin/uncomplete-reservation'
 					component={UncompleteForm}
@@ -319,6 +329,9 @@ const App = () => {
 					exact
 					component={ClerkDashboard}
 				/>
+
+				<OwnerRoute path='/owner/dashboard' exact component={OwnerDashboard} />
+				<OwnerRoute path='/owner/reports' exact component={DayOverDayOwner} />
 			</Switch>
 			<Footer />
 		</BrowserRouter>

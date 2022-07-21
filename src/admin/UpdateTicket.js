@@ -49,6 +49,13 @@ const UpdateTicket = ({ match }) => {
 	const [option2_Active, setOption2_Active] = useState(false);
 	const [option3_Active, setOption3_Active] = useState(false);
 	const [option4_Active, setOption4_Active] = useState(false);
+
+	const [breakfast, setBreakFast] = useState(false);
+	const [lunch, setLunch] = useState(false);
+	const [horses, setHorses] = useState(false);
+	const [pool, setPool] = useState(false);
+	const [boat, setBoat] = useState(false);
+
 	const [displayBusStationOption, setDisplayBusStationOption] = useState(true);
 	const [displayOcassion, setDisplayOcassion] = useState(true);
 
@@ -395,6 +402,36 @@ const UpdateTicket = ({ match }) => {
 						data.filter((s) => s._id === match.params.ticketId)[0]
 							.displayOcassion,
 				);
+
+				setBreakFast(
+					match.params.ticketId &&
+						match.params.ticketId !== "undefined" &&
+						data.filter((s) => s._id === match.params.ticketId)[0].breakfast,
+				);
+
+				setLunch(
+					match.params.ticketId &&
+						match.params.ticketId !== "undefined" &&
+						data.filter((s) => s._id === match.params.ticketId)[0].lunch,
+				);
+
+				setHorses(
+					match.params.ticketId &&
+						match.params.ticketId !== "undefined" &&
+						data.filter((s) => s._id === match.params.ticketId)[0].horses,
+				);
+
+				setPool(
+					match.params.ticketId &&
+						match.params.ticketId !== "undefined" &&
+						data.filter((s) => s._id === match.params.ticketId)[0].pool,
+				);
+
+				setBoat(
+					match.params.ticketId &&
+						match.params.ticketId !== "undefined" &&
+						data.filter((s) => s._id === match.params.ticketId)[0].boat,
+				);
 			}
 		});
 	};
@@ -588,6 +625,12 @@ const UpdateTicket = ({ match }) => {
 					option3_Active,
 					option4_Active,
 
+					breakfast,
+					lunch,
+					horses,
+					pool,
+					boat,
+
 					serviceLoyaltyPoints: serviceLoyaltyPoints,
 					activeService,
 					serviceDescription,
@@ -658,6 +701,12 @@ const UpdateTicket = ({ match }) => {
 				option2_Active,
 				option3_Active,
 				option4_Active,
+
+				breakfast,
+				lunch,
+				horses,
+				pool,
+				boat,
 
 				serviceLoyaltyPoints: serviceLoyaltyPoints,
 
@@ -1200,6 +1249,55 @@ const UpdateTicket = ({ match }) => {
 									onChange={() => setDisplayOcassion(!displayOcassion)}
 									checked={displayOcassion === true ? true : false}
 								/>
+							</div>
+							<div className='row text-center'>
+								<div className='form-group col-md-6 mx-auto mt-5'>
+									<label className='text-muted'>Breakfast (Constant)</label>
+									<input
+										type='checkbox'
+										className='ml-2 mt-2'
+										onChange={() => setBreakFast(!breakfast)}
+										checked={breakfast === true ? true : false}
+									/>
+								</div>
+
+								<div className='form-group col-md-6 mx-auto mt-5'>
+									<label className='text-muted'>Lunch (Constant)</label>
+									<input
+										type='checkbox'
+										className='ml-2 mt-2'
+										onChange={() => setLunch(!lunch)}
+										checked={lunch === true ? true : false}
+									/>
+								</div>
+
+								<div className='form-group col-md-6 mx-auto mt-5'>
+									<label className='text-muted'>Horses (Constant)</label>
+									<input
+										type='checkbox'
+										className='ml-2 mt-2'
+										onChange={() => setHorses(!horses)}
+										checked={horses === true ? true : false}
+									/>
+								</div>
+								<div className='form-group col-md-6 mx-auto mt-5'>
+									<label className='text-muted'>Pool (Constant)</label>
+									<input
+										type='checkbox'
+										className='ml-2 mt-2'
+										onChange={() => setPool(!pool)}
+										checked={pool === true ? true : false}
+									/>
+								</div>
+								<div className='form-group col-md-6 mx-auto mt-5'>
+									<label className='text-muted'>Boat (Constant)</label>
+									<input
+										type='checkbox'
+										className='ml-2 mt-2'
+										onChange={() => setBoat(!boat)}
+										checked={boat === true ? true : false}
+									/>
+								</div>
 							</div>
 
 							<div className='form-group col-md-10 mx-auto mt-1'>

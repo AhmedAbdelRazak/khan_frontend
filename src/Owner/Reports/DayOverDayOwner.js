@@ -7,13 +7,13 @@ import { isAuthenticated } from "../../auth";
 import Chart from "react-apexcharts";
 import Adminsidebar from "../AdminSideBar/Adminsidebar";
 import DarkBG from "../AdminSideBar/DarkBG";
-import { getPreviousBookingsAdmin } from "../apiAdmin";
+import { getPreviousBookingsOwner } from "../OwnerAPI";
 import { DatePicker } from "antd";
 import CountUp from "react-countup";
 import "antd/dist/antd.min.css";
 import moment from "moment";
 
-const DayOverDay = () => {
+const DayOverDayOwner = () => {
 	const [click2, setClick2] = useState(false);
 	const [clickMenu2, setClickMenu2] = useState(false);
 	// eslint-disable-next-line
@@ -47,7 +47,7 @@ const DayOverDay = () => {
 		}
 
 		setLoading(true);
-		getPreviousBookingsAdmin(user._id, token).then((data) => {
+		getPreviousBookingsOwner(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -561,7 +561,7 @@ const DayOverDay = () => {
 	);
 };
 
-export default DayOverDay;
+export default DayOverDayOwner;
 
 const DayOverDayWrapper = styled.div`
 	min-height: 700px;

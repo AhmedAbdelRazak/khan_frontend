@@ -210,7 +210,12 @@ const AddSiteAccount = () => {
 								style={{ fontSize: "0.80rem" }}>
 								<option>Please select / Required*</option>
 								<option value='2'>Clerk Account</option>
+								<option value='3'>Owner Account</option>
 								<option value='1'>Admin Account</option>
+								<option value='4'>Kitchen Account</option>
+								<option value='5'>Salon Account</option>
+								<option value='6'>Security Account</option>
+								<option value='7'>House Keeping Account</option>
 							</select>
 
 							<input

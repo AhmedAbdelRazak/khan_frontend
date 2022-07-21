@@ -28,6 +28,8 @@ const FormStep3 = ({
 	busStationChosenTime,
 	status,
 	setStatus,
+	reservationBelongsTo,
+	setReservationBelongsTo,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -35,6 +37,10 @@ const FormStep3 = ({
 
 	const handleReservationStatus = (event) => {
 		setStatus(event.target.value);
+	};
+
+	const handleReservationBelongsTo = (event) => {
+		setReservationBelongsTo(event.target.value);
 	};
 
 	// console.log(chosenBusStationPrice.price, "from Step 3");
@@ -326,6 +332,52 @@ const FormStep3 = ({
 									className='items text-muted inputFields'
 									value='Not Paid'>
 									Not Paid
+								</option>
+							</select>
+							<label
+								className='textResizeMain2'
+								style={{
+									fontWeight: "bold",
+									fontSize: "1rem",
+									color: "#00407f",
+								}}>
+								Reservation Belongs To:
+							</label>
+							<br />
+							<select
+								onChange={handleReservationBelongsTo}
+								className=' mb-3'
+								style={{
+									paddingTop: "12px",
+									paddingBottom: "12px",
+									paddingRight: "10px",
+									paddingLeft: "10px",
+									// textAlign: "center",
+									border: "#cfcfcf solid 1px",
+									borderRadius: "10px",
+									width: "100%",
+									fontSize: "0.9rem",
+									// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+								}}>
+								{reservationBelongsTo &&
+								reservationBelongsTo !== "Reservation Belongs To" ? (
+									<option className='items text-muted inputFields'>
+										{reservationBelongsTo}
+									</option>
+								) : (
+									<option className='items text-muted inputFields'>
+										Reservation Belongs To
+									</option>
+								)}
+								<option
+									className='items text-muted inputFields'
+									value='Khan Khadija'>
+									Khan Khadija
+								</option>
+								<option
+									className='items text-muted inputFields'
+									value='Semi Colon and Infinite-Apps'>
+									Semi Colon and Infinite-Apps
 								</option>
 							</select>
 						</div>

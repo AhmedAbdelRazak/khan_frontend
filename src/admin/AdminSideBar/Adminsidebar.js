@@ -410,6 +410,25 @@ const Adminsidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
+								to={`/admin/kitchen-dashboard`}
+								className='sidebar-link'
+								style={isActive(history, `/admin/kitchen-dashboard`)}
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment>Kitchen Dashboard</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
 								to={`/admin/uncomplete-reservation`}
 								className='sidebar-link'
 								style={isActive(history, `/admin/uncomplete-reservation`)}
