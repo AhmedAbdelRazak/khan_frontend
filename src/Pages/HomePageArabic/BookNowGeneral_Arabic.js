@@ -42,6 +42,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 	const [option2Count, setOption2Count] = useState(0);
 	const [option3Count, setOption3Count] = useState(0);
 	const [option4Count, setOption4Count] = useState(0);
+	const [busSeatsCount, setBusSeatsCount] = useState(1);
 	const [displayOptions, setDisplayOptions] = useState(false);
 	const [busStations, setBusStations] = useState([]);
 	const [chosenBusStationDetails, setChosenBusStationsDetails] = useState({
@@ -176,11 +177,13 @@ const BookNowGeneral_Arabic = ({ language }) => {
 	// eslint-disable-next-line
 	const handleQuantityAdults = (event) => {
 		setQuantity_Adults(event.target.value);
+		setBusSeatsCount(Number(quantity_Children) + Number(event.target.value));
 	};
 
 	// eslint-disable-next-line
 	const handleQuantityChildren = (event) => {
 		setQuantity_Children(event.target.value);
+		setBusSeatsCount(Number(quantity_Adults) + Number(event.target.value));
 	};
 
 	const handleOption1Count = (event) => {
@@ -194,6 +197,10 @@ const BookNowGeneral_Arabic = ({ language }) => {
 	};
 	const handleOption4Count = (event) => {
 		setOption4Count(event.target.value);
+	};
+
+	const handleBusSeatCount = (event) => {
+		setBusSeatsCount(event.target.value);
 	};
 
 	const couponValidation = () => {
@@ -275,8 +282,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
 
 		var TransportationFees =
-			Number(chosenBusStationDetails.price) *
-			(Number(quantity_Adults) + Number(quantity_Children));
+			Number(chosenBusStationDetails.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -321,8 +327,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 			-1;
 
 		var TransportationFees =
-			Number(chosenBusStationDetails.price) *
-			(Number(quantity_Adults) + Number(quantity_Children));
+			Number(chosenBusStationDetails.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -885,6 +890,25 @@ const BookNowGeneral_Arabic = ({ language }) => {
 														);
 													})}
 											</select>
+											<div className='col-md-10 mx-auto my-1'>
+												<label
+													className='textResizeMain2'
+													style={{
+														fontWeight: "bold",
+														fontSize: "1rem",
+														color: "#00407f",
+													}}>
+													عدد مقاعد الباص
+												</label>
+
+												<input
+													type='number'
+													className='form-control w-75  mx-auto'
+													value={busSeatsCount}
+													onChange={handleBusSeatCount}
+													placeholder='(**Required)'
+												/>
+											</div>
 										</div>
 									)}
 							</div>
@@ -1168,12 +1192,13 @@ const BookNowGeneral_Arabic = ({ language }) => {
 								chosenCoupon: chosenCoupon,
 								chosenCouponDetails: chosenCouponDetails,
 								currentPage: 1,
+								busSeatsCount: busSeatsCount,
 							};
 							localStorage.setItem(
 								"reservationData",
 								JSON.stringify(reservationData),
 							);
-							// window.scrollTo({ top: 300, behavior: "smooth" });
+							window.scrollTo({ top: 0, behavior: "smooth" });
 							ReactGA.event({
 								category: "Booked Now Button Was Clicked From Home Page",
 								action: `Booked Now Button Was Clicked From The Form With Orange in the home page`,
@@ -1187,7 +1212,7 @@ const BookNowGeneral_Arabic = ({ language }) => {
 					<Link
 						to='/listings'
 						onClick={() => {
-							// window.scrollTo({ top: 300, behavior: "smooth" });
+							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
 						className='btn btn-block'>
 						احجز الآن!

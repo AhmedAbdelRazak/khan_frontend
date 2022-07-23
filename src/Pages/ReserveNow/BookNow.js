@@ -75,6 +75,7 @@ const BookNow = ({ match }) => {
 	const [option2Count, setOption2Count] = useState(0);
 	const [option3Count, setOption3Count] = useState(0);
 	const [option4Count, setOption4Count] = useState(0);
+	const [busSeatsCount, setBusSeatsCount] = useState(1);
 
 	var days = [
 		"Sunday",
@@ -222,6 +223,13 @@ const BookNow = ({ match }) => {
 					localStorage.getItem("reservationData") &&
 						localStorage.getItem("reservationData"),
 				).option4Count,
+			);
+
+			setBusSeatsCount(
+				JSON.parse(
+					localStorage.getItem("reservationData") &&
+						localStorage.getItem("reservationData"),
+				).busSeatsCount,
 			);
 		}
 
@@ -435,6 +443,8 @@ const BookNow = ({ match }) => {
 					setOption2Count={setOption2Count}
 					setOption3Count={setOption3Count}
 					setOption4Count={setOption4Count}
+					busSeatsCount={busSeatsCount}
+					setBusSeatsCount={setBusSeatsCount}
 				/>
 			),
 		},
@@ -492,6 +502,7 @@ const BookNow = ({ match }) => {
 					setStatus={setStatus}
 					reservationBelongsTo={reservationBelongsTo}
 					setReservationBelongsTo={setReservationBelongsTo}
+					busSeatsCount={busSeatsCount}
 				/>
 			),
 		},
@@ -619,6 +630,7 @@ const BookNow = ({ match }) => {
 			option3Count: option3Count,
 			option4Count: option4Count,
 			reservationBelongsTo: reservationBelongsTo,
+			busSeatsCount: busSeatsCount,
 		};
 
 		createReservation(createOrderData).then((response) => {
@@ -664,6 +676,7 @@ const BookNow = ({ match }) => {
 			option2Count: option2Count,
 			option3Count: option3Count,
 			option4Count: option4Count,
+			busSeatsCount: busSeatsCount,
 		};
 
 		createBeforeReview(createOrderData).then((response) => {

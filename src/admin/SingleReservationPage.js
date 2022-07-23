@@ -40,6 +40,7 @@ const SingleReservationPage = (props) => {
 	const [appointmentComment, setAppointmentComment] = useState("");
 	const [event_ocassion, setEvent_ocassion] = useState("Day Use");
 	const [chosenCoupon, setChosenCoupon] = useState("");
+	const [busSeatsCount, setBusSeatsCount] = useState(0);
 	// eslint-disable-next-line
 	const [totalAmount, setTotalAmount] = useState(0);
 	// eslint-disable-next-line
@@ -112,6 +113,13 @@ const SingleReservationPage = (props) => {
 				setOption2Count(data.option2Count ? data.option2Count : 0);
 				setOption3Count(data.option3Count ? data.option3Count : 0);
 				setOption4Count(data.option4Count ? data.option4Count : 0);
+				setBusSeatsCount(
+					data.busSeatsCount
+						? data.busSeatsCount
+						: data.chosenBusStation.address !== "NO BUS NEEDED"
+						? Number(data.quantity) + Number(data.quantity_Children)
+						: 0,
+				);
 			}
 		});
 	};
@@ -259,6 +267,10 @@ const SingleReservationPage = (props) => {
 		setOption4Count(event.target.value);
 	};
 
+	const handleBusStationSeatsCount = (event) => {
+		setBusSeatsCount(event.target.value);
+	};
+
 	// const showInput = (key, value) => (
 	// 	<div className='input-group mb-2 mr-sm-2'>
 	// 		<div className='input-group-prepend'>
@@ -324,6 +336,7 @@ const SingleReservationPage = (props) => {
 			option2Count: option2Count,
 			option3Count: option3Count,
 			option4Count: option4Count,
+			busSeatsCount: busSeatsCount,
 		};
 		var userId =
 			isAuthenticated() && isAuthenticated().user && isAuthenticated().user._id;
@@ -420,6 +433,7 @@ const SingleReservationPage = (props) => {
 
 	const handleQuantity = (event) => {
 		setQuantity(event.target.value);
+		setBusSeatsCount(Number(quantity_Children) + Number(event.target.value));
 	};
 
 	const handleEven_Ocassion = (event) => {
@@ -428,6 +442,7 @@ const SingleReservationPage = (props) => {
 
 	const handleQuantityChildren = (event) => {
 		setQuantity_Children(event.target.value);
+		setBusSeatsCount(Number(quantity) + Number(event.target.value));
 	};
 
 	const handleChosenBusStation = (event) => {
@@ -465,8 +480,7 @@ const SingleReservationPage = (props) => {
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
 
 		var TransportationFees =
-			Number(chosenBusStationDetails.price) *
-			(Number(quantity) + Number(quantity_Children));
+			Number(chosenBusStationDetails.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -511,8 +525,7 @@ const SingleReservationPage = (props) => {
 			-1;
 
 		var TransportationFees =
-			Number(chosenBusStationDetails.price) *
-			(Number(quantity) + Number(quantity_Children));
+			Number(chosenBusStationDetails.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -1251,6 +1264,32 @@ const SingleReservationPage = (props) => {
 								</select>
 							</div>
 						)}
+
+					{busStationName &&
+						chosenBusStationDetails &&
+						busStationName !== "no bus needed" &&
+						busStationName !== "NO BUS NEEDED" && (
+							<div className='col-md-10 mx-auto my-1'>
+								<label
+									className='textResizeMain2'
+									style={{
+										fontWeight: "bold",
+										fontSize: "1rem",
+										color: "#00407f",
+									}}>
+									How Many Seats?
+								</label>
+
+								<input
+									type='number'
+									className='form-control w-75  mx-auto'
+									value={busSeatsCount}
+									onChange={handleBusStationSeatsCount}
+									placeholder='(**Required)'
+								/>
+							</div>
+						)}
+
 					{(singleOrder && singleOrder.option1Count > 0) ||
 					(singleOrder &&
 						singleOrder.chosenServiceDetails &&

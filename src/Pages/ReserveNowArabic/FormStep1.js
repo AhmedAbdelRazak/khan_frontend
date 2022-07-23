@@ -41,6 +41,8 @@ const FormStep1 = ({
 	setOption2Count,
 	setOption3Count,
 	setOption4Count,
+	busSeatsCount,
+	setBusSeatsCount,
 }) => {
 	const disabledDate = (current) => {
 		// Can not select days before today and today
@@ -95,10 +97,12 @@ const FormStep1 = ({
 
 	const handleQuantity = (event) => {
 		setQuantity(event.target.value);
+		setBusSeatsCount(Number(quantity_Children) + Number(event.target.value));
 	};
 
 	const handleQuantityChildren = (event) => {
 		setQuantity_Children(event.target.value);
+		setBusSeatsCount(Number(quantity) + Number(event.target.value));
 	};
 
 	const handleChosenBusStation = (event) => {
@@ -154,6 +158,10 @@ const FormStep1 = ({
 	// eslint-disable-next-line
 	const handleOption4Count = (event) => {
 		setOption4Count(event.target.value);
+	};
+
+	const handleBusSeatCount = (event) => {
+		setBusSeatsCount(event.target.value);
 	};
 
 	return (
@@ -486,6 +494,30 @@ const FormStep1 = ({
 						</div>
 					)}
 			</div>
+
+			{chosenBusStationDetails &&
+				chosenBusStationDetails.address !== "no bus needed" &&
+				chosenBusStationDetails.address !== "NO BUS NEEDED" && (
+					<div className='col-md-8 mx-auto my-2'>
+						<label
+							className='textResizeMain2'
+							style={{
+								fontWeight: "bold",
+								fontSize: "1rem",
+								color: "black",
+							}}>
+							عدد مقاعد الباص
+						</label>
+
+						<input
+							type='number'
+							className='form-control w-75  mx-auto'
+							value={busSeatsCount}
+							onChange={handleBusSeatCount}
+							placeholder='(**Required)'
+						/>
+					</div>
+				)}
 
 			{serviceDetails && serviceDetails.option1_Active ? (
 				<div className='col-md-8 mx-auto my-1'>

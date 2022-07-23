@@ -44,6 +44,7 @@ const BookNowGeneral = () => {
 	const [option4Count, setOption4Count] = useState(0);
 	const [displayOptions, setDisplayOptions] = useState(false);
 	const [busStations, setBusStations] = useState([]);
+	const [busSeatsCount, setBusSeatsCount] = useState(1);
 	const [chosenBusStationDetails, setChosenBusStationsDetails] = useState({
 		_id: "62859115e6e76c6625432018",
 		address: "NO BUS NEEDED",
@@ -178,11 +179,13 @@ const BookNowGeneral = () => {
 	// eslint-disable-next-line
 	const handleQuantityAdults = (event) => {
 		setQuantity_Adults(event.target.value);
+		setBusSeatsCount(Number(quantity_Children) + Number(event.target.value));
 	};
 
 	// eslint-disable-next-line
 	const handleQuantityChildren = (event) => {
 		setQuantity_Children(event.target.value);
+		setBusSeatsCount(Number(quantity_Adults) + Number(event.target.value));
 	};
 
 	const handleOption1Count = (event) => {
@@ -196,6 +199,10 @@ const BookNowGeneral = () => {
 	};
 	const handleOption4Count = (event) => {
 		setOption4Count(event.target.value);
+	};
+
+	const handleBusSeatCount = (event) => {
+		setBusSeatsCount(event.target.value);
 	};
 
 	const couponValidation = () => {
@@ -277,8 +284,7 @@ const BookNowGeneral = () => {
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
 
 		var TransportationFees =
-			Number(chosenBusStationDetails.price) *
-			(Number(quantity_Adults) + Number(quantity_Children));
+			Number(chosenBusStationDetails.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -323,8 +329,7 @@ const BookNowGeneral = () => {
 			-1;
 
 		var TransportationFees =
-			Number(chosenBusStationDetails.price) *
-			(Number(quantity_Adults) + Number(quantity_Children));
+			Number(chosenBusStationDetails.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -880,6 +885,25 @@ const BookNowGeneral = () => {
 														);
 													})}
 											</select>
+											<div className='col-md-10 mx-auto my-1'>
+												<label
+													className='textResizeMain2'
+													style={{
+														fontWeight: "bold",
+														fontSize: "1rem",
+														color: "#00407f",
+													}}>
+													How Many Seats?
+												</label>
+
+												<input
+													type='number'
+													className='form-control w-75  mx-auto'
+													value={busSeatsCount}
+													onChange={handleBusSeatCount}
+													placeholder='(**Required)'
+												/>
+											</div>
 										</div>
 									)}
 							</div>
@@ -1163,12 +1187,13 @@ const BookNowGeneral = () => {
 								chosenCoupon: chosenCoupon,
 								chosenCouponDetails: chosenCouponDetails,
 								currentPage: 1,
+								busSeatsCount: busSeatsCount,
 							};
 							localStorage.setItem(
 								"reservationData",
 								JSON.stringify(reservationData),
 							);
-							// window.scrollTo({ top: 300, behavior: "smooth" });
+							window.scrollTo({ top: 0, behavior: "smooth" });
 
 							ReactGA.event({
 								category: "Booked Now Button Was Clicked From Home Page",
@@ -1183,7 +1208,7 @@ const BookNowGeneral = () => {
 					<Link
 						to='/listings'
 						onClick={() => {
-							// window.scrollTo({ top: 300, behavior: "smooth" });
+							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
 						className='btn btn-block'>
 						Book Now!

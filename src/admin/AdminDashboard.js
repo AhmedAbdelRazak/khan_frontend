@@ -197,6 +197,27 @@ const AdminDashboard = () => {
 								totalAmount: data.totalAmount,
 								reservationBelongsTo: data.reservationBelongsTo,
 								appointmentComment: data.appointmentComment,
+								BreakfastMeals:
+									data.chosenServiceDetails.breakfast ||
+									data.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: data.chosenServiceDetails.serviceName ===
+										  "group reservation"
+										? data.option1Count
+										: 0,
+
+								LunchMeals:
+									data.chosenServiceDetails.lunch ||
+									data.chosenServiceDetails.serviceName === "kings ticket" ||
+									data.chosenServiceDetails.serviceName === "group reservation"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: 0,
+								BusSeats:
+									data.busSeatsCount && data.busSeatsCount > 0
+										? data.busSeatsCount
+										: data.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(data.quantity) + Number(data.quantity_Children),
 							};
 						}),
 					);
@@ -239,6 +260,30 @@ const AdminDashboard = () => {
 									totalAmount: data.totalAmount,
 									reservationBelongsTo: data.reservationBelongsTo,
 									appointmentComment: data.appointmentComment,
+									BreakfastMeals:
+										data.chosenServiceDetails.breakfast ||
+										data.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: data.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? data.option1Count
+											: 0,
+
+									LunchMeals:
+										data.chosenServiceDetails.lunch ||
+										data.chosenServiceDetails.serviceName === "kings ticket" ||
+										data.chosenServiceDetails.serviceName ===
+											"group reservation"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: 0,
+									busLocation: data.chosenBusStation.address,
+
+									BusSeats:
+										data.busSeatsCount && data.busSeatsCount > 0
+											? data.busSeatsCount
+											: data.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(data.quantity) + Number(data.quantity_Children),
 								};
 							}),
 					);
@@ -281,6 +326,30 @@ const AdminDashboard = () => {
 									totalAmount: data.totalAmount,
 									reservationBelongsTo: data.reservationBelongsTo,
 									appointmentComment: data.appointmentComment,
+									BreakfastMeals:
+										data.chosenServiceDetails.breakfast ||
+										data.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: data.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? data.option1Count
+											: 0,
+
+									LunchMeals:
+										data.chosenServiceDetails.lunch ||
+										data.chosenServiceDetails.serviceName === "kings ticket" ||
+										data.chosenServiceDetails.serviceName ===
+											"group reservation"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: 0,
+									busLocation: data.chosenBusStation.address,
+
+									BusSeats:
+										data.busSeatsCount && data.busSeatsCount > 0
+											? data.busSeatsCount
+											: data.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(data.quantity) + Number(data.quantity_Children),
 								};
 							}),
 					);
@@ -311,6 +380,28 @@ const AdminDashboard = () => {
 								totalAmount: data.totalAmount,
 								reservationBelongsTo: data.reservationBelongsTo,
 								appointmentComment: data.appointmentComment,
+								BreakfastMeals:
+									data.chosenServiceDetails.breakfast ||
+									data.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: data.chosenServiceDetails.serviceName ===
+										  "group reservation"
+										? data.option1Count
+										: 0,
+
+								LunchMeals:
+									data.chosenServiceDetails.lunch ||
+									data.chosenServiceDetails.serviceName === "kings ticket" ||
+									data.chosenServiceDetails.serviceName === "group reservation"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: 0,
+								busLocation: data.chosenBusStation.address,
+								BusSeats:
+									data.busSeatsCount && data.busSeatsCount > 0
+										? data.busSeatsCount
+										: data.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(data.quantity) + Number(data.quantity_Children),
 							};
 						}),
 					);
@@ -352,6 +443,7 @@ const AdminDashboard = () => {
 				row.reservationBelongsTo.toString().toLowerCase().indexOf(q) > -1 ||
 				row.bookedFrom.toString().toLowerCase().indexOf(q) > -1 ||
 				row.status.toString().toLowerCase().indexOf(q) > -1 ||
+				row.chosenBusStation.address.indexOf(q) > -1 ||
 				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1 ||
 				row.chosenServiceDetails.serviceName
 					.toString()
@@ -427,8 +519,10 @@ const AdminDashboard = () => {
 							<th scope='col'>Event/Ocassion</th>
 							<th scope='col'>Chosen Package</th>
 							<th scope='col'>Booking Source</th>
-							<th scope='col'>Package Price (L.E.)</th>
-							<th scope='col'>Package Price Discount (L.E.)</th>
+							<th scope='col'>Total Meals (Breakfast)</th>
+							<th scope='col'>Total Meals (Lunches)</th>
+							<th scope='col'>Bus Location</th>
+							<th scope='col'>Bus Reserved Seats</th>
 							<th scope='col'>Before Discount (L.E.)</th>
 							<th scope='col'>Total Amount (L.E.)</th>
 							<th scope='col'>Status</th>
@@ -479,7 +573,7 @@ const AdminDashboard = () => {
 									</td>
 									<td>+{s.phoneNumber}</td>
 
-									<td>{s.scheduledByUserEmail}</td>
+									<td style={{ width: "10px" }}>{s.scheduledByUserEmail}</td>
 									<td style={{ width: "10px" }}>{s.quantity}</td>
 									<td style={{ width: "10px" }}>{s.quantity_Children}</td>
 									<td>
@@ -489,17 +583,6 @@ const AdminDashboard = () => {
 											}),
 										)}
 									</td>
-									{/* <td>
-										{new Date(s.scheduledDate).toLocaleDateString() !==
-										"Invalid Date"
-											? dateFormat(new Date(s.scheduledDate).toLocaleString())
-											: dateFormat(
-													new Date(s.createdAt).toLocaleString("en-US", {
-														timeZone: "Africa/Cairo",
-													}),
-											  )}{" "}
-										<br />
-									</td> */}
 
 									<td>
 										{new Date(s.scheduledDate).toLocaleString() !==
@@ -515,11 +598,34 @@ const AdminDashboard = () => {
 									<td>{s.event}</td>
 									<td>{s.chosenServiceDetails.serviceName}</td>
 									<td style={{ width: "15px" }}>{s.bookedFrom}</td>
+
 									<td style={{ width: "15px" }}>
-										{s.chosenServiceDetails.servicePrice}
+										{s.chosenServiceDetails.breakfast ||
+										s.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(s.quantity) + Number(s.quantity_Children)
+											: s.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? s.option1Count
+											: 0}
+									</td>
+
+									<td style={{ width: "15px" }}>
+										{s.chosenServiceDetails.lunch ||
+										s.chosenServiceDetails.serviceName === "kings ticket" ||
+										s.chosenServiceDetails.serviceName === "happiness ticket" ||
+										s.chosenServiceDetails.serviceName === "group reservation"
+											? Number(s.quantity) + Number(s.quantity_Children)
+											: 0}
 									</td>
 									<td style={{ width: "15px" }}>
-										{s.chosenServiceDetails.servicePriceDiscount}
+										{s.chosenBusStation.address}
+									</td>
+									<td style={{ width: "15px" }}>
+										{s.busSeatsCount && s.busSeatsCount > 0
+											? s.busSeatsCount
+											: s.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(s.quantity) + Number(s.quantity_Children)}
 									</td>
 									<td style={{ width: "15px" }}>
 										{s.totalAmountBeforeDiscount}
@@ -534,6 +640,7 @@ const AdminDashboard = () => {
 													? "#871402"
 													: "var(--mainBlue)",
 											color: "white",
+											width: "15px",
 										}}>
 										{s.totalAmount}
 									</td>
@@ -562,7 +669,7 @@ const AdminDashboard = () => {
 											)}
 										</select>
 									</td>
-									<td style={{ width: "15px" }}>{s.reservationBelongsTo}</td>
+									<td style={{ width: "10px" }}>{s.reservationBelongsTo}</td>
 									<td>
 										<button
 											className='deleteButton'
@@ -647,7 +754,12 @@ const AdminDashboard = () => {
 						label='Reservation Belongs To'
 						value='reservationBelongsTo'
 					/>
+
 					<ExcelColumn label='Reservation Comment' value='appointmentComment' />
+					<ExcelColumn label='Breakfast' value='BreakfastMeals' />
+					<ExcelColumn label='Lunch' value='LunchMeals' />
+					<ExcelColumn label='Bus Location' value='busLocation' />
+					<ExcelColumn label='Bus Seats' value='BusSeats' />
 				</ExcelSheet>
 			</ExcelFile>
 		);

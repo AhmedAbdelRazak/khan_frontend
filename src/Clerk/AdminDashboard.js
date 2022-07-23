@@ -11,6 +11,7 @@ import { Button } from "antd";
 import { DatePicker } from "antd";
 import moment from "moment";
 import "antd/dist/antd.min.css";
+import ExecutiveSummary from "./ExecutiveSummary";
 
 import {
 	getPreviousBookingsEmployee,
@@ -141,6 +142,31 @@ const AdminDashboard = () => {
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
 								totalAmount: data.totalAmount,
+								reservationBelongsTo: data.reservationBelongsTo,
+								appointmentComment: data.appointmentComment,
+								BreakfastMeals:
+									data.chosenServiceDetails.breakfast ||
+									data.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: data.chosenServiceDetails.serviceName ===
+										  "group reservation"
+										? data.option1Count
+										: 0,
+
+								LunchMeals:
+									data.chosenServiceDetails.lunch ||
+									data.chosenServiceDetails.serviceName === "kings ticket" ||
+									data.chosenServiceDetails.serviceName === "group reservation"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: 0,
+								busLocation: data.chosenBusStation.address,
+
+								BusSeats:
+									data.busSeatsCount && data.busSeatsCount > 0
+										? data.busSeatsCount
+										: data.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(data.quantity) + Number(data.quantity_Children),
 							};
 						}),
 					);
@@ -182,6 +208,32 @@ const AdminDashboard = () => {
 										data.chosenServiceDetails.servicePriceDiscount,
 									Status: data.status,
 									totalAmount: data.totalAmount,
+									reservationBelongsTo: data.reservationBelongsTo,
+									appointmentComment: data.appointmentComment,
+									BreakfastMeals:
+										data.chosenServiceDetails.breakfast ||
+										data.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: data.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? data.option1Count
+											: 0,
+
+									LunchMeals:
+										data.chosenServiceDetails.lunch ||
+										data.chosenServiceDetails.serviceName === "kings ticket" ||
+										data.chosenServiceDetails.serviceName ===
+											"group reservation"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: 0,
+									busLocation: data.chosenBusStation.address,
+
+									BusSeats:
+										data.busSeatsCount && data.busSeatsCount > 0
+											? data.busSeatsCount
+											: data.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(data.quantity) + Number(data.quantity_Children),
 								};
 							}),
 					);
@@ -223,6 +275,32 @@ const AdminDashboard = () => {
 										data.chosenServiceDetails.servicePriceDiscount,
 									Status: data.status,
 									totalAmount: data.totalAmount,
+									reservationBelongsTo: data.reservationBelongsTo,
+									appointmentComment: data.appointmentComment,
+									BreakfastMeals:
+										data.chosenServiceDetails.breakfast ||
+										data.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: data.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? data.option1Count
+											: 0,
+
+									LunchMeals:
+										data.chosenServiceDetails.lunch ||
+										data.chosenServiceDetails.serviceName === "kings ticket" ||
+										data.chosenServiceDetails.serviceName ===
+											"group reservation"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: 0,
+									busLocation: data.chosenBusStation.address,
+
+									BusSeats:
+										data.busSeatsCount && data.busSeatsCount > 0
+											? data.busSeatsCount
+											: data.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(data.quantity) + Number(data.quantity_Children),
 								};
 							}),
 					);
@@ -252,6 +330,31 @@ const AdminDashboard = () => {
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
 								totalAmount: data.totalAmount,
+								reservationBelongsTo: data.reservationBelongsTo,
+								appointmentComment: data.appointmentComment,
+								BreakfastMeals:
+									data.chosenServiceDetails.breakfast ||
+									data.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: data.chosenServiceDetails.serviceName ===
+										  "group reservation"
+										? data.option1Count
+										: 0,
+
+								LunchMeals:
+									data.chosenServiceDetails.lunch ||
+									data.chosenServiceDetails.serviceName === "kings ticket" ||
+									data.chosenServiceDetails.serviceName === "group reservation"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: 0,
+								busLocation: data.chosenBusStation.address,
+
+								BusSeats:
+									data.busSeatsCount && data.busSeatsCount > 0
+										? data.busSeatsCount
+										: data.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(data.quantity) + Number(data.quantity_Children),
 							};
 						}),
 					);
@@ -296,8 +399,15 @@ const AdminDashboard = () => {
 				datesYaba.toString().toLowerCase().indexOf(q) > -1 ||
 				row._id.substring(0, 10).toString().toLowerCase().indexOf(q) > -1 ||
 				row.scheduledByUserEmail.toString().toLowerCase().indexOf(q) > -1 ||
+				row.reservationBelongsTo.toString().toLowerCase().indexOf(q) > -1 ||
+				row.bookedFrom.toString().toLowerCase().indexOf(q) > -1 ||
 				row.status.toString().toLowerCase().indexOf(q) > -1 ||
-				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1
+				row.chosenBusStation.address.indexOf(q) > -1 ||
+				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1 ||
+				row.chosenServiceDetails.serviceName
+					.toString()
+					.toLowerCase()
+					.indexOf(q) > -1
 			);
 		});
 	}
@@ -329,7 +439,7 @@ const AdminDashboard = () => {
 
 	const disabledDate = (current) => {
 		// Can not select days before today and today
-		return current <= moment();
+		return current <= moment() - 2;
 	};
 
 	const allReservationsDetails = () => {
@@ -347,84 +457,7 @@ const AdminDashboard = () => {
 						Filters:
 					</span>
 					<br />
-					{/* <button
-						onClick={() => {
-							setClickedButton("Select All");
-							setSelectedDate(today);
-						}}
-						style={{
-							color: "white",
-							backgroundColor: "var(--mainBlue)",
-							border: "none",
-						}}
-						className='ml-1 p-2 mt-3'>
-						Select All
-					</button> */}
-					{/* <button
-						onClick={() => {
-							setClickedButton("Today");
-							setSelectedDate(today);
-						}}
-						style={{
-							color: "black",
-							backgroundColor: "var(--orangePrimary)",
-							border: "none",
-						}}
-						className='ml-1 p-2 '>
-						Today
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("Tomorrow");
-							setSelectedDate(tomorrow);
-						}}
-						style={{
-							color: "white",
-							backgroundColor: "black",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						Tomorrow
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("Yesterday");
-							setSelectedDate(yesterday);
-						}}
-						style={{
-							color: "black",
-							backgroundColor: "var(--babyBlue)",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						Yesterday
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("This Week");
-							setSelectedDate(next7Days);
-						}}
-						style={{
-							color: "black",
-							backgroundColor: "#d9f9fe",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						This Week
-					</button>
-					<button
-						onClick={() => {
-							setClickedButton("This Month");
-							setSelectedDate(next30Days);
-						}}
-						style={{
-							color: "white",
-							backgroundColor: "#fc3e84",
-							border: "none",
-						}}
-						className='ml-1 p-2'>
-						This Month
-					</button> */}
+
 					<DatePicker
 						className='inputFields'
 						onChange={(date) => {
@@ -436,7 +469,7 @@ const AdminDashboard = () => {
 						disabledDate={disabledDate}
 						max
 						size='small'
-						showToday={true}
+						// showToday={true}
 						defaultValue={moment(new Date(selectedDate))}
 						placeholder='Please pick the desired schedule date'
 						style={{
@@ -449,6 +482,10 @@ const AdminDashboard = () => {
 						}}
 					/>
 				</div>
+				<ExecutiveSummary
+					historicalBooking={HistBookings}
+					clickedButton={clickedButton}
+				/>
 
 				<div className=' mb-3 form-group mx-3 text-center'>
 					<label
@@ -490,15 +527,17 @@ const AdminDashboard = () => {
 							<th scope='col'>Tickets Count (Children)</th>
 							<th scope='col'>Booked On</th>
 							<th scope='col'>Schedule Date</th>
-							<th scope='col'>Receipt #</th>
 							<th scope='col'>Event/Ocassion</th>
 							<th scope='col'>Chosen Package</th>
 							<th scope='col'>Booking Source</th>
-							<th scope='col'>Package Price (L.E.)</th>
-							<th scope='col'>Package Price Discount (L.E.)</th>
+							<th scope='col'>Total Meals (Breakfast)</th>
+							<th scope='col'>Total Meals (Lunches)</th>
+							<th scope='col'>Bus Location</th>
+							<th scope='col'>Bus Reserved Seats</th>
 							<th scope='col'>Before Discount (L.E.)</th>
 							<th scope='col'>Total Amount (L.E.)</th>
 							<th scope='col'>Status</th>
+							<th scope='col'>Reservation Belongs To</th>
 						</tr>
 					</thead>
 
@@ -542,7 +581,8 @@ const AdminDashboard = () => {
 									</Link>{" "}
 								</td>
 								<td>+{s.phoneNumber}</td>
-								<td>{s.scheduledByUserEmail}</td>
+
+								<td style={{ width: "10px" }}>{s.scheduledByUserEmail}</td>
 								<td style={{ width: "10px" }}>{s.quantity}</td>
 								<td style={{ width: "10px" }}>{s.quantity_Children}</td>
 								<td>
@@ -552,31 +592,45 @@ const AdminDashboard = () => {
 										}),
 									)}
 								</td>
-								{/* <td>
-										{new Date(s.scheduledDate).toLocaleDateString() !==
-										"Invalid Date"
-											? dateFormat(new Date(s.scheduledDate).toLocaleString())
-											: dateFormat(
-													new Date(s.createdAt).toLocaleString("en-US", {
-														timeZone: "Africa/Cairo",
-													}),
-											  )}{" "}
-										<br />
-									</td> */}
 
 								<td>
-									{dateFormat(new Date(s.scheduledDate).toLocaleString())}{" "}
+									{new Date(s.scheduledDate).toLocaleString() !== "Invalid Date"
+										? dateFormat(
+												new Date(s.scheduledDate).toLocaleString("en-US", {
+													timeZone: "Africa/Cairo",
+												}),
+										  )
+										: s.scheduledDate}{" "}
 									<br />
 								</td>
-								<td>+{s.phoneNumber}</td>
 								<td>{s.event}</td>
 								<td>{s.chosenServiceDetails.serviceName}</td>
 								<td style={{ width: "15px" }}>{s.bookedFrom}</td>
+
 								<td style={{ width: "15px" }}>
-									{s.chosenServiceDetails.servicePrice}
+									{s.chosenServiceDetails.breakfast ||
+									s.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(s.quantity) + Number(s.quantity_Children)
+										: s.chosenServiceDetails.serviceName === "group reservation"
+										? s.option1Count
+										: 0}
 								</td>
+
 								<td style={{ width: "15px" }}>
-									{s.chosenServiceDetails.servicePriceDiscount}
+									{s.chosenServiceDetails.lunch ||
+									s.chosenServiceDetails.serviceName === "kings ticket" ||
+									s.chosenServiceDetails.serviceName === "happiness ticket" ||
+									s.chosenServiceDetails.serviceName === "group reservation"
+										? Number(s.quantity) + Number(s.quantity_Children)
+										: 0}
+								</td>
+								<td style={{ width: "15px" }}>{s.chosenBusStation.address}</td>
+								<td style={{ width: "15px" }}>
+									{s.busSeatsCount && s.busSeatsCount > 0
+										? s.busSeatsCount
+										: s.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(s.quantity) + Number(s.quantity_Children)}
 								</td>
 								<td style={{ width: "15px" }}>{s.totalAmountBeforeDiscount}</td>
 
@@ -589,6 +643,7 @@ const AdminDashboard = () => {
 												? "#871402"
 												: "var(--mainBlue)",
 										color: "white",
+										width: "15px",
 									}}>
 									{s.totalAmount}
 								</td>
@@ -617,6 +672,7 @@ const AdminDashboard = () => {
 										)}
 									</select>
 								</td>
+								<td style={{ width: "10px" }}>{s.reservationBelongsTo}</td>
 							</tr>
 						))}
 					</tbody>
@@ -659,7 +715,6 @@ const AdminDashboard = () => {
 					/>
 					<ExcelColumn label='Booked On' value='BookedOn' />
 					<ExcelColumn label='Event Date' value='ScheduleDate' />
-					<ExcelColumn label='Receipt' value='Receipt' />
 					<ExcelColumn label='Event/Ocassion' value='Event' />
 					<ExcelColumn label='Chosen Package' value='ChosenPackage' />
 					<ExcelColumn label='Booking Source' value='BookingSource' />
@@ -670,6 +725,16 @@ const AdminDashboard = () => {
 					/>
 					<ExcelColumn label='Status' value='Status' />
 					<ExcelColumn label='Total Amount' value='totalAmount' />
+					<ExcelColumn
+						label='Reservation Belongs To'
+						value='reservationBelongsTo'
+					/>
+
+					<ExcelColumn label='Reservation Comment' value='appointmentComment' />
+					<ExcelColumn label='Breakfast' value='BreakfastMeals' />
+					<ExcelColumn label='Lunch' value='LunchMeals' />
+					<ExcelColumn label='Bus Location' value='busLocation' />
+					<ExcelColumn label='Bus Seats' value='BusSeats' />
 				</ExcelSheet>
 			</ExcelFile>
 		);
@@ -719,6 +784,7 @@ const AdminDashboard = () => {
 				<React.Fragment>
 					{showOrdersLength()}
 					<br />
+
 					{allReservationsDetails()}
 				</React.Fragment>
 			)}

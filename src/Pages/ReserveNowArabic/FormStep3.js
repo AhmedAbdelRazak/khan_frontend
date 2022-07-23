@@ -25,6 +25,7 @@ const FormStep3 = ({
 	option3Count,
 	option4Count,
 	busStationChosenTime,
+	busSeatsCount,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -38,8 +39,7 @@ const FormStep3 = ({
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
 
 		var TransportationFees =
-			Number(chosenBusStationPrice.price) *
-			(Number(quantity) + Number(quantity_Children));
+			Number(chosenBusStationPrice.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -89,8 +89,7 @@ const FormStep3 = ({
 			-1;
 
 		var TransportationFees =
-			Number(chosenBusStationPrice.price) *
-			(Number(quantity) + Number(quantity_Children));
+			Number(chosenBusStationPrice.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -140,6 +139,9 @@ const FormStep3 = ({
 
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
+
+	var TransportationFees2 =
+		Number(chosenBusStationPrice.price) * Number(busSeatsCount);
 
 	return (
 		<FormStep3Wrapper>
@@ -205,9 +207,6 @@ const FormStep3 = ({
 					</div>
 					<br />
 
-					<div className='toBeAlignedRight'>
-						رسوم المواصلات: {Number(chosenBusStationPrice.price)} جنيه{" "}
-					</div>
 					<br />
 					{serviceDetails.option1_Active && option1Count > 0 ? (
 						<Fragment>
@@ -246,6 +245,16 @@ const FormStep3 = ({
 							<br />
 						</Fragment>
 					) : null}
+
+					<div className='toBeAlignedRight'>
+						عدد مقاعد الباص: {Number(busSeatsCount)} مقاعد
+					</div>
+					<br />
+
+					<div className='toBeAlignedRight'>
+						رسوم المواصلات: {Number(TransportationFees2)} جنيه{" "}
+					</div>
+					<br />
 
 					<div className='toBeAlignedRight'>
 						تاريخ الحجز: {dateFormat(chosenDate)}

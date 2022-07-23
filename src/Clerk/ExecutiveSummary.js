@@ -51,6 +51,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 			.map((i) => i.totalAmount)
 			.filter((ii) => ii !== undefined);
 
+	// eslint-disable-next-line
 	const sumOfTotalPaidAmount = totalPaidAmount.reduce((a, b) => a + b, 0);
 
 	const TotalOverAllTickets =
@@ -68,7 +69,17 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
-	//Meals
+	// console.log(overallAdultsArray, "OverallAdultCount");
+	// console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
+	// console.log(overallAdultCount, "Adults Total Count");
+	// console.log(overallChildrenCount, "Children Total Count");
+	// console.log(totalPaidAmount, "Total Paid Amount");
+	// console.log(historicalBooking, "historicalBooking");
+	// console.log(scheduledDatesArray, "ScheduledDates");
+	// console.log(scheduledDatesArray[0], "MaxDate");
+	// console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
+
+	// Meals
 
 	var LunchMealsAdults =
 		nonCancelledReservation &&
@@ -177,16 +188,22 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 			return res;
 		}, {});
 
-	// console.log(overallAdultsArray, "OverallAdultCount");
-	// console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
-	// console.log(overallAdultCount, "Adults Total Count");
-	// console.log(overallChildrenCount, "Children Total Count");
-	// console.log(totalPaidAmount, "Total Paid Amount");
-	// console.log(historicalBooking, "historicalBooking");
-	// console.log(scheduledDatesArray, "ScheduledDates");
-	// console.log(scheduledDatesArray[0], "MaxDate");
-	// console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
+	// console.log(busStationBreakDown, "busStationBreakDown");
 
+	// console.log(
+	// 	lunchMealsAdultsTotal,
+	// 	"LunchAdult",
+	// 	lunchMealsChildrenTotal,
+	// 	"lunch child",
+	// 	BreakfastMealsAdultsTotal,
+	// 	"breakfast adults",
+	// 	BreakfastMealsChildrenTotal,
+	// 	"breakfastChild",
+	// 	BreakfastMealGroupReservationTotal,
+	// 	"breakfastGroup",
+	// 	BusSeatsTotal,
+	// 	"bus seats",
+	// );
 	return (
 		<ExecutiveSummaryWrapper>
 			<div className='container'>
@@ -250,21 +267,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 							</div>
 						</div>
 					</div>
-
-					<div className='col-md-5 text-center mx-auto mt-3'>
-						<div className='card' style={{ background: "var(--mainBlue)" }}>
-							<div className='card-body totalAmount' style={{ color: "white" }}>
-								<h5> Total Amount (Pounds)</h5>
-								<CountUp
-									duration='4.5'
-									delay={0.5}
-									end={sumOfTotalPaidAmount}
-									separator=','
-									// decimals={3}
-								/>
-							</div>
-						</div>
-					</div>
+					<br />
 					<br />
 					<br />
 					<div className='col-md-10 mx-auto'>

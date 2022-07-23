@@ -30,6 +30,7 @@ const FormStep3 = ({
 	setStatus,
 	reservationBelongsTo,
 	setReservationBelongsTo,
+	busSeatsCount,
 }) => {
 	const handleMeetingComment = (event) => {
 		setAppointmentComment(event.target.value);
@@ -51,8 +52,7 @@ const FormStep3 = ({
 			Number(serviceDetails.servicePrice_Children) * Number(quantity_Children);
 
 		var TransportationFees =
-			Number(chosenBusStationPrice.price) *
-			(Number(quantity) + Number(quantity_Children));
+			Number(chosenBusStationPrice.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -102,8 +102,7 @@ const FormStep3 = ({
 			-1;
 
 		var TransportationFees =
-			Number(chosenBusStationPrice.price) *
-			(Number(quantity) + Number(quantity_Children));
+			Number(chosenBusStationPrice.price) * Number(busSeatsCount);
 
 		var totalOtionsPrice =
 			Number(option1Count) *
@@ -139,6 +138,9 @@ const FormStep3 = ({
 				totalOtionsPrice,
 		).toFixed(2);
 	};
+
+	var TransportationFees2 =
+		Number(chosenBusStationPrice.price) * Number(busSeatsCount);
 
 	// console.log(chosenDate, "From FormStep3");
 
@@ -228,10 +230,8 @@ const FormStep3 = ({
 							{option4Count * serviceDetails.option4_Price} L.E).
 						</div>
 					) : null}
-
-					<div>
-						Transportation Fees: {Number(chosenBusStationPrice.price)} L.E.{" "}
-					</div>
+					<div>Bus Seats Count: {Number(busSeatsCount)} Seats</div>
+					<div>Transportation Fees: {Number(TransportationFees2)} L.E. </div>
 					<div>Bus Station Time: {busStationChosenTime}</div>
 
 					<div>Booking Date: {dateFormat(chosenDate)}</div>
