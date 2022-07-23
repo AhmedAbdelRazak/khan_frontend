@@ -98,8 +98,9 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 	var BreakfastMealsAdults =
 		nonCancelledReservation &&
 		nonCancelledReservation.map((i) =>
-			i.chosenServiceDetails.breakfast ||
-			i.chosenServiceDetails.serviceName === "kings ticket"
+			(i.chosenServiceDetails.breakfast ||
+				i.chosenServiceDetails.serviceName === "kings ticket") &&
+			i.chosenServiceDetails.serviceName !== "happiness ticket"
 				? Number(i.quantity)
 				: 0,
 		);
@@ -111,8 +112,9 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 	var BreakfastMealsChildren =
 		nonCancelledReservation &&
 		nonCancelledReservation.map((i) =>
-			i.chosenServiceDetails.breakfast ||
-			i.chosenServiceDetails.serviceName === "kings ticket"
+			(i.chosenServiceDetails.breakfast ||
+				i.chosenServiceDetails.serviceName === "kings ticket") &&
+			i.chosenServiceDetails.serviceName !== "happiness ticket"
 				? Number(i.quantity_Children)
 				: 0,
 		);
