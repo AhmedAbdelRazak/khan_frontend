@@ -608,8 +608,9 @@ const AdminDashboard = () => {
 								<td style={{ width: "15px" }}>{s.bookedFrom}</td>
 
 								<td style={{ width: "15px" }}>
-									{s.chosenServiceDetails.breakfast ||
-									s.chosenServiceDetails.serviceName === "kings ticket"
+									{(s.chosenServiceDetails.breakfast ||
+										s.chosenServiceDetails.serviceName === "kings ticket") &&
+									s.chosenServiceDetails.serviceName !== "happiness ticket"
 										? Number(s.quantity) + Number(s.quantity_Children)
 										: s.chosenServiceDetails.serviceName === "group reservation"
 										? s.option1Count
