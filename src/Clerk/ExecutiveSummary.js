@@ -179,7 +179,9 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 				busStationBreakDown.push(res[value.chosenBusStation.address]);
 			}
 
-			value.busSeatsCount && value.busSeatsCount > 0
+			value.busSeatsCount &&
+			value.busSeatsCount > 0 &&
+			value.chosenBusStation.address !== "NO BUS NEEDED"
 				? (res[value.chosenBusStation.address].busSeatsCount += Number(
 						value.busSeatsCount,
 				  ))
