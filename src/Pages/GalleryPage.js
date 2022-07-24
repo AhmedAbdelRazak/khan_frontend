@@ -40,10 +40,10 @@ const GalleryPage = () => {
 				className='titleBookNow'>
 				Khan Gallery
 			</h1>
-			<div className='ad-class my-3 text-center mx-auto'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class my-3 text-center mx-auto'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 			<div
 				className='row'
 				// style={{ border: "2px red solid" }}

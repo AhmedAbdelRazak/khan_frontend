@@ -80,10 +80,10 @@ const AboutArabic = () => {
 					) : null}
 				</div>
 			</div>
-			<div className='ad-class my-3 text-center mx-auto'>
-				{/* add your slot id  */}
-				<GoogleAds slot='8388147324' />
-			</div>
+			{/* <div className='ad-class my-3 text-center mx-auto'> */}
+			{/* add your slot id  */}
+			{/* <GoogleAds slot='8388147324' /> */}
+			{/* </div> */}
 
 			<KhanMap />
 			<PowerBySnippet />
