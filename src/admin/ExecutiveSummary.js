@@ -333,7 +333,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 									delay={0.5}
 									end={
 										Number(BreakfastMealsChildrenTotal) +
-										Number(BreakfastMealsChildrenTotal) +
+										Number(BreakfastMealGroupReservationTotal) +
 										Number(BreakfastMealsAdultsTotal)
 									}
 									separator=','

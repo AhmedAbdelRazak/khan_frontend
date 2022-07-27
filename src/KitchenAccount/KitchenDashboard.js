@@ -310,7 +310,7 @@ const KitchenDashboard2 = () => {
 										delay={0.5}
 										end={
 											Number(BreakfastMealsChildrenTotal) +
-											Number(BreakfastMealsChildrenTotal) +
+											Number(BreakfastMealGroupReservationTotal) +
 											Number(BreakfastMealsAdultsTotal)
 										}
 										separator=','
