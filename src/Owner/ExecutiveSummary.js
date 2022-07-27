@@ -79,17 +79,17 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 	// console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
 
 	return (
-		<ExecutiveSummaryWrapper>
+		<ExecutiveSummaryWrapper dir='rtl'>
 			<div className='container'>
 				{clickedButton.includes("Booking") ? null : (
 					<h4>
-						Selected Date: From{" "}
+						التاريخ المحدد: من{" "}
 						{dateFormat(
 							new Date(
 								scheduledDatesArray[scheduledDatesArray.length - 1],
 							).toLocaleString(),
 						)}{" "}
-						To {dateFormat(new Date(scheduledDatesArray[0]).toLocaleString())}
+						إلى {dateFormat(new Date(scheduledDatesArray[0]).toLocaleString())}
 					</h4>
 				)}
 
@@ -97,7 +97,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 					<div className='col-md-3 text-center mx-auto'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5>Overall Reservations</h5>
+								<h5>الحجوزات </h5>
 								<CountUp duration='2' delay={0.5} end={overallReservations} />
 							</div>
 						</div>
@@ -105,7 +105,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 					<div className='col-md-3 text-center mx-auto'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5>Total Number Of Adults</h5>
+								<h5>إجمالي عدد البالغين</h5>
 								<CountUp
 									duration='2.5'
 									delay={0.5}
@@ -118,7 +118,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 					<div className='col-md-3 text-center mx-auto'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5>Total Number Of Children</h5>
+								<h5>إجمالي عدد الأطفال</h5>
 								<CountUp
 									duration='3'
 									delay={0.5}
@@ -131,7 +131,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 					<div className='col-md-3 text-center mx-auto'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5> Total Sold Tickets</h5>
+								<h5> إجمالي التذاكر المباعة</h5>
 								<CountUp
 									duration='3.5'
 									delay={0.5}
@@ -145,7 +145,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 					<div className='col-md-5 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--mainBlue)" }}>
 							<div className='card-body totalAmount' style={{ color: "white" }}>
-								<h5> Total Amount (Pounds)</h5>
+								<h5> المبلغ الإجمالي (جنيه)</h5>
 								<CountUp
 									duration='4.5'
 									delay={0.5}

@@ -133,7 +133,7 @@ const DayOverDayOwner = () => {
 			},
 
 			title: {
-				text: "Khan Khadija Resort Day Over Day Overview (Total Amount L.E.)",
+				text: "نظرة عامة على منتجع خان خديجة يومًا بعد يوم (المبلغ الإجمالي جنيهاً)",
 				align: "center",
 				margin: 10,
 				offsetX: 0,
@@ -147,7 +147,7 @@ const DayOverDayOwner = () => {
 				},
 			},
 			xaxis: {
-				name: "Schedule Date",
+				name: "تاريخ الجدول الزمني",
 				categories: DayOverDay_ScheduledDate.map((i) =>
 					new Date(i.scheduledDate).toLocaleDateString("en-US", {
 						timeZone: "Africa/Cairo",
@@ -157,7 +157,7 @@ const DayOverDayOwner = () => {
 		},
 		series: [
 			{
-				name: "Total Paid Amount",
+				name: "إجمالي المبلغ المدفوع",
 				data: DayOverDay_ScheduledDate.map((i) => i.totalAmount),
 			},
 		],
@@ -193,7 +193,7 @@ const DayOverDayOwner = () => {
 			},
 
 			title: {
-				text: "Khan Khadija Resort Day Over Day Overview (Head Count)",
+				text: "نظرة عامة على منتجع خان خديجة يومًا بعد يوم (عدد الرؤساء)",
 				align: "center",
 				margin: 10,
 				offsetX: 0,
@@ -207,7 +207,7 @@ const DayOverDayOwner = () => {
 				},
 			},
 			xaxis: {
-				name: "Schedule Date",
+				name: "تاريخ الجدول الزمني",
 				categories: DayOverDay_HeadCount.map((i) =>
 					new Date(i.scheduledDate).toLocaleDateString("en-US", {
 						timeZone: "Africa/Cairo",
@@ -217,7 +217,7 @@ const DayOverDayOwner = () => {
 		},
 		series: [
 			{
-				name: "Total Paid Amount",
+				name: "إجمالي المبلغ المدفوع",
 				data: DayOverDay_HeadCount.map((i) => i.quantity),
 			},
 		],
@@ -254,7 +254,7 @@ const DayOverDayOwner = () => {
 			},
 
 			title: {
-				text: "Khan Khadija Resort Tickets Summary By Total Amount (L.E.)",
+				text: "ملخص تذاكر منتجع خان خديجة حسب المبلغ الإجمالي (بالجنيه)",
 				align: "center",
 				margin: 10,
 				offsetX: 0,
@@ -268,7 +268,7 @@ const DayOverDayOwner = () => {
 				},
 			},
 			xaxis: {
-				name: "Schedule Date",
+				name: "تاريخ الجدول الزمني",
 				categories: OverAllTicket_TotalAmount.map((i) =>
 					i.chosenService_Package.toUpperCase(),
 				),
@@ -276,66 +276,66 @@ const DayOverDayOwner = () => {
 		},
 		series: [
 			{
-				name: "Total Paid Amount",
+				name: "إجمالي المبلغ المدفوع",
 				data: OverAllTicket_TotalAmount.map((i) => i.totalAmount),
 			},
 		],
 	};
 
-	var overAllStatusSummary = [];
-	HistBookings &&
-		HistBookings.reduce(function (res, value) {
-			if (!res[value.status]) {
-				res[value.status] = {
-					status: value.status,
-					totalAmount: 0,
-				};
-				overAllStatusSummary.push(res[value.status]);
-			}
-			res[value.status].totalAmount += Number(value.totalAmount);
-			return res;
-		}, {});
+	// var overAllStatusSummary = [];
+	// HistBookings &&
+	// 	HistBookings.reduce(function (res, value) {
+	// 		if (!res[value.status]) {
+	// 			res[value.status] = {
+	// 				status: value.status,
+	// 				totalAmount: 0,
+	// 			};
+	// 			overAllStatusSummary.push(res[value.status]);
+	// 		}
+	// 		res[value.status].totalAmount += Number(value.totalAmount);
+	// 		return res;
+	// 	}, {});
 
-	var chartDataStatusSummary = {
-		options: {
-			chart: {
-				id: "line",
-			},
+	// var chartDataStatusSummary = {
+	// 	options: {
+	// 		chart: {
+	// 			id: "line",
+	// 		},
 
-			dataLabels: {
-				enabled: true,
-				enabledOnSeries: undefined,
-				formatter: function (val, opts) {
-					return val;
-				},
-			},
+	// 		dataLabels: {
+	// 			enabled: true,
+	// 			enabledOnSeries: undefined,
+	// 			formatter: function (val, opts) {
+	// 				return val;
+	// 			},
+	// 		},
 
-			title: {
-				text: "Khan Khadija Resort Status Summary By Total Amount (L.E.)",
-				align: "center",
-				margin: 10,
-				offsetX: 0,
-				offsetY: 0,
-				floating: false,
-				style: {
-					fontSize: "17px",
-					fontWeight: "bold",
-					// fontFamily: undefined,
-					color: "purple",
-				},
-			},
-			xaxis: {
-				name: "Status",
-				categories: overAllStatusSummary.map((i) => i.status.toUpperCase()),
-			},
-		},
-		series: [
-			{
-				name: "Total Paid Amount",
-				data: overAllStatusSummary.map((i) => i.totalAmount),
-			},
-		],
-	};
+	// 		title: {
+	// 			text: "ملخص مصدر حجز منتجع خان خديجة بالمبلغ الإجمالي (جنيهاً مصرياً)",
+	// 			align: "center",
+	// 			margin: 10,
+	// 			offsetX: 0,
+	// 			offsetY: 0,
+	// 			floating: false,
+	// 			style: {
+	// 				fontSize: "17px",
+	// 				fontWeight: "bold",
+	// 				// fontFamily: undefined,
+	// 				color: "purple",
+	// 			},
+	// 		},
+	// 		xaxis: {
+	// 			name: "مصدر الحجز",
+	// 			categories: overAllStatusSummary.map((i) => i.status.toUpperCase()),
+	// 		},
+	// 	},
+	// 	series: [
+	// 		{
+	// 			name: "إجمالي المبلغ المدفوع",
+	// 			data: overAllStatusSummary.map((i) => i.totalAmount),
+	// 		},
+	// 	],
+	// };
 
 	// Score Card
 
@@ -366,7 +366,7 @@ const DayOverDayOwner = () => {
 		Number(overallChildrenCount) + Number(overallAdultCount);
 
 	return (
-		<DayOverDayWrapper>
+		<DayOverDayWrapper dir='rtl'>
 			{click2 && clickMenu2 ? (
 				<DarkBG setClick2={setClick2} setClickMenu2={setClickMenu2} />
 			) : null}
@@ -387,7 +387,7 @@ const DayOverDayOwner = () => {
 				<div className='container text-center'>
 					<div className='row my-3'>
 						<div className='col-md-6 mx-auto'>
-							<div style={{ fontWeight: "bold" }}>Start Date</div>
+							<div style={{ fontWeight: "bold" }}>تاريخ بدء التقرير</div>
 							<DatePicker
 								className='inputFields'
 								onChange={(date) => {
@@ -413,7 +413,7 @@ const DayOverDayOwner = () => {
 						</div>
 
 						<div className='col-md-6 mx-auto'>
-							<div style={{ fontWeight: "bold" }}>End Date</div>
+							<div style={{ fontWeight: "bold" }}>تاريخ انتهاء التقرير</div>
 							<DatePicker
 								className='inputFields'
 								onChange={(date) => {
@@ -445,7 +445,7 @@ const DayOverDayOwner = () => {
 										style={{ background: "var(--babyBlue)" }}>
 										<div className='card-body'>
 											<h5 style={{ fontSize: "0.9rem" }}>
-												Reservations (Not Cancelled)
+												الحجوزات (غير ملغاة)
 											</h5>
 											<CountUp
 												duration='2'
@@ -460,7 +460,7 @@ const DayOverDayOwner = () => {
 										className='card'
 										style={{ background: "var(--babyBlue)" }}>
 										<div className='card-body'>
-											<h5>Total Number Of Adults</h5>
+											<h5>إجمالي عدد الراشدين</h5>
 											<CountUp
 												duration='2.5'
 												delay={0.5}
@@ -475,7 +475,7 @@ const DayOverDayOwner = () => {
 										className='card'
 										style={{ background: "var(--babyBlue)" }}>
 										<div className='card-body'>
-											<h5>Total Number Of Children</h5>
+											<h5>إجمالي عدد الأطفال</h5>
 											<CountUp
 												duration='3'
 												delay={0.5}
@@ -490,7 +490,7 @@ const DayOverDayOwner = () => {
 										className='card'
 										style={{ background: "var(--babyBlue)" }}>
 										<div className='card-body'>
-											<h5> Total Sold Tickets</h5>
+											<h5> إجمالي التذاكر المباعة</h5>
 											<CountUp
 												duration='3.5'
 												delay={0.5}
@@ -508,7 +508,7 @@ const DayOverDayOwner = () => {
 										<div
 											className='card-body totalAmount'
 											style={{ color: "white" }}>
-											<h5> Total Amount (Pounds)</h5>
+											<h5> المبلغ الإجمالي (جنيه)</h5>
 											<CountUp
 												duration='4.5'
 												delay={0.5}
@@ -547,14 +547,14 @@ const DayOverDayOwner = () => {
 						/>
 					</div>
 
-					<div className='mx-auto my-3 text-center' style={{ height: "50%" }}>
+					{/* <div className='mx-auto my-3 text-center' style={{ height: "50%" }}>
 						<Chart
 							options={chartDataStatusSummary.options}
 							series={chartDataStatusSummary.series}
 							type='bar'
 							width='90%'
 						/>
-					</div>
+					</div> */}
 				</div>
 			)}
 		</DayOverDayWrapper>

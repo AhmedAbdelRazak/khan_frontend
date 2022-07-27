@@ -603,6 +603,58 @@ const Sidebar = ({
 							</React.Fragment>
 						)}
 
+						{isAuthenticated() && isAuthenticated().user.role === 7 && (
+							<React.Fragment>
+								<li
+									className='nav-item ml-3 mt-3'
+									onClick={() => {
+										window.scrollTo({ top: 0, behavior: "smooth" });
+									}}>
+									<Link
+										style={{
+											fontWeight: "bold",
+											color: "var(--orangePrimary)",
+										}}
+										className='nav-link '
+										to='/bus-station/dashboard'
+										onClick={() => {
+											setClickMenu(false);
+											setClick(false);
+										}}>
+										<span className='linkStyling linkTextArabic'>
+											Bus Station Dashboard{" "}
+										</span>
+									</Link>
+								</li>
+							</React.Fragment>
+						)}
+
+						{isAuthenticated() && isAuthenticated().user.role === 4 && (
+							<React.Fragment>
+								<li
+									className='nav-item ml-3 mt-3'
+									onClick={() => {
+										window.scrollTo({ top: 0, behavior: "smooth" });
+									}}>
+									<Link
+										style={{
+											fontWeight: "bold",
+											color: "var(--orangePrimary)",
+										}}
+										className='nav-link '
+										to='/kitchen/dashboard'
+										onClick={() => {
+											setClickMenu(false);
+											setClick(false);
+										}}>
+										<span className='linkStyling linkTextArabic'>
+											Kitchen Dashboard{" "}
+										</span>
+									</Link>
+								</li>
+							</React.Fragment>
+						)}
+
 						{!isAuthenticated() && (
 							<Fragment>
 								<li

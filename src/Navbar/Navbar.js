@@ -234,6 +234,41 @@ const Navbar = ({ history, language, setLanguage }) => {
 						</React.Fragment>
 					)}
 
+					{isAuthenticated() && isAuthenticated().user.role === 7 && (
+						<React.Fragment>
+							<li
+								onClick={() => {
+									window.scrollTo({ top: 0, behavior: "smooth" });
+								}}>
+								<Link
+									className='DashboardStyling'
+									style={isActiveItemsToRight(
+										history,
+										"/bus-station/dashboard",
+									)}
+									to='/bus-station/dashboard'>
+									Bus Station Dashboard
+								</Link>
+							</li>
+						</React.Fragment>
+					)}
+
+					{isAuthenticated() && isAuthenticated().user.role === 4 && (
+						<React.Fragment>
+							<li
+								onClick={() => {
+									window.scrollTo({ top: 0, behavior: "smooth" });
+								}}>
+								<Link
+									className='DashboardStyling'
+									style={isActiveItemsToRight(history, "/kitchen/dashboard")}
+									to='/kitchen/dashboard'>
+									Kitchen Dashboard
+								</Link>
+							</li>
+						</React.Fragment>
+					)}
+
 					{!isAuthenticated() && (
 						<Fragment>
 							<li

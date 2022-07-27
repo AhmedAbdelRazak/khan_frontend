@@ -610,6 +610,7 @@ const AdminDashboard = () => {
 				<React.Fragment>
 					<div className='mx-auto text-center mt-3 mb-5'>
 						<span
+							dir='rtl'
 							style={{
 								fontSize: "1.3rem",
 								fontWeight: "bold",
@@ -617,7 +618,7 @@ const AdminDashboard = () => {
 								marginLeft: "10px",
 								color: "var(--mainBlue)",
 							}}>
-							Filters (Event Date):
+							التاريخ المقرر:
 						</span>
 						<br />
 						<button

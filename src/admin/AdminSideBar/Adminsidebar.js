@@ -429,6 +429,25 @@ const Adminsidebar = ({
 								window.scrollTo({ top: 0, behavior: "smooth" });
 							}}>
 							<Link
+								to={`/admin/bus-station-dashboard`}
+								className='sidebar-link'
+								style={isActive(history, `/admin/bus-station-dashboard`)}
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment>Bus Station Dashboard</React.Fragment>
+								) : null}
+							</Link>
+						</li>
+
+						<li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
 								to={`/admin/uncomplete-reservation`}
 								className='sidebar-link'
 								style={isActive(history, `/admin/uncomplete-reservation`)}

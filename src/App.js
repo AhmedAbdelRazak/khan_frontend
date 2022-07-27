@@ -62,6 +62,11 @@ import OwnerRoute from "./auth/OwnerRoute";
 import OwnerDashboard from "./Owner/OwnerDashboard";
 import DayOverDayOwner from "./Owner/Reports/DayOverDayOwner";
 import KitchenDashboard from "./admin/KitchenDashboard";
+import BusStationDashboard from "./admin/BusStationDashboard";
+import BusRoute from "./auth/BusRoute";
+import BusStationDashboard2 from "./BusAccount/BusStationDashboard2";
+import KitchenRoute from "./auth/KitchenRoute";
+import KitchenDashboard2 from "./KitchenAccount/KitchenDashboard";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -312,6 +317,12 @@ const App = () => {
 					component={UncompleteForm}
 				/>
 
+				<AdminRoute
+					exact
+					path='/admin/bus-station-dashboard'
+					component={BusStationDashboard}
+				/>
+
 				<EmployeeRoute
 					exact
 					path='/clerk/update-reservation/:reservationId'
@@ -332,6 +343,18 @@ const App = () => {
 
 				<OwnerRoute path='/owner/dashboard' exact component={OwnerDashboard} />
 				<OwnerRoute path='/owner/reports' exact component={DayOverDayOwner} />
+
+				<BusRoute
+					path='/bus-station/dashboard'
+					exact
+					component={BusStationDashboard2}
+				/>
+
+				<KitchenRoute
+					path='/kitchen/dashboard'
+					exact
+					component={KitchenDashboard2}
+				/>
 			</Switch>
 			<Footer />
 		</BrowserRouter>
