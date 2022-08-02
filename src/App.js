@@ -65,6 +65,7 @@ import KitchenDashboard from "./admin/KitchenDashboard";
 import BusStationDashboard from "./admin/BusStationDashboard";
 import BusRoute from "./auth/BusRoute";
 import BusStationDashboard2 from "./BusAccount/BusStationDashboard2";
+import BusStationDashboard3 from "./Clerk/BusStationDashboard3";
 import KitchenRoute from "./auth/KitchenRoute";
 import KitchenDashboard2 from "./KitchenAccount/KitchenDashboard";
 
@@ -339,6 +340,12 @@ const App = () => {
 					path='/clerk/dashboard'
 					exact
 					component={ClerkDashboard}
+				/>
+
+				<EmployeeRoute
+					path='/bus-station/clerk-dashboard'
+					exact
+					component={BusStationDashboard3}
 				/>
 
 				<OwnerRoute path='/owner/dashboard' exact component={OwnerDashboard} />

@@ -140,6 +140,25 @@ const Adminsidebar = ({
 								) : null}
 							</Link>
 						</li>
+
+						<li
+							className='mt-3'
+							onClick={() => {
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}>
+							<Link
+								to={`/bus-station/clerk-dashboard`}
+								className='sidebar-link'
+								style={isActive(history, `/bus-station/clerk-dashboard`)}
+								onClick={() => {
+									setClickMenu2(false);
+									setClick2(false);
+								}}>
+								{click2 && clickMenu2 ? (
+									<React.Fragment>Bus Station</React.Fragment>
+								) : null}
+							</Link>
+						</li>
 					</ul>
 				</SideWrapper>
 			</div>

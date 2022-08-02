@@ -51,7 +51,6 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 			.map((i) => i.totalAmount)
 			.filter((ii) => ii !== undefined);
 
-	// eslint-disable-next-line
 	const sumOfTotalPaidAmount = totalPaidAmount.reduce((a, b) => a + b, 0);
 
 	const TotalOverAllTickets =
@@ -69,17 +68,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
-	// console.log(overallAdultsArray, "OverallAdultCount");
-	// console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
-	// console.log(overallAdultCount, "Adults Total Count");
-	// console.log(overallChildrenCount, "Children Total Count");
-	// console.log(totalPaidAmount, "Total Paid Amount");
-	// console.log(historicalBooking, "historicalBooking");
-	// console.log(scheduledDatesArray, "ScheduledDates");
-	// console.log(scheduledDatesArray[0], "MaxDate");
-	// console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
-
-	// Meals
+	//Meals
 
 	var LunchMealsAdults =
 		nonCancelledReservation &&
@@ -158,7 +147,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 
 	// eslint-disable-next-line
 	const BusSeatsTotal = BusSeats.reduce((a, b) => a + b, 0);
-
+	// eslint-disable-next-line
 	const allMealsCombined =
 		Number(lunchMealsAdultsTotal) +
 		Number(lunchMealsChildrenTotal) +
@@ -166,6 +155,15 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 		Number(BreakfastMealsChildrenTotal) +
 		Number(BreakfastMealGroupReservationTotal);
 
+	var servicesOnlyArray =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			i.chosenServiceDetails.serviceName === "services only"
+				? Number(i.quantity_Children) + Number(i.quantity)
+				: 0,
+		);
+
+	const servicesOnlyArrayTotal = servicesOnlyArray.reduce((a, b) => a + b, 0);
 	var busStationBreakDown = [];
 
 	nonCancelledReservation &&
@@ -192,22 +190,16 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 			return res;
 		}, {});
 
-	// console.log(busStationBreakDown, "busStationBreakDown");
+	// console.log(overallAdultsArray, "OverallAdultCount");
+	// console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
+	// console.log(overallAdultCount, "Adults Total Count");
+	// console.log(overallChildrenCount, "Children Total Count");
+	// console.log(totalPaidAmount, "Total Paid Amount");
+	// console.log(historicalBooking, "historicalBooking");
+	// console.log(scheduledDatesArray, "ScheduledDates");
+	// console.log(scheduledDatesArray[0], "MaxDate");
+	// console.log(scheduledDatesArray[scheduledDatesArray.length - 1], "MinDate");
 
-	// console.log(
-	// 	lunchMealsAdultsTotal,
-	// 	"LunchAdult",
-	// 	lunchMealsChildrenTotal,
-	// 	"lunch child",
-	// 	BreakfastMealsAdultsTotal,
-	// 	"breakfast adults",
-	// 	BreakfastMealsChildrenTotal,
-	// 	"breakfastChild",
-	// 	BreakfastMealGroupReservationTotal,
-	// 	"breakfastGroup",
-	// 	BusSeatsTotal,
-	// 	"bus seats",
-	// );
 	return (
 		<ExecutiveSummaryWrapper>
 			<div className='container'>
@@ -271,14 +263,28 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 							</div>
 						</div>
 					</div>
-					<br />
+
+					<div className='col-md-5 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--mainBlue)" }}>
+							<div className='card-body totalAmount' style={{ color: "white" }}>
+								<h5> Total Amount (Pounds)</h5>
+								<CountUp
+									duration='4.5'
+									delay={0.5}
+									end={sumOfTotalPaidAmount}
+									separator=','
+									// decimals={3}
+								/>
+							</div>
+						</div>
+					</div>
 					<br />
 					<br />
 					<div className='col-md-10 mx-auto'>
 						<h4 className='mt-5 mx-auto'>Meals Breakdown</h4>
 					</div>
 
-					<div className='col-md-3 text-center mx-auto mt-3'>
+					<div className='col-md-4 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
 								<h5>Breakfast Adults</h5>
@@ -290,7 +296,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 							</div>
 						</div>
 					</div>
-					<div className='col-md-3 text-center mx-auto mt-3'>
+					<div className='col-md-4 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
 								<h5>Breakfast Children</h5>
@@ -303,7 +309,39 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 							</div>
 						</div>
 					</div>
-					<div className='col-md-3 text-center mx-auto mt-3'>
+
+					<div className='col-md-4 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5> Group Reservation Breakfast</h5>
+								<CountUp
+									duration='3.5'
+									delay={0.5}
+									end={BreakfastMealGroupReservationTotal}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className='col-md-8 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5>Total Breakfast Meals</h5>
+								<CountUp
+									duration='2.5'
+									delay={0.5}
+									end={
+										Number(BreakfastMealsChildrenTotal) +
+										Number(BreakfastMealGroupReservationTotal) +
+										Number(BreakfastMealsAdultsTotal)
+									}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+					<div className='col-md-6 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
 								<h5>Lunch Adults</h5>
@@ -316,7 +354,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 							</div>
 						</div>
 					</div>
-					<div className='col-md-3 text-center mx-auto mt-3'>
+					<div className='col-md-6 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
 								<h5> Lunch Children</h5>
@@ -330,27 +368,30 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 						</div>
 					</div>
 
-					<div className='col-md-3 text-center mx-auto mt-3'>
+					<div className='col-md-8 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5> Group Reservation Breakfast</h5>
+								<h5> Total Lunch Meals</h5>
 								<CountUp
 									duration='3.5'
 									delay={0.5}
-									end={BreakfastMealGroupReservationTotal}
+									end={
+										Number(lunchMealsAdultsTotal) +
+										Number(lunchMealsChildrenTotal)
+									}
 									separator=','
 								/>
 							</div>
 						</div>
 					</div>
-					<div className='col-md-3 text-center mx-auto mt-3'>
+					<div className='col-md-5 text-center mx-auto mt-5'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5> All Meals Combined</h5>
+								<h5> Services Only</h5>
 								<CountUp
 									duration='3.5'
 									delay={0.5}
-									end={allMealsCombined}
+									end={servicesOnlyArrayTotal}
 									separator=','
 								/>
 							</div>

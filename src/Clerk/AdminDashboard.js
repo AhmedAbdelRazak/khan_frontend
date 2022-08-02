@@ -361,6 +361,7 @@ const AdminDashboard = () => {
 				}
 
 				setLoading(false);
+				window.scrollTo({ top: 0, behavior: "smooth" });
 			}
 		});
 	};
@@ -437,6 +438,7 @@ const AdminDashboard = () => {
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
 
+	// eslint-disable-next-line
 	const disabledDate = (current) => {
 		// Can not select days before today and today
 		return current <= moment() - 2;
@@ -462,11 +464,13 @@ const AdminDashboard = () => {
 						className='inputFields'
 						onChange={(date) => {
 							setClickedButton("DatePicker");
+							window.scrollTo({ top: 0, behavior: "smooth" });
 							setSelectedDate(
 								new Date(date._d).toLocaleDateString() || date._d,
 							);
+							window.scrollTo({ top: 0, behavior: "smooth" });
 						}}
-						disabledDate={disabledDate}
+						// disabledDate={disabledDate}
 						max
 						size='small'
 						// showToday={true}
