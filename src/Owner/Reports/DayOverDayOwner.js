@@ -337,6 +337,74 @@ const DayOverDayOwner = () => {
 	// 	],
 	// };
 
+	var sourceBreakdown = HistBookings.map((i) => {
+		return {
+			semiColonVsKhan: i.reservationBelongsTo
+				? i.reservationBelongsTo
+				: "Semi Colon and Infinite-Apps",
+			totalAmount: i.totalAmount,
+		};
+	});
+
+	var overAllreservationBelongsToSummary = [];
+	sourceBreakdown &&
+		sourceBreakdown.reduce(function (res, value) {
+			if (!res[value.semiColonVsKhan]) {
+				res[value.semiColonVsKhan] = {
+					semiColonVsKhan: value.semiColonVsKhan,
+					totalAmount: 0,
+				};
+				overAllreservationBelongsToSummary.push(res[value.semiColonVsKhan]);
+			}
+			res[value.semiColonVsKhan].totalAmount += Number(value.totalAmount);
+			return res;
+		}, {});
+
+	// console.log(sourceBreakdown, "overAllreservationBelongsToSummary");
+
+	var chartDatareservationBelongsToSummary = {
+		options: {
+			chart: {
+				id: "line",
+			},
+
+			dataLabels: {
+				enabled: true,
+				enabledOnSeries: undefined,
+				formatter: function (val, opts) {
+					return val;
+				},
+			},
+
+			title: {
+				text: "ملخص منتجع خان خديجة 'محجوز من قبل الشركة' بالمبلغ الإجمالي (جنيهاً مصرياً)",
+				align: "center",
+				margin: 10,
+				offsetX: 0,
+				offsetY: 0,
+				floating: false,
+				style: {
+					fontSize: "17px",
+					fontWeight: "bold",
+					// fontFamily: undefined,
+					color: "purple",
+				},
+			},
+			xaxis: {
+				name: "Semi Colon Vs Khan Khadija",
+				categories: overAllreservationBelongsToSummary.map((i) =>
+					i.semiColonVsKhan.toUpperCase(),
+				),
+			},
+		},
+		series: [
+			{
+				name: "إجمالي المبلغ المدفوع",
+				data: overAllreservationBelongsToSummary.map((i) => i.totalAmount),
+			},
+		],
+	};
+
 	// Score Card
 
 	const overallReservations = HistBookings && HistBookings.length;
@@ -522,7 +590,10 @@ const DayOverDayOwner = () => {
 							</div>
 						</div>
 					</ExecutiveSummaryWrapper>
-					<div className='mx-auto text-center' style={{ height: "50%" }}>
+					<div
+						className='mx-auto text-center'
+						style={{ height: "50%" }}
+						dir='ltr'>
 						<Chart
 							options={chartDataTotalAmount.options}
 							series={chartDataTotalAmount.series}
@@ -530,7 +601,10 @@ const DayOverDayOwner = () => {
 							width='90%'
 						/>
 					</div>
-					<div className='mx-auto my-3 text-center' style={{ height: "50%" }}>
+					<div
+						className='mx-auto my-3 text-center'
+						style={{ height: "50%" }}
+						dir='ltr'>
 						<Chart
 							options={chartDataHeadCount.options}
 							series={chartDataHeadCount.series}
@@ -538,10 +612,25 @@ const DayOverDayOwner = () => {
 							width='90%'
 						/>
 					</div>
-					<div className='mx-auto my-3 text-center' style={{ height: "50%" }}>
+					<div
+						className='mx-auto my-3 text-center'
+						dir='ltr'
+						style={{ height: "80%" }}>
 						<Chart
 							options={chartDataTicketsSummary.options}
 							series={chartDataTicketsSummary.series}
+							type='bar'
+							width='90%'
+						/>
+					</div>
+
+					<div
+						className='mx-auto my-3 text-center'
+						style={{ height: "50%" }}
+						dir='ltr'>
+						<Chart
+							options={chartDatareservationBelongsToSummary.options}
+							series={chartDatareservationBelongsToSummary.series}
 							type='bar'
 							width='90%'
 						/>
