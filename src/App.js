@@ -68,6 +68,7 @@ import BusStationDashboard2 from "./BusAccount/BusStationDashboard2";
 import BusStationDashboard3 from "./Clerk/BusStationDashboard3";
 import KitchenRoute from "./auth/KitchenRoute";
 import KitchenDashboard2 from "./KitchenAccount/KitchenDashboard";
+import BusStationDashboard4 from "./Owner/BusStationDashboard2";
 
 const App = () => {
 	const [click, setClick] = useState(false);
@@ -350,6 +351,11 @@ const App = () => {
 
 				<OwnerRoute path='/owner/dashboard' exact component={OwnerDashboard} />
 				<OwnerRoute path='/owner/reports' exact component={DayOverDayOwner} />
+				<OwnerRoute
+					path='/owner/bus-station'
+					exact
+					component={BusStationDashboard4}
+				/>
 
 				<BusRoute
 					path='/bus-station/dashboard'

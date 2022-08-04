@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
 import { Button } from "antd";
-import { getPreviousBookingsOwner } from "./OwnerAPI";
+import { getPreviousBookingsOwner, getStatusValues } from "./OwnerAPI";
 import ExecutiveSummary from "./ExecutiveSummary";
 import { DatePicker } from "antd";
 import moment from "moment";
@@ -31,8 +31,10 @@ const AdminDashboard = () => {
 	const [HistBookings, setHistBookings] = useState([]);
 	// eslint-disable-next-line
 	const [excelDataSet, setExcelDataSet] = useState([]);
+	// eslint-disable-next-line
+	const [statusValues, setStatusValues] = useState([]);
 	const [q, setQ] = useState("");
-	const [clickedButton, setClickedButton] = useState("Select All");
+	const [clickedButton, setClickedButton] = useState("Today");
 	const [selectedDate, setSelectedDate] = useState(
 		new Date().toLocaleString("en-US", {
 			timeZone: "Africa/Cairo",
@@ -183,15 +185,36 @@ const AdminDashboard = () => {
 								),
 
 								ScheduleDate: new Date(data.scheduledDate).toDateString(),
-								Receipt: data.phoneNumber,
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
 								BookingSource: data.bookedFrom,
 								PackagePrice: data.chosenServiceDetails.servicePrice,
 								PackagePrice_Discount:
 									data.chosenServiceDetails.servicePriceDiscount,
-								Status: data.status,
 								totalAmount: data.totalAmount,
+								reservationBelongsTo: data.reservationBelongsTo,
+								appointmentComment: data.appointmentComment,
+								BreakfastMeals:
+									data.chosenServiceDetails.breakfast ||
+									data.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: data.chosenServiceDetails.serviceName ===
+										  "group reservation"
+										? data.option1Count
+										: 0,
+
+								LunchMeals:
+									data.chosenServiceDetails.lunch ||
+									data.chosenServiceDetails.serviceName === "kings ticket" ||
+									data.chosenServiceDetails.serviceName === "group reservation"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: 0,
+								BusSeats:
+									data.busSeatsCount && data.busSeatsCount > 0
+										? data.busSeatsCount
+										: data.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(data.quantity) + Number(data.quantity_Children),
 							};
 						}),
 					);
@@ -224,15 +247,39 @@ const AdminDashboard = () => {
 									),
 
 									ScheduleDate: new Date(data.scheduledDate).toDateString(),
-									Receipt: data.phoneNumber,
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
 									BookingSource: data.bookedFrom,
 									PackagePrice: data.chosenServiceDetails.servicePrice,
 									PackagePrice_Discount:
 										data.chosenServiceDetails.servicePriceDiscount,
-									Status: data.status,
 									totalAmount: data.totalAmount,
+									reservationBelongsTo: data.reservationBelongsTo,
+									appointmentComment: data.appointmentComment,
+									BreakfastMeals:
+										data.chosenServiceDetails.breakfast ||
+										data.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: data.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? data.option1Count
+											: 0,
+
+									LunchMeals:
+										data.chosenServiceDetails.lunch ||
+										data.chosenServiceDetails.serviceName === "kings ticket" ||
+										data.chosenServiceDetails.serviceName ===
+											"group reservation"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: 0,
+									busLocation: data.chosenBusStation.address,
+
+									BusSeats:
+										data.busSeatsCount && data.busSeatsCount > 0
+											? data.busSeatsCount
+											: data.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(data.quantity) + Number(data.quantity_Children),
 								};
 							}),
 					);
@@ -265,15 +312,39 @@ const AdminDashboard = () => {
 									),
 
 									ScheduleDate: new Date(data.scheduledDate).toDateString(),
-									Receipt: data.phoneNumber,
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
 									BookingSource: data.bookedFrom,
 									PackagePrice: data.chosenServiceDetails.servicePrice,
 									PackagePrice_Discount:
 										data.chosenServiceDetails.servicePriceDiscount,
-									Status: data.status,
 									totalAmount: data.totalAmount,
+									reservationBelongsTo: data.reservationBelongsTo,
+									appointmentComment: data.appointmentComment,
+									BreakfastMeals:
+										data.chosenServiceDetails.breakfast ||
+										data.chosenServiceDetails.serviceName === "kings ticket"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: data.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? data.option1Count
+											: 0,
+
+									LunchMeals:
+										data.chosenServiceDetails.lunch ||
+										data.chosenServiceDetails.serviceName === "kings ticket" ||
+										data.chosenServiceDetails.serviceName ===
+											"group reservation"
+											? Number(data.quantity) + Number(data.quantity_Children)
+											: 0,
+									busLocation: data.chosenBusStation.address,
+
+									BusSeats:
+										data.busSeatsCount && data.busSeatsCount > 0
+											? data.busSeatsCount
+											: data.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(data.quantity) + Number(data.quantity_Children),
 								};
 							}),
 					);
@@ -294,15 +365,37 @@ const AdminDashboard = () => {
 								),
 
 								ScheduleDate: new Date(data.scheduledDate).toDateString(),
-								Receipt: data.phoneNumber,
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
 								BookingSource: data.bookedFrom,
 								PackagePrice: data.chosenServiceDetails.servicePrice,
 								PackagePrice_Discount:
 									data.chosenServiceDetails.servicePriceDiscount,
-								Status: data.status,
 								totalAmount: data.totalAmount,
+								reservationBelongsTo: data.reservationBelongsTo,
+								appointmentComment: data.appointmentComment,
+								BreakfastMeals:
+									data.chosenServiceDetails.breakfast ||
+									data.chosenServiceDetails.serviceName === "kings ticket"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: data.chosenServiceDetails.serviceName ===
+										  "group reservation"
+										? data.option1Count
+										: 0,
+
+								LunchMeals:
+									data.chosenServiceDetails.lunch ||
+									data.chosenServiceDetails.serviceName === "kings ticket" ||
+									data.chosenServiceDetails.serviceName === "group reservation"
+										? Number(data.quantity) + Number(data.quantity_Children)
+										: 0,
+								busLocation: data.chosenBusStation.address,
+								BusSeats:
+									data.busSeatsCount && data.busSeatsCount > 0
+										? data.busSeatsCount
+										: data.chosenBusStation.address === "NO BUS NEEDED"
+										? 0
+										: Number(data.quantity) + Number(data.quantity_Children),
 							};
 						}),
 					);
@@ -315,7 +408,18 @@ const AdminDashboard = () => {
 
 	// console.log(excelDataSet, "excelDataSet");
 
+	const loadStatusValues = () => {
+		getStatusValues(user._id, token).then((data) => {
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setStatusValues(data);
+			}
+		});
+	};
+
 	useEffect(() => {
+		loadStatusValues();
 		loadHistReservations();
 
 		// eslint-disable-next-line
@@ -330,7 +434,10 @@ const AdminDashboard = () => {
 				datesYaba.toString().toLowerCase().indexOf(q) > -1 ||
 				row._id.substring(0, 10).toString().toLowerCase().indexOf(q) > -1 ||
 				row.scheduledByUserEmail.toString().toLowerCase().indexOf(q) > -1 ||
+				row.reservationBelongsTo.toString().toLowerCase().indexOf(q) > -1 ||
+				row.bookedFrom.toString().toLowerCase().indexOf(q) > -1 ||
 				row.status.toString().toLowerCase().indexOf(q) > -1 ||
+				row.chosenBusStation.address.indexOf(q) > -1 ||
 				row.phoneNumber.toString().toLowerCase().indexOf(q) > -1 ||
 				row.chosenServiceDetails.serviceName
 					.toString()
@@ -352,14 +459,14 @@ const AdminDashboard = () => {
 							color: "black",
 							borderRadius: "20px",
 						}}>
-						Search
+						البحث
 					</label>
 					<input
 						className='p-2 my-5 '
 						type='text'
 						value={q}
 						onChange={(e) => setQ(e.target.value.toLowerCase())}
-						placeholder='Search By Client Phone, Client Name, Package Name'
+						placeholder='البحث عن طريق هاتف العميل واسم العميل واسم التذكرة'
 						style={{ borderRadius: "20px", width: "50%" }}
 					/>
 				</div>
@@ -372,21 +479,23 @@ const AdminDashboard = () => {
 							<th scope='col'>
 								<span className=''>#</span>{" "}
 							</th>
-							<th scope='col'>Full Name</th>
-							<th scope='col'>Phone Number</th>
-							<th scope='col'>Client Email</th>
-							<th scope='col'>Tickets Count (Adults)</th>
-							<th scope='col'>Tickets Count (Children)</th>
-							<th scope='col'>Booked On</th>
-							<th scope='col'>Schedule Date</th>
-							<th scope='col'>Receipt #</th>
-							<th scope='col'>Event/Ocassion</th>
-							<th scope='col'>Chosen Package</th>
-							<th scope='col'>Booking Source</th>
-							<th scope='col'>Package Price (L.E.)</th>
-							<th scope='col'>Package Price Discount (L.E.)</th>
-							<th scope='col'>Before Discount (L.E.)</th>
-							<th scope='col'>Total Amount (L.E.)</th>
+							<th scope='col'>الاسم الكامل</th>
+							<th scope='col'>رقم الهاتف</th>
+							<th scope='col'>البريد الإلكتروني للعميل</th>
+							<th scope='col'>عدد التذاكر (الكبار)</th>
+							<th scope='col'>عدد التذاكر (للأطفال)</th>
+							<th scope='col'>حجزت في التاريخ</th>
+							<th scope='col'>تاريخ وصول العميل</th>
+							<th scope='col'>الحدث / المناسبة</th>
+							<th scope='col'>التذكرة</th>
+							<th scope='col'>مصدر الحجز</th>
+							<th scope='col'>إجمالي الوجبات (الإفطار)</th>
+							<th scope='col'>إجمالي الوجبات (وجبات الغداء)</th>
+							<th scope='col'>موقع الحافلة</th>
+							<th scope='col'>مقاعد الحافلات المحجوزة</th>
+							<th scope='col'>قبل الخصم (بالجنية)</th>
+							<th scope='col'>المبلغ الإجمالي (جنيه)</th>
+							<th scope='col'>الحجز يعود إلى</th>
 						</tr>
 					</thead>
 
@@ -432,7 +541,7 @@ const AdminDashboard = () => {
 									</td>
 									<td>+{s.phoneNumber}</td>
 
-									<td>{s.scheduledByUserEmail}</td>
+									<td style={{ width: "10px" }}>{s.scheduledByUserEmail}</td>
 									<td style={{ width: "10px" }}>{s.quantity}</td>
 									<td style={{ width: "10px" }}>{s.quantity_Children}</td>
 									<td>
@@ -442,17 +551,6 @@ const AdminDashboard = () => {
 											}),
 										)}
 									</td>
-									{/* <td>
-										{new Date(s.scheduledDate).toLocaleDateString() !==
-										"Invalid Date"
-											? dateFormat(new Date(s.scheduledDate).toLocaleString())
-											: dateFormat(
-													new Date(s.createdAt).toLocaleString("en-US", {
-														timeZone: "Africa/Cairo",
-													}),
-											  )}{" "}
-										<br />
-									</td> */}
 
 									<td>
 										{new Date(s.scheduledDate).toLocaleString() !==
@@ -465,15 +563,38 @@ const AdminDashboard = () => {
 											: s.scheduledDate}{" "}
 										<br />
 									</td>
-									<td>+{s.phoneNumber}</td>
 									<td>{s.event}</td>
 									<td>{s.chosenServiceDetails.serviceName}</td>
 									<td style={{ width: "15px" }}>{s.bookedFrom}</td>
+
 									<td style={{ width: "15px" }}>
-										{s.chosenServiceDetails.servicePrice}
+										{(s.chosenServiceDetails.breakfast ||
+											s.chosenServiceDetails.serviceName === "kings ticket") &&
+										s.chosenServiceDetails.serviceName !== "happiness ticket"
+											? Number(s.quantity) + Number(s.quantity_Children)
+											: s.chosenServiceDetails.serviceName ===
+											  "group reservation"
+											? s.option1Count
+											: 0}
+									</td>
+
+									<td style={{ width: "15px" }}>
+										{s.chosenServiceDetails.lunch ||
+										s.chosenServiceDetails.serviceName === "kings ticket" ||
+										s.chosenServiceDetails.serviceName === "happiness ticket" ||
+										s.chosenServiceDetails.serviceName === "group reservation"
+											? Number(s.quantity) + Number(s.quantity_Children)
+											: 0}
 									</td>
 									<td style={{ width: "15px" }}>
-										{s.chosenServiceDetails.servicePriceDiscount}
+										{s.chosenBusStation.address}
+									</td>
+									<td style={{ width: "15px" }}>
+										{s.busSeatsCount && s.busSeatsCount > 0
+											? s.busSeatsCount
+											: s.chosenBusStation.address === "NO BUS NEEDED"
+											? 0
+											: Number(s.quantity) + Number(s.quantity_Children)}
 									</td>
 									<td style={{ width: "15px" }}>
 										{s.totalAmountBeforeDiscount}
@@ -488,9 +609,12 @@ const AdminDashboard = () => {
 													? "#871402"
 													: "var(--mainBlue)",
 											color: "white",
+											width: "15px",
 										}}>
 										{s.totalAmount}
 									</td>
+
+									<td style={{ width: "10px" }}>{s.reservationBelongsTo}</td>
 								</tr>
 							);
 						})}
@@ -549,7 +673,6 @@ const AdminDashboard = () => {
 					/>
 					<ExcelColumn label='Booked On' value='BookedOn' />
 					<ExcelColumn label='Event Date' value='ScheduleDate' />
-					<ExcelColumn label='Receipt' value='Receipt' />
 					<ExcelColumn label='Event/Ocassion' value='Event' />
 					<ExcelColumn label='Chosen Package' value='ChosenPackage' />
 					<ExcelColumn label='Booking Source' value='BookingSource' />
@@ -558,8 +681,17 @@ const AdminDashboard = () => {
 						label='Price After Discount'
 						value='PackagePrice_Discount'
 					/>
-					<ExcelColumn label='Status' value='Status' />
 					<ExcelColumn label='Total Amount' value='totalAmount' />
+					<ExcelColumn
+						label='Reservation Belongs To'
+						value='reservationBelongsTo'
+					/>
+
+					<ExcelColumn label='Reservation Comment' value='appointmentComment' />
+					<ExcelColumn label='Breakfast' value='BreakfastMeals' />
+					<ExcelColumn label='Lunch' value='LunchMeals' />
+					<ExcelColumn label='Bus Location' value='busLocation' />
+					<ExcelColumn label='Bus Seats' value='BusSeats' />
 				</ExcelSheet>
 			</ExcelFile>
 		);
@@ -582,7 +714,7 @@ const AdminDashboard = () => {
 	// };
 
 	return (
-		<AdminDashboardWrapper>
+		<AdminDashboardWrapper dir='rtl'>
 			{click2 && clickMenu2 ? (
 				<DarkBG setClick2={setClick2} setClickMenu2={setClickMenu2} />
 			) : null}
@@ -610,7 +742,6 @@ const AdminDashboard = () => {
 				<React.Fragment>
 					<div className='mx-auto text-center mt-3 mb-5'>
 						<span
-							dir='rtl'
 							style={{
 								fontSize: "1.3rem",
 								fontWeight: "bold",
@@ -618,7 +749,7 @@ const AdminDashboard = () => {
 								marginLeft: "10px",
 								color: "var(--mainBlue)",
 							}}>
-							التاريخ المقرر:
+							تاريخ الوصول:
 						</span>
 						<br />
 						<button
@@ -632,7 +763,7 @@ const AdminDashboard = () => {
 								border: "none",
 							}}
 							className='ml-1 p-2 mt-3'>
-							Select All
+							اختر الكل
 						</button>
 						<button
 							onClick={() => {
@@ -645,7 +776,7 @@ const AdminDashboard = () => {
 								border: "none",
 							}}
 							className='ml-1 p-2 '>
-							Today
+							اليوم
 						</button>
 						<button
 							onClick={() => {
@@ -658,7 +789,7 @@ const AdminDashboard = () => {
 								border: "none",
 							}}
 							className='ml-1 p-2'>
-							Tomorrow
+							الغد
 						</button>
 						<button
 							onClick={() => {
@@ -671,7 +802,7 @@ const AdminDashboard = () => {
 								border: "none",
 							}}
 							className='ml-1 p-2'>
-							Yesterday
+							الامس
 						</button>
 						<button
 							onClick={() => {
@@ -684,7 +815,7 @@ const AdminDashboard = () => {
 								border: "none",
 							}}
 							className='ml-1 p-2'>
-							This Week
+							هذا الاسبوع
 						</button>
 						<button
 							onClick={() => {
@@ -697,7 +828,7 @@ const AdminDashboard = () => {
 								border: "none",
 							}}
 							className='ml-1 p-2'>
-							This Month
+							هذا الشهر
 						</button>
 						<DatePicker
 							className='inputFields'

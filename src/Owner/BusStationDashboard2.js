@@ -3,10 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Adminsidebar from "./AdminSideBar/Adminsidebar";
+import DarkBG from "./AdminSideBar/DarkBG";
 import { isAuthenticated } from "../auth";
-import { getPreviousBookingsBusStation } from "./BusAPI";
+import { getPreviousBookingsOwner } from "./OwnerAPI";
 
-const BusStationDashboard2 = () => {
+const BusStationDashboard4 = () => {
+	const [click2, setClick2] = useState(false);
+	const [clickMenu2, setClickMenu2] = useState(false);
 	// eslint-disable-next-line
 	const [loading, setLoading] = useState(true);
 	const [HistBookings, setHistBookings] = useState([]);
@@ -37,6 +41,10 @@ const BusStationDashboard2 = () => {
 
 	const { user, token } = isAuthenticated();
 
+	useEffect(() => {
+		setClickMenu2(click2);
+	}, [click2, clickMenu2]);
+
 	const loadHistReservations = () => {
 		function compareTotalAppointments(a, b) {
 			const TotalAppointmentsA = new Date(a.scheduledDate).setHours(0, 0, 0, 0);
@@ -51,7 +59,7 @@ const BusStationDashboard2 = () => {
 		}
 
 		setLoading(true);
-		getPreviousBookingsBusStation(user._id, token).then((data) => {
+		getPreviousBookingsOwner(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -137,6 +145,17 @@ const BusStationDashboard2 = () => {
 
 	return (
 		<BusStationDashboardWrapper dir='rtl'>
+			{click2 && clickMenu2 ? (
+				<DarkBG setClick2={setClick2} setClickMenu2={setClickMenu2} />
+			) : null}
+			<div className='mx-auto'>
+				<Adminsidebar
+					click2={click2}
+					setClick2={setClick2}
+					clickMenu2={clickMenu2}
+					setClickMenu2={setClickMenu2}
+				/>
+			</div>
 			{loading ? (
 				<div style={{ textAlign: "center", fontSize: "20px" }}>Loading</div>
 			) : (
@@ -271,7 +290,7 @@ const BusStationDashboard2 = () => {
 	);
 };
 
-export default BusStationDashboard2;
+export default BusStationDashboard4;
 
 const BusStationDashboardWrapper = styled.div`
 	min-height: 700px;

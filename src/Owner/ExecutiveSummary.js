@@ -28,6 +28,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 		historicalBooking &&
 		historicalBooking.filter((i) => i.status !== "Cancelled");
 
+	// eslint-disable-next-line
 	const scheduledDatesArray =
 		nonCancelledReservation &&
 		nonCancelledReservation
@@ -56,6 +57,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 	const TotalOverAllTickets =
 		Number(overallChildrenCount) + Number(overallAdultCount);
 
+	// eslint-disable-next-line
 	const dateFormat = (x) => {
 		var requiredDate = new Date(x);
 		var yyyy = requiredDate.getFullYear();
@@ -67,6 +69,128 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 
 		return (requiredDate = dd + "/" + mm + "/" + yyyy);
 	};
+
+	//Meals
+
+	var LunchMealsAdults =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			i.chosenServiceDetails.lunch ||
+			i.chosenServiceDetails.serviceName === "kings ticket" ||
+			i.chosenServiceDetails.serviceName === "happiness ticket" ||
+			i.chosenServiceDetails.serviceName === "group reservation"
+				? Number(i.quantity)
+				: 0,
+		);
+	const lunchMealsAdultsTotal = LunchMealsAdults.reduce((a, b) => a + b, 0);
+
+	var LunchMealsChildren =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			i.chosenServiceDetails.lunch ||
+			i.chosenServiceDetails.serviceName === "kings ticket" ||
+			i.chosenServiceDetails.serviceName === "happiness ticket" ||
+			i.chosenServiceDetails.serviceName === "group reservation"
+				? Number(i.quantity_Children)
+				: 0,
+		);
+
+	const lunchMealsChildrenTotal = LunchMealsChildren.reduce((a, b) => a + b, 0);
+
+	var BreakfastMealsAdults =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			(i.chosenServiceDetails.breakfast ||
+				i.chosenServiceDetails.serviceName === "kings ticket") &&
+			i.chosenServiceDetails.serviceName !== "happiness ticket"
+				? Number(i.quantity)
+				: 0,
+		);
+	const BreakfastMealsAdultsTotal = BreakfastMealsAdults.reduce(
+		(a, b) => a + b,
+		0,
+	);
+
+	var BreakfastMealsChildren =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			(i.chosenServiceDetails.breakfast ||
+				i.chosenServiceDetails.serviceName === "kings ticket") &&
+			i.chosenServiceDetails.serviceName !== "happiness ticket"
+				? Number(i.quantity_Children)
+				: 0,
+		);
+
+	const BreakfastMealsChildrenTotal = BreakfastMealsChildren.reduce(
+		(a, b) => a + b,
+		0,
+	);
+
+	var BreakfastMealGroupReservation =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			i.chosenServiceDetails.serviceName === "group reservation"
+				? Number(i.option1Count)
+				: 0,
+		);
+
+	const BreakfastMealGroupReservationTotal =
+		BreakfastMealGroupReservation.reduce((a, b) => a + b, 0);
+
+	var BusSeats =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			i.busSeatsCount && i.busSeatsCount > 0
+				? i.busSeatsCount
+				: i.chosenBusStation.address === "NO BUS NEEDED"
+				? 0
+				: Number(i.quantity) + Number(i.quantity_Children),
+		);
+
+	// eslint-disable-next-line
+	const BusSeatsTotal = BusSeats.reduce((a, b) => a + b, 0);
+	// eslint-disable-next-line
+	const allMealsCombined =
+		Number(lunchMealsAdultsTotal) +
+		Number(lunchMealsChildrenTotal) +
+		Number(BreakfastMealsAdultsTotal) +
+		Number(BreakfastMealsChildrenTotal) +
+		Number(BreakfastMealGroupReservationTotal);
+
+	var servicesOnlyArray =
+		nonCancelledReservation &&
+		nonCancelledReservation.map((i) =>
+			i.chosenServiceDetails.serviceName === "services only"
+				? Number(i.quantity_Children) + Number(i.quantity)
+				: 0,
+		);
+
+	const servicesOnlyArrayTotal = servicesOnlyArray.reduce((a, b) => a + b, 0);
+	var busStationBreakDown = [];
+
+	nonCancelledReservation &&
+		nonCancelledReservation.reduce(function (res, value) {
+			if (!res[value.chosenBusStation.address]) {
+				res[value.chosenBusStation.address] = {
+					chosenBusStation: value.chosenBusStation.address,
+					busSeatsCount: 0,
+				};
+
+				busStationBreakDown.push(res[value.chosenBusStation.address]);
+			}
+
+			value.busSeatsCount &&
+			value.busSeatsCount > 0 &&
+			value.chosenBusStation.address !== "NO BUS NEEDED"
+				? (res[value.chosenBusStation.address].busSeatsCount += Number(
+						value.busSeatsCount,
+				  ))
+				: value.chosenBusStation.address === "NO BUS NEEDED"
+				? (res[value.chosenBusStation.address].busSeatsCount += 0)
+				: (res[value.chosenBusStation.address].busSeatsCount +=
+						Number(value.quantity_Children) + Number(value.quantity));
+			return res;
+		}, {});
 
 	// console.log(overallAdultsArray, "OverallAdultCount");
 	// console.log(overallAdultsArray.reduce((a, b) => a + b, 0));
@@ -80,10 +204,10 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 
 	return (
 		<ExecutiveSummaryWrapper dir='rtl'>
-			<div className='container'>
-				{clickedButton.includes("Booking") ? null : (
+			<div className='container' dir='rtl'>
+				{/* {clickedButton.includes("Booking") ? null : (
 					<h4>
-						التاريخ المحدد: من{" "}
+						التاريخ المحدد:{" "}
 						{dateFormat(
 							new Date(
 								scheduledDatesArray[scheduledDatesArray.length - 1],
@@ -91,13 +215,13 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 						)}{" "}
 						إلى {dateFormat(new Date(scheduledDatesArray[0]).toLocaleString())}
 					</h4>
-				)}
+				)} */}
 
 				<div className='row text-center'>
 					<div className='col-md-3 text-center mx-auto'>
 						<div className='card' style={{ background: "var(--babyBlue)" }}>
 							<div className='card-body'>
-								<h5>الحجوزات </h5>
+								<h5>إجمالي الحجوزات</h5>
 								<CountUp duration='2' delay={0.5} end={overallReservations} />
 							</div>
 						</div>
@@ -145,7 +269,7 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 					<div className='col-md-5 text-center mx-auto mt-3'>
 						<div className='card' style={{ background: "var(--mainBlue)" }}>
 							<div className='card-body totalAmount' style={{ color: "white" }}>
-								<h5> المبلغ الإجمالي (جنيه)</h5>
+								<h5> المبلغ الإجمالي (جنيه مصري)</h5>
 								<CountUp
 									duration='4.5'
 									delay={0.5}
@@ -156,7 +280,150 @@ const ExecutiveSummary = ({ historicalBooking, clickedButton }) => {
 							</div>
 						</div>
 					</div>
+					<br />
+					<br />
+					<div className='col-md-10 mx-auto'>
+						<h4 className='mt-5 mx-auto'>توزيع الوجبات</h4>
+					</div>
+
+					<div className='col-md-4 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5>الإفطار للبالغين</h5>
+								<CountUp
+									duration='2'
+									delay={0.5}
+									end={BreakfastMealsAdultsTotal}
+								/>
+							</div>
+						</div>
+					</div>
+					<div className='col-md-4 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5>إفطار الأطفال</h5>
+								<CountUp
+									duration='2.5'
+									delay={0.5}
+									end={BreakfastMealsChildrenTotal}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className='col-md-4 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5> حجز المجموعات</h5>
+								<CountUp
+									duration='3.5'
+									delay={0.5}
+									end={BreakfastMealGroupReservationTotal}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className='col-md-8 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5>إجمالي وجبات الإفطار</h5>
+								<CountUp
+									duration='2.5'
+									delay={0.5}
+									end={
+										Number(BreakfastMealsChildrenTotal) +
+										Number(BreakfastMealGroupReservationTotal) +
+										Number(BreakfastMealsAdultsTotal)
+									}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+					<div className='col-md-6 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5>غداء الكبار</h5>
+								<CountUp
+									duration='3'
+									delay={0.5}
+									end={lunchMealsAdultsTotal}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+					<div className='col-md-6 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5> غداء الأطفال</h5>
+								<CountUp
+									duration='3.5'
+									delay={0.5}
+									end={lunchMealsChildrenTotal}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className='col-md-8 text-center mx-auto mt-3'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5> إجمالي وجبات الغداء</h5>
+								<CountUp
+									duration='3.5'
+									delay={0.5}
+									end={
+										Number(lunchMealsAdultsTotal) +
+										Number(lunchMealsChildrenTotal)
+									}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
+					<div className='col-md-5 text-center mx-auto mt-5'>
+						<div className='card' style={{ background: "var(--babyBlue)" }}>
+							<div className='card-body'>
+								<h5> الخدمات فقط</h5>
+								<CountUp
+									duration='3.5'
+									delay={0.5}
+									end={servicesOnlyArrayTotal}
+									separator=','
+								/>
+							</div>
+						</div>
+					</div>
 				</div>
+				<div className='col-md-10 mx-auto'>
+					<h4 className='mt-5 mx-auto'>توزيع محطات الحافلات</h4>
+				</div>
+				<table
+					className='table table-bordered table-md-responsive table-hover table-striped'
+					style={{ fontSize: "0.75rem" }}>
+					<thead className='thead-light text-center'>
+						<tr>
+							<th scope='col'>موقع</th>
+							<th scope='col'>مقاعد محجوزة</th>
+						</tr>
+					</thead>
+					<tbody>
+						{busStationBreakDown &&
+							busStationBreakDown.map((i, b) => {
+								return (
+									<tr key={b}>
+										<td>{i.chosenBusStation}</td>
+										<td>{i.busSeatsCount}</td>
+									</tr>
+								);
+							})}
+					</tbody>
+				</table>
 			</div>
 		</ExecutiveSummaryWrapper>
 	);

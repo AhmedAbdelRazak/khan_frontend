@@ -252,7 +252,7 @@ const BusStationDashboard = () => {
 												{s.fullName}
 											</Link>{" "}
 										</td>
-										<td>+{s.phoneNumber}</td>
+										<td>{s.phoneNumber}</td>
 
 										<td
 										// style={{ width: "10px" }}
