@@ -75,6 +75,19 @@ const AdminDashboard = () => {
 			}
 			return comparison;
 		}
+
+		function compareTotalAppointmentsByName(a, b) {
+			const TotalAppointmentsA = a.fullName;
+			const TotalAppointmentsB = b.fullName;
+			let comparison = 0;
+			if (TotalAppointmentsA < TotalAppointmentsB) {
+				comparison = 1;
+			} else if (TotalAppointmentsA > TotalAppointmentsB) {
+				comparison = -1;
+			}
+			return comparison;
+		}
+
 		setLoading(true);
 		getPreviousBookingsEmployee(user._id, token).then((data) => {
 			if (data.error) {
@@ -105,7 +118,7 @@ const AdminDashboard = () => {
 									new Date(i.createdAt).setHours(0, 0, 0, 0) ===
 									new Date(selectedDate).setHours(0, 0, 0, 0),
 							)
-							.sort(compareTotalAppointments),
+							.sort(compareTotalAppointmentsByName),
 					);
 				} else if (
 					clickedButton === "This Week" ||
