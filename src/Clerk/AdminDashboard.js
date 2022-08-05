@@ -97,6 +97,16 @@ const AdminDashboard = () => {
 							)
 							.sort(compareTotalAppointments),
 					);
+				} else if (clickedButton === "DatePickerBookingDate") {
+					setHistBookings(
+						data
+							.filter(
+								(i) =>
+									new Date(i.createdAt).setHours(0, 0, 0, 0) ===
+									new Date(selectedDate).setHours(0, 0, 0, 0),
+							)
+							.sort(compareTotalAppointments),
+					);
 				} else if (
 					clickedButton === "This Week" ||
 					clickedButton === "This Month"
@@ -456,7 +466,7 @@ const AdminDashboard = () => {
 							marginLeft: "10px",
 							color: "var(--mainBlue)",
 						}}>
-						Filters:
+						Filters (Schedule Date):
 					</span>
 					<br />
 
@@ -464,6 +474,45 @@ const AdminDashboard = () => {
 						className='inputFields'
 						onChange={(date) => {
 							setClickedButton("DatePicker");
+							window.scrollTo({ top: 0, behavior: "smooth" });
+							setSelectedDate(
+								new Date(date._d).toLocaleDateString() || date._d,
+							);
+							window.scrollTo({ top: 0, behavior: "smooth" });
+						}}
+						// disabledDate={disabledDate}
+						max
+						size='small'
+						// showToday={true}
+						defaultValue={moment(new Date(selectedDate))}
+						placeholder='Please pick the desired schedule date'
+						style={{
+							height: "auto",
+							width: "50%",
+							marginLeft: "5px",
+							padding: "10px",
+							// boxShadow: "2px 2px 2px 2px rgb(0,0,0,0.2)",
+							borderRadius: "10px",
+						}}
+					/>
+				</div>
+				<div className='mx-auto text-center mt-3 mb-5'>
+					<span
+						style={{
+							fontSize: "1.3rem",
+							fontWeight: "bold",
+							marginBottom: "10px",
+							marginLeft: "10px",
+							color: "var(--mainBlue)",
+						}}>
+						Filters (Booking Date):
+					</span>
+					<br />
+
+					<DatePicker
+						className='inputFields'
+						onChange={(date) => {
+							setClickedButton("DatePickerBookingDate");
 							window.scrollTo({ top: 0, behavior: "smooth" });
 							setSelectedDate(
 								new Date(date._d).toLocaleDateString() || date._d,
