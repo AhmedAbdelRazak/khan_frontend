@@ -186,7 +186,7 @@ const AdminDashboard = () => {
 									}),
 								),
 
-								ScheduleDate: new Date(data.scheduledDate).toDateString(),
+								ScheduleDate: new Date(data.scheduledDate).toLocaleDateString(),
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
 								BookingSource: data.bookedFrom,
@@ -275,7 +275,9 @@ const AdminDashboard = () => {
 										}),
 									),
 
-									ScheduleDate: new Date(data.scheduledDate).toDateString(),
+									ScheduleDate: new Date(
+										data.scheduledDate,
+									).toLocaleDateString(),
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
 									BookingSource: data.bookedFrom,
@@ -367,7 +369,9 @@ const AdminDashboard = () => {
 										}),
 									),
 
-									ScheduleDate: new Date(data.scheduledDate).toDateString(),
+									ScheduleDate: new Date(
+										data.scheduledDate,
+									).toLocaleDateString(),
 									Event: data.event,
 									ChosenPackage: data.chosenService_Package,
 									BookingSource: data.bookedFrom,
@@ -447,7 +451,7 @@ const AdminDashboard = () => {
 									}),
 								),
 
-								ScheduleDate: new Date(data.scheduledDate).toDateString(),
+								ScheduleDate: new Date(data.scheduledDate).toLocaleDateString(),
 								Event: data.event,
 								ChosenPackage: data.chosenService_Package,
 								BookingSource: data.bookedFrom,
