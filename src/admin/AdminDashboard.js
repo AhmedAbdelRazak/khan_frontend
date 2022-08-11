@@ -194,7 +194,33 @@ const AdminDashboard = () => {
 								PackagePrice_Discount:
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
-								totalAmount: data.totalAmount,
+								totalAmount_overall:
+									data.status === "Cancelled" ? 0 : data.totalAmount,
+								totalAmount_SemiColon:
+									data.status === "Cancelled"
+										? 0
+										: data.reservationBelongsTo ===
+												"Semi Colon and Infinite-Apps" ||
+										  data.reservationBelongsTo === undefined
+										? data.totalAmount
+										: 0,
+
+								totalAmount_Share:
+									data.status === "Cancelled"
+										? 0
+										: data.reservationBelongsTo ===
+												"Semi Colon and Infinite-Apps" ||
+										  data.reservationBelongsTo === undefined
+										? Number(data.totalAmount) * 0.05
+										: 0,
+
+								totalAmount_Khankhadija:
+									data.status === "Cancelled"
+										? 0
+										: data.reservationBelongsTo === "Khan Khadija" ||
+										  data.reservationBelongsTo === undefined
+										? data.totalAmount
+										: 0,
 								reservationBelongsTo: data.reservationBelongsTo,
 								appointmentComment: data.appointmentComment,
 								BreakfastMeals:
@@ -257,7 +283,33 @@ const AdminDashboard = () => {
 									PackagePrice_Discount:
 										data.chosenServiceDetails.servicePriceDiscount,
 									Status: data.status,
-									totalAmount: data.totalAmount,
+									totalAmount_overall:
+										data.status === "Cancelled" ? 0 : data.totalAmount,
+									totalAmount_SemiColon:
+										data.status === "Cancelled"
+											? 0
+											: data.reservationBelongsTo ===
+													"Semi Colon and Infinite-Apps" ||
+											  data.reservationBelongsTo === undefined
+											? data.totalAmount
+											: 0,
+
+									totalAmount_Share:
+										data.status === "Cancelled"
+											? 0
+											: data.reservationBelongsTo ===
+													"Semi Colon and Infinite-Apps" ||
+											  data.reservationBelongsTo === undefined
+											? Number(data.totalAmount) * 0.05
+											: 0,
+
+									totalAmount_Khankhadija:
+										data.status === "Cancelled"
+											? 0
+											: data.reservationBelongsTo === "Khan Khadija" ||
+											  data.reservationBelongsTo === undefined
+											? data.totalAmount
+											: 0,
 									reservationBelongsTo: data.reservationBelongsTo,
 									appointmentComment: data.appointmentComment,
 									BreakfastMeals:
@@ -323,7 +375,33 @@ const AdminDashboard = () => {
 									PackagePrice_Discount:
 										data.chosenServiceDetails.servicePriceDiscount,
 									Status: data.status,
-									totalAmount: data.totalAmount,
+									totalAmount_overall:
+										data.status === "Cancelled" ? 0 : data.totalAmount,
+									totalAmount_SemiColon:
+										data.status === "Cancelled"
+											? 0
+											: data.reservationBelongsTo ===
+													"Semi Colon and Infinite-Apps" ||
+											  data.reservationBelongsTo === undefined
+											? data.totalAmount
+											: 0,
+
+									totalAmount_Share:
+										data.status === "Cancelled"
+											? 0
+											: data.reservationBelongsTo ===
+													"Semi Colon and Infinite-Apps" ||
+											  data.reservationBelongsTo === undefined
+											? Number(data.totalAmount) * 0.05
+											: 0,
+
+									totalAmount_Khankhadija:
+										data.status === "Cancelled"
+											? 0
+											: data.reservationBelongsTo === "Khan Khadija" ||
+											  data.reservationBelongsTo === undefined
+											? data.totalAmount
+											: 0,
 									reservationBelongsTo: data.reservationBelongsTo,
 									appointmentComment: data.appointmentComment,
 									BreakfastMeals:
@@ -377,7 +455,33 @@ const AdminDashboard = () => {
 								PackagePrice_Discount:
 									data.chosenServiceDetails.servicePriceDiscount,
 								Status: data.status,
-								totalAmount: data.totalAmount,
+								totalAmount_overall:
+									data.status === "Cancelled" ? 0 : data.totalAmount,
+								totalAmount_SemiColon:
+									data.status === "Cancelled"
+										? 0
+										: data.reservationBelongsTo ===
+												"Semi Colon and Infinite-Apps" ||
+										  data.reservationBelongsTo === undefined
+										? data.totalAmount
+										: 0,
+
+								totalAmount_Share:
+									data.status === "Cancelled"
+										? 0
+										: data.reservationBelongsTo ===
+												"Semi Colon and Infinite-Apps" ||
+										  data.reservationBelongsTo === undefined
+										? Number(data.totalAmount) * 0.05
+										: 0,
+
+								totalAmount_Khankhadija:
+									data.status === "Cancelled"
+										? 0
+										: data.reservationBelongsTo === "Khan Khadija" ||
+										  data.reservationBelongsTo === undefined
+										? data.totalAmount
+										: 0,
 								reservationBelongsTo: data.reservationBelongsTo,
 								appointmentComment: data.appointmentComment,
 								BreakfastMeals:
@@ -750,7 +854,21 @@ const AdminDashboard = () => {
 						value='PackagePrice_Discount'
 					/>
 					<ExcelColumn label='Status' value='Status' />
-					<ExcelColumn label='Total Amount' value='totalAmount' />
+					<ExcelColumn
+						label='Total Amount Overall'
+						value='totalAmount_overall'
+					/>
+					<ExcelColumn
+						label='Total Amount Semi Colon'
+						value='totalAmount_SemiColon'
+					/>
+
+					<ExcelColumn label='Semi Colon Share' value='totalAmount_Share' />
+
+					<ExcelColumn
+						label='Total Amount Khan Khadija'
+						value='totalAmount_Khankhadija'
+					/>
 					<ExcelColumn
 						label='Reservation Belongs To'
 						value='reservationBelongsTo'

@@ -102,9 +102,20 @@ const DayOverDay = () => {
 		// eslint-disable-next-line
 	}, [startDate, endDate]);
 
+	var adjustingScheduledDate =
+		HistBookings &&
+		HistBookings.map((i) => {
+			return {
+				...i,
+				scheduledDate: new Date(i.scheduledDate).toLocaleDateString(),
+			};
+		});
+
+	// console.log(adjustingScheduledDate, "adjustingScheduledDate");
+
 	var DayOverDay_ScheduledDate = [];
-	HistBookings &&
-		HistBookings.reduce(function (res, value) {
+	adjustingScheduledDate &&
+		adjustingScheduledDate.reduce(function (res, value) {
 			if (!res[value.scheduledDate]) {
 				res[value.scheduledDate] = {
 					scheduledDate: value.scheduledDate,
@@ -149,9 +160,7 @@ const DayOverDay = () => {
 			xaxis: {
 				name: "Schedule Date",
 				categories: DayOverDay_ScheduledDate.map((i) =>
-					new Date(i.scheduledDate).toLocaleDateString("en-US", {
-						timeZone: "Africa/Cairo",
-					}),
+					new Date(i.scheduledDate).toLocaleDateString(),
 				),
 			},
 		},
@@ -164,8 +173,8 @@ const DayOverDay = () => {
 	};
 
 	var DayOverDay_HeadCount = [];
-	HistBookings &&
-		HistBookings.reduce(function (res, value) {
+	adjustingScheduledDate &&
+		adjustingScheduledDate.reduce(function (res, value) {
 			if (!res[value.scheduledDate]) {
 				res[value.scheduledDate] = {
 					scheduledDate: value.scheduledDate,
