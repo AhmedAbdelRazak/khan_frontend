@@ -12,6 +12,7 @@ import {
 	getTicketsManagement,
 	allLoyaltyPointsAndStoreStatus,
 	createReservation,
+	// eslint-disable-next-line
 	getPreviousBookings,
 	createBeforeReview,
 } from "../../apiCore";
@@ -60,7 +61,9 @@ const BookNow = ({ match }) => {
 	const [chosenCoupon, setChosenCoupon] = useState("");
 	const [totalAmount, setTotalAmount] = useState(0);
 	const [totalAmountBeforeDiscount, setTotalAmountBeforeDiscount] = useState(0);
-	const [HistBookings, setHistBookings] = useState([]);
+	// const [HistBookings, setHistBookings] = useState([]);
+
+	// eslint-disable-next-line
 	const [loading, setLoading] = useState(false);
 	const [
 		alreadySetLoyaltyPointsManagement,
@@ -264,24 +267,24 @@ const BookNow = ({ match }) => {
 		});
 	};
 
-	const loadingHistReservations = () => {
-		setLoading(true);
-		getPreviousBookings().then((data) => {
-			if (data.error) {
-				console.log(data.error);
-			} else {
-				setHistBookings(
-					data.filter(
-						(i) =>
-							new Date(i.scheduledDate).setHours(0, 0, 0, 0) ===
-								new Date(chosenDate).setHours(0, 0, 0, 0) &&
-							i.status !== "Cancelled",
-					),
-				);
-				setLoading(false);
-			}
-		});
-	};
+	// const loadingHistReservations = () => {
+	// 	setLoading(true);
+	// 	getPreviousBookings().then((data) => {
+	// 		if (data.error) {
+	// 			console.log(data.error);
+	// 		} else {
+	// 			setHistBookings(
+	// 				data.filter(
+	// 					(i) =>
+	// 						new Date(i.scheduledDate).setHours(0, 0, 0, 0) ===
+	// 							new Date(chosenDate).setHours(0, 0, 0, 0) &&
+	// 						i.status !== "Cancelled",
+	// 				),
+	// 			);
+	// 			setLoading(false);
+	// 		}
+	// 	});
+	// };
 
 	// console.log(HistBookings, "HistBooking");
 
@@ -303,7 +306,7 @@ const BookNow = ({ match }) => {
 		gettingAllTickets();
 		gettingAllTicketsManagement();
 		gettingPreviousLoyaltyPointsManagement();
-		loadingHistReservations();
+		// loadingHistReservations();
 		loadAllCoupons();
 		loadAllBusStations();
 		// eslint-disable-next-line
@@ -358,28 +361,28 @@ const BookNow = ({ match }) => {
 			new Date(chosenDate._d || chosenDate).toLocaleDateString(),
 		) > -1;
 
-	var availableTickets = () => {
-		//Get Array Of All Sold Tickets
-		const histBookedTickets =
-			HistBookings && HistBookings.map((i) => i.quantity);
-		const histBookedTickets_Children =
-			HistBookings && HistBookings.map((i) => i.quantity_Children);
-		//Get Sum Of All Sold Tickets
-		const sum = histBookedTickets.reduce(add, 0); // with initial value to avoid when the array is empty
-		const sum_Children = histBookedTickets_Children.reduce(add, 0); // with initial value to avoid when the array is empty
-		function add(accumulator, a) {
-			return accumulator + a;
-		}
+	// var availableTickets = () => {
+	// 	//Get Array Of All Sold Tickets
+	// 	const histBookedTickets =
+	// 		HistBookings && HistBookings.map((i) => i.quantity);
+	// 	const histBookedTickets_Children =
+	// 		HistBookings && HistBookings.map((i) => i.quantity_Children);
+	// 	//Get Sum Of All Sold Tickets
+	// 	const sum = histBookedTickets.reduce(add, 0); // with initial value to avoid when the array is empty
+	// 	const sum_Children = histBookedTickets_Children.reduce(add, 0); // with initial value to avoid when the array is empty
+	// 	function add(accumulator, a) {
+	// 		return accumulator + a;
+	// 	}
 
-		// Check Available Stock added by admin
-		const stockInTheChosenDate = ticketsManagement
-			? ticketsManagement.TicketAmount
-			: alreadySetLoyaltyPointsManagement &&
-			  alreadySetLoyaltyPointsManagement.defaultTicketQty;
+	// 	// Check Available Stock added by admin
+	// 	const stockInTheChosenDate = ticketsManagement
+	// 		? ticketsManagement.TicketAmount
+	// 		: alreadySetLoyaltyPointsManagement &&
+	// 		  alreadySetLoyaltyPointsManagement.defaultTicketQty;
 
-		//Return the available tickets in the chosen date
-		return Number(stockInTheChosenDate) - (Number(sum) + Number(sum_Children));
-	};
+	// 	//Return the available tickets in the chosen date
+	// 	return Number(stockInTheChosenDate) - (Number(sum) + Number(sum_Children));
+	// };
 
 	// console.log(ticketsManagement, "ticketsManagement");
 	// console.log(availableTickets(), "AvailableTickets");
@@ -407,7 +410,7 @@ const BookNow = ({ match }) => {
 				<FormStep1
 					chosenDate={chosenDate}
 					setChosenDate={setChosenDate}
-					HistBookings={HistBookings && HistBookings}
+					// HistBookings={HistBookings && HistBookings}
 					chosenService_Package={chosenService_Package}
 					setChosenService_Package={setChosenService_Package}
 					serviceDetails={serviceDetails}
@@ -416,7 +419,7 @@ const BookNow = ({ match }) => {
 					alreadySetLoyaltyPointsManagement={alreadySetLoyaltyPointsManagement}
 					storeClosed_NotClosed={storeClosed_NotClosed}
 					storeClosed_NotClosedCustomized={storeClosed_NotClosedCustomized}
-					availableTickets={availableTickets}
+					// availableTickets={availableTickets}
 					availableCoupon={availableCoupon}
 					chosenCoupon={chosenCoupon}
 					setChosenCoupon={setChosenCoupon}
@@ -580,11 +583,11 @@ const BookNow = ({ match }) => {
 			return toast.error("يجب أن تكون الكمية 0 أو أكثر من 0");
 		}
 
-		if (Number(quantity) + Number(quantity_Children) > availableTickets()) {
-			return toast.error(
-				"لا تتوفر تذاكر كافية ، يرجى اختيار تاريخ حجز آخر والمحاولة مرة أخرى",
-			);
-		}
+		// if (Number(quantity) + Number(quantity_Children) > availableTickets()) {
+		// 	return toast.error(
+		// 		"لا تتوفر تذاكر كافية ، يرجى اختيار تاريخ حجز آخر والمحاولة مرة أخرى",
+		// 	);
+		// }
 
 		if (!busStationChosenTime) {
 			return toast.error("الرجاء إضافة وقت لمحطة الحافلات للسفر");

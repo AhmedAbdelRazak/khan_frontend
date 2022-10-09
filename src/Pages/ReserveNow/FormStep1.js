@@ -21,7 +21,7 @@ const FormStep1 = ({
 	availableCoupon,
 	allCoupons,
 	setChosenCouponDetails,
-	availableTickets,
+	// availableTickets,
 	busStations,
 	chosenBusStationDetails,
 	setChosenBusStationsDetails,
@@ -344,9 +344,9 @@ const FormStep1 = ({
 						value={quantity}
 						onChange={handleQuantity}
 						placeholder='How Many Tickets?'
-						max={availableTickets()}
+						// max={availableTickets()}
 					/>
-					{Number(quantity) + Number(quantity_Children) >
+					{/* {Number(quantity) + Number(quantity_Children) >
 						availableTickets() && (
 						<div
 							className='mt-2'
@@ -354,7 +354,7 @@ const FormStep1 = ({
 							Not enough tickets are available, please choose another date and
 							try again.
 						</div>
-					)}
+					)} */}
 				</div>
 
 				<div className='col-md-5 mx-auto my-4'>
@@ -374,9 +374,9 @@ const FormStep1 = ({
 						value={quantity_Children}
 						onChange={handleQuantityChildren}
 						placeholder='How Many Tickets?'
-						max={availableTickets()}
+						// max={availableTickets()}
 					/>
-					{Number(quantity) + Number(quantity_Children) >
+					{/* {Number(quantity) + Number(quantity_Children) >
 						availableTickets() && (
 						<div
 							className='mt-2'
@@ -384,7 +384,7 @@ const FormStep1 = ({
 							Not enough tickets are available, please choose another date and
 							try again.
 						</div>
-					)}
+					)} */}
 				</div>
 
 				{serviceDetails && serviceDetails.displayBusStationOption ? (
