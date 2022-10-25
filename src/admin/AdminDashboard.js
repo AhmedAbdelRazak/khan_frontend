@@ -11,10 +11,12 @@ import DarkBG from "./AdminSideBar/DarkBG";
 // eslint-disable-next-line
 import { Button } from "antd";
 import {
+	// eslint-disable-next-line
 	getPreviousBookingsAdmin,
 	updateOrderStatus,
 	getStatusValues,
 	removeReservation,
+	listOrdersDates,
 } from "./apiAdmin";
 import ExecutiveSummary from "./ExecutiveSummary";
 import { DatePicker } from "antd";
@@ -98,7 +100,13 @@ const AdminDashboard = () => {
 		}
 
 		setLoading(true);
-		getPreviousBookingsAdmin(user._id, token).then((data) => {
+		var day1 = new Date().toDateString("en-US", {
+			timeZone: "Africa/Cairo",
+		});
+
+		var day2 = new Date(new Date().setDate(new Date().getDate() - 75));
+
+		listOrdersDates(user._id, token, day1, day2).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {

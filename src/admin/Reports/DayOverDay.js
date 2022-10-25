@@ -7,7 +7,8 @@ import { isAuthenticated } from "../../auth";
 import Chart from "react-apexcharts";
 import Adminsidebar from "../AdminSideBar/Adminsidebar";
 import DarkBG from "../AdminSideBar/DarkBG";
-import { getPreviousBookingsAdmin } from "../apiAdmin";
+// eslint-disable-next-line
+import { getPreviousBookingsAdmin, listOrdersDates } from "../apiAdmin";
 import { DatePicker } from "antd";
 import CountUp from "react-countup";
 import "antd/dist/antd.min.css";
@@ -47,7 +48,12 @@ const DayOverDay = () => {
 		}
 
 		setLoading(true);
-		getPreviousBookingsAdmin(user._id, token).then((data) => {
+		var day1 = new Date().toDateString("en-US", {
+			timeZone: "Africa/Cairo",
+		});
+
+		var day2 = new Date(new Date().setDate(new Date().getDate() - 75));
+		listOrdersDates(user._id, token, day1, day2).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {

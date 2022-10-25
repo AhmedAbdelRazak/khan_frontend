@@ -444,6 +444,24 @@ export const getPreviousBookingsAdmin = (userId, token) => {
 		.catch((err) => console.log(err));
 };
 
+export const listOrdersDates = (userId, token, day1, day2) => {
+	return fetch(
+		`${process.env.REACT_APP_API_URL}/reservations/list/dates/${day1}/${day2}/${userId}`,
+		{
+			method: "GET",
+			headers: {
+				Accept: "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			// body: JSON.stringify(today),
+		},
+	)
+		.then((response) => {
+			return response.json();
+		})
+		.catch((err) => console.log(err));
+};
+
 export const getCoupons = async () =>
 	await axios.get(`${process.env.REACT_APP_API_URL}/coupons`);
 
