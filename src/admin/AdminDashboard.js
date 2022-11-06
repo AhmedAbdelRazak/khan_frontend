@@ -16,11 +16,12 @@ import {
 	updateOrderStatus,
 	getStatusValues,
 	removeReservation,
-	listOrdersDates,
+	// listOrdersDates,
 } from "./apiAdmin";
 import ExecutiveSummary from "./ExecutiveSummary";
 import { DatePicker } from "antd";
 import moment from "moment";
+import Pagination from "./Pagination";
 
 import ReactExport from "react-export-excel";
 // import ExcelToJson from "./ExcelToJson";
@@ -44,6 +45,10 @@ const AdminDashboard = () => {
 			timeZone: "Africa/Cairo",
 		}),
 	);
+
+	//pagination
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postsPerPage, setPostsPerPage] = useState(200);
 
 	//Admin Auth
 	// eslint-disable-next-line
@@ -100,13 +105,14 @@ const AdminDashboard = () => {
 		}
 
 		setLoading(true);
-		var day1 = new Date().toDateString("en-US", {
-			timeZone: "Africa/Cairo",
-		});
 
-		var day2 = new Date(new Date().setDate(new Date().getDate() - 75));
+		// eslint-disable-next-line
+		var day1 = new Date(new Date().setDate(new Date().getDate() + 65));
 
-		listOrdersDates(user._id, token, day1, day2).then((data) => {
+		// eslint-disable-next-line
+		var day2 = new Date(new Date().setDate(new Date().getDate() - 300));
+
+		getPreviousBookingsAdmin(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
@@ -593,6 +599,15 @@ const AdminDashboard = () => {
 		}
 	};
 
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	// eslint-disable-next-line
+	const currentPosts =
+		HistBookings && HistBookings.slice(indexOfFirstPost, indexOfLastPost);
+
+	// eslint-disable-next-line
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 	const allReservationsDetails = () => {
 		return (
 			<Summary>
@@ -611,11 +626,25 @@ const AdminDashboard = () => {
 						className='p-2 my-5 '
 						type='text'
 						value={q}
-						onChange={(e) => setQ(e.target.value.toLowerCase())}
+						onChange={(e) => {
+							setQ(e.target.value.toLowerCase());
+
+							if (e.target.value.length > 0) {
+								setPostsPerPage(HistBookings.length + 2);
+							} else {
+								setPostsPerPage(200);
+							}
+						}}
 						placeholder='Search By Client Phone, Client Name, Package Name'
 						style={{ borderRadius: "20px", width: "50%" }}
 					/>
 				</div>
+				<Pagination
+					postsPerPage={postsPerPage}
+					totalPosts={HistBookings.length}
+					paginate={paginate}
+					currentPage={currentPage}
+				/>
 				<div className='my-3'>{DownloadExcel()}</div>
 				<table
 					className='table table-bordered table-md-responsive table-hover table-striped'
@@ -648,7 +677,7 @@ const AdminDashboard = () => {
 					</thead>
 
 					<tbody>
-						{search(HistBookings).map((s, i) => {
+						{search(currentPosts).map((s, i) => {
 							return (
 								<tr
 									key={i}
