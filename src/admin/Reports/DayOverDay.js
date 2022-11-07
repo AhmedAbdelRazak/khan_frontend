@@ -48,12 +48,15 @@ const DayOverDay = () => {
 		}
 
 		setLoading(true);
+
+		// eslint-disable-next-line
 		var day1 = new Date().toDateString("en-US", {
 			timeZone: "Africa/Cairo",
 		});
 
+		// eslint-disable-next-line
 		var day2 = new Date(new Date().setDate(new Date().getDate() - 75));
-		listOrdersDates(user._id, token, day1, day2).then((data) => {
+		getPreviousBookingsAdmin(user._id, token).then((data) => {
 			if (data.error) {
 				console.log(data.error);
 			} else {
