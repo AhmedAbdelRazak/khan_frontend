@@ -109,6 +109,8 @@ const App = () => {
 		ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_MEASUREMENTID);
 		// To Report Page View
 		ReactGA.pageview(window.location.pathname + window.location.search);
+
+		window.location.assign("https://infinite-apps.com/get-quote-now");
 		// eslint-disable-next-line
 	}, []);
 
